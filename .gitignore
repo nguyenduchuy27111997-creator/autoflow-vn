@@ -2,6 +2,9 @@
 
 # dependencies
 /node_modules
+
+# form submissions data
+/data
 /.pnp
 .pnp.*
 .yarn/*
