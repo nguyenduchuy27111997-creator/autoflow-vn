@@ -246,6 +246,45 @@ export default function VeToiPage() {
           </div>
         </section>
 
+        {/* Why Solo */}
+        <section className="py-16 max-w-3xl mx-auto px-6">
+          <div className="bg-primary-light/50 border border-primary/10 rounded-2xl p-8 md:p-10">
+            <h2 className="font-display font-bold text-xl text-slate-900 mb-4">
+              &quot;Tại sao chỉ 1 người?&quot; — Câu hỏi mình hay được hỏi nhất
+            </h2>
+            <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
+              <p>
+                Hầu hết agency IT có 5-10 người nhưng bạn vẫn chỉ nói chuyện với 1 account
+                manager — người không build sản phẩm. Rồi project chuyển qua team dev mà bạn
+                không bao giờ gặp. Lỡ hiểu sai requirement → sửa → delay → phát sinh chi phí.
+              </p>
+              <p>
+                Với AutoFlow, <strong>bạn nói chuyện trực tiếp với người build</strong>. Mình
+                nghe bạn kể vấn đề, mình viết workflow, mình test, mình training cho team bạn.
+                Không tam sao thất bản. Không &quot;để em hỏi lại team dev&quot;.
+              </p>
+              <p>
+                Đó là lý do mình deliver nhanh hơn (2-4 tuần thay vì 3-6 tháng) và rẻ hơn
+                (không overhead cho sales team, office, management layers).
+              </p>
+            </div>
+            <div className="mt-6 pt-6 border-t border-primary/10 grid sm:grid-cols-3 gap-4 text-center">
+              <div>
+                <p className="font-display font-extrabold text-2xl text-primary">50+</p>
+                <p className="text-xs text-slate-500">workflows đã build</p>
+              </div>
+              <div>
+                <p className="font-display font-extrabold text-2xl text-primary">100%</p>
+                <p className="text-xs text-slate-500">hoàn tiền nếu không deliver</p>
+              </div>
+              <div>
+                <p className="font-display font-extrabold text-2xl text-primary">24h</p>
+                <p className="text-xs text-slate-500">SLA fix lỗi (retainer)</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <section className="max-w-3xl mx-auto px-6 text-center">
           <div className="bg-slate-900 rounded-2xl p-10">

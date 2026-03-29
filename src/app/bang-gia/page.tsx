@@ -427,6 +427,39 @@ export default function BangGiaPage() {
           </div>
         </section>
 
+        {/* Guarantee */}
+        <section className="max-w-3xl mx-auto px-6 mb-16">
+          <div className="bg-accent/5 border border-accent/20 rounded-2xl p-8 text-center">
+            <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+              <svg width="28" height="28" fill="none" stroke="#10B981" strokeWidth="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <h3 className="font-display font-bold text-xl text-slate-900 mb-2">
+              Cam kết 100% hoàn tiền
+            </h3>
+            <p className="text-sm text-slate-500 leading-relaxed max-w-lg mx-auto">
+              Nếu AutoFlow không deliver đúng scope đã thỏa thuận trong hợp đồng —
+              bạn được hoàn 100% chi phí. Không điều kiện ẩn, không kéo dài.
+              Mình cam kết vì mình tin vào chất lượng công việc.
+            </p>
+            <div className="flex flex-wrap justify-center gap-6 mt-6 text-xs text-slate-400">
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                Scope rõ ràng trong hợp đồng
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                Bảo hành 7–30 ngày
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                Thanh toán 50/50 giảm rủi ro
+              </span>
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <section className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="font-display font-extrabold text-2xl md:text-3xl text-slate-900 mb-4">
