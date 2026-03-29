@@ -5,8 +5,8 @@ interface LogoProps {
 
 export default function Logo({ dark = false, className = "" }: LogoProps) {
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
-      <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+    <span className={`flex items-center gap-2 ${className}`}>
+      <span className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
         <svg
           width="18"
           height="18"
@@ -19,7 +19,7 @@ export default function Logo({ dark = false, className = "" }: LogoProps) {
         >
           <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
         </svg>
-      </div>
+      </span>
       <span
         className={`font-display font-bold text-lg tracking-tight ${
           dark ? "text-white" : "text-slate-900"
@@ -27,6 +27,6 @@ export default function Logo({ dark = false, className = "" }: LogoProps) {
       >
         AutoFlow<span className="text-primary">.vn</span>
       </span>
-    </div>
+    </span>
   );
 }
