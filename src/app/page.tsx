@@ -5,6 +5,7 @@ import Integrations from "@/components/Integrations";
 import PainPoints from "@/components/PainPoints";
 import WhyUs from "@/components/WhyUs";
 import Process from "@/components/Process";
+import PilotBanner from "@/components/PilotBanner";
 import Pricing from "@/components/Pricing";
 import Results from "@/components/Results";
 import FAQ from "@/components/FAQ";
@@ -41,6 +42,7 @@ export default function Home() {
         <Integrations />
         <PainPoints />
         <WhyUs />
+        <PilotBanner />
         <Process />
         <Pricing />
         <Results />
