@@ -17,10 +17,11 @@ export default function ChinhSachBaoMatPage() {
           <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-4 prose-p:text-slate-600 prose-p:leading-relaxed prose-li:text-slate-600">
             <h2>1. Giới thiệu</h2>
             <p>
-              AutoFlow VN (&quot;chúng tôi&quot;, &quot;của chúng tôi&quot;) cam kết bảo vệ
-              quyền riêng tư của bạn. Chính sách bảo mật này giải thích cách
-              chúng tôi thu thập, sử dụng, và bảo vệ thông tin cá nhân khi bạn
-              sử dụng website autoflowvn.com và các dịch vụ liên quan.
+              AutoFlow VN (&quot;chúng tôi&quot;, &quot;của chúng tôi&quot;) cam
+              kết bảo vệ quyền riêng tư của bạn. Chính sách bảo mật này giải
+              thích cách chúng tôi thu thập, sử dụng, và bảo vệ thông tin cá
+              nhân khi bạn sử dụng website autoflowvn.net và các dịch vụ liên
+              quan.
             </p>
 
             <h2>2. Thông tin chúng tôi thu thập</h2>
@@ -38,8 +39,8 @@ export default function ChinhSachBaoMatPage() {
                 team, vấn đề đang gặp
               </li>
               <li>
-                <strong>Dữ liệu sử dụng:</strong> Trang bạn truy cập, thời
-                gian trên trang, hành vi tương tác (qua Google Analytics)
+                <strong>Dữ liệu sử dụng:</strong> Trang bạn truy cập, thời gian
+                trên trang, hành vi tương tác (qua Google Analytics)
               </li>
             </ul>
             <p>
@@ -57,8 +58,8 @@ export default function ChinhSachBaoMatPage() {
               </li>
               <li>Gửi proposal dịch vụ nếu bạn quan tâm</li>
               <li>
-                Cải thiện website và trải nghiệm người dùng qua dữ liệu analytics
-                (ẩn danh)
+                Cải thiện website và trải nghiệm người dùng qua dữ liệu
+                analytics (ẩn danh)
               </li>
             </ul>
             <p>
@@ -105,9 +106,7 @@ export default function ChinhSachBaoMatPage() {
                 Hệ thống n8n được self-hosted trên VPS tại Việt Nam — dữ liệu
                 100% trong nước
               </li>
-              <li>
-                Dữ liệu dự án thuộc sở hữu hoàn toàn của khách hàng
-              </li>
+              <li>Dữ liệu dự án thuộc sở hữu hoàn toàn của khách hàng</li>
               <li>
                 Sau khi bàn giao, AutoFlow không truy cập dữ liệu dự án trừ khi
                 được client cho phép (trong gói Retainer)
@@ -124,7 +123,7 @@ export default function ChinhSachBaoMatPage() {
             </ul>
             <p>
               Để thực hiện các quyền trên, liên hệ{" "}
-              <strong>hello@autoflowvn.com</strong> hoặc Zalo{" "}
+              <strong>hello@autoflowvn.net</strong> hoặc Zalo{" "}
               <strong>0912 345 678</strong>.
             </p>
 
@@ -149,7 +148,7 @@ export default function ChinhSachBaoMatPage() {
             </p>
             <ul>
               <li>
-                <strong>Email:</strong> hello@autoflowvn.com
+                <strong>Email:</strong> hello@autoflowvn.net
               </li>
               <li>
                 <strong>Zalo:</strong> 0912 345 678

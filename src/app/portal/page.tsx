@@ -95,7 +95,7 @@ export default function PortalLoginPage() {
           <p className="text-xs text-center text-slate-400 mt-4">
             Quên mật khẩu?{" "}
             <a
-              href="mailto:hello@autoflowvn.com"
+              href="mailto:hello@autoflowvn.net"
               className="text-primary hover:text-primary-dark"
             >
               Liên hệ hỗ trợ

@@ -122,11 +122,19 @@ export default function Hero() {
               </div>
               <div className="flex-1 flex justify-center">
                 <div className="flex items-center gap-2 px-4 py-1 rounded-lg bg-white border border-slate-200 text-xs text-slate-400 max-w-xs w-full justify-center">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-slate-300">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="text-slate-300"
+                  >
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                   </svg>
-                  autoflowvn.com
+                  autoflowvn.net
                 </div>
               </div>
               <div className="w-[52px]" />
@@ -152,10 +160,7 @@ export default function Hero() {
         {/* Metrics bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x divide-slate-200 bg-white rounded-2xl border border-slate-200 p-6 md:p-0 shadow-sm opacity-0 animate-fade-up delay-500">
           {metrics.map((m, i) => (
-            <div
-              key={i}
-              className="md:px-8 md:py-6 text-center"
-            >
+            <div key={i} className="md:px-8 md:py-6 text-center">
               <AnimatedCounter value={m.value} />
               <span className="text-sm font-medium text-slate-400 ml-1">
                 {m.unit}

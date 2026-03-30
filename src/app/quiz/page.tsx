@@ -166,7 +166,7 @@ export default function QuizPage() {
 
   function shareResult() {
     const text = `Toi vua lam quiz Automation Readiness va duoc ${totalScore}/40 diem! Ban thu chua?`;
-    const url = "https://autoflowvn.com/quiz";
+    const url = "https://autoflowvn.net/quiz";
     if (navigator.share) {
       navigator
         .share({ title: "Automation Readiness Quiz", text, url })
@@ -490,7 +490,7 @@ export default function QuizPage() {
       <div className="bg-slate-900 text-center py-4 text-xs text-slate-500">
         Powered by{" "}
         <a
-          href="https://autoflowvn.com"
+          href="https://autoflowvn.net"
           className="text-primary font-semibold hover:underline"
         >
           AutoFlow VN

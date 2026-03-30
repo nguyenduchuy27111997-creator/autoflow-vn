@@ -34,11 +34,7 @@ const mockProjects = [
   },
 ];
 
-export default function PortalDashboard({
-  userEmail,
-}: {
-  userEmail: string;
-}) {
+export default function PortalDashboard({ userEmail }: { userEmail: string }) {
   const router = useRouter();
 
   const handleSignOut = async () => {
@@ -100,7 +96,9 @@ export default function PortalDashboard({
                 >
                   {project.status}
                 </span>
-                <span className="text-xs text-slate-400">{project.package}</span>
+                <span className="text-xs text-slate-400">
+                  {project.package}
+                </span>
               </div>
 
               {/* Project name */}
@@ -138,10 +136,10 @@ export default function PortalDashboard({
           <p className="text-sm text-slate-500">
             Cần hỗ trợ? Liên hệ qua{" "}
             <a
-              href="mailto:hello@autoflowvn.com"
+              href="mailto:hello@autoflowvn.net"
               className="text-primary hover:text-primary-dark font-medium"
             >
-              hello@autoflowvn.com
+              hello@autoflowvn.net
             </a>{" "}
             hoặc Zalo.
           </p>

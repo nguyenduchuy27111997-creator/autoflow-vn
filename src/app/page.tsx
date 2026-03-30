@@ -23,7 +23,7 @@ export default function Home() {
           provider: {
             "@type": "LocalBusiness",
             name: "AutoFlow VN",
-            url: "https://autoflowvn.com",
+            url: "https://autoflowvn.net",
           },
           areaServed: { "@type": "Country", name: "Vietnam" },
           description:

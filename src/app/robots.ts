@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/"],
     },
-    sitemap: "https://autoflowvn.com/sitemap.xml",
+    sitemap: "https://autoflowvn.net/sitemap.xml",
   };
 }

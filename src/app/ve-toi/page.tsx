@@ -7,18 +7,37 @@ const techStack = [
   { name: "MISA", desc: "Kế toán & ERP phổ biến nhất VN", color: "#E31937" },
   { name: "KiotViet", desc: "POS & quản lý bán hàng", color: "#00A651" },
   { name: "Shopee API", desc: "Đồng bộ đơn hàng real-time", color: "#EE4D2D" },
-  { name: "OpenAI / Claude", desc: "AI brain cho workflow thông minh", color: "#6366F1" },
+  {
+    name: "OpenAI / Claude",
+    desc: "AI brain cho workflow thông minh",
+    color: "#6366F1",
+  },
 ];
 
 const milestones = [
-  { year: "Hiện tại", title: "Chuyên gia n8n automation", desc: "Focus 100% vào giúp SME VN tự động hóa quy trình bằng n8n — tích hợp sâu với ecosystem Việt Nam." },
-  { year: "Trước đó", title: "Background kỹ thuật", desc: "Kinh nghiệm trong phát triển phần mềm, tích hợp hệ thống, và tư vấn công nghệ cho doanh nghiệp." },
+  {
+    year: "Hiện tại",
+    title: "Chuyên gia n8n automation",
+    desc: "Focus 100% vào giúp SME VN tự động hóa quy trình bằng n8n — tích hợp sâu với ecosystem Việt Nam.",
+  },
+  {
+    year: "Trước đó",
+    title: "Background kỹ thuật",
+    desc: "Kinh nghiệm trong phát triển phần mềm, tích hợp hệ thống, và tư vấn công nghệ cho doanh nghiệp.",
+  },
 ];
 
 const values = [
   {
     icon: (
-      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        viewBox="0 0 24 24"
+      >
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
       </svg>
     ),
@@ -27,7 +46,14 @@ const values = [
   },
   {
     icon: (
-      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        viewBox="0 0 24 24"
+      >
         <path d="M12 6v6l4 2M12 2a10 10 0 100 20 10 10 0 000-20z" />
       </svg>
     ),
@@ -36,7 +62,14 @@ const values = [
   },
   {
     icon: (
-      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        viewBox="0 0 24 24"
+      >
         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
         <circle cx="9" cy="7" r="4" />
         <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
@@ -47,7 +80,14 @@ const values = [
   },
   {
     icon: (
-      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        viewBox="0 0 24 24"
+      >
         <rect x="2" y="3" width="20" height="14" rx="2" />
         <line x1="8" y1="21" x2="16" y2="21" />
         <line x1="12" y1="17" x2="12" y2="21" />
@@ -85,14 +125,20 @@ export default function VeToiPage() {
                   className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-7 py-3.5 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/25"
                 >
                   Nói chuyện với mình
-                  <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <svg
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                  >
                     <path d="M5 8h6M8 5l3 3-3 3" />
                   </svg>
                 </a>
                 <div className="flex items-center gap-3 text-sm text-slate-500">
                   <span>📱 Zalo: 0912 345 678</span>
                   <span className="text-slate-300">|</span>
-                  <span>✉️ hello@autoflowvn.com</span>
+                  <span>✉️ hello@autoflowvn.net</span>
                 </div>
               </div>
             </div>
@@ -133,21 +179,22 @@ export default function VeToiPage() {
             </h2>
             <div className="prose prose-slate max-w-none">
               <p className="text-slate-600 leading-relaxed mb-5">
-                Mình thấy quá nhiều doanh nghiệp VN đang trả lương cho nhân
-                viên để làm những việc mà máy tính có thể làm trong vài giây —
-                nhập đơn hàng, gửi tin nhắn, tổng hợp báo cáo. Những việc lặp
-                đi lặp lại, tốn thời gian, dễ sai sót.
+                Mình thấy quá nhiều doanh nghiệp VN đang trả lương cho nhân viên
+                để làm những việc mà máy tính có thể làm trong vài giây — nhập
+                đơn hàng, gửi tin nhắn, tổng hợp báo cáo. Những việc lặp đi lặp
+                lại, tốn thời gian, dễ sai sót.
               </p>
               <p className="text-slate-600 leading-relaxed mb-5">
-                Vấn đề không phải SME không biết họ cần automation — 93% đã biết.
-                Vấn đề là <strong>không có ai giúp họ triển khai</strong> với giá
-                phù hợp, trong thời gian hợp lý, và hiểu đúng ecosystem Việt Nam
-                (Zalo, MISA, KiotViet — không phải Slack, Salesforce, HubSpot).
+                Vấn đề không phải SME không biết họ cần automation — 93% đã
+                biết. Vấn đề là <strong>không có ai giúp họ triển khai</strong>{" "}
+                với giá phù hợp, trong thời gian hợp lý, và hiểu đúng ecosystem
+                Việt Nam (Zalo, MISA, KiotViet — không phải Slack, Salesforce,
+                HubSpot).
               </p>
               <p className="text-slate-600 leading-relaxed">
                 Đó là lý do mình tạo AutoFlow — giúp SME VN tự động hóa quy
-                trình lặp lại bằng n8n, với giá phù hợp, kết quả trong 2–4
-                tuần, và dữ liệu 100% ở trong nước.
+                trình lặp lại bằng n8n, với giá phù hợp, kết quả trong 2–4 tuần,
+                và dữ liệu 100% ở trong nước.
               </p>
             </div>
           </div>
@@ -254,31 +301,43 @@ export default function VeToiPage() {
             </h2>
             <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
               <p>
-                Hầu hết agency IT có 5-10 người nhưng bạn vẫn chỉ nói chuyện với 1 account
-                manager — người không build sản phẩm. Rồi project chuyển qua team dev mà bạn
-                không bao giờ gặp. Lỡ hiểu sai requirement → sửa → delay → phát sinh chi phí.
+                Hầu hết agency IT có 5-10 người nhưng bạn vẫn chỉ nói chuyện với
+                1 account manager — người không build sản phẩm. Rồi project
+                chuyển qua team dev mà bạn không bao giờ gặp. Lỡ hiểu sai
+                requirement → sửa → delay → phát sinh chi phí.
               </p>
               <p>
-                Với AutoFlow, <strong>bạn nói chuyện trực tiếp với người build</strong>. Mình
-                nghe bạn kể vấn đề, mình viết workflow, mình test, mình training cho team bạn.
-                Không tam sao thất bản. Không &quot;để em hỏi lại team dev&quot;.
+                Với AutoFlow,{" "}
+                <strong>bạn nói chuyện trực tiếp với người build</strong>. Mình
+                nghe bạn kể vấn đề, mình viết workflow, mình test, mình training
+                cho team bạn. Không tam sao thất bản. Không &quot;để em hỏi lại
+                team dev&quot;.
               </p>
               <p>
-                Đó là lý do mình deliver nhanh hơn (2-4 tuần thay vì 3-6 tháng) và rẻ hơn
-                (không overhead cho sales team, office, management layers).
+                Đó là lý do mình deliver nhanh hơn (2-4 tuần thay vì 3-6 tháng)
+                và rẻ hơn (không overhead cho sales team, office, management
+                layers).
               </p>
             </div>
             <div className="mt-6 pt-6 border-t border-primary/10 grid sm:grid-cols-3 gap-4 text-center">
               <div>
-                <p className="font-display font-extrabold text-2xl text-primary">50+</p>
+                <p className="font-display font-extrabold text-2xl text-primary">
+                  50+
+                </p>
                 <p className="text-xs text-slate-500">workflows đã build</p>
               </div>
               <div>
-                <p className="font-display font-extrabold text-2xl text-primary">100%</p>
-                <p className="text-xs text-slate-500">hoàn tiền nếu không deliver</p>
+                <p className="font-display font-extrabold text-2xl text-primary">
+                  100%
+                </p>
+                <p className="text-xs text-slate-500">
+                  hoàn tiền nếu không deliver
+                </p>
               </div>
               <div>
-                <p className="font-display font-extrabold text-2xl text-primary">24h</p>
+                <p className="font-display font-extrabold text-2xl text-primary">
+                  24h
+                </p>
                 <p className="text-xs text-slate-500">SLA fix lỗi (retainer)</p>
               </div>
             </div>
@@ -300,7 +359,13 @@ export default function VeToiPage() {
               className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-8 py-4 rounded-xl transition-all hover:shadow-xl hover:shadow-primary/25"
             >
               Đặt lịch audit miễn phí
-              <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <svg
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
                 <path d="M5 8h6M8 5l3 3-3 3" />
               </svg>
             </a>

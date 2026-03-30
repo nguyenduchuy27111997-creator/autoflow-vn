@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: "Tài Liệu & Công Cụ Miễn Phí | AutoFlow VN",
     description:
       "Quiz, checklist, case study miễn phí về tự động hóa cho SME Việt Nam.",
-    url: "https://autoflowvn.com/tai-lieu",
+    url: "https://autoflowvn.net/tai-lieu",
   },
 };
 

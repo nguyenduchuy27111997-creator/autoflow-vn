@@ -67,11 +67,9 @@ export default function Footer() {
               Liên hệ
             </h4>
             <ul className="space-y-2.5">
+              <li className="text-sm text-slate-400">📱 Zalo: 0912 345 678</li>
               <li className="text-sm text-slate-400">
-                📱 Zalo: 0912 345 678
-              </li>
-              <li className="text-sm text-slate-400">
-                ✉️ hello@autoflowvn.com
+                ✉️ hello@autoflowvn.net
               </li>
               <li className="text-sm text-slate-400">📍 TP. Hồ Chí Minh</li>
             </ul>

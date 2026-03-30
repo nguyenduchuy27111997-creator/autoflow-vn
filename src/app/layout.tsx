@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     "tự động hóa Shopee",
     "n8n tiếng Việt",
   ],
-  metadataBase: new URL("https://autoflowvn.com"),
+  metadataBase: new URL("https://autoflowvn.net"),
   openGraph: {
     title: "AutoFlow VN — Tự Động Hóa Quy Trình Cho SME Việt Nam",
     description:
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true },
   },
   alternates: {
-    canonical: "https://autoflowvn.com",
+    canonical: "https://autoflowvn.net",
   },
 };
 
@@ -78,8 +78,8 @@ export default function RootLayout({
             name: "AutoFlow VN",
             description:
               "Giúp doanh nghiệp vừa và nhỏ Việt Nam tự động hóa quy trình lặp lại bằng n8n — tích hợp Zalo, MISA, Shopee, KiotViet.",
-            url: "https://autoflowvn.com",
-            email: "hello@autoflowvn.com",
+            url: "https://autoflowvn.net",
+            email: "hello@autoflowvn.net",
             address: {
               "@type": "PostalAddress",
               addressLocality: "TP. Hồ Chí Minh",

@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
     if (isRateLimited(clientKey)) {
       return NextResponse.json(
         { error: "Quá nhiều yêu cầu. Vui lòng thử lại sau." },
-        { status: 429 }
+        { status: 429 },
       );
     }
 
@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
     if (!email || !email.includes("@")) {
       return NextResponse.json(
         { error: "Email không hợp lệ." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -74,7 +74,7 @@ export async function POST(req: NextRequest) {
     if (!pdfInfo) {
       return NextResponse.json(
         { error: "Tài liệu không tồn tại." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -128,7 +128,7 @@ export async function POST(req: NextRequest) {
             </div>
 
             <div style="text-align: center; margin: 28px 0;">
-              <a href="https://autoflowvn.com/audit" style="display: inline-block; background: #0066FF; color: white; font-weight: 600; font-size: 14px; padding: 12px 28px; border-radius: 10px; text-decoration: none;">
+              <a href="https://autoflowvn.net/audit" style="display: inline-block; background: #0066FF; color: white; font-weight: 600; font-size: 14px; padding: 12px 28px; border-radius: 10px; text-decoration: none;">
                 Đặt Lịch Audit Miễn Phí →
               </a>
             </div>
@@ -136,7 +136,7 @@ export async function POST(req: NextRequest) {
             <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 28px 0;" />
             <p style="font-size: 12px; color: #94A3B8; text-align: center; line-height: 1.6;">
               AutoFlow VN — Tự động hóa quy trình cho SME Việt Nam<br />
-              <a href="https://autoflowvn.com" style="color: #0066FF; text-decoration: none;">autoflowvn.com</a>
+              <a href="https://autoflowvn.net" style="color: #0066FF; text-decoration: none;">autoflowvn.net</a>
             </p>
           </div>
         `,
@@ -151,7 +151,7 @@ export async function POST(req: NextRequest) {
       console.error("Email send error:", emailError);
       return NextResponse.json(
         { error: "Không thể gửi email. Vui lòng thử lại." },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -159,7 +159,7 @@ export async function POST(req: NextRequest) {
   } catch {
     return NextResponse.json(
       { error: "Có lỗi xảy ra. Vui lòng thử lại." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
