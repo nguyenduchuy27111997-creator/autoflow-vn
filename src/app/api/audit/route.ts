@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { readFile, writeFile, mkdir } from "fs/promises";
-import { join } from "path";
+import { createClient } from "@/lib/supabase/server";
 
 const WEBHOOK_URL = process.env.AUDIT_WEBHOOK_URL;
-const DATA_DIR = join(process.cwd(), "data");
-const SUBMISSIONS_FILE = join(DATA_DIR, "audit-submissions.json");
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
 const MAX_REQUESTS = 5;
 
@@ -67,29 +64,22 @@ export async function POST(req: NextRequest) {
     const submission = {
       name,
       phone,
-      company: company || "",
-      industry: industry || "",
-      teamSize: teamSize || "",
-      painPoints: painPoints || [],
-      details: details || "",
-      submittedAt: new Date().toISOString(),
+      company: company || null,
+      industry: industry || null,
+      team_size: teamSize || null,
+      pain_points: painPoints || [],
+      details: details || null,
       source: req.headers.get("referer") || "direct",
     };
 
-    // Save to local JSON file
-    try {
-      await mkdir(DATA_DIR, { recursive: true });
-      let submissions: unknown[] = [];
-      try {
-        const existing = await readFile(SUBMISSIONS_FILE, "utf-8");
-        submissions = JSON.parse(existing);
-      } catch {
-        // File doesn't exist yet
-      }
-      submissions.push(submission);
-      await writeFile(SUBMISSIONS_FILE, JSON.stringify(submissions, null, 2));
-    } catch (err) {
-      console.error("File save error:", err);
+    // Save to Supabase
+    const supabase = await createClient();
+    const { error } = await supabase
+      .from("audit_submissions")
+      .insert(submission);
+
+    if (error) {
+      console.error("Supabase insert error:", error);
     }
 
     // Forward to webhook (n8n, Zapier, Make, etc.)
@@ -97,7 +87,7 @@ export async function POST(req: NextRequest) {
       await fetch(WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(submission),
+        body: JSON.stringify({ ...submission, submittedAt: new Date().toISOString() }),
       }).catch((err) => {
         console.error("Webhook error:", err);
       });

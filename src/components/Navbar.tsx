@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Logo from "./ui/Logo";
 
 const services = [
@@ -14,14 +15,18 @@ const navLinks = [
   { label: "Quy trình", href: "/#quy-trinh" },
   { label: "Bảng giá", href: "/bang-gia" },
   { label: "Kết quả", href: "/#ket-qua" },
+  { label: "Tài liệu", href: "/tai-lieu" },
   { label: "Blog", href: "/blog" },
-  { label: "FAQ", href: "/#faq" },
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [serviceOpen, setServiceOpen] = useState(false);
+
+  // Pages with dark backgrounds need navbar always visible
+  const forceSolid = pathname === "/quiz";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -32,7 +37,7 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+        scrolled || forceSolid
           ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100"
           : "bg-transparent"
       }`}
