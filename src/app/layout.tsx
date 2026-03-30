@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Be_Vietnam_Pro, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import JsonLd from "@/components/JsonLd";
+import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
+import ConsentBannerWrapper from '@/components/analytics/ConsentBannerWrapper';
 import "./globals.css";
 
 const beVietnam = Be_Vietnam_Pro({
@@ -18,7 +20,6 @@ const plusJakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const ZALO_OA_ID = process.env.NEXT_PUBLIC_ZALO_OA_ID;
 
 export const metadata: Metadata = {
@@ -110,22 +111,8 @@ export default function RootLayout({
             data-height="420"
           />
         )}
-        {GA_ID && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="gtag-init" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_ID}');
-              `}
-            </Script>
-          </>
-        )}
+        <GoogleAnalytics />
+        <ConsentBannerWrapper />
       </body>
     </html>
   );
