@@ -11,7 +11,7 @@ export default function ChinhSachBaoMatPage() {
             Chính sách bảo mật
           </h1>
           <p className="text-sm text-slate-400 mb-10">
-            Cập nhật lần cuối: 28/03/2026
+            Cập nhật lần cuối: 29/03/2026
           </p>
 
           <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-4 prose-p:text-slate-600 prose-p:leading-relaxed prose-li:text-slate-600">
@@ -88,8 +88,8 @@ export default function ChinhSachBaoMatPage() {
             <ul>
               <li>Kết nối HTTPS mã hóa cho toàn bộ website</li>
               <li>
-                Không lưu trữ dữ liệu nhạy cảm trên trình duyệt
-                (cookies/localStorage)
+                Chỉ lưu trữ cookie phân tích của Google Analytics (
+                <code>_ga</code>, <code>_ga_*</code>) khi bạn đồng ý — không lưu dữ liệu cá nhân trực tiếp
               </li>
               <li>Form có cơ chế chống spam tự động</li>
               <li>
@@ -129,9 +129,23 @@ export default function ChinhSachBaoMatPage() {
 
             <h2>8. Cookies</h2>
             <p>
-              Website sử dụng cookies từ Google Analytics để đo lường traffic và
-              hành vi người dùng (ẩn danh). Bạn có thể tắt cookies trong trình
-              duyệt nếu muốn — website vẫn hoạt động bình thường.
+              Website hiển thị banner xin phép khi bạn truy cập lần đầu. Bạn có
+              thể chọn:
+            </p>
+            <ul>
+              <li>
+                <strong>Chấp nhận:</strong> Google Analytics được kích hoạt, lưu
+                cookie <code>_ga</code> và <code>_ga_*</code> để đo lường traffic
+                và hành vi người dùng (ẩn danh, không chứa thông tin cá nhân).
+              </li>
+              <li>
+                <strong>Từ chối:</strong> Google Analytics không được kích hoạt,
+                không có cookie phân tích nào được lưu trên trình duyệt của bạn.
+              </li>
+            </ul>
+            <p>
+              Lựa chọn của bạn được ghi nhớ qua các lần truy cập. Bạn có thể thay
+              đổi bất cứ lúc nào bằng cách xóa cookie của trình duyệt.
             </p>
 
             <h2>9. Thay đổi chính sách</h2>
