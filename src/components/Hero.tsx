@@ -4,10 +4,10 @@ import { useEffect, useRef } from "react";
 import Button from "./ui/Button";
 
 const metrics = [
-  { value: "10–20", unit: "giờ/tuần", label: "tiết kiệm cho team" },
-  { value: "0", unit: "lỗi", label: "nhập tay sai sót" },
-  { value: "2–4", unit: "tuần", label: "triển khai xong" },
-  { value: "5×", unit: "ROI", label: "hoàn vốn trong 5 tháng" },
+  { value: "3×", unit: "đơn hàng", label: "xử lý mỗi ngày" },
+  { value: "0", unit: "sai sót", label: "nhập liệu thủ công" },
+  { value: "2", unit: "tuần", label: "triển khai xong" },
+  { value: "3", unit: "tháng", label: "hoàn vốn đầu tư" },
 ];
 
 function AnimatedCounter({ value }: { value: string }) {
@@ -20,10 +20,21 @@ function AnimatedCounter({ value }: { value: string }) {
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const el = sectionRef.current;
     if (el) el.classList.add("animate-fade-up");
+  }, []);
+
+  // Ensure video plays on mount (some browsers block autoplay)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.play().catch(() => {
+        // Autoplay blocked — that's OK, poster will show
+      });
+    }
   }, []);
 
   return (
@@ -46,8 +57,9 @@ export default function Hero() {
         />
       </div>
 
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="max-w-3xl">
+      <div className="max-w-5xl mx-auto px-6">
+        {/* Vertical layout: text centered on top */}
+        <div className="text-center mb-12 md:mb-16">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-light text-primary text-xs font-semibold mb-6 opacity-0 animate-fade-up">
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
@@ -62,16 +74,16 @@ export default function Hero() {
           </h1>
 
           {/* Sub-headline */}
-          <p className="text-lg md:text-xl text-slate-500 leading-relaxed mb-8 max-w-2xl opacity-0 animate-fade-up delay-200">
+          <p className="text-lg md:text-xl text-slate-500 leading-relaxed mb-8 max-w-2xl mx-auto opacity-0 animate-fade-up delay-200">
             AutoFlow giúp SME Việt Nam tự động hóa quy trình lặp lại — tích hợp{" "}
             <strong className="text-slate-700">
               Zalo, MISA, Shopee, KiotViet
             </strong>{" "}
-            — kết quả trong 2–4 tuần, dữ liệu ở trong nước, giá phù hợp SME.
+            — kết quả trong 2 tuần, dữ liệu ở trong nước, giá phù hợp SME.
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-16 opacity-0 animate-fade-up delay-300">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 animate-fade-up delay-300">
             <a
               href="/audit"
               className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-7 py-3.5 rounded-xl transition-all hover:shadow-xl hover:shadow-primary/25 hover:-translate-y-0.5"
@@ -91,6 +103,49 @@ export default function Hero() {
             <Button href="#quy-trinh" variant="secondary">
               Xem cách hoạt động
             </Button>
+          </div>
+        </div>
+
+        {/* Video below — browser-style frame */}
+        <div className="relative opacity-0 animate-fade-up delay-400 mb-16">
+          {/* Decorative glow behind */}
+          <div className="absolute -inset-6 -z-10 bg-gradient-to-br from-primary/15 via-secondary/10 to-accent/5 rounded-[2rem] blur-3xl" />
+
+          {/* Browser frame */}
+          <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_60px_-12px_rgba(0,0,0,0.15)] border border-slate-200/80 bg-white">
+            {/* Title bar */}
+            <div className="flex items-center gap-2 px-4 py-3 bg-slate-50 border-b border-slate-200/80">
+              <div className="flex gap-1.5">
+                <span className="w-3 h-3 rounded-full bg-red-400" />
+                <span className="w-3 h-3 rounded-full bg-amber-400" />
+                <span className="w-3 h-3 rounded-full bg-green-400" />
+              </div>
+              <div className="flex-1 flex justify-center">
+                <div className="flex items-center gap-2 px-4 py-1 rounded-lg bg-white border border-slate-200 text-xs text-slate-400 max-w-xs w-full justify-center">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-slate-300">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                  autoflowvn.com
+                </div>
+              </div>
+              <div className="w-[52px]" />
+            </div>
+
+            {/* Video content */}
+            <video
+              ref={videoRef}
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster="/videos/hero-poster.jpg"
+              className="w-full h-auto block"
+              preload="auto"
+            >
+              <source src="/videos/hero-loop.webm" type="video/webm" />
+              <source src="/videos/hero-loop.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
 
