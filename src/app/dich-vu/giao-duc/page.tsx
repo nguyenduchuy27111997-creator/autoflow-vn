@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
 
 const painPoints = [
   {
@@ -24,6 +25,29 @@ const painPoints = [
     stat: "3 ngày",
     title: "Gom báo cáo từ nhiều chi nhánh",
     desc: "8 chi nhánh, mỗi nơi báo cáo khác nhau: Google Sheet, Zalo group, email. Cuối tháng mất 3 ngày tổng hợp, sai số là chuyện thường.",
+  },
+];
+
+const faqs = [
+  {
+    q: "Loại hình giáo dục nào phù hợp?",
+    a: "Trung tâm ngoại ngữ, trung tâm tin học, luyện thi, kỹ năng mềm, mầm non tư thục — bất kỳ cơ sở nào có học viên cần quản lý đều phù hợp.",
+  },
+  {
+    q: "Có tích hợp với phần mềm quản lý giáo dục không?",
+    a: "Hỗ trợ Google Sheets, Airtable, và kết nối qua API với hầu hết phần mềm quản lý. Trong audit mình sẽ đánh giá cụ thể phần mềm bạn đang dùng.",
+  },
+  {
+    q: "Tự động nhắc học phí thế nào?",
+    a: "Workflow tự động gửi tin nhắn Zalo OA nhắc trước 3-5-7 ngày. Nếu quá hạn, tự escalate cho nhân viên thu phí. Phụ huynh nhận thông báo chuyên nghiệp, không cần gọi điện từng người.",
+  },
+  {
+    q: "Tôi có 5 cơ sở, cần setup riêng cho từng cơ sở?",
+    a: "Không. 1 hệ thống quản lý tập trung cho tất cả cơ sở. Dữ liệu tách biệt theo cơ sở nhưng báo cáo tổng hợp được. Thêm cơ sở mới chỉ cần cấu hình, không cần build lại.",
+  },
+  {
+    q: "Bảo mật thông tin học viên thế nào?",
+    a: "Data chạy trên VPS riêng tại Việt Nam, không chia sẻ bên thứ ba. Phù hợp quy định bảo vệ dữ liệu cá nhân. Chỉ những người được phân quyền mới truy cập được.",
   },
 ];
 
@@ -63,6 +87,7 @@ const workflows = [
 export default function GiaoDucPage() {
   const [employees, setEmployees] = useState(2);
   const [hours, setHours] = useState(3);
+  const [openFaq, setOpenFaq] = useState(-1);
   const salary = 10;
   const costPerYear = employees * salary * 12;
   const savedCost = Math.round(costPerYear * 0.6);
@@ -365,6 +390,41 @@ export default function GiaoDucPage() {
             </div>
           </div>
         </section>
+
+        {/* FAQ */}
+        <section className="max-w-3xl mx-auto px-6 mb-20">
+          <h2 className="font-display font-extrabold text-2xl md:text-3xl text-slate-900 text-center mb-10">
+            Câu hỏi thường gặp
+          </h2>
+          <div className="space-y-3">
+            {faqs.map((faq, i) => (
+              <div key={i} className="border border-slate-200 rounded-xl overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? -1 : i)}
+                  className="w-full flex items-center justify-between px-6 py-4 text-left"
+                >
+                  <span className="font-semibold text-sm text-slate-900">{faq.q}</span>
+                  <svg className={`shrink-0 w-5 h-5 text-slate-400 transition-transform ${openFaq === i ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" /></svg>
+                </button>
+                {openFaq === i && (
+                  <div className="px-6 pb-4 text-sm text-slate-500 leading-relaxed">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <JsonLd data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }} />
 
         {/* CTA */}
         <section className="max-w-3xl mx-auto px-6 text-center">

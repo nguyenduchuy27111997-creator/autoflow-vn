@@ -77,6 +77,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/ket-qua`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/ket-qua/e-commerce`,
       lastModified: new Date(),
       changeFrequency: "monthly",

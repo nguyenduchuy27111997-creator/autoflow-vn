@@ -1,45 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import SectionHeader from "./ui/SectionHeader";
-
-const caseStudies = [
-  {
-    industry: "E-commerce",
-    company: "Shop thời trang online",
-    employees: "15 nhân viên",
-    before: {
-      hours: "5 giờ/ngày nhập đơn từ 3 sàn",
-      errors: "8–10 lỗi sai tồn kho/tuần",
-      cost: "2 nhân viên chỉ làm việc nhập liệu",
-    },
-    after: {
-      hours: "0 giờ — tự động 100%",
-      errors: "0 lỗi — đồng bộ real-time",
-      cost: "2 nhân viên chuyển sang chăm khách",
-    },
-    result: "Tiết kiệm 18 giờ/tuần, tăng 23% doanh thu nhờ chăm khách tốt hơn",
-    timeline: "3 tuần triển khai",
-    package: "Growth — 28 triệu đồng",
-  },
-  {
-    industry: "Giáo dục",
-    company: "Chuỗi trung tâm tiếng Anh",
-    employees: "45 nhân viên · 8 chi nhánh",
-    before: {
-      hours: "3 giờ/ngày gọi nhắc lịch học viên",
-      errors: "15% học viên miss lịch học/tháng",
-      cost: "1 người chỉ để tổng hợp báo cáo 8 chi nhánh",
-    },
-    after: {
-      hours: "Zalo OA tự nhắc lịch 24h trước",
-      errors: "Miss lịch giảm còn 3%",
-      cost: "Báo cáo 8 chi nhánh tự động mỗi sáng thứ 2",
-    },
-    result: "Giảm 80% miss lịch, tiết kiệm 1 nhân sự full-time",
-    timeline: "4 tuần triển khai",
-    package: "Scale — 65 triệu đồng",
-  },
-];
+import { caseStudies } from "@/lib/case-studies";
 
 export default function Results() {
   return (
@@ -56,13 +19,14 @@ export default function Results() {
         {/* Case studies */}
         <div className="space-y-8">
           {caseStudies.map((cs, idx) => (
-            <div
+            <Link
               key={idx}
-              className="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-all duration-300"
+              href={`/ket-qua/${cs.slug}`}
+              className="block bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-all duration-300 group"
             >
               {/* Header bar */}
               <div className="px-8 py-4 bg-slate-900 flex flex-wrap items-center gap-4">
-                <span className="text-xs font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">
+                <span className={`text-xs font-bold ${cs.badgeText} ${cs.badgeBg} px-3 py-1 rounded-full`}>
                   {cs.industry}
                 </span>
                 <span className="text-sm font-semibold text-white">
@@ -72,7 +36,7 @@ export default function Results() {
                   {cs.employees}
                 </span>
                 <span className="text-xs text-slate-400 ml-auto">
-                  {cs.package}
+                  {cs.homepagePackage}
                 </span>
               </div>
 
@@ -89,7 +53,7 @@ export default function Results() {
                     </h4>
                   </div>
                   <ul className="space-y-3">
-                    {Object.values(cs.before).map((item, i) => (
+                    {Object.values(cs.homepageBefore).map((item, i) => (
                       <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
                         <span className="shrink-0 mt-1 w-1.5 h-1.5 rounded-full bg-red-300" />
                         {item}
@@ -109,7 +73,7 @@ export default function Results() {
                     </h4>
                   </div>
                   <ul className="space-y-3">
-                    {Object.values(cs.after).map((item, i) => (
+                    {Object.values(cs.homepageAfter).map((item, i) => (
                       <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
                         <span className="shrink-0 mt-1 w-1.5 h-1.5 rounded-full bg-accent" />
                         {item}
@@ -119,17 +83,45 @@ export default function Results() {
                 </div>
               </div>
 
+              {/* Testimonial */}
+              <div className="px-8 py-4 border-t border-slate-100">
+                <p className="text-sm text-slate-500 italic">
+                  &ldquo;{cs.testimonial.quote}&rdquo;
+                </p>
+                <p className="text-xs text-slate-400 mt-1">
+                  — {cs.testimonial.name}, {cs.testimonial.role}
+                </p>
+              </div>
+
               {/* Result highlight */}
               <div className="px-8 py-4 bg-accent/5 border-t border-accent/10 flex flex-wrap items-center justify-between gap-4">
                 <p className="text-sm font-semibold text-accent">
-                  📈 {cs.result}
+                  📈 {cs.homepageResult}
                 </p>
-                <span className="text-xs text-slate-400">
-                  ⏱ {cs.timeline}
-                </span>
+                <div className="flex items-center gap-3">
+                  <span className="text-xs text-slate-400">
+                    ⏱ {cs.homepageTimeline}
+                  </span>
+                  <span className="text-xs font-medium text-primary group-hover:translate-x-1 transition-transform">
+                    Xem chi tiết →
+                  </span>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
+        </div>
+
+        {/* View all link */}
+        <div className="text-center mt-10">
+          <Link
+            href="/ket-qua"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
+          >
+            Xem tất cả case studies
+            <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M5 8h6M8 5l3 3-3 3" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

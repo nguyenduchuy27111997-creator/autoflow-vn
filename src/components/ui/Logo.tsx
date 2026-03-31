@@ -14,15 +14,15 @@ export default function Logo({ dark = false, className = "" }: LogoProps) {
           fill="none"
         >
           {/* 3x3 grid dots */}
-          <circle cx="56" cy="56" r="5" fill="rgba(255,255,255,0.15)" />
-          <circle cx="96" cy="56" r="5" fill="rgba(255,255,255,0.15)" />
-          <circle cx="136" cy="56" r="5" fill="rgba(255,255,255,0.15)" />
-          <circle cx="56" cy="96" r="5" fill="rgba(255,255,255,0.15)" />
-          <circle cx="96" cy="96" r="5" fill="rgba(255,255,255,0.15)" />
-          <circle cx="136" cy="96" r="5" fill="rgba(255,255,255,0.15)" />
-          <circle cx="56" cy="136" r="5" fill="rgba(255,255,255,0.15)" />
-          <circle cx="96" cy="136" r="5" fill="rgba(255,255,255,0.15)" />
-          <circle cx="136" cy="136" r="5" fill="rgba(255,255,255,0.15)" />
+          <circle cx="56" cy="56" r="10" fill="rgba(255,255,255,0.35)" />
+          <circle cx="96" cy="56" r="10" fill="rgba(255,255,255,0.35)" />
+          <circle cx="136" cy="56" r="10" fill="rgba(255,255,255,0.35)" />
+          <circle cx="56" cy="96" r="10" fill="rgba(255,255,255,0.35)" />
+          <circle cx="96" cy="96" r="10" fill="rgba(255,255,255,0.35)" />
+          <circle cx="136" cy="96" r="10" fill="rgba(255,255,255,0.35)" />
+          <circle cx="56" cy="136" r="10" fill="rgba(255,255,255,0.35)" />
+          <circle cx="96" cy="136" r="10" fill="rgba(255,255,255,0.35)" />
+          <circle cx="136" cy="136" r="10" fill="rgba(255,255,255,0.35)" />
           {/* Staircase path */}
           <polyline
             points="56,56 96,56 96,96 136,96 136,136"

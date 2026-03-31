@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
 
 const painPoints = [
   {
@@ -24,6 +25,29 @@ const painPoints = [
     stat: "2 ngày",
     title: "Báo cáo doanh thu đa chi nhánh",
     desc: "3 chi nhánh, mỗi nơi báo khác nhau. Cuối tuần quản lý mất 2 ngày tổng hợp doanh thu, chi phí, food cost. Quyết định chậm vì thiếu data.",
+  },
+];
+
+const faqs = [
+  {
+    q: "Nhà hàng tôi nhỏ, có cần tự động hóa không?",
+    a: "Nếu bạn đang mất 2+ giờ/ngày cho nhập liệu, quản lý đơn online, hoặc báo cáo — thì có. AutoFlow Starter chỉ từ 8 triệu, rẻ hơn nửa tháng lương nhân viên.",
+  },
+  {
+    q: "Tích hợp với POS nào?",
+    a: "Hỗ trợ KiotViet, Sapo, và các POS có API. Ngoài ra tích hợp với GrabFood, ShopeeFood, Zalo OA cho đơn online.",
+  },
+  {
+    q: "Có quản lý được nguyên vật liệu không?",
+    a: "Có. Workflow tự động trừ tồn kho nguyên vật liệu theo đơn bán, thông báo khi gần hết, và tạo đề xuất nhập hàng tự động.",
+  },
+  {
+    q: "Tôi có 3 chi nhánh, quản lý chung được không?",
+    a: "Được. AutoFlow tổng hợp dữ liệu từ tất cả chi nhánh vào 1 dashboard. Báo cáo doanh thu, tồn kho, chi phí theo từng chi nhánh hoặc tổng.",
+  },
+  {
+    q: "Nếu internet quán bị mất thì sao?",
+    a: "Workflow chạy trên cloud server riêng, không phụ thuộc internet quán. Khi internet quán khôi phục, dữ liệu tự đồng bộ lại. Đơn offline vẫn được xử lý khi kết nối lại.",
   },
 ];
 
@@ -63,6 +87,7 @@ const workflows = [
 export default function FnBPage() {
   const [staff, setStaff] = useState(3);
   const [hours, setHours] = useState(3);
+  const [openFaq, setOpenFaq] = useState(-1);
   const salary = 9;
   const costPerYear = staff * salary * 12;
   const savedCost = Math.round(costPerYear * 0.55);
@@ -365,6 +390,41 @@ export default function FnBPage() {
             </div>
           </div>
         </section>
+
+        {/* FAQ */}
+        <section className="max-w-3xl mx-auto px-6 mb-20">
+          <h2 className="font-display font-extrabold text-2xl md:text-3xl text-slate-900 text-center mb-10">
+            Câu hỏi thường gặp
+          </h2>
+          <div className="space-y-3">
+            {faqs.map((faq, i) => (
+              <div key={i} className="border border-slate-200 rounded-xl overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? -1 : i)}
+                  className="w-full flex items-center justify-between px-6 py-4 text-left"
+                >
+                  <span className="font-semibold text-sm text-slate-900">{faq.q}</span>
+                  <svg className={`shrink-0 w-5 h-5 text-slate-400 transition-transform ${openFaq === i ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" /></svg>
+                </button>
+                {openFaq === i && (
+                  <div className="px-6 pb-4 text-sm text-slate-500 leading-relaxed">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <JsonLd data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }} />
 
         {/* CTA */}
         <section className="max-w-3xl mx-auto px-6 text-center">

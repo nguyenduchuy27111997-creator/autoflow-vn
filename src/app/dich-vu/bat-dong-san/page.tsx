@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
 
 const painPoints = [
   {
@@ -24,6 +25,29 @@ const painPoints = [
     stat: "5 ngày",
     title: "Báo cáo pipeline sales cuối tháng",
     desc: "Quản lý cần biết: bao nhiêu lead mới, bao nhiêu đang xem nhà, bao nhiêu sắp chốt. Data nằm rải rác trong Zalo, Sheet, sổ tay.",
+  },
+];
+
+const faqs = [
+  {
+    q: "AutoFlow tích hợp với CRM bất động sản nào?",
+    a: "Hỗ trợ Google Sheets, Airtable, và các CRM phổ biến qua API. Nếu bạn đang dùng CRM riêng, mình sẽ đánh giá khả năng tích hợp trong buổi audit miễn phí.",
+  },
+  {
+    q: "Có tự động phân lead cho từng sales không?",
+    a: "Có. Workflow tự động phân loại lead theo khu vực, ngân sách, loại BĐS và gán cho sales phù hợp. Lead nóng được ưu tiên thông báo ngay qua Zalo.",
+  },
+  {
+    q: "Khách hàng hay hỏi ngoài giờ, xử lý thế nào?",
+    a: "AutoFlow setup chatbot Zalo OA trả lời tự động 24/7 — gửi thông tin dự án, bảng giá, lịch hẹn xem nhà. Lead được lưu lại và phân loại ngay, sáng hôm sau sales có danh sách sẵn.",
+  },
+  {
+    q: "Tôi có nhiều dự án, mỗi dự án cần workflow riêng?",
+    a: "Không nhất thiết. Workflow được thiết kế linh hoạt — 1 workflow có thể xử lý nhiều dự án, tự động phân loại theo dự án. Chỉ cần thêm dự án mới vào hệ thống.",
+  },
+  {
+    q: "Bao lâu thì thấy ROI?",
+    a: "Thông thường 3-5 tháng. Với BĐS, chỉ cần chốt thêm 1 deal nhờ không mất lead là đã hoàn vốn gấp nhiều lần.",
   },
 ];
 
@@ -63,6 +87,7 @@ const workflows = [
 export default function BatDongSanPage() {
   const [sales, setSales] = useState(5);
   const [hours, setHours] = useState(3);
+  const [openFaq, setOpenFaq] = useState(-1);
   const salary = 12;
   const costPerYear = sales * salary * 12;
   const savedCost = Math.round(costPerYear * 0.5);
@@ -365,6 +390,41 @@ export default function BatDongSanPage() {
             </div>
           </div>
         </section>
+
+        {/* FAQ */}
+        <section className="max-w-3xl mx-auto px-6 mb-20">
+          <h2 className="font-display font-extrabold text-2xl md:text-3xl text-slate-900 text-center mb-10">
+            Câu hỏi thường gặp
+          </h2>
+          <div className="space-y-3">
+            {faqs.map((faq, i) => (
+              <div key={i} className="border border-slate-200 rounded-xl overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? -1 : i)}
+                  className="w-full flex items-center justify-between px-6 py-4 text-left"
+                >
+                  <span className="font-semibold text-sm text-slate-900">{faq.q}</span>
+                  <svg className={`shrink-0 w-5 h-5 text-slate-400 transition-transform ${openFaq === i ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" /></svg>
+                </button>
+                {openFaq === i && (
+                  <div className="px-6 pb-4 text-sm text-slate-500 leading-relaxed">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <JsonLd data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }} />
 
         {/* CTA */}
         <section className="max-w-3xl mx-auto px-6 text-center">

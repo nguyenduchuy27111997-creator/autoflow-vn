@@ -63,7 +63,9 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/icon.svg",
+    apple: "/icon-192.png",
   },
+  manifest: "/manifest.json",
   robots: {
     index: true,
     follow: true,
@@ -85,6 +87,28 @@ export default function RootLayout({
       className={`${beVietnam.variable} ${plusJakarta.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
+        {/* Organization schema */}
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "AutoFlow VN",
+            url: "https://autoflowvn.net",
+            logo: "https://autoflowvn.net/icon.svg",
+            email: "hello@autoflowvn.net",
+            description:
+              "Giúp doanh nghiệp vừa và nhỏ Việt Nam tự động hóa quy trình lặp lại bằng n8n — tích hợp Zalo, MISA, Shopee, KiotViet.",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "TP. Hồ Chí Minh",
+              addressCountry: "VN",
+            },
+            sameAs: [
+              "https://facebook.com/autoflowvn",
+            ],
+          }}
+        />
+        {/* LocalBusiness schema */}
         <JsonLd
           data={{
             "@context": "https://schema.org",
@@ -105,6 +129,57 @@ export default function RootLayout({
               "n8n Workflow Development",
               "Business Process Automation",
             ],
+            hasOfferCatalog: {
+              "@type": "OfferCatalog",
+              name: "Gói dịch vụ tự động hóa",
+              itemListElement: [
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Starter — 1 workflow",
+                    description: "Tự động hóa 1 quy trình, hoàn thành trong 1-2 tuần",
+                  },
+                  priceSpecification: {
+                    "@type": "PriceSpecification",
+                    price: "8000000",
+                    priceCurrency: "VND",
+                    minPrice: "8000000",
+                    maxPrice: "15000000",
+                  },
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Growth — 3-5 workflows",
+                    description: "Tự động hóa đa quy trình, hoàn thành trong 3-4 tuần",
+                  },
+                  priceSpecification: {
+                    "@type": "PriceSpecification",
+                    price: "20000000",
+                    priceCurrency: "VND",
+                    minPrice: "20000000",
+                    maxPrice: "35000000",
+                  },
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Scale — 8-12 workflows",
+                    description: "Tự động hóa toàn bộ vận hành, hoàn thành trong 6-8 tuần",
+                  },
+                  priceSpecification: {
+                    "@type": "PriceSpecification",
+                    price: "50000000",
+                    priceCurrency: "VND",
+                    minPrice: "50000000",
+                    maxPrice: "80000000",
+                  },
+                },
+              ],
+            },
           }}
         />
         {children}

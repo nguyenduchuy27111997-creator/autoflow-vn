@@ -14,7 +14,7 @@ const services = [
 const navLinks = [
   { label: "Quy trình", href: "/#quy-trinh" },
   { label: "Bảng giá", href: "/bang-gia" },
-  { label: "Kết quả", href: "/#ket-qua" },
+  { label: "Kết quả", href: "/ket-qua" },
   { label: "Tài liệu", href: "/tai-lieu" },
   { label: "Blog", href: "/blog" },
 ];
