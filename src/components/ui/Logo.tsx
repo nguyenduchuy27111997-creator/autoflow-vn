@@ -10,14 +10,34 @@ export default function Logo({ dark = false, className = "" }: LogoProps) {
         <svg
           width="18"
           height="18"
-          viewBox="0 0 24 24"
+          viewBox="0 0 192 192"
           fill="none"
-          stroke="white"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
         >
-          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+          {/* 3x3 grid dots */}
+          <circle cx="56" cy="56" r="5" fill="rgba(255,255,255,0.15)" />
+          <circle cx="96" cy="56" r="5" fill="rgba(255,255,255,0.15)" />
+          <circle cx="136" cy="56" r="5" fill="rgba(255,255,255,0.15)" />
+          <circle cx="56" cy="96" r="5" fill="rgba(255,255,255,0.15)" />
+          <circle cx="96" cy="96" r="5" fill="rgba(255,255,255,0.15)" />
+          <circle cx="136" cy="96" r="5" fill="rgba(255,255,255,0.15)" />
+          <circle cx="56" cy="136" r="5" fill="rgba(255,255,255,0.15)" />
+          <circle cx="96" cy="136" r="5" fill="rgba(255,255,255,0.15)" />
+          <circle cx="136" cy="136" r="5" fill="rgba(255,255,255,0.15)" />
+          {/* Staircase path */}
+          <polyline
+            points="56,56 96,56 96,96 136,96 136,136"
+            stroke="white"
+            strokeWidth="12"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            opacity="0.9"
+          />
+          {/* Active nodes */}
+          <circle cx="56" cy="56" r="14" fill="white" />
+          <circle cx="96" cy="56" r="12" fill="white" />
+          <circle cx="96" cy="96" r="12" fill="white" />
+          <circle cx="136" cy="96" r="12" fill="white" />
+          <circle cx="136" cy="136" r="14" fill="white" />
         </svg>
       </span>
       <span

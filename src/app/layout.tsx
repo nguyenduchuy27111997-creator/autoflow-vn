@@ -50,6 +50,16 @@ export const metadata: Metadata = {
     locale: "vi_VN",
     type: "website",
     siteName: "AutoFlow VN",
+    url: "https://autoflowvn.net",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AutoFlow VN — Tự Động Hóa Quy Trình Cho SME Việt Nam",
+    description:
+      "Tiết kiệm 10–20 giờ/tuần. Loại bỏ lỗi nhập tay. ROI trong 5 tháng.",
+  },
+  icons: {
+    icon: "/icon.svg",
   },
   robots: {
     index: true,
