@@ -148,7 +148,6 @@ export default function QuizPage() {
     try {
       const utm = getStoredUTM();
       const tier = getResultTierKey(totalScore);
-      const eventId = crypto.randomUUID();
 
       const res = await fetch("/api/quiz", {
         method: "POST",
@@ -161,14 +160,13 @@ export default function QuizPage() {
           result_tier: tier,
           answers,
           ...utm,
-          event_id: eventId,
         }),
       });
 
       if (res.ok) {
         trackQuizCompleted(totalScore);
         trackGenerateLead({ form_type: "quiz", score: totalScore, result_tier: tier });
-        fbqTrackLead({ content_name: "quiz", event_id: eventId });
+        fbqTrackLead({ content_name: "quiz" });
       }
     } catch (err) {
       console.error("Quiz submission failed:", err);

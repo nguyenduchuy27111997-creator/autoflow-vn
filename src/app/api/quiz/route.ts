@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { enqueueEmailSequence } from "@/lib/email-queue";
-import { sendCapiEvent } from "@/lib/capi";
 
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000;
 const MAX_REQUESTS = 10;
@@ -46,7 +45,6 @@ export async function POST(req: NextRequest) {
     const {
       name, email, phone, score, result_tier, answers,
       utm_source, utm_medium, utm_campaign, utm_term, utm_content,
-      event_id,
     } = body;
 
     if (!email || !email.includes("@")) {
@@ -81,25 +79,6 @@ export async function POST(req: NextRequest) {
       sequenceType: "quiz",
       metadata: { score, tier: result_tier },
     }).catch((err) => console.error("Email queue error (quiz):", err));
-
-    // CAPI Lead event (fire-and-forget)
-    if (event_id) {
-      sendCapiEvent({
-        eventName: "Lead",
-        eventId: event_id,
-        sourceUrl: `${req.headers.get("origin") || "https://autoflowvn.net"}/quiz`,
-        userEmail: email.trim(),
-        userPhone: phone?.trim(),
-        userName: name?.trim(),
-        clientIp: getRateLimitKey(req),
-        clientUserAgent: req.headers.get("user-agent") || undefined,
-        customData: {
-          content_name: "quiz",
-          content_category: "lead_gen",
-          value: score,
-        },
-      }).catch((err) => console.error("CAPI error (quiz):", err));
-    }
 
     return NextResponse.json({ success: true });
   } catch {

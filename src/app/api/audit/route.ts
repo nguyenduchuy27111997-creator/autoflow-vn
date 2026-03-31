@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { enqueueEmailSequence } from "@/lib/email-queue";
-import { sendCapiEvent } from "@/lib/capi";
 
 const WEBHOOK_URL = process.env.AUDIT_WEBHOOK_URL;
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
@@ -54,8 +53,7 @@ export async function POST(req: NextRequest) {
 
     // Validate required fields
     const { name, phone, industry, teamSize, painPoints, details, company,
-      utm_source, utm_medium, utm_campaign, utm_term, utm_content,
-      event_id } = body;
+      utm_source, utm_medium, utm_campaign, utm_term, utm_content } = body;
 
     if (!name || !phone) {
       return NextResponse.json(
@@ -97,21 +95,6 @@ export async function POST(req: NextRequest) {
         name: name?.trim(),
         sequenceType: "audit",
       }).catch((err) => console.error("Email queue error (audit):", err));
-    }
-
-    // CAPI Lead event (fire-and-forget)
-    if (event_id) {
-      sendCapiEvent({
-        eventName: "Lead",
-        eventId: event_id,
-        sourceUrl: `${req.headers.get("origin") || "https://autoflowvn.net"}/audit`,
-        userEmail: body.email?.trim(),
-        userPhone: phone?.trim(),
-        userName: name?.trim(),
-        clientIp: getRateLimitKey(req),
-        clientUserAgent: req.headers.get("user-agent") || undefined,
-        customData: { content_name: "audit", content_category: "lead_gen" },
-      }).catch((err) => console.error("CAPI error (audit):", err));
     }
 
     // Forward to webhook (n8n, Zapier, Make, etc.)

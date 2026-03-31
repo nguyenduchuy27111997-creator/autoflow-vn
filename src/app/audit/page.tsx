@@ -46,15 +46,14 @@ export default function AuditPage() {
     setSubmitting(true);
     try {
       const utm = getStoredUTM();
-      const eventId = crypto.randomUUID();
       const res = await fetch("/api/audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, ...utm, event_id: eventId }),
+        body: JSON.stringify({ ...form, ...utm }),
       });
       if (res.ok) {
         trackGenerateLead({ form_type: "audit" });
-        fbqTrackLead({ content_name: "audit", event_id: eventId });
+        fbqTrackLead({ content_name: "audit" });
       }
       setSubmitted(true);
     } catch {

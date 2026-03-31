@@ -59,15 +59,14 @@ export function fbpixelEvent(
 }
 
 /**
- * Fire Lead event on client Pixel with event_id for CAPI dedup.
- * Call after successful form submission.
+ * Fire Lead event on client Pixel.
+ * CAPI dedup handled by Stape — no event_id needed.
  */
 export function fbqTrackLead(params: {
   content_name: string;
-  event_id: string;
 }): void {
   fbpixelEvent("Lead", {
     content_name: params.content_name,
     content_category: "lead_gen",
-  }, params.event_id);
+  });
 }

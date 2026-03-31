@@ -5,7 +5,6 @@ import { enqueueEmailSequence } from "@/lib/email-queue";
 import { readFile } from "fs/promises";
 import { join } from "path";
 import { EMAIL_FROM, SITE_NAME, SITE_URL } from "@/data/constants";
-import { sendCapiEvent } from "@/lib/capi";
 
 function getResend() {
   const key = process.env.RESEND_API_KEY;
@@ -63,8 +62,7 @@ export async function POST(req: NextRequest) {
     }
 
     const { name, email, phone, resource,
-      utm_source, utm_medium, utm_campaign, utm_term, utm_content,
-      event_id } = body;
+      utm_source, utm_medium, utm_campaign, utm_term, utm_content } = body;
 
     if (!email || !email.includes("@")) {
       return NextResponse.json(
@@ -107,21 +105,6 @@ export async function POST(req: NextRequest) {
       name: name?.trim(),
       sequenceType: "pdf",
     }).catch((err) => console.error("Email queue error (pdf):", err));
-
-    // CAPI Lead event (fire-and-forget)
-    if (event_id) {
-      sendCapiEvent({
-        eventName: "Lead",
-        eventId: event_id,
-        sourceUrl: `${req.headers.get("origin") || "https://autoflowvn.net"}/tai-lieu`,
-        userEmail: email.trim(),
-        userPhone: phone?.trim(),
-        userName: name?.trim(),
-        clientIp: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown",
-        clientUserAgent: req.headers.get("user-agent") || undefined,
-        customData: { content_name: "pdf", content_category: "lead_gen" },
-      }).catch((err) => console.error("CAPI error (pdf):", err));
-    }
 
     // Read PDF file and send email
     const resend = getResend();

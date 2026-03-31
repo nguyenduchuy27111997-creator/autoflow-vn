@@ -113,7 +113,6 @@ function LeadModal({
 
     try {
       const utm = getStoredUTM();
-      const eventId = crypto.randomUUID();
       const res = await fetch("/api/tai-lieu", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -123,7 +122,6 @@ function LeadModal({
           phone: form.phone,
           resource: "10-quy-trinh",
           ...utm,
-          event_id: eventId,
         }),
       });
 
@@ -135,7 +133,7 @@ function LeadModal({
       }
 
       trackGenerateLead({ form_type: "pdf", resource: "10-quy-trinh" });
-      fbqTrackLead({ content_name: "pdf", event_id: eventId });
+      fbqTrackLead({ content_name: "pdf" });
       setSubmitted(true);
     } catch {
       setError("Không thể kết nối. Vui lòng thử lại.");
