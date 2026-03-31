@@ -1,171 +1,200 @@
 # Pitfalls Research
 
-**Domain:** Internal lead scoring dashboard on Supabase (production database read layer)
+**Domain:** Facebook Pixel + Conversions API (CAPI) on Next.js website
 **Researched:** 2026-03-29
-**Confidence:** HIGH (Supabase-specific pitfalls from official docs + community post-mortems), MEDIUM (lead scoring formula pitfalls from industry sources)
+**Confidence:** HIGH (Meta official docs + community post-mortems + enforcement actions), MEDIUM (Next.js-specific patterns from community)
 
 ---
 
 ## Critical Pitfalls
 
-### Pitfall 1: Analytical Queries Degrading Production OLTP Performance
+### Pitfall 1: Deduplication Broken Due to Missing or Mismatched event_id
 
 **What goes wrong:**
-Dashboard aggregate queries — COUNT(*), SUM(), GROUP BY across large tables — run on the same Postgres instance as transactional writes. A dashboard refresh that triggers a complex aggregation across 500k+ rows can cause write latency spikes, connection exhaustion, and in extreme cases, transaction timeouts for production operations. Postgres is row-oriented (OLTP), not column-oriented (OLAP). It is not optimized for aggregating functions at scale.
+Both the browser Pixel and the server-side CAPI event fire for the same user action (e.g., Lead or Purchase). Without a shared `event_id`, Meta cannot recognize them as the same event and counts both. Reported conversion volume inflates by 2x. ROAS appears higher than reality. Budget decisions are made on fabricated data. Meta's own audits show 70% of stores running Pixel + CAPI simultaneously have broken or incomplete deduplication configurations — and it fails silently.
 
 **Why it happens:**
-Developers treat "read-only" as "safe." They assume SELECT queries cannot hurt production. In practice, large scans consume I/O, CPU, and connection slots — finite resources shared with writes.
+Developers add Pixel to the frontend and CAPI to the API route independently. The `event_id` requirement is documented but easy to skip when prototyping. The Pixel fires automatically; the CAPI event is written separately. No shared identifier is threaded between them. Additionally, `event_name` is case-sensitive — "purchase" and "Purchase" are treated as different events, preventing deduplication even when `event_id` matches.
 
 **How to avoid:**
-- Route dashboard queries through Supabase Read Replicas (available on Pro and above). The read replica absorbs analytical I/O without touching the primary.
-- Use materialized views for expensive aggregates (score distributions, funnel breakdowns, lead count summaries). Refresh them on a schedule (pg_cron or Edge Function trigger), not on every dashboard load.
-- Set `statement_timeout` on the dashboard's Postgres role to kill runaway queries before they block the primary: `SET statement_timeout = '30s'`.
-- Monitor `pg_stat_activity` for long-running dashboard queries; add query cancellation if duration exceeds threshold.
+- Generate a single UUID (e.g., `crypto.randomUUID()`) at the moment the event is triggered on the client.
+- Pass this `event_id` to both `fbq('track', 'Lead', {}, { eventID: uuid })` (client) and the CAPI payload `{ event_id: uuid }` (server).
+- Standardize event names to match Meta's Standard Events list exactly, including case. Do not invent custom spellings.
+- Log both the client-side `eventID` and the server-side `event_id` during QA; confirm they are identical for the same user action.
+- Meta deduplicates within a 48-hour window when `event_name` AND `event_id` both match.
 
 **Warning signs:**
-- Production API response times spike around dashboard refresh intervals.
-- `pg_stat_activity` shows dashboard queries with `wait_event_type = 'Lock'` or long `query_duration`.
-- Cache hit rate drops below 95% in Supabase Reports after dashboard goes live.
+- Events Manager shows both a "Browser" and "Server" source for the same event with counts that nearly double when both are running.
+- `event_id` field is absent from CAPI payloads in server logs.
+- Reported conversions are approximately 2x what the business expects.
 
-**Phase to address:** Foundation / Data Access Layer phase — before any dashboard query is written.
+**Phase to address:** Implementation phase — define the `event_id` threading pattern before writing any tracking code. Make it a code review requirement.
 
 ---
 
-### Pitfall 2: N+1 Query Pattern in Dashboard Components
+### Pitfall 2: CAPI Access Token Exposed in Client-Side Code
 
 **What goes wrong:**
-A real-world Supabase case study recorded 61 queries firing to render a single dashboard page (1 query for a list of 20 records, then 3 follow-up queries per record). Load time was 2.8 seconds. After consolidation to 1 RPC query, load time dropped to 150ms. This pattern is endemic to component-level data fetching where each card/row fetches its own supplementary data.
+The CAPI System User Access Token is placed in a client-accessible environment variable (e.g., `NEXT_PUBLIC_FB_ACCESS_TOKEN`). It becomes visible in the JavaScript bundle, browser DevTools, and any decompiled client code. Anyone who reads it gains full access to the Facebook ad account: can send arbitrary conversion events, pollute attribution data, modify datasets, and drain ad budget by injecting fake high-value conversions.
 
 **Why it happens:**
-Frontend components fetch their own data in isolation. When a list renders, each row independently queries for owner name, score, last activity — instead of the parent query joining all of it.
+Developers prefix secrets with `NEXT_PUBLIC_` out of habit (needed for client-side values), without realizing the CAPI token should only ever be used in a server-side context. It "works" immediately — the mistake is invisible until exploited.
 
 **How to avoid:**
-- Define data requirements at the page level, not the component level. One query (or one RPC call) provides all data a page needs.
-- Use Supabase RPC functions with JOINs and LATERAL subqueries for complex multi-entity aggregations.
-- If using React Query or SWR, batch-load related data in a single key, not per-row keys.
+- Store the CAPI token as a server-only environment variable: `FB_CAPI_ACCESS_TOKEN` (no `NEXT_PUBLIC_` prefix).
+- All CAPI calls must be made from Next.js Route Handlers (`app/api/`) or Server Actions — never from client components.
+- In Vercel: set the environment variable with "Server" scope only. Do not enable "Browser" exposure.
+- Audit: `grep -r "NEXT_PUBLIC_FB" src/` should return zero matches for anything CAPI-related.
 
 **Warning signs:**
-- Browser network tab shows 10+ parallel `/rest/v1/` requests per page load.
-- Dashboard feels fast per-card but total Time to Interactive is 2s+.
-- Supabase Reports show API request count spiking proportionally with table row count.
+- `NEXT_PUBLIC_` prefix on any variable named `FB_ACCESS_TOKEN`, `FB_CAPI_TOKEN`, or similar.
+- CAPI `fetch()` calls written inside `.tsx` client components or any file with `'use client'`.
+- The token is visible when running `JSON.stringify(process.env)` from a client component (it should not be).
 
-**Phase to address:** Dashboard UI implementation phase — enforce as an architectural constraint before any component ships.
+**Phase to address:** Initial setup phase — define server-only environment variable naming conventions before writing the first API route.
 
 ---
 
-### Pitfall 3: RLS Policies Causing Full-Table Scans
+### Pitfall 3: Facebook Pixel Fires Before User Consent (GDPR/CCPA Violation)
 
 **What goes wrong:**
-Row Level Security policies evaluated on every row of a large table without supporting indexes cause sequential scans. A basic `auth.uid() = user_id` RLS policy on a 1M-row table can take over 3 minutes and time out. Internal dashboards that use the service role key bypass this — but dashboards that query as an authenticated user role hit it hard.
+The Pixel script loads in `<head>` or via `next/script` without a consent gate. On page load — before any consent banner is displayed or accepted — Pixel fires a `PageView` event and sets `_fbp`/`_fbc` cookies. This is a GDPR Article 7 violation in the EU: personal data is processed without lawful basis. EU regulators have issued fines up to €15 million for exactly this pattern. Even with a cookie banner present, if the banner is "cosmetic" (does not actually block the script), it does not satisfy GDPR.
 
 **Why it happens:**
-RLS is added for safety, but the columns referenced in policies (`user_id`, `team_id`, `org_id`) are often not indexed. Postgres evaluates the policy predicate for every row it considers, multiplying the cost by the number of rows in scope.
+Adding Pixel to `layout.tsx` or `_document.tsx` is the simplest implementation. Most tutorials do it this way. Consent management is treated as a secondary concern. CMP (Consent Management Platform) is installed visually but not wired to actually block script execution.
 
 **How to avoid:**
-- For every column referenced in an RLS policy, create a btree index: `CREATE INDEX ON leads (user_id);`
-- For internal-only admin dashboards, consider a dedicated Postgres role with `BYPASSRLS` privilege accessed via a server-side function — never expose this role's credentials client-side.
-- Run Supabase's built-in Performance Advisor; it flags missing RLS-supporting indexes automatically.
-- Benchmark RLS impact: test with and without `SET row_security = off` to quantify overhead.
+- Conditionally render the Pixel script only after the user accepts marketing/advertising cookies.
+- Use a CMP that categorizes Meta Pixel as an "Advertising" vendor requiring opt-in, and provides a JavaScript callback/event when consent is granted — then load the Pixel on that callback.
+- For Vietnam-based operations: if processing data of EU citizens (GDPR applies extraterritorially), or Vietnamese personal data under Vietnam's PDPD (Decree 13/2023), consent requirements apply.
+- Verify with technical testing: open an incognito window, open DevTools Network tab, confirm zero requests to `connect.facebook.net` or `facebook.com/tr` before clicking "Accept" on the banner.
+- CAPI is also not exempt: sending personal data server-side for users who have not consented is still a violation. The consent signal must be respected end-to-end.
 
 **Warning signs:**
-- `EXPLAIN ANALYZE` shows `Seq Scan` on large tables inside RLS policy checks.
-- Query duration increases linearly (not logarithmically) as table grows.
-- Supabase Performance Advisor flags "RLS Performance" warnings.
+- Pixel script added directly to `layout.tsx` without a consent wrapper.
+- Network tab shows `facebook.com/tr` requests on first page load before consent interaction.
+- CMP is installed but no JavaScript callback triggers Pixel initialization.
+- No `data-processing-consent` or equivalent guard in the Pixel initialization code.
 
-**Phase to address:** Database schema and access layer phase, before any query benchmarking.
+**Phase to address:** Consent architecture phase — must be designed before implementing any tracking. Do not add Pixel first and "add consent later."
 
 ---
 
-### Pitfall 4: Service Role Key Exposed in Client-Side Dashboard Code
+### Pitfall 4: PageView Double-Firing in Next.js App Router SPA Navigation
 
 **What goes wrong:**
-An internal dashboard needs to bypass RLS to see all leads (not just the logged-in user's leads). Developer uses `supabase.createClient(url, SERVICE_ROLE_KEY)` in the frontend. The service role key is now embedded in JavaScript bundle, visible to anyone who opens DevTools. This key bypasses all RLS and grants full read/write/delete access to the entire database — equivalent to root access.
+The Pixel script's built-in HTML5 History API listener fires `PageView` automatically on every `history.pushState` call. In Next.js App Router, client-side navigation uses `pushState`. If a developer also wires `usePathname` + `useEffect` to call `fbq('track', 'PageView')` manually, every navigation fires PageView twice. Additionally, if `ReactPixel.init()` is called in both `layout.tsx` and a separate tracking component, the Pixel initializes twice, causing all events to double-fire regardless of navigation.
 
 **Why it happens:**
-The dashboard "works" immediately with the service role key. RLS policies that restrict per-user access feel like obstacles for an admin view. The shortcut ships.
+App Router is different from Pages Router. Existing tutorials use Pages Router patterns (`router.events`). Porting these patterns to App Router without accounting for the Pixel's own listener is a common mistake. The double-fire is invisible unless inspecting network requests with browser tooling.
 
 **How to avoid:**
-- Never pass the service role key to any client-side code. Server-side only: Next.js Route Handlers, Edge Functions, or a dedicated backend API.
-- For admin views that need all rows: create a Postgres function with `SECURITY DEFINER` owned by a role with `BYPASSRLS`. Call it via `supabase.rpc()` with the anon key. The function runs with elevated privileges server-side but the key in the client remains low-privilege.
-- Alternatively, set a custom `app.role = 'admin'` claim in the JWT and write RLS policies that check `(auth.jwt() ->> 'role') = 'admin'`.
-- Audit: grep the codebase for `service_role` to verify it never appears in any client-side file.
+- Choose one approach: either rely on the Pixel's built-in History listener (`disablePushState: false`, the default), OR manually track route changes — never both.
+- Call `fbq('init', ...)` exactly once, in one place. For App Router, a single client component wrapped in `Suspense` (because of `useSearchParams`) is the correct location.
+- Use `dynamic(() => import('./PixelTracker'), { ssr: false })` to avoid server-side rendering of the Pixel component, which has no effect on the server but can cause hydration mismatches.
+- Disable the Pixel's built-in push state listener if doing manual tracking: pass `{ disablePushState: true }` in the Pixel init options.
+- Test navigation: click between 3 routes and confirm exactly 3 PageView events in Events Manager "Test Events" tab (not 6).
 
 **Warning signs:**
-- `SUPABASE_SERVICE_ROLE_KEY` imported in a `.tsx` or `.ts` file outside `/api/` or `/app/api/` directories.
-- Environment variable names not prefixed with `SECRET_` or stored in server-only `.env` files.
-- Vercel environment variables with service role key set to "Preview" + "Browser" exposure.
+- Network tab shows two consecutive `facebook.com/tr?ev=PageView` requests on each client-side navigation.
+- Pixel `init()` called in multiple files (e.g., both `layout.tsx` and `PixelTracker.tsx`).
+- PageView count in Events Manager is approximately double actual page sessions.
 
-**Phase to address:** Authentication and access control phase — define access patterns before writing any query.
+**Phase to address:** Implementation phase — audit for double-init before connecting CAPI. Fix the client-side tracking first, then layer server-side events.
 
 ---
 
-### Pitfall 5: Lead Score Staleness With No Decay Mechanism
+### Pitfall 5: PII Sent Unhashed or Incorrectly Normalized to CAPI
 
 **What goes wrong:**
-Lead scores are computed once and stored. A lead who scored 85 from a product demo six months ago but has had zero activity since continues to rank above a lead who scored 65 last week with active engagement. Sales teams see "hot" leads that are actually cold. Trust in the dashboard erodes; sales reverts to gut instinct.
+Meta requires all Personally Identifiable Information (PII) sent via CAPI to be SHA-256 hashed before transmission. Sending raw email addresses or phone numbers is a privacy violation and may trigger Meta's data quality warnings. More subtly: hashing `"User@Email.com"` instead of `"user@email.com"` (lowercase, trimmed) produces a different hash, which does not match Meta's internal hashed copy of the user's email — destroying match quality. Hashing `"(555) 123-4567"` instead of `"15551234567"` (E.164 format, digits only) similarly fails to match.
 
 **Why it happens:**
-Score computation is implemented as a one-time calculation or a simple recalculation that adds/removes points based on events but never subtracts for time elapsed. Time decay requires a background job, which is an architectural addition developers defer.
+Developers know to hash but skip normalization. The SHA-256 output is valid — it just does not match Meta's stored hash for the same user. There is no error; Event Match Quality silently degrades. Fields like `client_ip_address`, `client_user_agent`, `fbc`, and `fbp` must NOT be hashed (Meta uses them raw) — but this is non-obvious and some developers hash everything.
 
 **How to avoid:**
-- Build time decay into the score formula from day one. Common approach: reduce score by a configurable percentage (e.g., 10-20%) per week of inactivity. Store `last_activity_at` on every lead record.
-- Use `pg_cron` or a scheduled Edge Function to recompute scores nightly. Do not recompute on every page load.
-- Display `score_updated_at` on the dashboard so users can see data freshness.
-- Define "active" explicitly: what events reset the inactivity clock? (page visit, email open, form submission).
+- Before hashing: lowercase emails, trim whitespace, format phone numbers as E.164 (country code + digits, no spaces/dashes/parentheses: `15551234567` for a US number).
+- Hash with SHA-256: `crypto.createHash('sha256').update(normalized).digest('hex')` (Node.js).
+- Do NOT hash: `client_ip_address`, `client_user_agent`, `fbc`, `fbp`, `external_id` (unless specified).
+- Use Meta's [Payload Helper](https://developers.facebook.com/docs/marketing-api/conversions-api/payload-helper) to validate hashing before deploying.
+- Write a dedicated `hashUserData(userData)` utility function with normalization built in. Test it with known email → expected hash pairs.
 
 **Warning signs:**
-- Score distribution is bimodal — many leads stuck at high scores from months-old events, few in the middle range.
-- Sales team ignores the dashboard score column and sorts by `created_at` instead.
-- No `last_activity_at` or `score_updated_at` column exists on the leads table.
+- Event Match Quality score below 6.0 despite sending email and phone fields.
+- Raw email addresses visible in CAPI request logs (should always be 64-character hex strings).
+- Phone numbers in CAPI payloads contain spaces, dashes, or parentheses.
 
-**Phase to address:** Lead scoring formula design phase — decay must be specified before the schema is finalized.
+**Phase to address:** Implementation phase — write and test the `hashUserData` utility before integrating it into any event payload.
 
 ---
 
-### Pitfall 6: Overly Complex Scoring Formula That No One Trusts
+### Pitfall 6: Low Event Match Quality (EMQ) From Sparse User Data
 
 **What goes wrong:**
-A scoring model with 20+ criteria, arbitrary point values, and multiple weighted sub-scores becomes a black box. Sales cannot explain why a lead scores 73 vs 74. When the model contradicts their intuition, they ignore it. Adoption collapses.
+The CAPI payload sends only `event_name`, `event_time`, and `event_source_url`. No user identifiers are included. Meta cannot match the event to a user in its system. Event Match Quality (EMQ) score is 0-3 ("Poor"). Conversions go unattributed. Retargeting audiences are empty. The CAPI investment delivers no improvement over Pixel alone, which is the opposite of its purpose.
 
 **Why it happens:**
-More criteria feels more accurate. Developers add every available signal. The resulting score is defensible on paper but opaque in practice.
+Including user data requires collecting it (email from form fills, phone from checkout), which requires building a data pipeline from user interactions to the CAPI payload. This feels like extra work after the basic event fires. The Pixel fires with a valid event; the developer assumes CAPI is "working."
 
 **How to avoid:**
-- Start with 5-7 criteria that predict 80% of conversions. Analyze historical win/loss data to identify which attributes actually correlate with closed deals.
-- Make score breakdown visible: show each contributing factor and its point value alongside the total score. "Score: 73 (Company size: +20, Recent demo: +30, Email opens: +15, Inactive 3 weeks: -12)."
-- Include sales in formula design from the start. They own the definition of a qualified lead.
-- Validate the model: does it agree with deals already closed? Run the formula retroactively on converted leads and verify they score high.
+- Identify the minimum viable user data for each event: for a `Lead` event (form submission), you likely have email, first name, last name — send all three (hashed).
+- Include `fbc` (from `_fbc` cookie, set when user clicks a Facebook ad) and `fbp` (from `_fbp` cookie, always set by Pixel) — these are the two highest-impact identifiers for attribution.
+- Include `client_ip_address` and `client_user_agent` from the server-side request context (available in Next.js Route Handlers via request headers).
+- Target EMQ score 7+ for meaningful attribution improvement; 9+ for maximum ROAS impact.
+- An EMQ improvement from 8.6 to 9.3 has been documented to reduce CPA by 18% and increase ROAS by 22%.
 
 **Warning signs:**
-- Formula defined entirely by marketing/engineering without sales input.
-- Dashboard has no "score breakdown" or "score explanation" column.
-- Sales team uses the CRM "notes" field to add their own informal quality ratings alongside the dashboard score.
+- EMQ score below 6.0 in Events Manager > Datasets > Event Match Quality.
+- CAPI payloads have empty or missing `user_data` objects.
+- `_fbc` and `_fbp` cookies are not being read and forwarded to the CAPI payload.
 
-**Phase to address:** Score formula design phase (pre-build) — get sales sign-off before writing a single line of scoring logic.
+**Phase to address:** Implementation phase — design the `user_data` collection and forwarding strategy before writing CAPI events. For server-side events, plan how cookies and request metadata flow from client to server.
 
 ---
 
-### Pitfall 7: Materialized Views With No Refresh Strategy
+### Pitfall 7: _fbc and _fbp Cookie Loss Breaking Attribution
 
 **What goes wrong:**
-Materialized views are created to precompute expensive aggregates (e.g., lead count by stage, score distribution histogram). They are refreshed manually during development. In production, no automated refresh is wired up. The dashboard shows data from the day the view was last manually refreshed. Users notice numbers that don't match the source tables. Dashboard credibility is lost.
+`_fbc` (click ID cookie, set when a user arrives via a Facebook ad link containing `fbclid`) and `_fbp` (browser ID cookie, set by the Pixel on first visit) are the primary identifiers linking CAPI events to Meta users. Safari's ITP (Intelligent Tracking Prevention) deletes `_fbc` after 24 hours if set by a tracking URL, and deletes `_fbp` after 7 days. Many ad blockers strip `fbclid` from URLs before the page loads, preventing `_fbc` from ever being created. In Next.js SPA navigation, the `_fbc` cookie may not be set on client-navigated pages that were not the landing page.
 
 **Why it happens:**
-`REFRESH MATERIALIZED VIEW` works locally. Deploying the refresh scheduler (pg_cron, Edge Function, or cron job) is a separate infrastructure task that gets deprioritized.
+Cookie behavior differences across browsers are not obvious during development (which typically uses Chrome). Testing is done on the developer's own browser where cookies persist. Safari and Firefox users (a significant share of mobile traffic) have degraded tracking without any error signal.
 
 **How to avoid:**
-- Treat refresh scheduling as part of the materialized view definition — ship them together, never separately.
-- Use pg_cron for simple periodic refreshes: `SELECT cron.schedule('refresh-lead-stats', '*/15 * * * *', 'REFRESH MATERIALIZED VIEW CONCURRENTLY lead_stats_mv;')`.
-- Use `CONCURRENTLY` on refresh to avoid locking the view during refresh (requires a unique index on the materialized view).
-- Supabase does not support realtime subscriptions on materialized views — if the dashboard requires live updates, materialized views are the wrong tool; use direct table queries with proper indexes instead.
-- Display a "Last updated: X minutes ago" timestamp sourced from the materialized view's refresh metadata.
+- Read `_fbc` and `_fbp` from `document.cookie` on the client at event-fire time and pass them to the API route for CAPI forwarding — do not rely on cookies being present server-side (they may have expired).
+- Store `fbclid` from the URL query parameter in `localStorage` or a first-party cookie with a longer TTL when the user lands from a Facebook ad. This enables reconstructing `_fbc` for subsequent events.
+- For the server-side Route Handler, extract cookies from the incoming request headers (via `cookies()` in Next.js 15+) as a fallback.
+- Accept that some percentage of events will lack `_fbc` (users who did not come from a Facebook ad) — this is normal and does not break CAPI; it just reduces attribution for non-click traffic.
 
 **Warning signs:**
-- Dashboard aggregate numbers are static for hours while the underlying tables are actively updated.
-- No `pg_cron` jobs exist in the database for view refresh.
-- `REFRESH MATERIALIZED VIEW` appears only in migration files, not in any scheduled job.
+- CAPI payloads consistently show `fbc: null` or missing `fbc` field even for campaign traffic.
+- Meta ads attribution window shows fewer conversions than expected for Safari/iOS users.
+- `_fbc` cookie disappears between page navigations in Safari.
 
-**Phase to address:** Data layer / infrastructure phase — before any materialized view is created.
+**Phase to address:** Implementation phase — write cookie extraction utilities before integrating user data into CAPI payloads. Test on Safari explicitly.
+
+---
+
+### Pitfall 8: Multiple CAPI Sources Sending Duplicate Events to the Same Pixel
+
+**What goes wrong:**
+A second CAPI integration is added (e.g., a third-party CRM connector, a Shopify app, or a tag manager server-side container) without coordinating with the existing custom CAPI implementation. Both systems send `Purchase` events to the same pixel/dataset. There is no shared `event_id` between the two systems. Conversions are counted twice, but from different sources, so Meta's deduplication logic does not catch it. Attribution is corrupted.
+
+**Why it happens:**
+Marketing teams install third-party integrations independently of engineering teams. A CRM integration "also supports Facebook CAPI" and marketing enables it without knowing a custom CAPI implementation already exists. The Meta Events Manager shows the combined volume, which looks like a performance improvement.
+
+**How to avoid:**
+- Audit Events Manager > Datasets > Overview before starting implementation to see if any existing CAPI connections are active.
+- Document all CAPI event sources in a single place and make it a requirement that no new CAPI source is added without engineering review.
+- If a third-party integration must coexist, ensure it uses a different event dataset (pixel ID) or that its events carry `event_id` values that your custom implementation can match for deduplication.
+- Meta explicitly warns: avoid configuring additional CAPI integrations that send duplicate data to the same dataset.
+
+**Warning signs:**
+- Events Manager shows two "Server" sources for the same event type.
+- Event volume inexplicably doubles after a third-party integration is installed.
+- `event_id` is absent or inconsistent across event sources in the raw data.
+
+**Phase to address:** Audit phase (before any implementation) — inventory existing integrations. Then enforcement during ongoing operations.
 
 ---
 
@@ -173,12 +202,12 @@ Materialized views are created to precompute expensive aggregates (e.g., lead co
 
 | Shortcut | Immediate Benefit | Long-term Cost | When Acceptable |
 |----------|-------------------|----------------|-----------------|
-| Query production DB directly without read replica | No infrastructure setup needed | Dashboard queries impact production write latency at scale | MVP only if table is under 50k rows |
-| Hardcode score weights in application code | Fast to ship | Requires deploy to adjust weights; sales cannot tune | Never for long-running product |
-| Single global lead score (no per-segment scoring) | Simple to implement | Misranks leads from different product lines or geographies | Acceptable at MVP if single product |
-| Compute scores on every dashboard page load | Always fresh data | 10x query cost at scale; production impact | Never — use scheduled computation |
-| Use service role key server-side via Vercel env vars | Easy RLS bypass | Fine if truly server-side only; catastrophic if leaked | Acceptable only in server-side code |
-| Skip `CONCURRENTLY` on materialized view refresh | Simpler setup | Locks view for all reads during refresh | Acceptable for low-traffic dashboards refreshing infrequently |
+| Skip `event_id` on initial Pixel-only setup | Faster to ship | Deduplication broken when CAPI is added later; requires retrofitting all events | Never if CAPI is planned |
+| Use GTM for Pixel instead of direct Next.js integration | No code deployment needed for tracking changes | GTM loads async, increases consent complexity, harder to control with React lifecycle | Acceptable if team manages GTM and no SSR events needed |
+| Use `test_event_code` in production during debugging | Easier to debug | Test events pollute the dataset if left in; Meta flags it | Never in production longer than a debugging session |
+| Read `_fbp`/`_fbc` server-side only (from cookies header) | Simpler code | Misses cookies that expired before the server request; degrades EMQ | Acceptable only if no Safari/iOS audience |
+| Send only `PageView` via CAPI | Simple implementation | CAPI provides no attribution value without conversion events; wasted infrastructure | Never — CAPI is only valuable for conversion events |
+| Skip consent gate for CAPI (server-side is "invisible") | Simpler implementation | GDPR violation; enforcement actions increasing; no valid legal basis for processing | Never |
 
 ---
 
@@ -186,11 +215,14 @@ Materialized views are created to precompute expensive aggregates (e.g., lead co
 
 | Integration | Common Mistake | Correct Approach |
 |-------------|----------------|------------------|
-| Supabase Auth + dashboard admin view | Using service role key client-side to bypass RLS for admin | Server-side only: use SECURITY DEFINER functions or admin JWT claims |
-| Supabase RPC for complex queries | Calling individual table endpoints in a loop | Define RPC functions that JOIN and aggregate in a single database round-trip |
-| pg_cron for score refresh | Assuming it is enabled by default on all plans | Verify pg_cron is enabled in Database Extensions; it requires Pro plan or manual activation on some tiers |
-| Supabase Realtime + materialized views | Subscribing to materialized view changes for live dashboard | Realtime does not support materialized views; subscribe to source tables or use polling |
-| Next.js + Supabase server-side rendering | Fetching dashboard data in client components | Use Server Components or Route Handlers to keep database logic server-side; reduces network round-trips and hides credentials |
+| Meta Pixel + Next.js App Router | Calling `fbq('init')` inside `layout.tsx` without SSR guard | Use `dynamic(() => import('./PixelTracker'), { ssr: false })` to prevent server-side execution |
+| CAPI + Next.js Route Handlers | Using `NEXT_PUBLIC_` prefix on the access token | Server-only env var (no prefix); call CAPI only from Route Handlers or Server Actions |
+| Pixel + CMP (consent platform) | CMP shows banner but does not block script execution | Wire CMP consent callback to conditionally render the Pixel component or call `fbq('consent', 'grant')` |
+| CAPI + GDPR consent | Assuming server-side calls bypass consent requirements | Respect consent signal server-side too; do not call CAPI for users who declined advertising cookies |
+| `_fbc` cookie + SPA navigation | Expecting `_fbc` to be set on every page | Read `fbclid` from URL on landing and persist it; do not assume cookie exists on subsequent pages |
+| CAPI + existing CRM integration | Installing both independently | Audit Events Manager for active CAPI sources before implementing; coordinate `event_id` generation |
+| Pixel + Meta Pixel Helper extension | Using extension to verify CAPI events | Pixel Helper only validates browser-side events; use Events Manager > Test Events tab for CAPI verification |
+| CAPI `user_data` hashing | Hashing IP address, user agent, `fbc`, `fbp` | Only hash PII (email, phone, name, address); leave technical identifiers raw |
 
 ---
 
@@ -198,11 +230,10 @@ Materialized views are created to precompute expensive aggregates (e.g., lead co
 
 | Trap | Symptoms | Prevention | When It Breaks |
 |------|----------|------------|----------------|
-| Unindexed ORDER BY + LIMIT for lead list pagination | Fast at 100 rows, progressively slower | Add composite index on (score DESC, id) for the primary sort | ~10k rows |
-| Aggregate COUNT(*) on full table without index | Dashboard header stat "Total Leads: X" takes 2s | Use partial indexes or materialized views for counts | ~50k rows |
-| RLS policy on unindexed foreign key column | All dashboard queries slow for authenticated users | Index every column referenced in RLS policies | ~5k rows with complex policies |
-| Fetching complete lead records to compute dashboard metrics in application code | Works fast; silently fetches entire table | Compute aggregates in SQL, not in JavaScript | ~1k rows |
-| No connection pooling (PgBouncer/Supavisor) for dashboard tool | Dashboard works; unexplained 503s during peak traffic | Use Supabase's built-in Supavisor (port 6543) for connection pooling | ~50 concurrent dashboard users |
+| Synchronous CAPI call blocking Route Handler response | Form submission feels slow; user waits for Meta API round-trip | Use `after()` (Next.js 15) or fire-and-forget pattern — do not await CAPI call in the critical path | Any time Meta API latency > 200ms |
+| CAPI call in Server Component render | Page SSR is blocked by Meta API | CAPI calls belong in Route Handlers or Server Actions triggered by user action, not in render | Every page load |
+| Loading Pixel script without `next/script` strategy | Pixel blocks page rendering; affects LCP/FCP scores | Use `next/script` with `strategy="afterInteractive"` to defer Pixel until page is interactive | Every page with Pixel in `<head>` |
+| Batching CAPI events without retry logic | Silent event loss when Meta API returns 429 or 5xx | Implement exponential backoff retry; log failed event payloads for manual re-submission | High-traffic events (>1000/batch) |
 
 ---
 
@@ -210,11 +241,11 @@ Materialized views are created to precompute expensive aggregates (e.g., lead co
 
 | Mistake | Risk | Prevention |
 |---------|------|------------|
-| Service role key in client bundle | Full DB read/write access for anyone with DevTools | Server-side only; grep CI checks for `SERVICE_ROLE` in client files |
-| RLS disabled on leads table | All leads visible to any authenticated user | Enable RLS on all tables; Supabase now sends email alerts when tables have RLS disabled |
-| Dashboard exposes raw PII (email, phone) without access controls | Regulatory exposure (GDPR, CCPA); internal data leakage | Role-based access: restrict PII columns to specific user roles in the dashboard |
-| No audit log for lead data access | Cannot detect or investigate data exfiltration | Enable Supabase Vault or add a simple access log trigger for sensitive queries |
-| Exposing Supabase project URL + anon key in public repo | Low risk if RLS is correct, but invites probing | Move to environment variables; anon key exposure with weak RLS is a high-risk combination |
+| CAPI System User Token in `NEXT_PUBLIC_` env var | Full ad account access for anyone with DevTools open | Server-only env var; CI check: `grep -r "NEXT_PUBLIC_" .env` should not include FB token |
+| Raw PII (email, phone) sent to CAPI without hashing | Privacy regulation violation; Meta TOS violation | Dedicated `hashUserData()` utility; automated tests verifying output is 64-char hex strings |
+| Pixel fires before consent | GDPR/CCPA violation; potential fines up to 4% of global turnover | CMP blocks script execution; technical verification in incognito before each production deploy |
+| CAPI call includes URL with sensitive query params as `event_source_url` | PII leakage in URL (e.g., `?email=user@example.com`) | Sanitize `event_source_url` before sending; strip query parameters that contain user data |
+| Logging full CAPI payloads to application logs | Hashed PII in server logs; accessible to anyone with log access | Log only event name, event ID, and success/failure status — never the full `user_data` object |
 
 ---
 
@@ -222,23 +253,23 @@ Materialized views are created to precompute expensive aggregates (e.g., lead co
 
 | Pitfall | User Impact | Better Approach |
 |---------|-------------|-----------------|
-| No score explanation / breakdown visible | Sales cannot act on the score; low trust | Show each scoring factor inline (why did this lead score 73?) |
-| Showing stale "last updated" data with no timestamp | Users act on outdated scores; missed opportunities | Display `Score last updated: 2 hours ago` on every lead row |
-| Single dashboard for all use cases (daily ops + weekly reports + management view) | Overwhelms users; wrong metrics for each job | Separate views: "Today's hot leads" vs "Weekly pipeline health" vs "Monthly score trends" |
-| No sort/filter by score change | Users cannot spot leads that recently became hot | Add "Score change (7d)" column with delta indicator |
-| Pagination without cursor-based approach on large sorted datasets | Offset pagination degrades at high page numbers | Use cursor-based pagination (id + score cursor) for lead list over 10k rows |
+| Consent banner blocks the page until interaction | Frustrating UX; high bounce rate from EU users | Use a non-blocking banner style; allow navigation before consent is given (just do not fire Pixel yet) |
+| No "Reject All" button at the same level as "Accept All" | Violates GDPR dark pattern rules; regulators actively targeting | "Accept" and "Reject" must be equally prominent; no extra clicks to reject |
+| Consent preference not persisted across sessions | User must re-consent every visit | Store consent choice in a first-party cookie (e.g., `_consent`) with 12-month expiry |
+| Pixel fires on internal team traffic inflating metrics | Marketing makes decisions on skewed data | Filter internal IP ranges in Events Manager; add `?notrack=1` parameter support for QA |
 
 ---
 
 ## "Looks Done But Isn't" Checklist
 
-- [ ] **Score computation:** Score updates on new events — verify it also decays on inactivity, not just increases on activity.
-- [ ] **Materialized views:** View shows correct data — verify a refresh job is scheduled and running in production (not just local).
-- [ ] **RLS policies:** Policies exist — verify they have supporting indexes (check Supabase Performance Advisor for RLS warnings).
-- [ ] **Read replica routing:** Dashboard uses read replica — verify the Supabase client is pointed at the read replica URL for dashboard queries specifically.
-- [ ] **Service role key:** Dashboard can see all leads — verify the key is not accessible in any client-side bundle (check browser DevTools > Sources).
-- [ ] **Lead score formula:** Sales team reviewed the formula — verify they can explain why a specific lead scores high; if not, it's not adopted.
-- [ ] **N+1 queries:** Dashboard loads fast in development — verify network tab in production against a realistic dataset (500+ leads, not 5).
+- [ ] **Deduplication:** Both Pixel and CAPI events fire — verify `event_id` is identical in the browser request (`fbq` call) and the CAPI payload for the same user action.
+- [ ] **Token security:** CAPI calls work from the server — verify the access token is NOT visible in `window.__NEXT_DATA__` or any client-side bundle (check DevTools > Sources > search for the token).
+- [ ] **Consent blocking:** Cookie banner displays — verify in incognito that zero requests go to `connect.facebook.net` before the user clicks "Accept" (DevTools > Network tab).
+- [ ] **PII hashing:** `user_data` is populated — verify emails are lowercase 64-char hex strings in server logs, not raw email addresses.
+- [ ] **EMQ score:** Events are received in Events Manager — verify the EMQ score is 7+ (not just that events arrive, but that they match users).
+- [ ] **No double PageView:** App Router navigation is tracked — verify exactly 1 `PageView` fires per route change (not 2), using Events Manager Test Events tab.
+- [ ] **fbc/fbp forwarding:** CAPI events send user data — verify `fbc` and `fbp` fields are populated for users who arrived via Facebook ad campaigns.
+- [ ] **CAPI non-blocking:** Form submission returns fast — verify the Route Handler responds before the CAPI API call completes (use `after()` or fire-and-forget).
 
 ---
 
@@ -246,12 +277,12 @@ Materialized views are created to precompute expensive aggregates (e.g., lead co
 
 | Pitfall | Recovery Cost | Recovery Steps |
 |---------|---------------|----------------|
-| Production slowdown from dashboard queries | MEDIUM | Add read replica routing (same day); add materialized views for heaviest aggregates (1-2 days) |
-| N+1 query problem found post-launch | LOW | Consolidate queries into RPC functions; no schema changes needed |
-| Service role key leaked in frontend | HIGH | Rotate key immediately in Supabase dashboard; audit logs for unauthorized access; add server-side access layer |
-| Lead scores trusted by no one | MEDIUM | Rebuild formula with sales input; retroactively validate against historical closed deals; add score breakdown UI |
-| Materialized views showing stale data | LOW | Add pg_cron refresh job; add `CONCURRENTLY` flag; add last-updated timestamp to dashboard |
-| Over-complex scoring formula | MEDIUM | Simplify to 5-7 factors; requires sales alignment meeting + formula rebuild + recomputation of all scores |
+| Deduplication broken (inflated conversions) | MEDIUM | Add `event_id` to all events; audit historical data in Events Manager; expect conversion counts to drop to accurate levels — communicate this to marketing before fixing |
+| Access token exposed | HIGH | Immediately regenerate token in Meta Business Manager > System Users; audit Events Manager for unauthorized event submissions; add server-only env var; redeploy |
+| GDPR consent violation discovered | HIGH | Disable Pixel immediately; conduct data audit; notify DPO; add technical consent blocking; document remediation; consult legal before re-enabling |
+| Low EMQ score | LOW | Add missing `user_data` fields to CAPI payloads; fix normalization/hashing; EMQ improves within 24-48 hours of corrected events flowing |
+| Double PageView from App Router | LOW | Remove duplicate `fbq('init')` call; disable built-in push state listener if using manual tracking; no historical data impact |
+| Multiple CAPI sources double-counting | MEDIUM | Disable third-party CAPI integration or coordinate `event_id` generation; historical data in Events Manager cannot be corrected; affects attribution retroactively |
 
 ---
 
@@ -259,32 +290,41 @@ Materialized views are created to precompute expensive aggregates (e.g., lead co
 
 | Pitfall | Prevention Phase | Verification |
 |---------|------------------|--------------|
-| Analytical queries degrading production | Phase 1: Data access layer setup | Confirm read replica is used for all dashboard queries; benchmark with realistic data volume |
-| N+1 query pattern | Phase 2: Dashboard UI architecture | Code review gate: no per-row individual queries; all page data loads in ≤3 queries |
-| RLS full-table scans | Phase 1: Schema and access layer | Run Supabase Performance Advisor after schema finalized; zero RLS warnings before shipping |
-| Service role key in client | Phase 1: Auth and security setup | CI check: grep for service_role in `src/`, `components/`, `pages/` — zero matches required |
-| Lead score staleness without decay | Phase 1: Score formula design | Decay formula specified in writing + unit tested before any frontend work begins |
-| Overly complex scoring formula | Pre-build: Formula alignment with sales | Sales team sign-off document + retroactive validation on 20 historical closed deals |
-| Materialized views with no refresh | Phase 2: Data infrastructure | pg_cron jobs listed in schema migration; integration test verifies refresh fires |
+| Deduplication broken (missing event_id) | Phase 1: Core Pixel + CAPI setup | QA test: same user action shows 1 combined event in Events Manager (not Browser + Server separate counts) |
+| CAPI token exposed client-side | Phase 1: Core setup and environment config | CI check: grep for token pattern in client bundles; Vercel env var scope audit |
+| Pixel fires before consent | Phase 1: Consent architecture | Technical test in incognito: zero Facebook network requests before banner interaction |
+| Double PageView in App Router | Phase 1: Pixel integration | Events Manager Test Events: exactly 1 PageView per navigation, confirmed across 3+ route changes |
+| PII sent unhashed | Phase 1: CAPI implementation | Unit tests on `hashUserData()` utility; server log audit showing hex strings not raw emails |
+| Low EMQ from sparse user data | Phase 2: Conversion event optimization | Events Manager > Datasets > EMQ score ≥ 7 for each conversion event type |
+| _fbc/_fbp cookie loss | Phase 2: Attribution hardening | Test on Safari: confirm `fbc`/`fbp` fields populated in CAPI payload when arriving from a FB ad link |
+| Multiple CAPI sources duplicating | Phase 0: Audit before implementation | Events Manager audit confirms no active CAPI connections before new implementation starts |
+| CAPI blocking request latency | Phase 2: Performance optimization | Route Handler p95 response time <300ms even when Meta API is slow; verified with load testing |
 
 ---
 
 ## Sources
 
-- [Supabase RLS Performance and Best Practices](https://supabase.com/docs/guides/troubleshooting/rls-performance-and-best-practices-Z5Jjwv) — official, HIGH confidence
-- [Supabase Query Optimization](https://supabase.com/docs/guides/database/query-optimization) — official, HIGH confidence
-- [Supabase Performance Tuning](https://supabase.com/docs/guides/platform/performance) — official, HIGH confidence
-- [Supabase Read Replicas](https://supabase.com/docs/guides/platform/read-replicas) — official, HIGH confidence
-- [Case Study: 61 Queries to 1 on a Supabase Dashboard](https://medium.com/@maximedalessandro/case-study-how-our-ai-cut-our-supabase-dashboard-queries-from-61-to-1-043ef525fd5c) — MEDIUM confidence (community post-mortem)
-- [How to Secure Your Supabase Service Role Key](https://chat2db.ai/resources/blog/secure-supabase-role-key) — MEDIUM confidence
-- [Supabase Security Retro 2025](https://supabase.com/blog/supabase-security-2025-retro) — official, HIGH confidence
-- [Optimizing Supabase with Materialized Views](https://dev.to/kovidr/optimize-read-performance-in-supabase-with-postgres-materialized-views-12k5) — MEDIUM confidence
-- [Common Lead Scoring Mistakes](https://www.reform.app/blog/common-lead-scoring-mistakes-and-fixes) — MEDIUM confidence
-- [Common Problems with Lead Scoring](https://www.passagetechnology.com/passage-technology-blog/common-problems-with-lead-scoring-and-how-to-fix-them) — MEDIUM confidence
-- [B2B Lead Scoring Mistakes](https://vereigenmedia.com/how-to-avoid-the-most-common-b2b-lead-scoring-mistakes/) — MEDIUM confidence
-- [Data Freshness vs Latency](https://tacnode.io/post/data-freshness-vs-latency) — MEDIUM confidence
-- [OLTP vs OLAP and dashboard impact](https://clickhouse.com/resources/engineering/oltp-vs-olap) — HIGH confidence
+- [Meta Conversions API Deduplication — Official Docs](https://developers.facebook.com/docs/marketing-api/conversions-api/deduplicate-pixel-and-server-events/) — HIGH confidence
+- [Meta Business Help: About Deduplication](https://www.facebook.com/business/help/823677331451951) — HIGH confidence
+- [Meta Pixel Helper — Official Docs](https://developers.facebook.com/docs/meta-pixel/support/pixel-helper/) — HIGH confidence
+- [Meta Dataset Quality API](https://developers.facebook.com/docs/marketing-api/conversions-api/dataset-quality-api/) — HIGH confidence
+- [About Event Match Quality — Meta Business Help](https://www.facebook.com/business/help/765081237991954) — HIGH confidence
+- [Deduplication in Meta Pixel + CAPI — Analyzify](https://analyzify.com/hub/event-deduplication-for-meta-conversions) — MEDIUM confidence
+- [Facebook Pixel + CAPI Deduplication Guide — Seresa](https://seresa.io/blog/marketing-pixels-tags/facebook-pixel-capi-are-both-firing) — MEDIUM confidence
+- [Meta Consent Mode Explained 2025 — SecurePrivacy](https://secureprivacy.ai/blog/meta-consent-mode-explained-2025) — MEDIUM confidence
+- [Facebook Pixel and GDPR — DEV Community](https://dev.to/custodiaadmin/facebook-pixel-and-gdpr-how-to-use-meta-pixel-without-violating-privacy-law-424f) — MEDIUM confidence
+- [Fix Pre-Consent Cookie Loading — SecurePrivacy Support](https://support.secureprivacy.ai/article/ensuring-prior-consent-for-nonessential-cookies-gdpr-compliance/) — MEDIUM confidence
+- [Meta Conversions API fbc and fbp Parameters — Watsspace](https://watsspace.com/blog/meta-conversions-api-fbc-and-fbp-parameters/) — MEDIUM confidence
+- [Stop Losing Meta CAPI Conversions: Fix _fbc Cookie Expiration — EGO Digital](https://ego-digital.io/fix-fbc-cookie-expiration-meta-capi/) — MEDIUM confidence
+- [How to Standardize Conversion Data for Meta — AdAmigo.ai](https://www.adamigo.ai/blog/how-to-standardize-conversion-data-for-meta-integration) — MEDIUM confidence
+- [How to Improve Meta EMQ Score — Trackbee](https://www.trackbee.io/blog/how-to-improve-metas-event-match-quality-score-for-better-ad-performance-with-trackbee) — MEDIUM confidence
+- [Facebook Pixel Event Tracking in NextJS App Directory — DEV Community](https://dev.to/dankedev/add-facebook-pixel-event-tracking-in-nextjs-app-directory-3ipc) — MEDIUM confidence
+- [Add Facebook Pixel in Next.js 14 App Router — Plain English](https://plainenglish.io/blog/how-to-add-facebook-pixel-in-next-js-14-app-router-a-step-by-step-guide) — MEDIUM confidence
+- [How to Fix Potentially Violating Personal Data Sent to Meta — Stape](https://stape.io/blog/fix-personal-data-violations-meta) — MEDIUM confidence
+- [Facebook CAPI: Common Errors & FAQs — Stape](https://stape.io/helpdesk/documentation/common-errors-and-questions) — MEDIUM confidence
+- [Using event_id For Proper Deduplication — Brad Farleigh](https://www.bradfarleigh.com/2025/02/facebook-pixel-signal-deduplication-using-event_id/) — MEDIUM confidence
+- [Vercel Next.js with-facebook-pixel example](https://github.com/vercel/next.js/tree/canary/examples/with-facebook-pixel) — HIGH confidence
 
 ---
-*Pitfalls research for: Internal lead scoring dashboard on Supabase*
+*Pitfalls research for: Facebook Pixel + Conversions API on Next.js website*
 *Researched: 2026-03-29*

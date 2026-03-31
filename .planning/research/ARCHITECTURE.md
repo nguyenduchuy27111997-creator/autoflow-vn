@@ -1,8 +1,8 @@
 # Architecture Research
 
-**Domain:** Internal lead scoring dashboard — read-only, single user, Next.js 16 + existing Supabase project
+**Domain:** FB Pixel + Conversions API (CAPI) — Next.js 16 App Router, existing consent system
 **Researched:** 2026-03-29
-**Confidence:** HIGH (verified against local Next.js 16 docs + existing codebase patterns)
+**Confidence:** HIGH (verified against local Next.js 16 docs, existing codebase, Meta developer docs)
 
 ---
 
@@ -11,280 +11,369 @@
 ### System Overview
 
 ```
-┌──────────────────────────────────────────────────────────────────┐
-│                     Browser (1 internal user)                     │
-│  ┌──────────────────────────────────────────────────────────┐    │
-│  │  /portal/dashboard/leads  (Server Component page)         │    │
-│  │  ├── LeadTable (Server Component — streams per section)   │    │
-│  │  ├── ScoreBreakdown (Server Component)                    │    │
-│  │  └── UTMFilter (Client Component — search params only)    │    │
-│  └──────────────────────────────────────────────────────────┘    │
-└─────────────────────────┬────────────────────────────────────────┘
-                           │ HTTP (same Next.js app, /portal prefix)
-┌─────────────────────────▼────────────────────────────────────────┐
-│                    Next.js 16 App Router                          │
+┌─────────────────────────────────────────────────────────────────────┐
+│                          Browser (Visitor)                           │
+│                                                                      │
+│  localStorage: "autoflow_cookie_consent" = "granted" | "denied"     │
+│  Cookies (set by Pixel after consent): _fbp, _fbc                   │
+│                                                                      │
+│  ┌────────────────────────────────────────────────────────────────┐ │
+│  │  FacebookPixel.tsx (Client Component, 'use client')            │ │
+│  │  - Reads consent from localStorage on mount                    │ │
+│  │  - Loads connect.facebook.net/fbevents.js via next/script      │ │
+│  │    ONLY when consent === "granted"                             │ │
+│  │  - Listens for custom "consent:granted" window event           │ │
+│  │    to init Pixel if consent granted after page load            │ │
+│  └────────────────────────────────────────────────────────────────┘ │
+│                                                                      │
+│  ┌────────────────────────────────────────────────────────────────┐ │
+│  │  lib/fbpixel.ts (client-side helpers)                          │ │
+│  │  - fbpixelEvent(name, data, eventId)                           │ │
+│  │  - reads _fbp, _fbc from document.cookie                       │ │
+│  │  - called from: quiz handleSubmit, audit form submit           │ │
+│  └────────────────────────────────────────────────────────────────┘ │
+└───────────────────┬──────────────────────────────────────┬──────────┘
+                    │ POST (form submit w/ event_id)        │ Pixel fire
+                    │                                       │ fbq('track','Lead',{},{eventID})
+┌───────────────────▼───────────────────────────────────────────────┐
+│                   Next.js 16 App Router (Server)                   │
 │                                                                    │
-│  middleware.ts → /portal/dashboard/** guards (already exists)     │
+│  src/app/api/audit/route.ts  (existing — ADD CAPI call here)      │
+│  src/app/api/tai-lieu/route.ts  (existing — ADD CAPI call here)   │
+│  src/lib/capi.ts  (NEW — server-side CAPI helper)                 │
 │                                                                    │
-│  src/app/portal/dashboard/                                         │
-│  ├── leads/page.tsx         (async Server Component, reads DB)    │
-│  ├── leads/loading.tsx      (Suspense skeleton)                   │
-│  └── leads/error.tsx        (error boundary)                      │
+│  capi.ts responsibilities:                                         │
+│  - hash PII (email, phone) with SHA-256                           │
+│  - extract client_ip from x-forwarded-for header                  │
+│  - extract client_user_agent from request headers                 │
+│  - receive fbp, fbc from request body (sent by client)            │
+│  - POST to graph.facebook.com/v19.0/<PIXEL_ID>/events             │
+└───────────────────┬───────────────────────────────────────────────┘
+                    │ HTTPS POST
+┌───────────────────▼───────────────────────────────────────────────┐
+│              Meta Conversions API (graph.facebook.com)             │
 │                                                                    │
-│  src/lib/supabase/server.ts  (createClient — already exists)      │
-│  src/lib/leads.ts            (query helpers, NEW)                  │
-└─────────────────────────┬────────────────────────────────────────┘
-                           │ supabase-js (server-side, service_role key)
-┌─────────────────────────▼────────────────────────────────────────┐
-│                 Supabase project: peniykvgzysirjwkyzyy            │
-│                                                                    │
-│  Tables (existing):                                                │
-│  ├── quiz_leads          (id, email, score, utm_*, created_at)    │
-│  ├── audit_submissions   (id, email, utm_*, created_at)           │
-│  ├── pdf_leads           (id, email, utm_*, created_at)           │
-│  └── email_queue         (id, to_email, status, created_at)       │
-│                                                                    │
-│  Views / Functions (NEW — defined in Supabase SQL editor):        │
-│  ├── v_all_leads          (UNION ALL of all 3 lead sources)       │
-│  └── score_lead(email)    (Postgres function — lead scoring)      │
-└──────────────────────────────────────────────────────────────────┘
+│  Deduplication: event_id + event_name match within 48h window     │
+│  Pixel event (browser) + CAPI event (server) = counted ONCE       │
+└───────────────────────────────────────────────────────────────────┘
 ```
 
 ### Component Responsibilities
 
-| Component | Responsibility | Typical Implementation |
-|-----------|----------------|------------------------|
-| `middleware.ts` | Auth guard on `/portal/dashboard/**` — already implemented | `updateSession()` with `supabase.auth.getUser()` redirect |
-| `leads/page.tsx` | Server Component: fetches from `v_all_leads`, renders table | `async` page component, `await createClient()` |
-| `leads/loading.tsx` | Suspense fallback shown during streaming | Skeleton table with `animate-pulse` |
-| `leads/error.tsx` | Catches Supabase query errors | Simple error card |
-| `UTMFilter` | Client Component: updates URL search params for filtering | `useSearchParams` + `useRouter` — no server state |
-| `src/lib/leads.ts` | Query helpers: fetch, score, filter | Plain async functions calling `createClient()` |
-| `v_all_leads` (Supabase view) | UNION ALL normalized leads from 3 tables | PostgreSQL view, queryable via SDK |
-| `score_lead` (Supabase function) | Deterministic scoring per lead | PostgreSQL function, called via `.rpc()` |
+| Component | Responsibility | Lives In |
+|-----------|----------------|----------|
+| `FacebookPixel.tsx` | Conditional Pixel script loading based on consent; re-init on late consent | `src/components/analytics/` (NEW) |
+| `lib/fbpixel.ts` | Client-side event helpers: `fbpixelEvent()`, cookie readers for `_fbp`/`_fbc`, `generateEventId()` | `src/lib/` (NEW) |
+| `lib/capi.ts` | Server-side CAPI POST: hashing, request field extraction, `graph.facebook.com` call | `src/lib/` (NEW) |
+| `ConsentBanner.tsx` | Existing: stores consent in `localStorage`, dispatches `consent:granted` window event (NEW) | `src/components/analytics/` (MODIFY) |
+| `api/audit/route.ts` | Existing: ADD `capi()` call after Supabase insert; receives `event_id`, `fbp`, `fbc` from body | `src/app/api/audit/` (MODIFY) |
+| `api/tai-lieu/route.ts` | Existing: ADD `capi()` call after Supabase insert; receives `event_id`, `fbp`, `fbc` from body | `src/app/api/tai-lieu/` (MODIFY) |
+| `quiz/page.tsx` | Existing: ADD `fbpixelEvent()` call in `handleSubmit`; generate and pass `event_id` to both Pixel and API route | `src/app/quiz/` (MODIFY) |
 
 ---
 
 ## Recommended Project Structure
 
-This is an extension to the existing app inside `/portal`. No separate Next.js app is needed — the milestone context says "standalone" but the codebase already has the Supabase client, auth, and portal route. Building inside the same app avoids duplicating infrastructure.
+Only files that are NEW or MODIFIED for this milestone:
 
 ```
 src/
+├── components/
+│   └── analytics/
+│       ├── ConsentBanner.tsx      # MODIFY: dispatch window event on accept
+│       ├── FacebookPixel.tsx      # NEW: conditional Pixel loader
+│       └── (existing files unchanged)
 ├── app/
-│   └── portal/
-│       ├── layout.tsx              # existing — robots: noindex
-│       ├── page.tsx                # existing — login page
-│       └── dashboard/
-│           ├── page.tsx            # existing — redirects to /leads
-│           ├── PortalDashboard.tsx # existing — client portal view
-│           └── leads/              # NEW — lead scoring dashboard
-│               ├── page.tsx        # Server Component, fetches v_all_leads
-│               ├── loading.tsx     # Suspense skeleton
-│               ├── error.tsx       # Error boundary
-│               ├── LeadTable.tsx   # Server Component — renders rows
-│               └── UTMFilter.tsx   # Client Component — filter controls
-├── lib/
-│   ├── supabase/
-│   │   ├── server.ts               # existing
-│   │   ├── client.ts               # existing
-│   │   └── middleware.ts           # existing
-│   └── leads.ts                    # NEW — query + scoring helpers
-└── types/
-    └── leads.ts                    # NEW — Lead, LeadSource, Score types
+│   ├── layout.tsx                 # MODIFY: add <FacebookPixel /> next to <GoogleAnalytics />
+│   ├── api/
+│   │   ├── audit/route.ts         # MODIFY: add capi() call, accept event_id/fbp/fbc in body
+│   │   └── tai-lieu/route.ts      # MODIFY: add capi() call, accept event_id/fbp/fbc in body
+│   └── quiz/page.tsx              # MODIFY: add fbpixelEvent() + pass event_id to API
+└── lib/
+    ├── fbpixel.ts                 # NEW: client-side Pixel helpers
+    └── capi.ts                    # NEW: server-side CAPI helper
 ```
 
 ### Structure Rationale
 
-- **`/portal/dashboard/leads/`:** Extends existing portal rather than a new app — reuses auth, layout, and Supabase client setup already present. Keeps the middleware matcher unchanged.
-- **`src/lib/leads.ts`:** Centralizes all Supabase queries in one file. Server Components import directly — no API route indirection needed for internal dashboards.
-- **`types/leads.ts`:** Single source of truth for the normalized lead shape returned by `v_all_leads`.
+- **`FacebookPixel.tsx` separate from `GoogleAnalytics.tsx`:** GA uses the existing Google Consent Mode via `gtag('consent',...)`. Pixel has its own conditional loading logic that is meaningfully different — merging them creates an unmaintainable component. Keep tracking providers isolated.
+- **`lib/fbpixel.ts` (client) vs `lib/capi.ts` (server):** The client file uses `document.cookie`, `window.fbq`, and `crypto.randomUUID()`. The server file uses `crypto` (Node.js), `fetch`, and environment secrets. They cannot coexist in the same file because of client/server boundary rules.
+- **CAPI call in existing API routes, not a new `/api/fb-events` route:** The form submission already goes to `/api/audit` and `/api/tai-lieu`. Adding a second API call would require the client to make two requests. Instead, the existing route calls `capi()` after its Supabase insert — one HTTP round trip from the client, two outgoing calls from the server.
 
 ---
 
 ## Architectural Patterns
 
-### Pattern 1: Service Role Key for Internal Read-Only Dashboard
+### Pattern 1: Conditional Pixel Loading via Consent State
 
-**What:** Use `SUPABASE_SERVICE_ROLE_KEY` (not the anon key) in a server-side-only Supabase client for the leads dashboard. This bypasses RLS entirely, which is correct for an internal tool where the auth guard is the middleware check.
+**What:** `FacebookPixel.tsx` is a Client Component that reads consent from `localStorage` on mount. If `"granted"`, it renders the `<Script>` for `fbevents.js`. If `"denied"` or `null` (no decision yet), it renders nothing. It also listens for a `"consent:granted"` window event dispatched by `ConsentBanner.tsx` when the user clicks Accept, so late consent after page load also loads the Pixel without requiring a page refresh.
 
-**When to use:** Internal dashboards accessed only by authenticated admin users. The service role key must never be passed to client components — it stays in Server Components and `src/lib/` server-only code.
+**When to use:** Any analytics script that must respect user consent but cannot rely on Google Consent Mode (which is GA-specific). Pixel does not have its own consent mode that integrates with gtag.
 
-**Trade-offs:** Simpler than writing RLS policies for admin read access. Risk: accidental exposure if the client is used in a `'use client'` component. Mitigation: keep a separate admin client factory.
-
-**Example:**
-```typescript
-// src/lib/supabase/admin.ts  (NEW — server-only)
-import { createClient } from "@supabase/supabase-js";
-
-export function createAdminClient() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!, // never NEXT_PUBLIC_
-  );
-}
-```
-
-The page then calls `createAdminClient()` directly — no cookie handling needed since this is not session-based.
-
----
-
-### Pattern 2: Server Component Data Fetching with Suspense Streaming
-
-**What:** `leads/page.tsx` is an `async` Server Component that `await`s Supabase queries. Wrap in `<Suspense>` from the parent or use `loading.tsx` for the full-page skeleton. This matches the pattern already used in `portal/dashboard/page.tsx`.
-
-**When to use:** Any dashboard page that reads from a database. Confirmed as the canonical pattern in the local Next.js 16 docs (`06-fetching-data.md`): "Since Server Components are rendered on the server, credentials and query logic will not be included in the client bundle so you can safely make database queries."
-
-**Trade-offs:** Data is always fresh on navigation (no stale client cache). For a read-only internal tool this is ideal — no staleness concerns, no client-state complexity.
+**Trade-offs:** Script is not loaded at all until consent — good for compliance and page weight. A user who accepts consent will see the Pixel fire on their next page load or via the window event trigger (same session, no refresh needed).
 
 **Example:**
 ```typescript
-// src/app/portal/dashboard/leads/page.tsx
-import { createAdminClient } from "@/lib/supabase/admin";
-import { LeadTable } from "./LeadTable";
-import { UTMFilter } from "./UTMFilter";
+// src/components/analytics/FacebookPixel.tsx
+'use client';
 
-export default async function LeadsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ utm_source?: string; utm_medium?: string }>;
-}) {
-  const { utm_source, utm_medium } = await searchParams;
-  const supabase = createAdminClient();
+import { useEffect, useState } from 'react';
+import Script from 'next/script';
 
-  let query = supabase.from("v_all_leads").select("*").order("created_at", { ascending: false });
-  if (utm_source) query = query.eq("utm_source", utm_source);
-  if (utm_medium) query = query.eq("utm_medium", utm_medium);
+const PIXEL_ID = process.env.NEXT_PUBLIC_FB_PIXEL_ID;
+const CONSENT_KEY = 'autoflow_cookie_consent';
 
-  const { data: leads, error } = await query;
-  if (error) throw error;
+export default function FacebookPixel() {
+  const [pixelReady, setPixelReady] = useState(false);
+
+  useEffect(() => {
+    // Check existing consent
+    if (localStorage.getItem(CONSENT_KEY) === 'granted') {
+      setPixelReady(true);
+      return;
+    }
+    // Listen for late consent (user clicks Accept after page load)
+    function onConsentGranted() { setPixelReady(true); }
+    window.addEventListener('consent:granted', onConsentGranted);
+    return () => window.removeEventListener('consent:granted', onConsentGranted);
+  }, []);
+
+  if (!PIXEL_ID || !pixelReady) return null;
 
   return (
-    <div>
-      <UTMFilter />
-      <LeadTable leads={leads} />
-    </div>
+    <>
+      <Script id="fb-pixel-init" strategy="afterInteractive">
+        {`!function(f,b,e,v,n,t,s){...}(window,...);
+          fbq('init','${PIXEL_ID}');
+          fbq('track','PageView');`}
+      </Script>
+    </>
   );
+}
+```
+
+**Required modification to `ConsentBanner.tsx`:** Add one line to `handleAccept`:
+```typescript
+window.dispatchEvent(new Event('consent:granted'));
+```
+
+---
+
+### Pattern 2: event_id Generation and Dual-Channel Firing
+
+**What:** Before firing a conversion event (Lead, Submit), generate a unique `event_id` string in the client. Pass the same `event_id` to both: (1) `fbq('track', 'Lead', {}, { eventID: event_id })` for the Pixel, and (2) the API route body for CAPI. Meta's deduplication system matches by `event_name + event_id` within a 48-hour window and counts the conversion once.
+
+**When to use:** Every meaningful conversion event — form submissions, PDF downloads, quiz completions. Do NOT use for PageView since CAPI does not typically mirror PageView server-side.
+
+**Trade-offs:** Requires passing `event_id` through form submission logic. The generation must happen before either the Pixel fire or the API call. If `event_id` is generated in the API route (server), the Pixel call (client) fires without an ID — deduplication breaks. Generation must happen client-side first.
+
+**event_id format:** Timestamp + random string. UUID v4 from `crypto.randomUUID()` is also acceptable and simpler.
+
+**Example in `lib/fbpixel.ts`:**
+```typescript
+// src/lib/fbpixel.ts
+export function generateEventId(): string {
+  // Use crypto.randomUUID() if available (all modern browsers + Node 14.17+)
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  // Fallback: timestamp + random
+  return `${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+}
+
+export function getCookie(name: string): string | null {
+  if (typeof document === 'undefined') return null;
+  const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
+export function fbpixelEvent(
+  eventName: string,
+  data: Record<string, unknown>,
+  eventId: string
+): void {
+  if (typeof window === 'undefined' || typeof window.fbq !== 'function') return;
+  window.fbq('track', eventName, data, { eventID: eventId });
 }
 ```
 
 ---
 
-### Pattern 3: Supabase `v_all_leads` UNION ALL View
+### Pattern 3: CAPI Call in Existing API Routes
 
-**What:** A single PostgreSQL view that normalizes quiz_leads, audit_submissions, and pdf_leads into a common shape. Queried directly via the Supabase SDK. Scoring logic runs as a computed column or a companion `score_lead` function.
+**What:** `lib/capi.ts` exports a single async function `sendCapiEvent(params)`. It hashes PII, constructs the payload, and POSTs to the Meta Graph API. The existing route handlers (`api/audit/route.ts`, `api/tai-lieu/route.ts`) call `sendCapiEvent()` after the Supabase insert, fire-and-forget with `.catch(console.error)` — the CAPI call must never block or fail the user-facing form response.
 
-**When to use:** Whenever the dashboard needs to display leads across sources without JOIN complexity in application code. Views are first-class citizens in Supabase's PostgREST layer — `.from("v_all_leads").select("*")` works identically to a real table.
+**When to use:** Any server-side route that processes a lead form submission. Do NOT create a separate `/api/fb-events` client-facing route — that exposes CAPI credentials to client-reachable endpoints unnecessarily.
 
-**Trade-offs:** View logic lives in Supabase SQL editor, not in version-controlled TypeScript. Mitigation: write the view SQL in a migration file under `/supabase/migrations/` if using Supabase CLI, or document it in a `supabase/views.sql` file.
+**PII hashing rule:** Email and phone must be SHA-256 hashed (lowercase, trimmed) before sending. `fbp` and `fbc` cookie values must NOT be hashed — send raw. `client_ip_address` and `client_user_agent` must NOT be hashed — send raw.
 
-**Recommended view SQL:**
-```sql
--- supabase/views/v_all_leads.sql
-CREATE OR REPLACE VIEW v_all_leads AS
-  SELECT
-    id::text,
-    'quiz'           AS source,
-    email,
-    score            AS raw_score,
-    NULL::text       AS resource,
-    utm_source, utm_medium, utm_campaign, utm_term, utm_content,
-    created_at
-  FROM quiz_leads
+**Example `lib/capi.ts`:**
+```typescript
+// src/lib/capi.ts  — server-only, never import in 'use client' components
+import { createHash } from 'crypto';
 
-  UNION ALL
+const PIXEL_ID = process.env.FB_PIXEL_ID;       // no NEXT_PUBLIC_ prefix
+const ACCESS_TOKEN = process.env.FB_CAPI_TOKEN; // no NEXT_PUBLIC_ prefix
 
-  SELECT
-    id::text,
-    'audit'          AS source,
-    email,
-    NULL::int        AS raw_score,
-    NULL::text       AS resource,
-    utm_source, utm_medium, utm_campaign, utm_term, utm_content,
-    created_at
-  FROM audit_submissions
+function sha256(value: string): string {
+  return createHash('sha256').update(value.toLowerCase().trim()).digest('hex');
+}
 
-  UNION ALL
+export interface CapiEventParams {
+  eventName: string;           // 'Lead', 'CompleteRegistration', etc.
+  eventId: string;             // must match the Pixel eventID for dedup
+  eventSourceUrl: string;      // full URL of the page where conversion occurred
+  email?: string;              // hashed in this function
+  phone?: string;              // hashed in this function; E.164 format digits only
+  fbp?: string | null;         // _fbp cookie value — NOT hashed
+  fbc?: string | null;         // _fbc cookie value — NOT hashed
+  clientIp?: string | null;    // from x-forwarded-for — NOT hashed
+  clientUserAgent?: string | null; // from user-agent header — NOT hashed
+}
 
-  SELECT
-    id::text,
-    'pdf'            AS source,
-    email,
-    NULL::int        AS raw_score,
-    resource::text,
-    utm_source, utm_medium, utm_campaign, utm_term, utm_content,
-    created_at
-  FROM pdf_leads;
+export async function sendCapiEvent(params: CapiEventParams): Promise<void> {
+  if (!PIXEL_ID || !ACCESS_TOKEN) return;
+
+  const userData: Record<string, string> = {};
+  if (params.email) userData.em = sha256(params.email);
+  if (params.phone) userData.ph = sha256(params.phone.replace(/\D/g, ''));
+  if (params.fbp) userData.fbp = params.fbp;
+  if (params.fbc) userData.fbc = params.fbc;
+  if (params.clientIp) userData.client_ip_address = params.clientIp;
+  if (params.clientUserAgent) userData.client_user_agent = params.clientUserAgent;
+
+  const payload = {
+    data: [
+      {
+        event_name: params.eventName,
+        event_time: Math.floor(Date.now() / 1000),
+        event_id: params.eventId,
+        event_source_url: params.eventSourceUrl,
+        action_source: 'website',
+        user_data: userData,
+      },
+    ],
+  };
+
+  await fetch(
+    `https://graph.facebook.com/v19.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }
+  );
+}
+```
+
+**Integration in `api/audit/route.ts` (addition only):**
+```typescript
+// Add to request body parsing:
+const { name, phone, email, ..., event_id, fbp, fbc } = body;
+
+// After the Supabase insert, fire CAPI without blocking:
+sendCapiEvent({
+  eventName: 'Lead',
+  eventId: event_id,
+  eventSourceUrl: req.headers.get('referer') || 'https://autoflowvn.net/audit',
+  email: body.email,
+  phone: body.phone,
+  fbp: fbp || null,
+  fbc: fbc || null,
+  clientIp: req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || null,
+  clientUserAgent: req.headers.get('user-agent'),
+}).catch(err => console.error('CAPI error (audit):', err));
 ```
 
 ---
 
-### Pattern 4: Lead Scoring as a PostgreSQL Function
+### Pattern 4: Passing fbp/fbc from Browser to Server
 
-**What:** A `score_lead(email text)` function that aggregates across all source tables and returns a numeric score. Called from the dashboard via `.rpc('score_lead', { email })` or pre-computed and included as a column in `v_all_leads` via a subquery.
+**What:** The `_fbp` and `_fbc` cookies are set by the Pixel in the browser. The API route needs them to enrich the CAPI payload and improve event match quality. The client reads them from `document.cookie` (using `getCookie()` from `lib/fbpixel.ts`) and includes them as plain string fields in the JSON body of the form POST request.
 
-**When to use:** When score is derived from multiple signals (e.g., quiz_leads.score + whether audit was submitted + whether PDF was downloaded + email_queue delivery). Keeping scoring logic in Postgres avoids N+1 queries from the application layer.
+**Why not read cookies server-side from request headers:** Next.js 16 Route Handlers can read cookies via `req.headers.get('cookie')` and parse them, which works if Pixel cookies are same-site. However, the Pixel sets `_fbp` as `SameSite=Lax` — it will be included in POST bodies initiated from first-party JavaScript (fetch). Reading from the request cookie header is slightly simpler but couples cookie parsing to the server. The explicit body approach keeps the server code clean.
 
-**Recommended scoring logic (example rules):**
-```sql
-CREATE OR REPLACE FUNCTION score_lead(p_email text)
-RETURNS integer
-LANGUAGE sql
-STABLE
-AS $$
-  SELECT
-    COALESCE((SELECT score FROM quiz_leads WHERE email = p_email ORDER BY created_at DESC LIMIT 1), 0)
-    + CASE WHEN EXISTS (SELECT 1 FROM audit_submissions WHERE email = p_email) THEN 30 ELSE 0 END
-    + CASE WHEN EXISTS (SELECT 1 FROM pdf_leads WHERE email = p_email) THEN 10 ELSE 0 END
-    + CASE WHEN EXISTS (SELECT 1 FROM email_queue WHERE to_email = p_email AND status = 'sent') THEN 5 ELSE 0 END;
-$$;
-```
+**Why not use a separate `/api/fb-events` endpoint:** An additional client-facing route adds a second HTTP round trip per form submission. The form data (email, phone, UTMs) is already going to `/api/audit` — piggyback the pixel metadata in the same request.
 
-For the dashboard view, embed the score directly in `v_all_leads` rather than calling `.rpc()` per row:
-```sql
--- Add to the SELECT in v_all_leads (or create a separate v_leads_scored view):
-score_lead(email) AS computed_score
-```
-
-**Trade-off:** Scoring in SQL means it runs on every view query. For 1 internal user this is inconsequential. If lead volume grows large (>50k rows), consider materializing the view or adding a `score` column updated via trigger.
+**What to do when Pixel is blocked or denied:** If consent was denied, the Pixel was never loaded, so `_fbp` and `_fbc` will be `null`. The `sendCapiEvent()` function omits `null` fields. CAPI still works without `fbp`/`fbc` — it falls back to email/phone matching. Event match score drops but the event is still recorded.
 
 ---
 
 ## Data Flow
 
-### Request Flow (Filter + Display)
+### Lead Submission (Audit Form — Full Flow)
 
 ```
-User changes UTM filter (client-side)
+User fills audit form → clicks submit
     ↓
-UTMFilter (Client Component) → router.push("?utm_source=fb")
+AuditForm (Client Component)
+  1. generateEventId() → event_id = "uuid-v4"
+  2. getCookie('_fbp') → fbp = "fb.1.1234567890.9876543210"
+  3. getCookie('_fbc') → fbc = null (no fbclid in URL)
+  4. fbpixelEvent('Lead', {}, event_id)
+     → fbq('track', 'Lead', {}, { eventID: event_id })  [BROWSER → Meta]
+  5. fetch('/api/audit', { body: { ...formData, event_id, fbp, fbc } })
     ↓
-Next.js re-renders leads/page.tsx (Server Component, searchParams change)
+/api/audit route.ts (Server)
+  6. Validate, rate limit, honeypot check
+  7. supabase.from('audit_submissions').insert(...)
+  8. sendCapiEvent({ eventName: 'Lead', eventId: event_id, ... })
+     → POST graph.facebook.com/v19.0/<ID>/events  [SERVER → Meta]
+  9. Return { success: true } to client
     ↓
-page.tsx: createAdminClient() → .from("v_all_leads").select().eq("utm_source","fb")
-    ↓
-Supabase: evaluates v_all_leads UNION ALL + score_lead() → returns rows
-    ↓
-LeadTable (Server Component) renders rows → streamed HTML to browser
+Meta deduplication:
+  event_name='Lead' + event_id match → counted once
+  Browser signal (fbp, fbc, pixel) + server signal (email hash, ip) = best of both
 ```
 
-### Auth Flow (already implemented)
+### Quiz Submission (Client-only Supabase insert — special case)
+
+The quiz uses `createClient()` (browser Supabase client) directly in `quiz/page.tsx` — there is no server API route. The CAPI call cannot go server-side without adding a new API route or converting the quiz to use an API route.
+
+**Decision required:** Two options with clear tradeoffs:
+
+**Option A (recommended): Add `/api/quiz` route**
+- Converts quiz insert to use an API route (matches audit/pdf pattern)
+- Enables CAPI call from server with full data (ip, user agent)
+- Build cost: ~30 minutes to extract Supabase insert + email queue logic into a route
+- This is the correct long-term architecture — the client Supabase insert bypasses server-side processing
+
+**Option B: Client-only CAPI proxy**
+- Keep existing quiz client Supabase insert, add only `fbpixelEvent()` (no CAPI)
+- Pixel-only tracking for quiz (no server-side signal)
+- Lower event match quality for quiz vs audit/pdf
+- Zero build cost beyond adding `fbpixelEvent()` call
+
+**Recommendation: Option A.** The quiz is the highest-traffic form. CAPI signal quality matters most here. The refactor is small.
+
+### Consent → Pixel Initialization Flow
 
 ```
-Request to /portal/dashboard/**
+First visit (no stored consent)
     ↓
-middleware.ts → updateSession(request) → supabase.auth.getUser()
+FacebookPixel.tsx: localStorage.getItem('autoflow_cookie_consent') = null
+→ renders nothing
+→ attaches window event listener for 'consent:granted'
     ↓
-No user? → redirect to /portal (login page)
-User exists? → proceed, page.tsx gets rendered
+ConsentBanner appears (0.8s delay, existing behaviour)
     ↓
-page.tsx additionally calls supabase.auth.getUser() as defense-in-depth
-    (existing pattern from portal/dashboard/page.tsx)
+User clicks "Chấp nhận"
+    ↓
+ConsentBanner.tsx handleAccept():
+  1. setStoredConsent('granted')     [existing]
+  2. updateGtag('granted')           [existing]
+  3. window.dispatchEvent(new Event('consent:granted'))  [NEW]
+    ↓
+FacebookPixel.tsx event listener fires:
+  setPixelReady(true)
+    ↓
+Component re-renders → <Script> for fbevents.js is rendered
+→ Pixel loads → fbq('init', PIXEL_ID) → fbq('track', 'PageView')
+
+Subsequent visits (consent already stored):
+FacebookPixel.tsx: localStorage = 'granted' → setPixelReady(true) immediately
+→ Pixel loads normally via afterInteractive strategy
 ```
-
-### State Management
-
-No client-side state store needed. The only client state is URL search params (UTM filters), managed by the browser URL. Server Components re-fetch on every navigation. This is correct for an internal read-only dashboard.
 
 ---
 
@@ -292,107 +381,145 @@ No client-side state store needed. The only client state is URL search params (U
 
 ### External Services
 
-| Service | Integration Pattern | Notes |
-|---------|---------------------|-------|
-| Supabase (peniykvgzysirjwkyzyy) | `createAdminClient()` — service_role key, server-only | Key stored in `SUPABASE_SERVICE_ROLE_KEY` (no `NEXT_PUBLIC_` prefix — never exposed to browser) |
-| Supabase Auth | Already wired: `createClient()` (anon key) in middleware + portal login | Admin dashboard uses `createAdminClient()` separately — no cookie session needed post-auth-check |
+| Service | Integration Pattern | Credentials |
+|---------|---------------------|-------------|
+| Meta Pixel (browser) | `<Script strategy="afterInteractive">` in `FacebookPixel.tsx` | `NEXT_PUBLIC_FB_PIXEL_ID` |
+| Meta CAPI (server) | `fetch` POST from `lib/capi.ts` called inside existing API routes | `FB_PIXEL_ID` + `FB_CAPI_TOKEN` (no `NEXT_PUBLIC_` prefix) |
+| Existing consent system | `localStorage` key `autoflow_cookie_consent`, window event `consent:granted` | No credentials — window event only |
 
 ### Internal Boundaries
 
 | Boundary | Communication | Notes |
 |----------|---------------|-------|
-| Server Component → Supabase | Direct SDK call in `page.tsx` or `lib/leads.ts` | No API route needed — server components run server-side |
-| Client Component (UTMFilter) → Server Component (page) | URL search params only | UTMFilter calls `router.push()`, never calls Supabase directly |
-| `v_all_leads` view → score_lead function | SQL function call inside view query | Keeps scoring server-side; no app-level aggregation |
-| Existing portal auth → leads dashboard | Shared middleware matcher | Middleware already protects `/portal/dashboard/:path*` — no new auth wiring needed |
+| `FacebookPixel.tsx` → Consent | Read `localStorage` on mount + listen `window` event | No prop passing — avoids making consent a React context dependency |
+| Client form → API route | `event_id`, `fbp`, `fbc` added to existing POST body fields | API routes already parse JSON body; these are additive fields |
+| API route → `lib/capi.ts` | Direct function call, fire-and-forget `.catch()` | CAPI failure must never cause form submission failure |
+| `lib/fbpixel.ts` | Client-only; uses `window.fbq`, `document.cookie` | Must never be imported in Server Components or `lib/capi.ts` |
+| `lib/capi.ts` | Server-only; uses Node.js `crypto`, `process.env` secrets | Must never be imported in `'use client'` components |
+
+---
+
+## Environment Variables
+
+```bash
+# Public — safe to expose in client bundle (NEXT_PUBLIC_ prefix)
+NEXT_PUBLIC_FB_PIXEL_ID=123456789012345
+
+# Secret — server-only, never in client bundle
+FB_PIXEL_ID=123456789012345     # same value, server copy without prefix
+FB_CAPI_TOKEN=EAAxxxxxxxx...    # Meta system user access token
+```
+
+Note: Two env vars for the same Pixel ID are needed because `NEXT_PUBLIC_` is required for `FacebookPixel.tsx` (client component) but the server copy should not use `NEXT_PUBLIC_` to avoid confusion about whether it is sensitive. The access token must never have `NEXT_PUBLIC_` under any circumstances.
 
 ---
 
 ## Build Order (Dependency-Aware)
 
-This is the correct implementation sequence given the dependency graph:
+1. **`lib/fbpixel.ts`** — Defines `generateEventId()`, `getCookie()`, `fbpixelEvent()`. No dependencies. Unblocks pixel event calls in quiz/audit forms.
 
-1. **Supabase SQL layer** — Create `v_all_leads` view and `score_lead()` function in Supabase SQL editor. Verify via Supabase Table Editor that the view returns data. This unblocks everything else.
+2. **`lib/capi.ts`** — Defines `sendCapiEvent()`. Requires `FB_PIXEL_ID` + `FB_CAPI_TOKEN` env vars in `.env.local`. No dependencies on other new files. Unblocks API route modifications.
 
-2. **`src/lib/supabase/admin.ts`** — Create the service_role client factory. Add `SUPABASE_SERVICE_ROLE_KEY` to `.env.local`. This unblocks query helpers.
+3. **`ConsentBanner.tsx` modification** — Add `window.dispatchEvent(new Event('consent:granted'))` in `handleAccept`. One line. Unblocks `FacebookPixel.tsx` late-consent path.
 
-3. **`src/types/leads.ts`** — Define the `Lead` type matching `v_all_leads` columns. This unblocks both the query helpers and the UI components.
+4. **`FacebookPixel.tsx`** — New Client Component. Depends on `NEXT_PUBLIC_FB_PIXEL_ID` env var and the consent window event. Add to `layout.tsx` next to `<GoogleAnalytics />`.
 
-4. **`src/lib/leads.ts`** — Write typed query helpers (`getLeads(filters)`, etc.) using `createAdminClient()`. This unblocks the page component.
+5. **`layout.tsx` modification** — Import and render `<FacebookPixel />` after `<GoogleAnalytics />`. One line addition. Pixel is now live for consenting users.
 
-5. **`leads/page.tsx` + `loading.tsx` + `error.tsx`** — Implement the async Server Component page. Stub `UTMFilter` and `LeadTable` as empty shells first to confirm data flows end-to-end.
+6. **`api/audit/route.ts` modification** — Accept `event_id`, `fbp`, `fbc` in body. Call `sendCapiEvent()` fire-and-forget after Supabase insert. Verify with Meta Events Manager test tool.
 
-6. **`LeadTable.tsx`** — Server Component rendering the lead rows with score column.
+7. **`api/tai-lieu/route.ts` modification** — Same pattern as audit route. PDF download as `Lead` event (or `CompleteRegistration`).
 
-7. **`UTMFilter.tsx`** — Client Component adding UTM filter controls via URL search params.
+8. **Quiz API route + client modification** — If Option A is chosen: extract quiz Supabase insert into `/api/quiz`, update `quiz/page.tsx` to use `fetch('/api/quiz',...)` instead of direct Supabase client insert, add `fbpixelEvent()` + CAPI call.
 
 ---
 
 ## Anti-Patterns
 
-### Anti-Pattern 1: Fetching in Client Components
+### Anti-Pattern 1: Loading Pixel Unconditionally in layout.tsx
 
-**What people do:** Mark the dashboard page `'use client'`, use `useEffect` + `supabase.from(...).select()` from `@supabase/supabase-js` browser client.
+**What people do:** Add `fbq('init', ...)` via a `<Script>` component in `layout.tsx` without checking consent — matching the GA pattern but ignoring that GA has its own consent mode.
 
-**Why it's wrong:** Exposes data-fetching credentials on the client. Adds loading flash and waterfall. The existing codebase already demonstrates the correct pattern: `portal/dashboard/page.tsx` is an async Server Component that calls `createClient()` server-side and passes results as props.
+**Why it's wrong:** The Pixel sets `_fbp` cookies on load. Loading before consent violates GDPR/ePrivacy. GA4 is legal without prior consent because it uses consent mode to suppress cookie writes. The Pixel has no equivalent mechanism — it must not load until consent is granted.
 
-**Do this instead:** Async Server Component + `createAdminClient()` server-side. Client components receive pre-fetched data as props.
-
----
-
-### Anti-Pattern 2: Using NEXT_PUBLIC_ for Service Role Key
-
-**What people do:** Prefix the service role key with `NEXT_PUBLIC_` to "make it available" in the component.
-
-**Why it's wrong:** `NEXT_PUBLIC_` variables are embedded in the client bundle and visible to anyone in the browser. The service role key bypasses all RLS — its exposure is a critical security issue.
-
-**Do this instead:** Use `SUPABASE_SERVICE_ROLE_KEY` (no prefix). It is only available in Server Components, Route Handlers, and `lib/` files that are never imported into client components.
+**Do this instead:** `FacebookPixel.tsx` with the conditional loading pattern in Pattern 1 above.
 
 ---
 
-### Anti-Pattern 3: N+1 Scoring Queries
+### Anti-Pattern 2: Generating event_id Server-Side Only
 
-**What people do:** Fetch all leads from `v_all_leads`, then loop in TypeScript calling `score_lead()` per email via `.rpc()`.
+**What people do:** Generate `event_id` in the API route (server), then try to use it in the Pixel call.
 
-**Why it's wrong:** 100 leads = 101 round trips to Supabase. Even on a fast connection this adds seconds of latency.
+**Why it's wrong:** The Pixel fires before the API response returns. By the time the server generates the ID and returns it to the client, the Pixel event has already fired without an `eventID`. The deduplication fails — both events are counted as separate conversions.
 
-**Do this instead:** Embed `score_lead(email)` directly as a computed column in the `v_all_leads` view (or a wrapper view). One query returns all leads with scores.
+**Do this instead:** Generate `event_id` client-side before any event fires (Pattern 2). Pass it to both the Pixel call and the API route body simultaneously.
 
 ---
 
-### Anti-Pattern 4: Separate Next.js App for the Dashboard
+### Anti-Pattern 3: Hashing fbp/fbc Values
 
-**What people do:** Spin up a new Next.js project for the "standalone" dashboard.
+**What people do:** Apply SHA-256 to all fields in `user_data` including `fbp` and `fbc`, following the same rule as email/phone.
 
-**Why it's wrong:** The existing app already has Supabase client setup, auth middleware, Supabase SSR pattern, and the `/portal` route. A separate app doubles infrastructure, requires duplicating env vars, and creates a deployment dependency.
+**Why it's wrong:** Meta explicitly requires `fbp` and `fbc` to be sent as raw (unhashed) strings. Hashing them produces a string Meta cannot decode, so the browser-pixel-to-CAPI match fails and event match quality drops to near zero.
 
-**Do this instead:** Extend `/portal/dashboard/` with a `/leads` sub-route. The milestone says "standalone" in the sense of a discrete deliverable, not a separate codebase.
+**Do this instead:** Hash only `em` (email) and `ph` (phone). Pass `fbp`, `fbc`, `client_ip_address`, and `client_user_agent` as plain strings.
+
+---
+
+### Anti-Pattern 4: Blocking the API Response on CAPI
+
+**What people do:** `await sendCapiEvent(...)` before `return NextResponse.json({ success: true })`.
+
+**Why it's wrong:** If `graph.facebook.com` is slow (>2s is common) or down, the user's form submission hangs. CAPI latency is not the user's problem. A 3-second form submit feels broken.
+
+**Do this instead:** `sendCapiEvent(...).catch(err => console.error('CAPI error:', err))` — fire and forget. The CAPI call runs concurrently with the response being sent to the client. Log errors for monitoring but never surface them to the user.
+
+---
+
+### Anti-Pattern 5: A Separate `/api/fb-events` Client Route
+
+**What people do:** Create a dedicated `/api/fb-events` route and make a second `fetch` call from the client form after the main form submission.
+
+**Why it's wrong:** Two HTTP round trips per form submission. More importantly, this route becomes a public endpoint that accepts arbitrary data and calls the CAPI token — a potential abuse vector. The existing form routes already have rate limiting, honeypot, and validation. Reusing them keeps all protections in one place.
+
+**Do this instead:** Add CAPI call to the existing form API routes where form data is already validated.
 
 ---
 
 ## Scaling Considerations
 
-This is a 1-user internal tool. Scaling is not a concern. Notes for if it grows:
+This is a marketing website with low concurrent form submissions. No scaling concerns at current traffic levels.
 
-| Scale | Architecture Adjustments |
-|-------|--------------------------|
-| 1 user (current) | Server Component direct query — ideal |
-| 5-10 internal users | No change needed. Supabase connection pooling handles this trivially. |
-| Public-facing or high-frequency | Add `'use cache'` directive with `cacheLife('minutes')` on the data-fetching function (Next.js 16 feature, requires `cacheComponents: true` in `next.config.ts`). Currently not needed. |
+| Scale | Notes |
+|-------|-------|
+| Current (low volume) | Direct `fetch` to Meta API from route handler is fine |
+| >1000 submissions/day | Consider queuing CAPI events (e.g., via Supabase Edge Function or n8n) if `graph.facebook.com` rate limits appear in logs |
+| CAPI rate limits | Meta Graph API allows 200 calls/hour per access token by default; for a lead gen site this is never a constraint |
 
 ---
 
 ## Sources
 
-- Local Next.js 16 docs: `node_modules/next/dist/docs/01-app/01-getting-started/05-server-and-client-components.md`
-- Local Next.js 16 docs: `node_modules/next/dist/docs/01-app/01-getting-started/06-fetching-data.md`
-- Local Next.js 16 docs: `node_modules/next/dist/docs/01-app/02-guides/streaming.md`
-- Existing codebase patterns: `src/app/portal/dashboard/page.tsx`, `src/lib/supabase/server.ts`, `middleware.ts`
-- [Supabase Understanding API keys](https://supabase.com/docs/guides/api/api-keys) — service_role vs anon key
-- [Supabase Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security) — why service_role bypasses RLS
-- [Supabase Server-Side Auth for Next.js](https://supabase.com/docs/guides/auth/server-side/nextjs) — `createServerClient` patterns
-- [Supabase Joins and Nested tables](https://supabase.com/docs/guides/database/joins-and-nesting) — views queryable via PostgREST SDK
+### Primary (HIGH confidence)
+
+- Local Next.js 16 docs: `node_modules/next/dist/docs/01-app/03-api-reference/02-components/script.md` — `<Script>` strategies, `afterInteractive`, `onLoad`/`onReady` client-only
+- Existing codebase: `src/components/analytics/ConsentBanner.tsx` — `CONSENT_KEY`, `getStoredConsent()`, `setStoredConsent()` patterns confirmed
+- Existing codebase: `src/components/analytics/GoogleAnalytics.tsx` — inline consent default + deferred `<Script>` pattern confirmed
+- Existing codebase: `src/app/api/audit/route.ts`, `src/app/api/tai-lieu/route.ts` — JSON body parsing, Supabase insert, fire-and-forget webhook pattern confirmed
+- [Meta Pixel Advanced — eventID fourth parameter syntax](https://developers.facebook.com/docs/meta-pixel/advanced/) — `fbq('track', 'Lead', {}, { eventID: 'xxx' })` confirmed
+- [Meta CAPI Deduplication docs](https://developers.facebook.com/docs/marketing-api/conversions-api/deduplicate-pixel-and-server-events/) — 48h window, event_name + event_id matching
+- [Meta CAPI Original Event parameters](https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/original-event/) — `event_id` optional but required for dedup; any unique string
+- [fbp/fbc parameter capture — Watsspace](https://watsspace.com/blog/meta-conversions-api-fbc-and-fbp-parameters/) — cookie format `fb.1.<ts>.<random>`, confirmed NOT hashed
+- [Meta CAPI SHA-256 hashing — WebSearch via AdAmigo](https://www.adamigo.ai/blog/how-to-standardize-conversion-data-for-meta-integration) — lowercase+trim before hash for em/ph; raw for fbp/fbc/ip/ua
+
+### Secondary (MEDIUM confidence)
+
+- [FB CAPI + Next.js setup — stape.io 2026 guide](https://stape.io/blog/how-to-set-up-facebook-conversion-api) — full data flow for leads, fbc/fbp field extraction
+- [event_id generation — Brad Farleigh 2025](https://www.bradfarleigh.com/2025/02/facebook-pixel-signal-deduplication-using-event_id/) — timestamp+random format confirmed valid; UUID also acceptable
+- [Meta Consent Mode for Pixel — secureprivacy.ai 2025](https://secureprivacy.ai/blog/meta-consent-mode-explained-2025) — Pixel must not load before consent; no native consent mode integration unlike GA4
+- [Next.js Facebook Pixel example — vercel/next.js canary](https://github.com/vercel/next.js/tree/canary/examples/with-facebook-pixel) — `'use client'` Script pattern for Pixel
 
 ---
-*Architecture research for: Lead scoring dashboard — Next.js 16 + Supabase (peniykvgzysirjwkyzyy)*
+
+*Architecture research for: FB Pixel + Conversions API — Next.js 16 App Router*
 *Researched: 2026-03-29*

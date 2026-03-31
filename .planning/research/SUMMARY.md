@@ -1,17 +1,17 @@
 # Project Research Summary
 
-**Project:** Internal Lead Scoring Dashboard
-**Domain:** B2B internal analytics — lead scoring, triage, and UTM attribution
+**Project:** autoflow-vn website — Facebook Pixel + Meta Conversions API
+**Domain:** Client-side tracking + server-side event mirroring for lead-gen website
 **Researched:** 2026-03-29
 **Confidence:** HIGH
 
 ## Executive Summary
 
-This is an internal read-only dashboard that joins data from four existing Supabase tables (quiz_leads, audit_submissions, pdf_leads, email_queue) to produce a composite lead score, tier assignment, and UTM attribution view for a single authenticated admin user. The dominant architecture recommendation across all four research files is consistent: build inside the existing `/portal/dashboard/` route extension rather than a standalone app, use async Server Components for all data fetching, compute scoring logic as a PostgreSQL function embedded in a `v_all_leads` UNION view, and keep the service role key strictly server-side. The stack is almost entirely locked (Next.js 16, React 19, Supabase, Tailwind 4) with only three additions needed: Recharts (via shadcn/ui Chart), TanStack Table v8, and optionally nuqs for URL-state filters.
+This milestone adds Facebook Pixel (browser-side) and Meta Conversions API / CAPI (server-side) tracking to an existing Next.js 16 App Router website that already has GA4 with Consent Mode v2 and a custom localStorage consent banner. The canonical approach for this domain is a dual-channel pattern: the browser Pixel fires immediately on user action to capture `_fbp`/`_fbc` cookies and provide real-time signal, while a server-side CAPI call mirrors every meaningful conversion event to recover signal lost to ad blockers and iOS 14+ Intelligent Tracking Prevention. Both channels share a single `event_id` per conversion so Meta deduplicates them into one counted event — not two.
 
-The most important architectural decision is that composite scoring is the dependency foundation for the entire dashboard. Six of the seven table-stakes features depend on computing a unified score from multiple tables before any UI can be built. This means the Supabase SQL layer (view + scoring function) must be the first deliverable, not the last. The correct build order is: SQL layer first, then typed query helpers, then page scaffolding, then UI components.
+The recommended implementation uses `next/script` with `strategy="afterInteractive"` (built-in to Next.js 16, zero new dependencies) for the browser Pixel, and the official `facebook-nodejs-business-sdk` v25.0.1 for CAPI calls inside existing Next.js Route Handlers. The site has three conversion points — quiz completion, audit form submission, PDF download — all mapped to Meta's `Lead` standard event differentiated by `content_name`. CAPI is required for all three because they are the primary optimization signals for Meta ad campaigns. Client-side-only events suffice for `PageView`, `ViewContent`, and a `QuizStart` custom event.
 
-The top risks are security (service role key exposure in client bundles), performance (N+1 queries and analytical queries degrading production OLTP), and trust (a scoring formula that sales cannot explain or does not use). All three are avoidable with architectural constraints established in Phase 1 — they are expensive to fix post-launch. Score staleness from missing time decay and materialized views with no refresh scheduler are "looks done but isn't" traps that must be explicitly verified before shipping.
+The three most consequential risks are: (1) broken deduplication from a mismatched or absent `event_id`, which silently inflates conversions 2x with no error signal; (2) the CAPI System User Access Token placed in a `NEXT_PUBLIC_` environment variable, exposing full ad account access to anyone with browser DevTools; and (3) the Pixel loading before user consent, a GDPR violation. All three are architectural decisions made at the start of implementation — they cannot be retrofitted safely after the fact. The existing consent system (localStorage + window event dispatch) provides the correct integration surface; it requires one modification to `ConsentBanner.tsx` to dispatch a `consent:granted` window event on accept.
 
 ---
 
@@ -19,161 +19,160 @@ The top risks are security (service role key exposure in client bundles), perfor
 
 ### Recommended Stack
 
-The core application stack is locked. Research scope was limited to charting, data tables, and auth patterns. shadcn/ui Chart (Recharts v3) is the clear choice for charts — it is already consistent with the existing design system, avoids a second component library, and Recharts v3 resolves the infinite render loop bugs present in v2. TanStack Table v8 is the correct choice for the lead list: it is headless (fits Tailwind perfectly), feature-complete for free, and the official shadcn/ui Data Table guide targets it explicitly. Auth reuses the existing Supabase project — no new auth system is needed. A separate admin client factory (`createAdminClient`) using the service role key handles the single-user internal admin access pattern.
+The stack is almost entirely determined by locked existing dependencies (Next.js 16, React 19, TypeScript 5, Tailwind 4, Supabase). Two new production dependencies are required: `facebook-nodejs-business-sdk@^25.0.1` (official Meta SDK, server-only) and `uuid@^11.x` for `event_id` generation (verify it is not already a transitive dependency first; in modern browsers `crypto.randomUUID()` is available without any package). One new dev dependency: `@types/facebook-nodejs-business-sdk@^23.0.0` (types lag the SDK by approximately two major versions but cover all CAPI-relevant classes). The browser Pixel requires no new dependencies — `next/script` is built into Next.js 16.
 
 **Core technologies:**
-- **Recharts ^3.8.1** (via shadcn/ui Chart): Lead scoring charts, KPI cards, score distribution — avoids adding a second design system; Recharts v3 confirmed React 19 compatible
-- **@tanstack/react-table ^8.21.3**: Sortable/filterable lead list — headless, Tailwind-native, full-featured in free tier; v9 is alpha, do not use
-- **Supabase Auth (@supabase/ssr ^0.9.0, already locked)**: Single-user session auth — reuse existing Supabase project; middleware already protects `/portal/dashboard/**`
-- **nuqs ^2.x** (optional): URL-based filter state — enables shareable filtered views; works with Next.js 16 App Router
-- **date-fns ^4.x**: Timestamp formatting for lead created_at columns
+- `next/script` (built-in): Pixel script loading with `afterInteractive` strategy — consent-gated via conditional render in a `'use client'` component; no third-party wrapper needed
+- `facebook-nodejs-business-sdk@^25.0.1`: Official Meta SDK for CAPI server events — `ServerEvent`, `UserData`, `EventRequest` classes; handles Graph API v25.0 auth and request formatting
+- `crypto` (Node.js built-in): SHA-256 hashing of PII (email, phone) before CAPI transmission — no install required in Route Handlers
+- `crypto.randomUUID()` / `uuid@^11.x`: Unique `event_id` per conversion event — the deduplication linchpin; browser-native in all modern browsers
+
+**Critical constraints:**
+- `FB_CAPI_ACCESS_TOKEN` must never use the `NEXT_PUBLIC_` prefix — server-only
+- `NEXT_PUBLIC_FB_PIXEL_ID` is the only public-safe FB environment variable
+- `facebook-nodejs-business-sdk` is a server-side-only package; must never be imported in Client Components
+- `@types/facebook-nodejs-business-sdk` installs with `-D` flag (types-only, not runtime)
 
 ### Expected Features
 
-Research identifies composite score computation as the prerequisite that unblocks the majority of other features. The ops team's core need is replacing a manual spreadsheet workflow — the MVP must deliver sortable/filterable lead triage with score breakdown and UTM attribution.
+The feature set maps cleanly to the existing GA4 event taxonomy. Three conversion points already fire GA4 events; this milestone maps them to FB standard events and adds CAPI server-side coverage for signal recovery.
 
-**Must have (table stakes — v1 launch):**
-- Lead list table with sort by score/tier/date, filter by tier and source
-- Composite score computation (joins quiz + audit + pdf + email into 0-100 score per lead)
-- Tier badges (Hot/Warm/Cold) derived from composite score — single source of truth
-- Lead detail view with full signal breakdown: quiz answers, audit fields, email status, UTM
-- UTM source quality summary (avg score + lead count per utm_source/utm_campaign)
-- Date range filter across all views
-- CSV export of filtered lead list
+**Must have (table stakes — v1 launch blockers):**
+- Base Pixel init on all pages (consent-gated) — no attribution works without this
+- `Lead` event on quiz completion — highest-volume conversion, primary algorithm signal
+- `Lead` event on audit form submission — highest-value conversion
+- `Lead` event on PDF download — volume signal for Lookalike audience seed building
+- `event_id` generation and client-to-server threading — required for deduplication
+- Domain verification in Meta Business Manager — CAPI events silently rejected without it
+- CAPI server endpoint for all three `Lead` events — recovers events blocked by ad blockers / iOS
+- Hashed email + phone in CAPI `user_data` — required for Event Match Quality (EMQ) score ≥ 6
 
-**Should have (v1.x post-validation):**
-- Pain point clustering from audit_submissions (surfaces common lead needs)
-- Lead velocity metric (hot leads per week with trend sparkline)
-- Score decay indicator (visual aging on warm leads going cold)
+**Should have (differentiators — v1.x after validation):**
+- `_fbc` and `_fbp` cookie capture and forwarding to CAPI — improves ad click attribution accuracy
+- `value` + `currency` parameters on `Lead` events (VND per conversion type) — unlocks Meta Value Optimization bidding
+- `QuizStart` custom event — enables quiz abandoner retargeting audience in Ads Manager
 
 **Defer (v2+):**
-- Score history / trend line — requires new `lead_score_snapshots` table schema; cannot be retroactively derived
-- Cohort view by UTM source — high complexity, defer until team has regular analytical rhythm
-- CRM push integration — defer until CRM platform decision is made
-- Predictive ML scoring — requires 6+ months of win/loss outcome labels
+- Offline conversion upload (requires CRM integration)
+- GTM Server-Side container (overkill for current scale — fewer than 200 CAPI calls/hour)
+- Catalog-based dynamic ads (irrelevant for a services lead-gen site)
 
 **Anti-features to reject:**
-- Real-time WebSocket updates (complexity without value — refresh on load is sufficient)
-- AI-generated outreach suggestions (out of scope for a scoring dashboard)
-- Full CRM replacement with deal stages, notes, tasks (scope creep)
-- Complex role-based permissions (single user, no need)
+- Tracking scroll, hover, or micro-interactions — creates noise, degrades Meta algorithm optimization
+- Firing both `Lead` and `CompleteRegistration` on the same action — causes double-counting
+- Custom events mirroring every GA4 event — concentrate signal on fewer high-value events
 
 ### Architecture Approach
 
-The dashboard extends the existing `/portal/dashboard/` route rather than spinning up a separate Next.js app. All data fetching happens in async Server Components using a dedicated `createAdminClient()` factory with the service role key — this bypasses RLS safely for an admin-only internal tool. A PostgreSQL `v_all_leads` UNION ALL view normalizes all three lead source tables into one queryable shape, and a `score_lead(email)` Postgres function computes the composite score as a computed column in that view. Client Components are limited to filter controls (UTMFilter) which communicate with the server exclusively through URL search params. No client-side state store, no API routes, no WebSockets.
+The architecture is a minimal extension of the existing codebase: two new library files, one new Client Component, one minor modification each to `ConsentBanner.tsx` and `layout.tsx`, and CAPI call additions to two existing API routes. A key special case is the quiz, which currently uses the browser Supabase client directly with no API route — this prevents server-side CAPI. The recommended resolution (Option A) is to extract the quiz Supabase insert into a new `/api/quiz` Route Handler, an approximately 30-minute refactor that gives the highest-traffic conversion full CAPI coverage.
 
 **Major components:**
-1. **`v_all_leads` (Supabase view)** — UNION ALL of quiz_leads, audit_submissions, pdf_leads with normalized columns + computed_score column; single query surface for all dashboard data
-2. **`score_lead()` (Postgres function)** — deterministic scoring function embedded in the view; eliminates N+1 pattern at the database layer
-3. **`src/lib/supabase/admin.ts`** — server-only admin client factory using service role key; never imported into client components
-4. **`src/lib/leads.ts`** — typed query helpers wrapping the admin client; called directly from Server Components (no API routes needed)
-5. **`leads/page.tsx`** — async Server Component; fetches `v_all_leads` with search param filters, passes pre-fetched data to child components
-6. **`UTMFilter.tsx`** — only Client Component; updates URL search params to trigger server re-render; never calls Supabase directly
-7. **`LeadTable.tsx`** — Server Component rendering TanStack Table v8 with shadcn Table primitives
+
+1. `FacebookPixel.tsx` (Client Component, NEW) — Conditional Pixel script loading; reads consent from localStorage on mount, listens for `consent:granted` window event for late consent (after banner accept without page reload), renders `<Script strategy="afterInteractive">` only when consent is granted
+2. `lib/fbpixel.ts` (client-only, NEW) — `generateEventId()`, `getCookie()` for `_fbp`/`_fbc`, `fbpixelEvent()` wrapper around `window.fbq`; must never be imported in Server Components
+3. `lib/capi.ts` (server-only, NEW) — `sendCapiEvent()` async function; SHA-256 PII hashing, Graph API POST via `facebook-nodejs-business-sdk`, fire-and-forget integration; must never be imported in `'use client'` components
+4. `api/audit/route.ts` + `api/tai-lieu/route.ts` (MODIFY) — Accept `event_id`, `fbp`, `fbc` in request body; call `sendCapiEvent()` fire-and-forget after Supabase insert
+5. `api/quiz/route.ts` (NEW, Option A) — Extract quiz Supabase insert server-side; enables CAPI on the highest-volume conversion point
+
+**Key patterns:**
+- Client/server module boundary is strict — `lib/fbpixel.ts` and `lib/capi.ts` must never be cross-imported
+- `event_id` is always generated client-side before any event fires, then passed in the POST body to the server
+- CAPI calls are always fire-and-forget — `sendCapiEvent(...).catch(err => console.error(...))` — never block the user-facing form response
+- Only `em` (email) and `ph` (phone) are SHA-256 hashed; `fbp`, `fbc`, `client_ip_address`, and `client_user_agent` are passed as raw strings
 
 **Build order (dependency-aware):**
-1. Supabase SQL layer (view + scoring function) — unblocks everything
-2. `admin.ts` client factory + env var — unblocks query helpers
-3. `types/leads.ts` — unblocks both query helpers and UI components
-4. `src/lib/leads.ts` query helpers — unblocks page component
-5. `leads/page.tsx` + `loading.tsx` + `error.tsx` — confirm data flows end-to-end
-6. `LeadTable.tsx` — Server Component with scored rows
-7. `UTMFilter.tsx` — Client Component for filter controls
+1. `lib/fbpixel.ts` — no dependencies; unblocks client event calls
+2. `lib/capi.ts` — no dependencies; requires env vars in `.env.local`
+3. `ConsentBanner.tsx` modification — one line; unblocks `FacebookPixel.tsx` late-consent path
+4. `FacebookPixel.tsx` + `layout.tsx` modification — Pixel now live for consenting users
+5. `api/audit/route.ts` + `api/tai-lieu/route.ts` modifications — CAPI live on form submissions
+6. `/api/quiz` Route Handler + `quiz/page.tsx` update — CAPI live on quiz completion
 
 ### Critical Pitfalls
 
-1. **Service role key in client bundle** — Use `SUPABASE_SERVICE_ROLE_KEY` (no `NEXT_PUBLIC_` prefix) exclusively in Server Components and `lib/` files. Add CI grep check: zero matches for `service_role` in `src/`, `components/`, `pages/`. Catastrophic if leaked — bypasses all RLS.
+1. **Broken deduplication from mismatched `event_id`** — Generate UUID once client-side before any event fires; pass the same value to both `fbq()` and the API route body simultaneously; never generate it independently on the server. The most common failure mode — inflates conversions 2x silently, no error in console.
 
-2. **N+1 query pattern** — Embed `score_lead(email)` as a computed column in `v_all_leads` so all leads with scores load in one query. Never call scoring functions per-row in application code. A real-world case study recorded 61 queries per page load dropping to 1 after consolidation, cutting load time from 2.8s to 150ms.
+2. **CAPI Access Token in a `NEXT_PUBLIC_` environment variable** — Store as `FB_CAPI_ACCESS_TOKEN` with no `NEXT_PUBLIC_` prefix. Verify with `grep -r "NEXT_PUBLIC_FB" src/` returning zero matches for any access token variable. A leaked token grants full ad account write access.
 
-3. **Analytical queries degrading production OLTP** — Dashboard aggregate queries run on the same Postgres instance as production writes. At current scale (early-stage SaaS, likely under 50k leads), direct queries are acceptable. Plan for read replica routing before table exceeds 50k rows. Add `statement_timeout = '30s'` on the admin role to kill runaway queries.
+3. **Pixel loading before consent** — Never add Pixel directly to `layout.tsx`. Use the `FacebookPixel.tsx` conditional loading pattern. Verify in incognito: zero requests to `connect.facebook.net` before the user clicks "Accept" on the consent banner. This is a GDPR violation with fines up to 4% of global turnover.
 
-4. **Lead score staleness without decay** — A lead scoring 85 from a demo six months ago must rank below a lead scoring 65 with activity last week. Build time decay into the `score_lead()` function from day one using `last_activity_at`. Decay computed in Postgres via scheduled Edge Function or pg_cron — never on every page load. Define "active event" before writing the schema.
+4. **PII sent unhashed or incorrectly normalized** — Lowercase and trim email before SHA-256; strip all non-digits and format as E.164 (`+84...`) for Vietnamese phone numbers before hashing. Do not hash `fbp`, `fbc`, `client_ip_address`, or `client_user_agent` — Meta requires these as raw strings and hashing them destroys Event Match Quality.
 
-5. **Overly complex scoring formula that no one trusts** — Start with 5-7 criteria. Make score breakdown visible in the lead detail view (each factor + its point contribution). Get sales team sign-off on the formula before writing any scoring logic. If sales cannot explain why a lead scores 73 vs 74, the formula will be ignored.
-
-6. **Materialized views with no refresh scheduler** — If materialized views are used for aggregate stats (lead count by tier, score distribution histogram), ship the pg_cron refresh job at the same time as the view. Never deploy a materialized view without a scheduler — data goes stale and dashboard credibility collapses.
+5. **CAPI blocking the Route Handler response** — Always fire-and-forget. If Meta's Graph API is slow (>2s response is common), the user's form submission hangs. CAPI latency is never the user's problem; it should never appear in the critical path.
 
 ---
 
 ## Implications for Roadmap
 
-Based on the dependency graph across all four research files, the recommended phase structure is:
+Based on the dependency chain across all four research files, three implementation phases are appropriate. The ordering is constrained: consent architecture must exist before Pixel fires; Pixel must load before CAPI events have `_fbp`/`_fbc` cookies to forward; domain verification must be complete before CAPI events are accepted by Meta.
 
-### Phase 1: SQL Foundation + Scoring Engine
+### Phase 0: Audit and Environment Setup
 
-**Rationale:** Composite score computation is the prerequisite for six of seven table-stakes features. Nothing meaningful can be built until the database layer is correct. This phase also establishes the security boundary (admin client, server-side key) that all subsequent phases depend on. Establishing score decay logic here prevents painful retroactive formula rebuilds.
+**Rationale:** PITFALLS.md explicitly calls for an audit phase before any implementation to inventory existing CAPI connections in Meta Events Manager. Uncoordinated CAPI sources from multiple systems create attribution corruption that cannot be resolved after the fact. Environment variable naming conventions (server-only vs public) must be locked before the first line of tracking code is written, because retrofitting them breaks deduplication.
 
-**Delivers:** `v_all_leads` UNION view, `score_lead()` Postgres function with decay logic, `admin.ts` client factory, `types/leads.ts`, verified end-to-end data flow to a stub page.
+**Delivers:** Verified clean state in Meta Events Manager (no unexpected CAPI sources), domain verification completed in Meta Business Manager, environment variables defined in `.env.local` and Vercel (`NEXT_PUBLIC_FB_PIXEL_ID`, `FB_PIXEL_ID`, `FB_CAPI_TOKEN`), test Pixel ID ready for development use
 
-**Addresses:** Composite score (P1 feature), tier assignment (P1 feature), UTM normalization across all source tables.
+**Addresses:** Domain verification (table stakes — CAPI silently rejects events to unverified domains); Multi-source CAPI audit (Pitfall 8)
 
-**Avoids:** N+1 scoring queries (score computed in SQL), service role key exposure (admin client pattern established), production OLTP degradation (query structure defined before UI adds complexity), scoring formula nobody trusts (decay logic designed upfront).
+**Avoids:** Multiple CAPI sources double-counting; token exposure from wrong env var naming
 
-**Research flag:** Standard patterns — Supabase view/function creation is well-documented. No additional research needed.
+**Research flag:** Configuration only — no code research needed; Pitfalls file documents the audit process explicitly
 
----
+### Phase 1: Core Pixel + Consent Integration
 
-### Phase 2: Core Dashboard — Lead List + Detail View
+**Rationale:** Consent architecture is the prerequisite for everything and is not safely retroactable. Building the Pixel with consent gating first validates the `next/script` + localStorage pattern in isolation before CAPI complexity is layered on top. It also establishes the Pixel base code that will set `_fbp`/`_fbc` cookies — cookies that Phase 2 CAPI calls depend on for Event Match Quality.
 
-**Rationale:** With the SQL layer validated, build the primary interaction surface. The lead list with sort/filter is the dashboard's main job — it replaces the ops team's spreadsheet. Lead detail view is the second highest-value feature (explains score, surfaces full signal breakdown). Both are low-to-medium complexity but high user value.
+**Delivers:** `lib/fbpixel.ts` helpers, `FacebookPixel.tsx` conditional loader, `ConsentBanner.tsx` window event modification, `layout.tsx` integration, `PageView` firing for consented users, verified in Meta Pixel Helper and Events Manager Test Events tab
 
-**Delivers:** `leads/page.tsx` async Server Component, `LeadTable.tsx` with TanStack Table v8 + shadcn Table primitives, `UTMFilter.tsx` Client Component with nuqs URL state, lead detail view with score breakdown, tier badges, date range filter.
+**Addresses:** Base Pixel on all pages (P1 table stakes); `PageView` auto-fire; consent architecture
 
-**Uses:** `@tanstack/react-table ^8.21.3`, shadcn/ui Table + Badge + Input + Select + Card + Button components.
+**Avoids:** Pixel fires before consent (Pitfall 3 / GDPR); PageView double-firing from App Router SPA navigation (Pitfall 4); loading Pixel unconditionally in layout (Architecture Anti-Pattern 1)
 
-**Implements:** Server Component data fetching pattern, URL-state-only client components, `loading.tsx` Suspense skeleton.
+**Research flag:** Standard patterns — well-documented in the official Next.js `with-facebook-pixel` example and the existing codebase consent system. No additional research needed.
 
-**Avoids:** Client-side data fetching anti-pattern (all data in Server Components), N+1 per-row queries (data pre-fetched at page level).
+### Phase 2: CAPI + Lead Event Integration
 
-**Research flag:** Standard patterns — TanStack Table v8 + shadcn/ui Data Table guide is well-documented. No additional research needed.
+**Rationale:** CAPI is the primary value of this milestone. It depends on Phase 1 being stable: the Pixel must initialize and set `_fbp`/`_fbc` cookies before CAPI events can forward them for attribution. The quiz Route Handler extraction (Option A) belongs in this phase because the quiz is the highest-traffic conversion and should have CAPI coverage from launch, not as an afterthought.
 
----
+**Delivers:** `lib/capi.ts` server helper, CAPI calls in `api/audit/route.ts` and `api/tai-lieu/route.ts`, new `/api/quiz` Route Handler, `Lead` events on all three conversion points with `event_id` deduplication, hashed email/phone in `user_data`, verified deduplication showing combined (not doubled) events in Events Manager Test Events tab
 
-### Phase 3: Analytics + UTM Attribution Views
+**Uses:** `facebook-nodejs-business-sdk@^25.0.1`, Node.js `crypto` built-in, `crypto.randomUUID()`
 
-**Rationale:** Once the lead list is validated by the ops team, add the analytical layer: UTM attribution quality summary and lead count summary stats. These are the features that give the dashboard value beyond a read-only DB view — they answer "where are our best leads coming from?" without building custom queries.
+**Addresses:** All P1 features: CAPI server endpoint, `Lead` on quiz/audit/pdf, `event_id` generation, hashed user data
 
-**Delivers:** UTM source quality chart (avg score per utm_source/utm_campaign), KPI stat cards (total leads, hot count, warm count, avg composite score), score distribution histogram, CSV export of filtered view.
+**Avoids:** Deduplication broken from missing `event_id` (Pitfall 1); PII sent unhashed (Pitfall 5); CAPI blocking response (Pitfall / Architecture Anti-Pattern 4); separate `/api/fb-events` public endpoint as abuse vector (Architecture Anti-Pattern 5)
 
-**Uses:** Recharts ^3.8.1 via shadcn/ui Chart components (`<ChartContainer>`, `<BarChart>`, `<AreaChart>`), shadcn/ui Card components.
+**Research flag:** Standard patterns — Meta CAPI docs are authoritative and complete; existing Route Handler patterns are established in the codebase. No additional research needed.
 
-**Avoids:** Materialized views deployed without refresh schedulers (if aggregate views are added, pg_cron jobs ship simultaneously).
+### Phase 3: Attribution Quality + Signal Optimization
 
-**Research flag:** Standard patterns — shadcn/ui Chart documentation + Recharts v3 usage is well-documented. No additional research needed.
+**Rationale:** Once base tracking is confirmed working (Events Manager shows events, EMQ score is visible), enrich the signal quality. These features are additive and non-breaking. EMQ baseline data from Phase 2 is needed to confirm the current score before applying improvements. Value parameters require confirmation that Meta Ads Manager accepts VND for value optimization in the Vietnam market.
 
----
+**Delivers:** `_fbc` and `_fbp` cookie forwarding from client to CAPI payloads; `value` + `currency` parameters on `Lead` events (differentiated VND values per conversion type); `QuizStart` custom event; EMQ score verified at 7+ for all Lead event types in Events Manager; quiz abandoner retargeting audience configured in Ads Manager
 
-### Phase 4: v1.x Enhancements (Post-Validation)
+**Addresses:** P2 features: cookie capture, value parameters, QuizStart event; EMQ monitoring
 
-**Rationale:** Defer until the ops team is actively using v1 and confirms which gap hurts most. Research identifies three post-validation candidates: pain point clustering, lead velocity metric, and score decay visualization. Build only what feedback validates.
+**Avoids:** Low EMQ from sparse user data (Pitfall 6); `_fbc`/`_fbp` cookie loss breaking attribution (Pitfall 7)
 
-**Delivers:** Pain point clustering from audit_submissions.pain_points, lead velocity sparkline (hot leads/week), score decay visual indicator on warm leads.
-
-**Dependency note:** Pain point clustering requires `audit_submissions.pain_points` to be parseable (check column type: array, JSONB, or text). Validate the data shape before scheduling this phase.
-
-**Research flag:** May need targeted research for pain_points column shape if it is a complex JSONB structure.
-
----
+**Research flag:** Standard patterns — EMQ improvement is incremental enrichment of existing CAPI payloads; no novel architecture. Validate VND currency support in Meta Ads Manager before assigning monetary values (see Gaps section).
 
 ### Phase Ordering Rationale
 
-- SQL foundation must precede all UI work because composite score is the dependency for all P1 features.
-- Admin client and types are infrastructure that both query helpers and UI components require — they belong in Phase 1 not Phase 2.
-- Score decay logic must be specified before the schema is finalized because it requires a `last_activity_at` column that cannot be retroactively populated.
-- UTM normalization (standardizing case/format across all four source tables) must happen in the SQL layer (Phase 1) before any UTM-based analytics are built (Phase 3).
-- CSV export and analytics views are deferred to Phase 3 because they depend on the stable data shape and filter state established in Phase 2.
-- Score history/trend line and cohort views are deferred to v2+ because they require schema additions (`lead_score_snapshots` table) that cannot be retroactively populated from current data.
+- Consent architecture before Pixel prevents GDPR exposure from day one; it is not safely retrofittable
+- Pixel initialization before CAPI is a hard technical dependency: `_fbp` cookie only exists after the Pixel has loaded; CAPI Event Match Quality depends on forwarding it
+- Domain verification in Phase 0 saves wasted debugging time in Phase 2 — events are silently rejected without it and there is no error to diagnose
+- Quiz Route Handler extraction belongs in Phase 2 (not a separate phase) because it is a small refactor (~30 minutes) that gates CAPI on the most critical conversion point
+- Attribution enrichment (Phase 3) is intentionally deferred until base event flow is confirmed — adding `value` parameters and cookie forwarding before confirming base events work is premature
 
 ### Research Flags
 
 Phases needing deeper research during planning:
-- **Phase 1 (score decay formula):** The specific decay rate (% per week, definition of "active event") needs alignment with the sales team before writing SQL. This is a business logic question, not a technical one, but it shapes the schema.
-- **Phase 4 (pain point clustering):** Requires inspection of `audit_submissions.pain_points` column type before planning. If it is unstructured text, parsing strategy differs from JSONB or array.
+- **Phase 0:** One-time Business Manager configuration — if the Meta Business Manager account does not yet have a Pixel created or is missing System User setup, this phase may surface organizational blockers requiring marketing/legal input before code work begins
 
 Phases with standard patterns (skip research-phase):
-- **Phase 2 (lead list UI):** TanStack Table v8 + shadcn/ui Data Table guide covers this exactly.
-- **Phase 3 (charts):** shadcn/ui Chart documentation + Recharts v3 migration guide covers this.
+- **Phase 1:** Official Next.js Pixel example and existing codebase consent pattern cover implementation completely
+- **Phase 2:** Meta CAPI docs are authoritative; Route Handler pattern is already established in the codebase
+- **Phase 3:** Incremental payload enrichment with documented fields — no novel patterns required
 
 ---
 
@@ -181,22 +180,22 @@ Phases with standard patterns (skip research-phase):
 
 | Area | Confidence | Notes |
 |------|------------|-------|
-| Stack | HIGH | All additions (Recharts v3, TanStack Table v8, nuqs v2) verified against official docs; version compatibility with React 19 and Next.js 16 confirmed |
-| Features | MEDIUM-HIGH | Table-stakes features verified across multiple practitioner B2B sources; exact scoring weights and decay rates are business decisions not researchable |
-| Architecture | HIGH | Verified against local Next.js 16 docs in `node_modules/next/dist/docs/` and existing codebase patterns in `portal/dashboard/`; not inferred from training data |
-| Pitfalls | HIGH (Supabase-specific), MEDIUM (lead scoring) | Supabase pitfalls from official docs + community post-mortems; lead scoring trust/adoption pitfalls from industry practitioner sources |
+| Stack | HIGH | Official Meta SDK v25.0.1 released March 2026 confirmed current; Next.js `with-facebook-pixel` example verified; all locked deps are known quantities |
+| Features | HIGH | Official Meta Pixel Reference and CAPI Server Event Parameters docs used; three conversion points and their event mappings are unambiguous from existing GA4 taxonomy |
+| Architecture | HIGH | Verified against actual codebase files (`ConsentBanner.tsx`, `api/audit/route.ts`, `api/tai-lieu/route.ts`); existing patterns confirmed, not inferred |
+| Pitfalls | HIGH (Meta docs) / MEDIUM (Next.js specifics) | Core pitfalls from official Meta docs; App Router-specific patterns from community sources with multiple corroborating examples |
 
 **Overall confidence:** HIGH
 
 ### Gaps to Address
 
-- **Score decay rate and "active event" definition:** Research identifies that decay is necessary and common approaches (10-20%/week), but the actual rate and the list of events that reset the inactivity clock are business decisions requiring sales team input. Must be resolved before writing `score_lead()`.
+- **Quiz architecture decision (Option A vs B):** Research recommends Option A (new `/api/quiz` Route Handler), but this refactors existing quiz code that currently uses a direct browser Supabase insert. Validate before planning that the quiz `quiz/page.tsx` has no side-effects that would be lost by moving the insert server-side. Budget ~30 minutes for refactor plus time for quiz flow regression testing.
 
-- **`audit_submissions.pain_points` column shape:** The pain point clustering feature (Phase 4) depends on whether this column is a structured array, JSONB, or unstructured text. Inspect the actual column type before scheduling Phase 4 work.
+- **`@types/facebook-nodejs-business-sdk` version lag:** Types package is at v23, SDK is at v25. Newer SDK fields added in v24-v25 may lack TypeScript coverage. The CAPI-relevant classes (`ServerEvent`, `UserData`, `EventRequest`, `CustomData`) are confirmed covered; accept minor type gaps for campaign-level additions if they arise.
 
-- **UTM value consistency across source tables:** Research flags UTM normalization as non-trivial (`google` vs `Google` vs `google-ads`). Requires sampling actual UTM data from all four tables before writing the normalization logic in the SQL view.
+- **VND currency support for value optimization:** FEATURES.md assigns VND values to `Lead` events for Meta Value Optimization bidding. Confirm Meta Ads Manager accepts VND as a valid currency for value-based audience optimization in the Vietnam market before implementing the `value` parameter in Phase 3. This is a configuration verification, not a code question.
 
-- **Lead volume baseline:** Performance guidance (when to add read replicas, when to switch to cursor pagination) depends on actual row counts. The current volume is unknown from research. Verify row counts in `quiz_leads`, `audit_submissions`, `pdf_leads` to calibrate Phase 1 performance decisions.
+- **Meta Business Manager account access:** Domain verification and System User Access Token generation require admin access to the Meta Business Manager account. Confirm this access exists before Phase 0 begins to avoid blocking Phase 2 implementation.
 
 ---
 
@@ -204,27 +203,27 @@ Phases with standard patterns (skip research-phase):
 
 ### Primary (HIGH confidence)
 
-- Local Next.js 16 docs (`node_modules/next/dist/docs/`) — server components, data fetching, streaming patterns
-- Existing codebase: `src/app/portal/dashboard/page.tsx`, `src/lib/supabase/server.ts`, `middleware.ts` — confirmed architectural patterns already in use
-- [Supabase SSR Auth for Next.js](https://supabase.com/docs/guides/auth/server-side/nextjs) — `getUser()` over `getSession()`, middleware pattern
-- [Supabase RLS Performance and Best Practices](https://supabase.com/docs/guides/troubleshooting/rls-performance-and-best-practices-Z5Jjwv) — RLS index requirements
-- [Supabase Query Optimization](https://supabase.com/docs/guides/database/query-optimization) — performance guidance
-- [Supabase Read Replicas](https://supabase.com/docs/guides/platform/read-replicas) — dashboard query routing
-- [shadcn/ui Chart documentation](https://ui.shadcn.com/docs/components/radix/chart) — Recharts v3 usage, CSS variable theming
-- [shadcn/ui Data Table documentation](https://ui.shadcn.com/docs/components/radix/data-table) — TanStack Table v8 integration
-- [Recharts v3 migration guide](https://github.com/recharts/recharts/wiki/3.0-migration-guide) — v3 vs v2 breaking changes
-- [TanStack Table v8 releases](https://github.com/TanStack/table/releases) — v8.21.3 stable confirmed
-- [Supabase Security Retro 2025](https://supabase.com/blog/supabase-security-2025-retro) — service role key security guidance
+- Meta Conversions API official docs — endpoint, auth, required fields, `event_id` deduplication
+- Meta CAPI Using the API — confirmed v25.0 endpoint and required fields
+- Meta CAPI Deduplication guide — `event_id` + `event_name` matching, 48-hour window
+- Meta Pixel Reference — standard events, parameters, advanced matching
+- Conversions API Server Event Parameters — `user_data` fields and hashing rules
+- `facebook-nodejs-business-sdk` GitHub Releases — v25.0.1 confirmed current (March 2026)
+- `@types/facebook-nodejs-business-sdk` npm — v23.0.0 confirmed
+- Next.js official `with-facebook-pixel` example (vercel/next.js canary) — `next/script` App Router pattern
+- Next.js Script Component docs — `afterInteractive` strategy, App Router compatibility
+- Existing codebase: `src/components/analytics/ConsentBanner.tsx`, `GoogleAnalytics.tsx`, `api/audit/route.ts`, `api/tai-lieu/route.ts` — confirmed patterns
 
 ### Secondary (MEDIUM confidence)
 
-- [Case Study: 61 Queries to 1 on a Supabase Dashboard](https://medium.com/@maximedalessandro/case-study-how-our-ai-cut-our-supabase-dashboard-queries-from-61-to-1-043ef525fd5c) — N+1 pattern consequences; 2.8s to 150ms improvement
-- [B2B Lead Scoring: Belkins' Formula](https://belkins.io/blog/lead-scoring) — scoring formula structure and point values
-- [CRM Lead Scoring in B2B — instantly.ai](https://instantly.ai/blog/how-crm-scores-b2b-leads/) — tier thresholds (Hot/Warm/Cold)
-- [TanStack Table v9 roadmap discussion](https://github.com/TanStack/table/discussions/5270) — confirms v9 not stable as of March 2026
-- [Optimizing Supabase with Materialized Views](https://dev.to/kovidr/optimize-read-performance-in-supabase-with-postgres-materialized-views-12k5) — refresh strategy patterns
-- [Common Lead Scoring Mistakes](https://www.reform.app/blog/common-lead-scoring-mistakes-and-fixes) — formula adoption pitfalls
-- [2026 B2B Lead Prioritization Playbook — saleswingsapp.com](https://www.saleswingsapp.com/inside-sales/how-to-prioritize-high-volume-b2b-leads-2026-playbook/) — current year scoring patterns
+- Meta Events Manager test_event_code docs — development debugging workflow
+- SecurePrivacy: Meta Consent Mode Explained 2025 — Pixel consent requirements, GDPR guidance
+- Stape.io: FB CAPI + Next.js setup 2026 — full data flow for leads, fbc/fbp extraction
+- Watsspace: `fbc`/`fbp` parameters — confirmed NOT hashed, format reference
+- AdAmigo.ai: Standardize conversion data for Meta — hashing normalization rules
+- Brad Farleigh 2025: `event_id` generation and deduplication — timestamp+random format confirmed valid
+- Analyzify, Seresa, Trackbee, CustomerLabs — deduplication patterns and EMQ scoring confirmed across multiple sources
+- DEV Community: Facebook Pixel App Directory + Plain English: Next.js 14 App Router guides — community confirmation of official patterns
 
 ---
 
