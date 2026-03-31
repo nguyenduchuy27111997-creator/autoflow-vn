@@ -166,6 +166,56 @@ export default function QuizPage() {
       } else {
         trackQuizCompleted(totalScore);
         trackGenerateLead({ form_type: "quiz", score: totalScore, result_tier: tier });
+
+        // Enqueue 3-email sequence for this lead
+        try {
+          const now = new Date();
+          const day3 = new Date(now); day3.setDate(day3.getDate() + 3);
+          const day7 = new Date(now); day7.setDate(day7.getDate() + 7);
+          const queueMeta = { score: totalScore, tier };
+
+          // Duplicate check: skip if already enrolled
+          const { count } = await supabase
+            .from("email_queue")
+            .select("id", { count: "exact", head: true })
+            .eq("email", leadData.email.trim())
+            .eq("sequence_type", "quiz");
+
+          if ((count ?? 0) === 0) {
+            await supabase.from("email_queue").insert([
+              {
+                email: leadData.email.trim(),
+                name: leadData.name.trim() || null,
+                sequence_type: "quiz",
+                email_number: 1,
+                scheduled_at: now.toISOString(),
+                status: "pending",
+                metadata: queueMeta,
+              },
+              {
+                email: leadData.email.trim(),
+                name: leadData.name.trim() || null,
+                sequence_type: "quiz",
+                email_number: 2,
+                scheduled_at: day3.toISOString(),
+                status: "pending",
+                metadata: queueMeta,
+              },
+              {
+                email: leadData.email.trim(),
+                name: leadData.name.trim() || null,
+                sequence_type: "quiz",
+                email_number: 3,
+                scheduled_at: day7.toISOString(),
+                status: "pending",
+                metadata: queueMeta,
+              },
+            ]);
+          }
+        } catch (queueErr) {
+          console.error("Email queue enqueue failed:", queueErr);
+          // Non-fatal — do not block user flow
+        }
       }
     } catch (err) {
       console.error("Quiz submission failed:", err);
