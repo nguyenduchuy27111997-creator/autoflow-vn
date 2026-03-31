@@ -3,9 +3,9 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { createClient } from "@/lib/supabase/client";
 import { getStoredUTM } from "@/lib/utm";
-import { trackGenerateLead, trackQuizStart, trackQuizQuestion, trackQuizCompleted, trackQuizAbandoned } from "@/lib/analytics";
+import { trackGenerateLead, trackQuizStart, trackQuizQuestion, trackQuizCompleted } from "@/lib/analytics";
+import { fbqTrackLead } from "@/lib/fbpixel";
 import {
   quizQuestions,
   getResultTier,
@@ -140,82 +140,35 @@ export default function QuizPage() {
   async function handleSubmit() {
     if (!emailValid || submitting) return;
 
-    // Honeypot check
-    const honeypot = document.querySelector<HTMLInputElement>(
-      'input[name="website"]',
-    );
+    const honeypot = document.querySelector<HTMLInputElement>('input[name="website"]');
     if (honeypot?.value) return;
 
     setSubmitting(true);
 
     try {
-      const supabase = createClient();
       const utm = getStoredUTM();
       const tier = getResultTierKey(totalScore);
-      const { error } = await supabase.from("quiz_leads").insert({
-        name: leadData.name.trim() || null,
-        email: leadData.email.trim(),
-        phone: leadData.phone.trim() || null,
-        score: totalScore,
-        result_tier: tier,
-        answers,
-        ...utm,
+      const eventId = crypto.randomUUID();
+
+      const res = await fetch("/api/quiz", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: leadData.name,
+          email: leadData.email,
+          phone: leadData.phone,
+          score: totalScore,
+          result_tier: tier,
+          answers,
+          ...utm,
+          event_id: eventId,
+        }),
       });
-      if (error) {
-        console.error("Quiz submission failed:", error);
-      } else {
+
+      if (res.ok) {
         trackQuizCompleted(totalScore);
         trackGenerateLead({ form_type: "quiz", score: totalScore, result_tier: tier });
-
-        // Enqueue 3-email sequence for this lead
-        try {
-          const now = new Date();
-          const day3 = new Date(now); day3.setDate(day3.getDate() + 3);
-          const day7 = new Date(now); day7.setDate(day7.getDate() + 7);
-          const queueMeta = { score: totalScore, tier };
-
-          // Duplicate check: skip if already enrolled
-          const { count } = await supabase
-            .from("email_queue")
-            .select("id", { count: "exact", head: true })
-            .eq("email", leadData.email.trim())
-            .eq("sequence_type", "quiz");
-
-          if ((count ?? 0) === 0) {
-            await supabase.from("email_queue").insert([
-              {
-                email: leadData.email.trim(),
-                name: leadData.name.trim() || null,
-                sequence_type: "quiz",
-                email_number: 1,
-                scheduled_at: now.toISOString(),
-                status: "pending",
-                metadata: queueMeta,
-              },
-              {
-                email: leadData.email.trim(),
-                name: leadData.name.trim() || null,
-                sequence_type: "quiz",
-                email_number: 2,
-                scheduled_at: day3.toISOString(),
-                status: "pending",
-                metadata: queueMeta,
-              },
-              {
-                email: leadData.email.trim(),
-                name: leadData.name.trim() || null,
-                sequence_type: "quiz",
-                email_number: 3,
-                scheduled_at: day7.toISOString(),
-                status: "pending",
-                metadata: queueMeta,
-              },
-            ]);
-          }
-        } catch (queueErr) {
-          console.error("Email queue enqueue failed:", queueErr);
-          // Non-fatal — do not block user flow
-        }
+        fbqTrackLead({ content_name: "quiz", event_id: eventId });
       }
     } catch (err) {
       console.error("Quiz submission failed:", err);

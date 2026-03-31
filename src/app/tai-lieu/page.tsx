@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getStoredUTM } from "@/lib/utm";
 import { trackGenerateLead } from "@/lib/analytics";
+import { fbqTrackLead } from "@/lib/fbpixel";
 
 /* ── Use‑case data ───────────────────────────────────────────── */
 const useCases = [
@@ -112,6 +113,7 @@ function LeadModal({
 
     try {
       const utm = getStoredUTM();
+      const eventId = crypto.randomUUID();
       const res = await fetch("/api/tai-lieu", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -121,6 +123,7 @@ function LeadModal({
           phone: form.phone,
           resource: "10-quy-trinh",
           ...utm,
+          event_id: eventId,
         }),
       });
 
@@ -132,6 +135,7 @@ function LeadModal({
       }
 
       trackGenerateLead({ form_type: "pdf", resource: "10-quy-trinh" });
+      fbqTrackLead({ content_name: "pdf", event_id: eventId });
       setSubmitted(true);
     } catch {
       setError("Không thể kết nối. Vui lòng thử lại.");

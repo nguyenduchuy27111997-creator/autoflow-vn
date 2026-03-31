@@ -191,15 +191,23 @@ export default function PilotBanner() {
 
         {/* CTA */}
         <div className="text-center">
-          <a
-            href="/audit"
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold text-lg px-10 py-4 rounded-2xl transition-all hover:shadow-xl hover:shadow-primary/25 hover:-translate-y-0.5"
-          >
-            Đặt lịch audit miễn phí
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </a>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="/pilot"
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold text-lg px-10 py-4 rounded-2xl transition-all hover:shadow-xl hover:shadow-primary/25 hover:-translate-y-0.5"
+            >
+              Xem chi tiết Pilot
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+            <a
+              href="/audit"
+              className="inline-flex items-center gap-2 text-primary hover:text-primary-dark font-semibold text-sm transition-all"
+            >
+              Hoặc đặt lịch audit miễn phí →
+            </a>
+          </div>
           <p className="text-xs text-slate-400 mt-3">
             30 phút · Miễn phí · Không cam kết · Qua Zoom hoặc Google Meet
           </p>

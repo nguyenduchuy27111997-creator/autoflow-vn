@@ -57,3 +57,17 @@ export function fbpixelEvent(
     window.fbq('track', eventName, data);
   }
 }
+
+/**
+ * Fire Lead event on client Pixel with event_id for CAPI dedup.
+ * Call after successful form submission.
+ */
+export function fbqTrackLead(params: {
+  content_name: string;
+  event_id: string;
+}): void {
+  fbpixelEvent("Lead", {
+    content_name: params.content_name,
+    content_category: "lead_gen",
+  }, params.event_id);
+}

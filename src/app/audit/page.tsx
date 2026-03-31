@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { industries, teamSizes } from "@/data/constants";
 import { getStoredUTM } from "@/lib/utm";
 import { trackGenerateLead } from "@/lib/analytics";
+import { fbqTrackLead } from "@/lib/fbpixel";
 
 const painPoints = [
   "Nhập liệu thủ công quá nhiều",
@@ -45,12 +46,16 @@ export default function AuditPage() {
     setSubmitting(true);
     try {
       const utm = getStoredUTM();
+      const eventId = crypto.randomUUID();
       const res = await fetch("/api/audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, ...utm }),
+        body: JSON.stringify({ ...form, ...utm, event_id: eventId }),
       });
-      if (res.ok) trackGenerateLead({ form_type: "audit" });
+      if (res.ok) {
+        trackGenerateLead({ form_type: "audit" });
+        fbqTrackLead({ content_name: "audit", event_id: eventId });
+      }
       setSubmitted(true);
     } catch {
       setSubmitted(true);
