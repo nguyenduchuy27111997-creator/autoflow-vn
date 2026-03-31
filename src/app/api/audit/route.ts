@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { enqueueEmailSequence } from "@/lib/email-queue";
 
 const WEBHOOK_URL = process.env.AUDIT_WEBHOOK_URL;
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
@@ -85,6 +86,15 @@ export async function POST(req: NextRequest) {
 
     if (error) {
       console.error("Supabase insert error:", error);
+    }
+
+    // Enqueue email sequence if email provided
+    if (body.email && typeof body.email === "string" && body.email.includes("@")) {
+      enqueueEmailSequence({
+        email: body.email.trim(),
+        name: name?.trim(),
+        sequenceType: "audit",
+      }).catch((err) => console.error("Email queue error (audit):", err));
     }
 
     // Forward to webhook (n8n, Zapier, Make, etc.)

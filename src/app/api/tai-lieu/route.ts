@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { createClient } from "@/lib/supabase/server";
+import { enqueueEmailSequence } from "@/lib/email-queue";
 import { readFile } from "fs/promises";
 import { join } from "path";
 import { EMAIL_FROM, SITE_NAME, SITE_URL } from "@/data/constants";
@@ -97,6 +98,13 @@ export async function POST(req: NextRequest) {
     if (dbError) {
       console.error("Supabase insert error:", dbError);
     }
+
+    // Enqueue PDF email sequence
+    enqueueEmailSequence({
+      email: email.trim(),
+      name: name?.trim(),
+      sequenceType: "pdf",
+    }).catch((err) => console.error("Email queue error (pdf):", err));
 
     // Read PDF file and send email
     const resend = getResend();
