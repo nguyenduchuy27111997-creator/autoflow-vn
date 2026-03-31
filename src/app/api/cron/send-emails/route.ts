@@ -8,12 +8,18 @@ import {
   quizEmail1,
   quizEmail2,
   quizEmail3,
+  quizEmail4,
+  quizEmail5,
   pdfEmail1,
   pdfEmail2,
   pdfEmail3,
+  pdfEmail4,
+  pdfEmail5,
   auditEmail1,
   auditEmail2,
   auditEmail3,
+  auditEmail4,
+  auditEmail5,
 } from "@/lib/email-templates";
 
 interface QueueRow {
@@ -33,24 +39,31 @@ function getResend() {
 
 function getEmailTemplate(row: QueueRow): EmailResult | null {
   const meta = (row.metadata ?? {}) as Record<string, unknown>;
+  const email = row.email;
   const name = row.name ?? undefined;
   const tier = (meta.tier as QuizTier) ?? "starter";
   const score = (meta.score as number) ?? 0;
 
   if (row.sequence_type === "quiz") {
-    if (row.email_number === 1) return quizEmail1({ name, score, tier });
-    if (row.email_number === 2) return quizEmail2({ name, tier });
-    if (row.email_number === 3) return quizEmail3({ name, tier });
+    if (row.email_number === 1) return quizEmail1({ email, name, score, tier });
+    if (row.email_number === 2) return quizEmail2({ email, name, tier });
+    if (row.email_number === 3) return quizEmail3({ email, name, tier });
+    if (row.email_number === 4) return quizEmail4({ email, name, tier });
+    if (row.email_number === 5) return quizEmail5({ email, name, tier });
   }
   if (row.sequence_type === "pdf") {
-    if (row.email_number === 1) return pdfEmail1({ name });
-    if (row.email_number === 2) return pdfEmail2({ name });
-    if (row.email_number === 3) return pdfEmail3({ name });
+    if (row.email_number === 1) return pdfEmail1({ email, name });
+    if (row.email_number === 2) return pdfEmail2({ email, name });
+    if (row.email_number === 3) return pdfEmail3({ email, name });
+    if (row.email_number === 4) return pdfEmail4({ email, name });
+    if (row.email_number === 5) return pdfEmail5({ email, name });
   }
   if (row.sequence_type === "audit") {
-    if (row.email_number === 1) return auditEmail1({ name });
-    if (row.email_number === 2) return auditEmail2({ name });
-    if (row.email_number === 3) return auditEmail3({ name });
+    if (row.email_number === 1) return auditEmail1({ email, name });
+    if (row.email_number === 2) return auditEmail2({ email, name });
+    if (row.email_number === 3) return auditEmail3({ email, name });
+    if (row.email_number === 4) return auditEmail4({ email, name });
+    if (row.email_number === 5) return auditEmail5({ email, name });
   }
   return null;
 }
@@ -66,6 +79,7 @@ export async function GET(req: NextRequest) {
   const supabase = await createClient();
   const now = new Date().toISOString();
 
+  // Also skip rows where user has unsubscribed
   const { data: rows, error } = await supabase
     .from("email_queue")
     .select("id, email, name, sequence_type, email_number, metadata")
@@ -83,8 +97,35 @@ export async function GET(req: NextRequest) {
   let failed = 0;
   let skipped = 0;
 
+  // Check unsubscribed emails in bulk
+  const emails = [...new Set((rows ?? []).map((r) => r.email))];
+  const unsubscribedSet = new Set<string>();
+
+  if (emails.length > 0) {
+    const { data: unsubs } = await supabase
+      .from("email_unsubscribes")
+      .select("email")
+      .in("email", emails);
+
+    if (unsubs) {
+      for (const u of unsubs) {
+        unsubscribedSet.add(u.email);
+      }
+    }
+  }
+
   for (const row of rows ?? []) {
-    // No Resend API key — mark all remaining rows as skipped
+    // Skip unsubscribed
+    if (unsubscribedSet.has(row.email)) {
+      await supabase
+        .from("email_queue")
+        .update({ status: "skipped" })
+        .eq("id", row.id);
+      skipped++;
+      continue;
+    }
+
+    // No Resend API key — mark as skipped
     if (!resend) {
       await supabase
         .from("email_queue")
@@ -110,6 +151,9 @@ export async function GET(req: NextRequest) {
         to: row.email,
         subject: template.subject,
         html: template.html,
+        headers: {
+          "List-Unsubscribe": `<${process.env.NEXT_PUBLIC_SITE_URL || "https://autoflowvn.net"}/api/unsubscribe?email=${encodeURIComponent(row.email)}>`,
+        },
       });
       await supabase
         .from("email_queue")

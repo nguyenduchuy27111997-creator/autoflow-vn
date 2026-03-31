@@ -16,6 +16,15 @@ export interface EnqueueResult {
   error?: string;
 }
 
+// Schedule: Day 0, 3, 7, 14, 21
+const EMAIL_SCHEDULE = [
+  { email_number: 1, days_offset: 0 },
+  { email_number: 2, days_offset: 3 },
+  { email_number: 3, days_offset: 7 },
+  { email_number: 4, days_offset: 14 },
+  { email_number: 5, days_offset: 21 },
+];
+
 export async function enqueueEmailSequence(
   params: EnqueueParams
 ): Promise<EnqueueResult> {
@@ -39,13 +48,9 @@ export async function enqueueEmailSequence(
       return { success: true, skipped: true };
     }
 
-    // Schedule 3 emails: day 0, day 3, day 7
+    // Schedule 5 emails
     const now = new Date();
-    const rows = [
-      { email_number: 1, days_offset: 0 },
-      { email_number: 2, days_offset: 3 },
-      { email_number: 3, days_offset: 7 },
-    ].map(({ email_number, days_offset }) => {
+    const rows = EMAIL_SCHEDULE.map(({ email_number, days_offset }) => {
       const scheduled = new Date(now);
       scheduled.setDate(scheduled.getDate() + days_offset);
       return {
@@ -67,7 +72,7 @@ export async function enqueueEmailSequence(
       return { success: false, error: insertError.message };
     }
 
-    return { success: true, inserted: 3 };
+    return { success: true, inserted: EMAIL_SCHEDULE.length };
   } catch (err) {
     return {
       success: false,
