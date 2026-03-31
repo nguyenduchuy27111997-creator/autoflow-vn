@@ -24,15 +24,13 @@ export default async function LeadDetailPage({
   const formTypes = [...new Set(leads.map((l) => l.source_type))];
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <div className="max-w-4xl mx-auto px-6 py-8">
-        {/* Back */}
-        <a
-          href="/portal/dashboard/leads"
-          className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-primary mb-6"
-        >
-          ← Back to leads
-        </a>
+    <div className="px-8 py-8 max-w-4xl">
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-2 text-sm text-slate-400 mb-6">
+          <a href="/portal/dashboard/leads" className="hover:text-primary transition-colors">Leads</a>
+          <span>/</span>
+          <span className="text-slate-700">{primary.name || decodedEmail}</span>
+        </div>
 
         {/* Header */}
         <div className="bg-white rounded-xl border border-slate-200 p-6 mb-6">
@@ -122,7 +120,6 @@ export default async function LeadDetailPage({
             )}
           </div>
         </div>
-      </div>
     </div>
   );
 }

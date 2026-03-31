@@ -55,61 +55,20 @@ export default async function AnalyticsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="font-display font-extrabold text-2xl text-slate-900">Analytics</h1>
-            <p className="text-sm text-slate-500 mt-1">{stats.uniqueLeads} unique leads</p>
-          </div>
-          <a
-            href="/portal/dashboard/leads"
-            className="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 bg-white border border-slate-200 hover:bg-slate-50"
-          >
-            ← Lead List
-          </a>
-        </div>
-
-        {/* KPI Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <KPICard label="Total Leads" value={stats.uniqueLeads.toString()} />
-          <KPICard label="Avg Score" value={stats.avgScore.toString()} sub="/100" />
-          <KPICard label="Hot Leads" value={stats.hotCount.toString()} color="text-red-600" />
-          <KPICard label="Top Source" value={stats.topSource} />
-        </div>
-
-        {/* Charts */}
-        <AnalyticsCharts
-          dailyData={dailyData}
-          utmData={utmData}
-          tierData={tierData}
-        />
+    <div className="px-8 py-8">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="font-display font-bold text-xl text-slate-900">Analytics</h1>
+        <p className="text-sm text-slate-400 mt-0.5">{stats.uniqueLeads} unique leads across all sources</p>
       </div>
+
+      {/* Charts */}
+      <AnalyticsCharts
+        dailyData={dailyData}
+        utmData={utmData}
+        tierData={tierData}
+      />
     </div>
   );
 }
 
-function KPICard({
-  label,
-  value,
-  sub,
-  color,
-}: {
-  label: string;
-  value: string;
-  sub?: string;
-  color?: string;
-}) {
-  return (
-    <div className="bg-white rounded-xl border border-slate-200 p-5">
-      <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-        {label}
-      </div>
-      <div className={`font-display font-extrabold text-2xl mt-1 ${color || "text-slate-900"}`}>
-        {value}
-        {sub && <span className="text-sm font-normal text-slate-400">{sub}</span>}
-      </div>
-    </div>
-  );
-}
