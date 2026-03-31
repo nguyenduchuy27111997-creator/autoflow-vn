@@ -58,6 +58,7 @@ export default function ConsentBanner() {
   const handleAccept = useCallback(() => {
     setStoredConsent("granted");
     updateGtag("granted");
+    window.dispatchEvent(new Event('consent:granted'));
     setAnimating(false);
     setTimeout(() => setVisible(false), 300);
   }, []);

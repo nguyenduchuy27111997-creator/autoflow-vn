@@ -4,6 +4,7 @@ import Script from "next/script";
 import JsonLd from "@/components/JsonLd";
 import { Suspense } from "react";
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
+import FacebookPixel from '@/components/analytics/FacebookPixel';
 import ConsentBannerWrapper from '@/components/analytics/ConsentBannerWrapper';
 import UTMCapture from '@/components/analytics/UTMCapture';
 import ZaloTracker from '@/components/analytics/ZaloTracker';
@@ -200,6 +201,7 @@ export default function RootLayout({
           />
         )}
         <GoogleAnalytics />
+        <FacebookPixel />
         <ConsentBannerWrapper />
         <Suspense fallback={null}><UTMCapture /></Suspense>
         <ZaloTracker />
