@@ -99,10 +99,9 @@ function LeadModal({
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   if (!open) return null;
-
-  const [error, setError] = useState("");
   const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
 
   const handleSubmit = async (e: React.FormEvent) => {
