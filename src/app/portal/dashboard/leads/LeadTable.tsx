@@ -182,7 +182,8 @@ export default function LeadTable({ leads }: { leads: ScoredLead[] }) {
             {table.getRowModel().rows.map((row) => (
               <tr
                 key={row.id}
-                className="border-b border-slate-50 hover:bg-slate-50/50 transition-colors"
+                onClick={() => window.location.href = `/portal/dashboard/leads/${encodeURIComponent(row.original.email)}`}
+                className="border-b border-slate-50 hover:bg-primary/5 transition-colors cursor-pointer"
               >
                 {row.getVisibleCells().map((cell) => (
                   <td key={cell.id} className="px-4 py-3">
