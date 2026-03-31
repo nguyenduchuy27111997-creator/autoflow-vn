@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Be_Vietnam_Pro, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import JsonLd from "@/components/JsonLd";
+import { Suspense } from "react";
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import ConsentBannerWrapper from '@/components/analytics/ConsentBannerWrapper';
+import UTMCapture from '@/components/analytics/UTMCapture';
 import "./globals.css";
 
 const beVietnam = Be_Vietnam_Pro({
@@ -123,6 +125,7 @@ export default function RootLayout({
         )}
         <GoogleAnalytics />
         <ConsentBannerWrapper />
+        <Suspense fallback={null}><UTMCapture /></Suspense>
       </body>
     </html>
   );

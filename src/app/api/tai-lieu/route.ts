@@ -60,7 +60,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { name, email, phone, resource } = body;
+    const { name, email, phone, resource,
+      utm_source, utm_medium, utm_campaign, utm_term, utm_content } = body;
 
     if (!email || !email.includes("@")) {
       return NextResponse.json(
@@ -86,6 +87,11 @@ export async function POST(req: NextRequest) {
       email: email.trim(),
       phone: phone?.trim() || null,
       resource: resourceKey,
+      utm_source: utm_source || null,
+      utm_medium: utm_medium || null,
+      utm_campaign: utm_campaign || null,
+      utm_term: utm_term || null,
+      utm_content: utm_content || null,
     });
 
     if (dbError) {

@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { createClient } from "@/lib/supabase/client";
+import { getStoredUTM } from "@/lib/utm";
+import { trackGenerateLead } from "@/lib/analytics";
 import {
   quizQuestions,
   getResultTier,
@@ -147,15 +149,22 @@ export default function QuizPage() {
 
     try {
       const supabase = createClient();
+      const utm = getStoredUTM();
+      const tier = getResultTierKey(totalScore);
       const { error } = await supabase.from("quiz_leads").insert({
         name: leadData.name.trim() || null,
         email: leadData.email.trim(),
         phone: leadData.phone.trim() || null,
         score: totalScore,
-        result_tier: getResultTierKey(totalScore),
+        result_tier: tier,
         answers,
+        ...utm,
       });
-      if (error) console.error("Quiz submission failed:", error);
+      if (error) {
+        console.error("Quiz submission failed:", error);
+      } else {
+        trackGenerateLead({ form_type: "quiz", score: totalScore, result_tier: tier });
+      }
     } catch (err) {
       console.error("Quiz submission failed:", err);
     }

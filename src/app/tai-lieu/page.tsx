@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getStoredUTM } from "@/lib/utm";
+import { trackGenerateLead } from "@/lib/analytics";
 
 /* ── Use‑case data ───────────────────────────────────────────── */
 const useCases = [
@@ -110,6 +112,7 @@ function LeadModal({
     setError("");
 
     try {
+      const utm = getStoredUTM();
       const res = await fetch("/api/tai-lieu", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -118,6 +121,7 @@ function LeadModal({
           email: form.email,
           phone: form.phone,
           resource: "10-quy-trinh",
+          ...utm,
         }),
       });
 
@@ -128,6 +132,7 @@ function LeadModal({
         return;
       }
 
+      trackGenerateLead({ form_type: "pdf", resource: "10-quy-trinh" });
       setSubmitted(true);
     } catch {
       setError("Không thể kết nối. Vui lòng thử lại.");

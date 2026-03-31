@@ -51,8 +51,8 @@ export async function POST(req: NextRequest) {
     }
 
     // Validate required fields
-    const { name, phone, industry, teamSize, painPoints, details, company } =
-      body;
+    const { name, phone, industry, teamSize, painPoints, details, company,
+      utm_source, utm_medium, utm_campaign, utm_term, utm_content } = body;
 
     if (!name || !phone) {
       return NextResponse.json(
@@ -70,6 +70,11 @@ export async function POST(req: NextRequest) {
       pain_points: painPoints || [],
       details: details || null,
       source: req.headers.get("referer") || "direct",
+      utm_source: utm_source || null,
+      utm_medium: utm_medium || null,
+      utm_campaign: utm_campaign || null,
+      utm_term: utm_term || null,
+      utm_content: utm_content || null,
     };
 
     // Save to Supabase

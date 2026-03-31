@@ -4,6 +4,8 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { industries, teamSizes } from "@/data/constants";
+import { getStoredUTM } from "@/lib/utm";
+import { trackGenerateLead } from "@/lib/analytics";
 
 const painPoints = [
   "Nhập liệu thủ công quá nhiều",
@@ -42,14 +44,16 @@ export default function AuditPage() {
     e.preventDefault();
     setSubmitting(true);
     try {
-      await fetch("/api/audit", {
+      const utm = getStoredUTM();
+      const res = await fetch("/api/audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, ...utm }),
       });
+      if (res.ok) trackGenerateLead({ form_type: "audit" });
       setSubmitted(true);
     } catch {
-      setSubmitted(true); // Show success anyway — webhook may retry
+      setSubmitted(true);
     } finally {
       setSubmitting(false);
     }
