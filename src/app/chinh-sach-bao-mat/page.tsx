@@ -78,6 +78,20 @@ export default function ChinhSachBaoMatPage() {
                 danh, không chứa thông tin cá nhân trực tiếp)
               </li>
               <li>
+                <strong>Facebook Pixel (Meta):</strong> Khi bạn chấp nhận cookies quảng cáo,
+                chúng tôi sử dụng Facebook Pixel để đo lường hiệu quả quảng cáo và tạo tệp
+                khách hàng tương tự. Dữ liệu được gửi đến Meta Platforms, Inc. theo{" "}
+                <a
+                  href="https://www.facebook.com/privacy/policy/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  chính sách quyền riêng tư của Meta
+                </a>
+                .
+              </li>
+              <li>
                 <strong>Yêu cầu pháp luật:</strong> Khi bắt buộc bởi luật pháp
                 Việt Nam
               </li>
@@ -134,13 +148,16 @@ export default function ChinhSachBaoMatPage() {
             </p>
             <ul>
               <li>
-                <strong>Chấp nhận:</strong> Google Analytics được kích hoạt, lưu
-                cookie <code>_ga</code> và <code>_ga_*</code> để đo lường traffic
-                và hành vi người dùng (ẩn danh, không chứa thông tin cá nhân).
+                <strong>Chấp nhận:</strong> Google Analytics và Facebook Pixel được
+                kích hoạt. Google Analytics lưu cookie <code>_ga</code> và{" "}
+                <code>_ga_*</code> để đo lường traffic ẩn danh. Facebook Pixel lưu
+                cookie <code>_fbp</code> (browser ID) và <code>_fbc</code> (click ID
+                từ quảng cáo Facebook) để đo lường hiệu quả quảng cáo.
               </li>
               <li>
-                <strong>Từ chối:</strong> Google Analytics không được kích hoạt,
-                không có cookie phân tích nào được lưu trên trình duyệt của bạn.
+                <strong>Từ chối:</strong> Google Analytics và Facebook Pixel không
+                được kích hoạt. Không có cookie phân tích hoặc quảng cáo nào được
+                lưu trên trình duyệt của bạn.
               </li>
             </ul>
             <p>
