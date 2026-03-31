@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import ConsentBannerWrapper from '@/components/analytics/ConsentBannerWrapper';
 import UTMCapture from '@/components/analytics/UTMCapture';
+import ZaloTracker from '@/components/analytics/ZaloTracker';
 import "./globals.css";
 
 const beVietnam = Be_Vietnam_Pro({
@@ -126,6 +127,7 @@ export default function RootLayout({
         <GoogleAnalytics />
         <ConsentBannerWrapper />
         <Suspense fallback={null}><UTMCapture /></Suspense>
+        <ZaloTracker />
       </body>
     </html>
   );

@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { createClient } from "@/lib/supabase/client";
 import { getStoredUTM } from "@/lib/utm";
-import { trackGenerateLead } from "@/lib/analytics";
+import { trackGenerateLead, trackQuizStart, trackQuizQuestion, trackQuizCompleted, trackQuizAbandoned } from "@/lib/analytics";
 import {
   quizQuestions,
   getResultTier,
@@ -80,6 +80,7 @@ export default function QuizPage() {
   const selectAnswer = useCallback(
     (qId: number, index: number, score: number) => {
       setAnswers((prev) => ({ ...prev, [qId]: { index, score } }));
+      trackQuizQuestion(qId, index);
       if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
       autoAdvanceTimer.current = setTimeout(() => {
         setCurrentQuestion((prev) => {
@@ -163,6 +164,7 @@ export default function QuizPage() {
       if (error) {
         console.error("Quiz submission failed:", error);
       } else {
+        trackQuizCompleted(totalScore);
         trackGenerateLead({ form_type: "quiz", score: totalScore, result_tier: tier });
       }
     } catch (err) {
@@ -243,6 +245,7 @@ export default function QuizPage() {
                 onClick={() => {
                   setScreen("quiz");
                   setCurrentQuestion(0);
+                  trackQuizStart();
                 }}
                 className="bg-gradient-to-br from-primary to-secondary text-white font-display font-bold text-lg px-10 py-4 rounded-2xl shadow-lg shadow-primary/30 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/40 transition-all"
               >
