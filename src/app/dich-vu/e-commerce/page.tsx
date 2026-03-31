@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { fbpixelEvent } from "@/lib/fbpixel";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
@@ -85,6 +86,10 @@ const workflows = [
 ];
 
 export default function EcommercePage() {
+  useEffect(() => {
+    fbpixelEvent('ViewContent', { content_name: 'Dịch vụ E-commerce' });
+  }, []);
+
   const [employees, setEmployees] = useState(3);
   const [hours, setHours] = useState(4);
   const [openFaq, setOpenFaq] = useState(-1);

@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CaseStudyDetail from "@/components/CaseStudyDetail";
 import { getCaseStudyBySlug } from "@/lib/case-studies";
+import PixelViewContent from "@/components/analytics/PixelViewContent";
 
 const cs = getCaseStudyBySlug("giao-duc")!;
 
@@ -42,6 +43,7 @@ export default function GiaoDucResultPage() {
   if (!cs) notFound();
   return (
     <>
+      <PixelViewContent contentName="Kết quả Giáo dục" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
