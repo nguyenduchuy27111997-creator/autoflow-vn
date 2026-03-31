@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { createClient } from "@/lib/supabase/server";
 import { readFile } from "fs/promises";
 import { join } from "path";
+import { EMAIL_FROM, SITE_NAME, SITE_URL } from "@/data/constants";
 
 function getResend() {
   const key = process.env.RESEND_API_KEY;
@@ -103,13 +104,13 @@ export async function POST(req: NextRequest) {
       const pdfBuffer = await readFile(pdfPath);
 
       await resend.emails.send({
-        from: "AutoFlow VN <onboarding@resend.dev>",
+        from: EMAIL_FROM,
         to: email.trim(),
         subject: `📄 Tài liệu: ${pdfInfo.title}`,
         html: `
           <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 32px 24px;">
             <div style="text-align: center; margin-bottom: 32px;">
-              <div style="font-size: 24px; font-weight: 800; color: #0F172A;">AutoFlow VN</div>
+              <div style="font-size: 24px; font-weight: 800; color: #0F172A;">${SITE_NAME}</div>
               <div style="font-size: 13px; color: #94A3B8; margin-top: 4px;">Chuyên gia #1 về n8n automation tại Việt Nam</div>
             </div>
 
@@ -128,15 +129,15 @@ export async function POST(req: NextRequest) {
             </div>
 
             <div style="text-align: center; margin: 28px 0;">
-              <a href="https://autoflowvn.net/audit" style="display: inline-block; background: #0066FF; color: white; font-weight: 600; font-size: 14px; padding: 12px 28px; border-radius: 10px; text-decoration: none;">
+              <a href="${SITE_URL}/audit" style="display: inline-block; background: #0066FF; color: white; font-weight: 600; font-size: 14px; padding: 12px 28px; border-radius: 10px; text-decoration: none;">
                 Đặt Lịch Audit Miễn Phí →
               </a>
             </div>
 
             <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 28px 0;" />
             <p style="font-size: 12px; color: #94A3B8; text-align: center; line-height: 1.6;">
-              AutoFlow VN — Tự động hóa quy trình cho SME Việt Nam<br />
-              <a href="https://autoflowvn.net" style="color: #0066FF; text-decoration: none;">autoflowvn.net</a>
+              ${SITE_NAME} — Tự động hóa quy trình cho SME Việt Nam<br />
+              <a href="${SITE_URL}" style="color: #0066FF; text-decoration: none;">autoflowvn.net</a>
             </p>
           </div>
         `,
