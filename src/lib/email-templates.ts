@@ -205,3 +205,93 @@ export function quizEmail3(params: {
     html: emailWrapper(bodyHtml),
   };
 }
+
+// ── PDF Email 1 — Day 0: Quick wins from the PDF ───────────────────────────────
+
+export function pdfEmail1(params: { name?: string }): EmailResult {
+  const { name } = params;
+  const displayName = name ? name : "bạn";
+
+  const subject = "3 quick wins từ tài liệu bạn vừa tải";
+
+  const bodyHtml = `
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Chào <strong>${displayName}</strong>,</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Cảm ơn bạn đã tải tài liệu "10 Quy Trình SME Nên Tự Động Hóa Ngay". Mình hy vọng bạn đã có cơ hội xem qua.</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Để giúp bạn bắt đầu nhanh hơn, đây là 3 quy trình nhiều khách hàng của AutoFlow thường triển khai đầu tiên vì ROI rõ nhất:</p>
+
+    <div style="background: #F0F7FF; border-radius: 12px; padding: 20px; margin: 24px 0; border-left: 4px solid #0066FF;">
+      <p style="font-size: 14px; color: #334155; margin: 0 0 8px 0; line-height: 1.6;">1. Tự động hóa lead capture từ Facebook/Zalo → Google Sheet (tiết kiệm 30-60 phút/ngày)</p>
+      <p style="font-size: 14px; color: #334155; margin: 0 0 8px 0; line-height: 1.6;">2. Tự động gửi báo giá/thông tin sản phẩm khi khách hỏi (phản hồi trong 2 phút, không cần nhân viên trực)</p>
+      <p style="font-size: 14px; color: #334155; margin: 0 0 8px 0; line-height: 1.6;">3. Tự động tổng hợp báo cáo doanh thu cuối ngày gửi Zalo (không cần ai làm thủ công)</p>
+    </div>
+
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Trong tài liệu còn 7 quy trình khác — nhưng 3 cái trên là điểm khởi đầu tốt nhất cho hầu hết SME.</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Nếu bạn muốn mình xem qua và đề xuất quy trình nào phù hợp nhất với doanh nghiệp của bạn — đặt lịch audit miễn phí 30 phút nhé.</p>
+
+    ${ctaButton(`${SITE_URL}/audit`, "Đặt Lịch Audit Miễn Phí →")}
+  `;
+
+  return {
+    subject,
+    html: emailWrapper(bodyHtml),
+  };
+}
+
+// ── PDF Email 2 — Day 3: Cross-sell to quiz ────────────────────────────────────
+
+export function pdfEmail2(params: { name?: string }): EmailResult {
+  const { name } = params;
+  const displayName = name ? name : "bạn";
+
+  const subject = "Doanh nghiệp bạn cần tự động hóa gấp không?";
+
+  const bodyHtml = `
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Chào <strong>${displayName}</strong>,</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">3 ngày trước bạn đã tải tài liệu về 10 quy trình tự động hóa của AutoFlow.</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Nhiều người đọc xong thường tự hỏi: "Liệu doanh nghiệp mình có thực sự cần tự động hóa không? Và nên bắt đầu từ đâu?"</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Mình đã xây một bài quiz 10 câu hỏi — chỉ mất 3 phút — để đánh giá chính xác:</p>
+    <ul style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0; padding-left: 20px;">
+      <li>Mức độ sẵn sàng tự động hóa của doanh nghiệp bạn (điểm 10-40)</li>
+      <li>Quy trình nào nên ưu tiên trước</li>
+      <li>Gói giải pháp phù hợp với quy mô hiện tại</li>
+    </ul>
+
+    <div style="background: #F0F7FF; border-radius: 12px; padding: 20px; margin: 24px 0; border-left: 4px solid #0066FF;">
+      <p style="font-size: 14px; color: #334155; margin: 0; line-height: 1.6;">Hơn 200 SME đã làm quiz này. Kết quả cá nhân hóa theo từng doanh nghiệp — không phải câu trả lời chung chung.</p>
+    </div>
+
+    ${ctaButton(`${SITE_URL}/quiz`, "Làm Quiz Đánh Giá Miễn Phí →")}
+  `;
+
+  return {
+    subject,
+    html: emailWrapper(bodyHtml),
+  };
+}
+
+// ── PDF Email 3 — Day 7: CTA audit ────────────────────────────────────────────
+
+export function pdfEmail3(params: { name?: string }): EmailResult {
+  const { name } = params;
+  const displayName = name ? name : "bạn";
+
+  const subject = "Bạn đã sẵn sàng bắt đầu tự động hóa chưa?";
+
+  const bodyHtml = `
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Chào <strong>${displayName}</strong>,</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Một tuần trước bạn đã tải tài liệu về tự động hóa quy trình. Mình không biết bạn đang ở giai đoạn nào trong hành trình này — chỉ muốn để lại một lời mời.</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Nếu bạn đang cân nhắc và muốn có thêm góc nhìn từ người đã triển khai automation cho 50+ SME Việt Nam — mình sẵn sàng dành 30 phút nói chuyện.</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 8px 0;">Trong buổi audit miễn phí, mình sẽ:</p>
+    <p style="font-size: 15px; color: #334155; margin: 0 0 8px 0; line-height: 1.6; padding-left: 16px; position: relative;">• Nghe bạn mô tả quy trình hiện tại</p>
+    <p style="font-size: 15px; color: #334155; margin: 0 0 8px 0; line-height: 1.6; padding-left: 16px; position: relative;">• Xác định 2-3 điểm có thể tự động hóa ngay</p>
+    <p style="font-size: 15px; color: #334155; margin: 0 0 16px 0; line-height: 1.6; padding-left: 16px; position: relative;">• Ước tính ROI cụ thể cho doanh nghiệp của bạn</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Không cam kết, không phí. Chỉ là cuộc trao đổi thực chất.</p>
+
+    ${ctaButton(`${SITE_URL}/audit`, "Đặt Lịch Tư Vấn Miễn Phí →")}
+  `;
+
+  return {
+    subject,
+    html: emailWrapper(bodyHtml),
+  };
+}
