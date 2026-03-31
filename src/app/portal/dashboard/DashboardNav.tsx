@@ -46,6 +46,10 @@ export default function DashboardNav({ userEmail }: { userEmail: string }) {
 
   const isActive = (href: string) => {
     if (href === "/portal/dashboard") return pathname === href;
+    if (href === "/portal/dashboard/leads") {
+      // Active for /leads and /leads/[email], but NOT /leads/analytics
+      return pathname === href || (pathname.startsWith(href) && !pathname.includes("/analytics"));
+    }
     return pathname.startsWith(href);
   };
 
