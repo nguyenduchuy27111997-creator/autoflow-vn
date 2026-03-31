@@ -295,3 +295,93 @@ export function pdfEmail3(params: { name?: string }): EmailResult {
     html: emailWrapper(bodyHtml),
   };
 }
+
+// ── Audit Email 1 — Day 0: Confirmation + preparation checklist ───────────────
+
+export function auditEmail1(params: { name?: string }): EmailResult {
+  const { name } = params;
+  const displayName = name ? name : "bạn";
+
+  const subject = "Xác nhận đặt lịch audit — AutoFlow";
+
+  const bodyHtml = `
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Chào <strong>${displayName}</strong>,</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Mình đã nhận được yêu cầu audit của bạn. Một thành viên AutoFlow sẽ liên hệ trong vòng 24 giờ để xác nhận lịch cụ thể.</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Trong khi chờ, bạn có thể chuẩn bị trước một số thông tin để buổi audit hiệu quả hơn:</p>
+
+    <div style="background: #F0F7FF; border-radius: 12px; padding: 20px; margin: 24px 0; border-left: 4px solid #0066FF;">
+      <p style="font-size: 13px; font-weight: 600; color: #0052CC; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.05em;">Checklist Chuẩn Bị Audit</p>
+      <p style="font-size: 14px; color: #334155; margin: 0 0 8px 0; line-height: 1.6;">☑ Liệt kê 3-5 quy trình thủ công tốn thời gian nhất hiện tại</p>
+      <p style="font-size: 14px; color: #334155; margin: 0 0 8px 0; line-height: 1.6;">☑ Ước tính số giờ/ngày team bạn dành cho những việc lặp lại</p>
+      <p style="font-size: 14px; color: #334155; margin: 0 0 8px 0; line-height: 1.6;">☑ Các công cụ đang dùng (phần mềm kế toán, CRM, kênh bán hàng...)</p>
+      <p style="font-size: 14px; color: #334155; margin: 0 0 8px 0; line-height: 1.6;">☑ Ngân sách dự kiến cho giải pháp tự động hóa (nếu có)</p>
+    </div>
+
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Chuẩn bị sẵn 4 điểm trên sẽ giúp mình đưa ra gợi ý cụ thể và thực tế hơn trong 30 phút.</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Nếu bạn muốn thay đổi hoặc cần gấp hơn, reply email này hoặc liên hệ trực tiếp.</p>
+  `;
+
+  return {
+    subject,
+    html: emailWrapper(bodyHtml),
+  };
+}
+
+// ── Audit Email 2 — Day 3: Value-add content ──────────────────────────────────
+
+export function auditEmail2(params: { name?: string }): EmailResult {
+  const { name } = params;
+  const displayName = name ? name : "bạn";
+
+  const subject = "5 dấu hiệu bạn đang tốn tiền vào việc thủ công";
+
+  const bodyHtml = `
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Chào <strong>${displayName}</strong>,</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">3 ngày trước bạn đã đặt lịch audit với AutoFlow — mình muốn chia sẻ một bài viết ngắn trong khi chờ.</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Đây là 5 dấu hiệu phổ biến nhất mà doanh nghiệp đang "đốt tiền" cho công việc có thể tự động hóa:</p>
+
+    <div style="background: #F0F7FF; border-radius: 12px; padding: 20px; margin: 24px 0; border-left: 4px solid #0066FF;">
+      <p style="font-size: 14px; color: #334155; margin: 0 0 8px 0; line-height: 1.6;">1. Nhân viên mất hơn 1 giờ/ngày để copy-paste dữ liệu giữa các hệ thống</p>
+      <p style="font-size: 14px; color: #334155; margin: 0 0 8px 0; line-height: 1.6;">2. Báo cáo cuối tháng mất 1-3 ngày để tổng hợp từ nhiều nguồn</p>
+      <p style="font-size: 14px; color: #334155; margin: 0 0 8px 0; line-height: 1.6;">3. Khách liên hệ ngoài giờ không được trả lời trong vòng 1 giờ</p>
+      <p style="font-size: 14px; color: #334155; margin: 0 0 8px 0; line-height: 1.6;">4. Đơn hàng từ nhiều kênh phải nhập lại thủ công vào một chỗ</p>
+      <p style="font-size: 14px; color: #334155; margin: 0 0 8px 0; line-height: 1.6;">5. Không biết chính xác số liệu doanh thu hôm nay mà không mở file Excel</p>
+    </div>
+
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Nếu doanh nghiệp bạn có 2+ dấu hiệu trên — automation sẽ có ROI rõ ràng.</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Mình sẽ đi vào chi tiết hơn trong buổi audit. Nếu chưa xác nhận lịch, bạn có thể đặt lại ở đây.</p>
+
+    ${ctaButton(`${SITE_URL}/audit`, "Xác Nhận Lịch Audit →")}
+  `;
+
+  return {
+    subject,
+    html: emailWrapper(bodyHtml),
+  };
+}
+
+// ── Audit Email 3 — Day 7: Soft follow-up ─────────────────────────────────────
+
+export function auditEmail3(params: { name?: string }): EmailResult {
+  const { name } = params;
+  const displayName = name ? name : "bạn";
+
+  const subject = "Mình vẫn ở đây nếu bạn cần — AutoFlow";
+
+  const bodyHtml = `
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Chào <strong>${displayName}</strong>,</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Một tuần trước bạn đã liên hệ với AutoFlow để tìm hiểu về tự động hóa quy trình.</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Mình không biết bạn đang ở đâu trong quá trình ra quyết định — và hoàn toàn hiểu nếu bạn cần thêm thời gian.</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Chỉ muốn nhắc: lời mời vẫn còn hiệu lực. Khi bạn sẵn sàng nói chuyện — dù là tuần tới hay tháng sau — mình vẫn ở đây.</p>
+    <p style="font-size: 15px; color: #334155; line-height: 1.7; margin: 0 0 16px 0;">Và nếu bạn muốn có thêm góc nhìn trước khi quyết định, bài quiz đánh giá mức độ sẵn sàng tự động hóa chỉ mất 3 phút:</p>
+
+    ${ctaButton(`${SITE_URL}/quiz`, "Làm Quiz Đánh Giá →")}
+
+    <p style="font-size: 13px; color: #94A3B8; text-align: center; margin-top: 12px;">Hoặc nếu bạn đã sẵn sàng nói chuyện ngay: <a href="${SITE_URL}/audit" style="color: #0066FF; text-decoration: none;">đặt lịch audit</a></p>
+  `;
+
+  return {
+    subject,
+    html: emailWrapper(bodyHtml),
+  };
+}
