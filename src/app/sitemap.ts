@@ -1,200 +1,180 @@
 import type { MetadataRoute } from "next";
+import { blogPosts } from "@/data/blog-posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://autoflowvn.net";
 
-  return [
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: new Date("2026-03-15"),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${baseUrl}/audit`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/pilot`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/bang-gia`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/tai-lieu`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
+      url: `${baseUrl}/dich-vu`,
+      lastModified: new Date("2026-03-15"),
+      changeFrequency: "monthly",
       priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/tai-lieu/e-commerce`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/tai-lieu/giao-duc`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/tai-lieu/bat-dong-san`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/ve-toi`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
     },
     {
       url: `${baseUrl}/dich-vu/e-commerce`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/dich-vu/giao-duc`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/dich-vu/bat-dong-san`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/dich-vu/fnb`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-03-15"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/quy-trinh`,
+      lastModified: new Date("2026-03-15"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tai-lieu`,
+      lastModified: new Date("2026-03-15"),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/tai-lieu/e-commerce`,
+      lastModified: new Date("2026-03-15"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tai-lieu/giao-duc`,
+      lastModified: new Date("2026-03-15"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tai-lieu/bat-dong-san`,
+      lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/ket-qua`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/ket-qua/e-commerce`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/ket-qua/giao-duc`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/ket-qua/bat-dong-san`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/ket-qua/fnb`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-03-15"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/ve-toi`,
+      lastModified: new Date("2026-03-15"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date("2026-03-30"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/quiz`,
+      lastModified: new Date("2026-03-15"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/fb-ads`,
+      lastModified: new Date("2026-03-15"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/tu-lam`,
+      lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/bang-gia/retainer`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/blog/zalo-oa-automation`,
-      lastModified: new Date(),
+      url: `${baseUrl}/pilot`,
+      lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
       priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/tu-dong-hoa-shopee`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/huong-dan-n8n`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/n8n-vs-zapier`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/tich-hop-shopee-misa`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/nhac-lich-zalo-oa`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/chi-phi-tu-dong-hoa`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/5-dau-hieu-can-automation`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/tu-lam`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/portal`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.5,
     },
     {
       url: `${baseUrl}/chinh-sach-bao-mat`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-01-01"),
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
       url: `${baseUrl}/dieu-khoan`,
-      lastModified: new Date(),
+      lastModified: new Date("2026-01-01"),
       changeFrequency: "yearly",
       priority: 0.3,
     },
   ];
+
+  const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: "monthly" as const,
+    priority: post.featured ? 0.9 : 0.7,
+  }));
+
+  return [...staticPages, ...blogEntries];
 }

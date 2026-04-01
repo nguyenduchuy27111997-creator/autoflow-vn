@@ -1,0 +1,31 @@
+# AutoFlow VN
+
+> AutoFlow VN giúp doanh nghiệp vừa và nhỏ Việt Nam tự động hóa quy trình lặp lại bằng n8n.
+
+## Dịch vụ chính
+- Tự động hóa quy trình (n8n workflows)
+- Tích hợp Zalo OA, MISA, Shopee, KiotViet
+- Audit quy trình miễn phí
+- Training và hỗ trợ sau go-live
+
+## Ngành phục vụ
+- E-commerce (Shopee, TikTok Shop, Haravan, Sapo)
+- Giáo dục & Đào tạo
+- Bất động sản
+- F&B / Nhà hàng
+- Y tế / Phòng khám
+- Marketing Agency
+
+## Liên hệ
+- Website: https://autoflowvn.net
+- Email: hello@autoflowvn.net
+- Zalo: 0935115248
+- Địa chỉ: TP. Hồ Chí Minh, Việt Nam
+
+## Trang quan trọng
+- Trang chủ: https://autoflowvn.net
+- Blog: https://autoflowvn.net/blog
+- Bảng giá: https://autoflowvn.net/bang-gia
+- Audit miễn phí: https://autoflowvn.net/audit
+- Dịch vụ: https://autoflowvn.net/dich-vu
+- Quy trình: https://autoflowvn.net/quy-trinh
