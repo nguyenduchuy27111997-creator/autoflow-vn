@@ -90,14 +90,37 @@ const commitments = [
   {
     title: "Scope rõ ràng trong hợp đồng",
     desc: "Mỗi workflow, timeline, deliverable — tất cả ghi rõ trước khi bắt đầu.",
+    icon: (
+      <svg width="22" height="22" fill="none" stroke="#6366F1" strokeWidth="2" viewBox="0 0 24 24">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="16" y1="13" x2="8" y2="13" />
+        <line x1="16" y1="17" x2="8" y2="17" />
+        <polyline points="10 9 9 9 8 9" />
+      </svg>
+    ),
+    color: "#6366F1",
   },
   {
     title: "Cam kết 100% hoàn tiền",
     desc: "Không deliver đúng scope = hoàn 100%. Không điều kiện ẩn.",
+    icon: (
+      <svg width="22" height="22" fill="none" stroke="#10B981" strokeWidth="2" viewBox="0 0 24 24">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    ),
+    color: "#10B981",
   },
   {
     title: "Thanh toán 50/50",
     desc: "50% trước khi bắt đầu, 50% khi bàn giao hoàn tất. Giảm rủi ro cho cả hai bên.",
+    icon: (
+      <svg width="22" height="22" fill="none" stroke="#0EA5E9" strokeWidth="2" viewBox="0 0 24 24">
+        <line x1="12" y1="1" x2="12" y2="23" />
+        <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+      </svg>
+    ),
+    color: "#0EA5E9",
   },
 ];
 
@@ -248,12 +271,14 @@ export default function QuyTrinhPage() {
             {commitments.map((c, i) => (
               <div
                 key={i}
-                className="bg-accent/5 border border-accent/20 rounded-2xl p-7 text-center"
+                className="rounded-2xl p-7 text-center"
+                style={{ backgroundColor: `${c.color}08`, borderWidth: 1, borderColor: `${c.color}30` }}
               >
-                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                  <svg width="22" height="22" fill="none" stroke="#10B981" strokeWidth="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  </svg>
+                <div
+                  className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4"
+                  style={{ backgroundColor: `${c.color}15` }}
+                >
+                  {c.icon}
                 </div>
                 <h3 className="font-display font-bold text-slate-900 mb-2">
                   {c.title}
