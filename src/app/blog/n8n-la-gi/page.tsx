@@ -9,6 +9,7 @@ import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
+import CodeBlock from "@/components/blog/CodeBlock";
 
 export const metadata: Metadata = {
   title: "n8n Là Gì? Hướng Dẫn Toàn Diện Cho Người Mới 2026",
@@ -458,27 +459,32 @@ export default function N8nLaGiBlog() {
                 </CalloutBox>
 
                 <StepList steps={[
-                  {
-                    title: "Bước 1: Tạo VPS và cài Docker",
-                    desc: "Tạo VPS Ubuntu 22.04 tại DigitalOcean/Vultr/Bizfly. SSH vào server và chạy: curl -fsSL https://get.docker.com | sh && apt install -y docker-compose-plugin",
-                  },
-                  {
-                    title: "Bước 2: Tạo thư mục và file cấu hình",
-                    desc: 'mkdir n8n && cd n8n. Tạo file docker-compose.yml với image n8nio/n8n, port 5678, volume để lưu data. Đặt biến môi trường: N8N_BASIC_AUTH_ACTIVE=true, N8N_BASIC_AUTH_USER, N8N_BASIC_AUTH_PASSWORD.',
-                  },
-                  {
-                    title: "Bước 3: Khởi động n8n",
-                    desc: "Chạy: docker compose up -d. Kiểm tra: docker compose logs -f n8n. Sau 30–60 giây, n8n chạy tại http://your-server-ip:5678",
-                  },
-                  {
-                    title: "Bước 4: Cấu hình domain và HTTPS (tùy chọn nhưng nên làm)",
-                    desc: "Trỏ domain về IP server. Cài nginx-proxy-manager hoặc Caddy để tự động cấp SSL. n8n sẽ chạy tại https://n8n.yourdomain.com",
-                  },
-                  {
-                    title: "Bước 5: Tạo tài khoản admin",
-                    desc: "Truy cập URL n8n, điền email và mật khẩu để tạo tài khoản owner đầu tiên. Xong — n8n đã sẵn sàng!",
-                  },
+                  { title: "Bước 1: Tạo VPS và cài Docker", desc: "Tạo VPS Ubuntu 22.04 (2GB RAM) tại DigitalOcean, Vultr, hoặc Bizfly Cloud." },
+                  { title: "Bước 2: Tạo thư mục và cấu hình", desc: "Tạo file docker-compose.yml với image n8n chính thức." },
+                  { title: "Bước 3: Khởi động n8n", desc: "Chạy docker compose và kiểm tra logs." },
+                  { title: "Bước 4: Cấu hình domain + HTTPS", desc: "Trỏ domain về IP, cài Caddy hoặc nginx-proxy-manager." },
+                  { title: "Bước 5: Tạo tài khoản admin", desc: "Truy cập URL n8n, tạo tài khoản owner đầu tiên." },
                 ]} />
+
+                <CodeBlock
+                  title="Bước 1 — Cài Docker trên VPS"
+                  code={`ssh root@your-server-ip\ncurl -fsSL https://get.docker.com | sh\napt install -y docker-compose-plugin`}
+                />
+
+                <CodeBlock
+                  title="Bước 2 — Tạo docker-compose.yml"
+                  lang="yaml"
+                  code={`version: "3"\nservices:\n  n8n:\n    image: n8nio/n8n\n    restart: always\n    ports:\n      - "5678:5678"\n    volumes:\n      - n8n_data:/home/node/.n8n\n    environment:\n      - N8N_BASIC_AUTH_ACTIVE=true\n      - N8N_BASIC_AUTH_USER=admin\n      - N8N_BASIC_AUTH_PASSWORD=your-password\nvolumes:\n  n8n_data:`}
+                />
+
+                <CodeBlock
+                  title="Bước 3 — Khởi động"
+                  code={`docker compose up -d\ndocker compose logs -f n8n`}
+                />
+
+                <CalloutBox type="success" title="Xong!">
+                  Sau 30-60 giây, n8n chạy tại <strong>http://your-server-ip:5678</strong>. Trỏ domain + cài Caddy để có HTTPS.
+                </CalloutBox>
 
                 <WorkflowFlow
                   accentColor="#0EA5E9"
