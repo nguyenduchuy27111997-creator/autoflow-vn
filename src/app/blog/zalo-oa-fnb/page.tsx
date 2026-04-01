@@ -64,15 +64,15 @@ export default function ZaloOAFnBBlog() {
             </p>
           </div>
 
-          {/* Workflow banner — cropped center, full image for OG/share */}
-          <div className="mb-12 rounded-2xl overflow-hidden">
+          {/* Workflow banner — cropped to center workflow strip */}
+          <div className="mb-12 rounded-2xl overflow-hidden border border-slate-200/60">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/blog/zalo-oa-fnb-workflow.svg"
+              src="/blog/zalo-oa-fnb-banner.png"
               alt="4 Workflow Zalo OA cho F&B: Xác nhận đơn, Nhắc đặt bàn, Chăm sóc, Khuyến mãi — kết nối qua Zalo OA"
               width={1200}
               height={630}
-              className="w-full h-48 md:h-64 object-cover object-center"
+              className="w-full h-52 md:h-72 object-cover object-center"
               loading="eager"
             />
           </div>
