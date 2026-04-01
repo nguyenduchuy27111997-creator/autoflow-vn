@@ -29,7 +29,7 @@ export default function TableOfContents({ items }: { items: TOCItem[] }) {
   }, [items]);
 
   return (
-    <nav className="hidden xl:block sticky top-24 w-56 shrink-0 not-prose">
+    <nav className="hidden xl:block sticky top-24 w-56 shrink-0 self-start max-h-[calc(100vh-8rem)] overflow-y-auto not-prose">
       <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-3">
         Mục lục
       </div>

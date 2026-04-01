@@ -65,7 +65,7 @@ export default function ZaloOAFnBBlog() {
           </div>
 
           {/* Content + TOC */}
-          <div className="flex gap-12">
+          <div className="flex gap-12 items-start relative">
             {/* Main content */}
             <div className="flex-1 min-w-0 max-w-3xl">
               <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
