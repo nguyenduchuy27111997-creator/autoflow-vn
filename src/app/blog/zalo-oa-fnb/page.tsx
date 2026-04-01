@@ -64,6 +64,19 @@ export default function ZaloOAFnBBlog() {
             </p>
           </div>
 
+          {/* Workflow banner image */}
+          <div className="mb-12 rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/blog/zalo-oa-fnb-workflow.svg"
+              alt="4 Workflow Zalo OA cho F&B: Xác nhận đơn, Nhắc đặt bàn, Chăm sóc, Khuyến mãi — tất cả kết nối qua Zalo OA"
+              width={1200}
+              height={630}
+              className="w-full h-auto"
+              loading="eager"
+            />
+          </div>
+
           {/* Content + TOC */}
           <div className="flex gap-12 items-start relative">
             {/* Main content */}
