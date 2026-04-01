@@ -33,19 +33,6 @@ export default function ShareButtons({ title }: { title: string }) {
         </svg>
       </a>
 
-      {/* Zalo */}
-      <a
-        href={`https://zalo.me/share?u=${encodeURIComponent(url)}&t=${encodeURIComponent(title)}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-blue-50 flex items-center justify-center text-slate-400 hover:text-blue-500 transition-colors"
-        title="Chia sẻ Zalo"
-      >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0C5.373 0 0 5.037 0 11.25c0 3.525 1.7 6.675 4.35 8.775V24l3.6-1.95c1.275.375 2.625.45 3.975.45h.075c6.627 0 12-5.037 12-11.25S18.627 0 12 0zm1.2 15.15H9.9l-.15-.225L6.6 11.1h1.95l2.1 2.55 2.1-2.55h1.95l-3.15 3.825-.15.225zm3.6-5.85H9.6v-.975h7.2v.975zm0-2.1H9.6V6.225h7.2V7.2z" />
-        </svg>
-      </a>
-
       {/* LinkedIn */}
       <a
         href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`}
