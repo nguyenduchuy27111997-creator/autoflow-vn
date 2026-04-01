@@ -11,6 +11,17 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
   },
 
+  // Redirects
+  async redirects() {
+    return [
+      {
+        source: "/ve-toi",
+        destination: "/ve-chung-toi",
+        permanent: true,
+      },
+    ];
+  },
+
   // Security headers
   async headers() {
     return [

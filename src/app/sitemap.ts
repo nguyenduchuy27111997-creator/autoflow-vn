@@ -114,7 +114,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/ve-toi`,
+      url: `${baseUrl}/ve-chung-toi`,
       lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
       priority: 0.7,

@@ -10,6 +10,7 @@ import UTMCapture from '@/components/analytics/UTMCapture';
 import ZaloTracker from '@/components/analytics/ZaloTracker';
 import ExitIntentPopup from '@/components/ExitIntentPopup';
 import SocialProof from '@/components/SocialProof';
+import ChatWidget from '@/components/ChatWidget';
 import "./globals.css";
 
 const beVietnam = Be_Vietnam_Pro({
@@ -212,6 +213,7 @@ export default function RootLayout({
         <ZaloTracker />
         <ExitIntentPopup />
         <SocialProof />
+        <ChatWidget />
       </body>
     </html>
   );

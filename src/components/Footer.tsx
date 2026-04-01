@@ -79,7 +79,7 @@ export default function Footer() {
                 { label: "Bảng giá", href: "/bang-gia" },
                 { label: "Quy trình", href: "/quy-trinh" },
                 { label: "Kết quả", href: "/ket-qua" },
-                { label: "Về tôi", href: "/ve-toi" },
+                { label: "Về chúng tôi", href: "/ve-chung-toi" },
               ].map((item) => (
                 <li key={item.label}>
                   <a
