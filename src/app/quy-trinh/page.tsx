@@ -138,11 +138,11 @@ export default function QuyTrinhPage() {
               Quy trình làm việc
             </div>
             <h1 className="font-display font-extrabold text-3xl md:text-5xl text-slate-900 leading-tight tracking-tight mb-5">
-              4 bước.{" "}
-              <span className="gradient-text">Không bất ngờ.</span>
+              Chỉ 4 bước.{" "}
+              <span className="gradient-text">Bạn biết trước tất cả.</span>
             </h1>
             <p className="text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto mb-8">
-              Bạn biết trước mọi thứ sẽ diễn ra — từ cuộc gọi đầu tiên đến lúc workflow chạy thật. Minh bạch từ scope, timeline đến chi phí.
+              Từ cuộc gọi đầu tiên đến lúc bàn giao — scope, timeline, chi phí đều rõ ràng trước khi bắt đầu.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

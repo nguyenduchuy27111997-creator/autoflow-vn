@@ -45,9 +45,9 @@ export default function Process() {
         {/* Header */}
         <SectionHeader
           badge="Quy trình rõ ràng"
-          title="4 bước."
-          gradientText="Không bất ngờ."
-          subtitle="Bạn biết trước mọi thứ sẽ diễn ra như thế nào — từ cuộc gọi đầu tiên đến lúc bàn giao."
+          title="Chỉ 4 bước."
+          gradientText="Bạn biết trước tất cả."
+          subtitle="Từ cuộc gọi đầu tiên đến lúc bàn giao — scope, timeline, chi phí đều rõ ràng trước khi bắt đầu."
           className="mb-16"
         />
 
