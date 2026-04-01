@@ -12,7 +12,7 @@ const services = [
 ];
 
 const navLinks = [
-  { label: "Quy trình", href: "/#quy-trinh" },
+  { label: "Quy trình", href: "/quy-trinh" },
   { label: "Bảng giá", href: "/bang-gia" },
   { label: "Kết quả", href: "/ket-qua" },
   { label: "Tài liệu", href: "/tai-lieu" },
@@ -57,7 +57,7 @@ export default function Navbar() {
             onMouseLeave={() => setServiceOpen(false)}
           >
             <a
-              href="/#dich-vu"
+              href="/dich-vu"
               className="text-sm font-medium text-slate-500 hover:text-primary transition-colors inline-flex items-center gap-1"
             >
               Dịch vụ
