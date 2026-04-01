@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Automation Cho Du Lịch & Khách Sạn — Booking, Check-in, Review Tự Động 2026",
@@ -64,6 +65,7 @@ const faqItems = [
 export default function AutomationDuLichKhachSanBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="automation-du-lich-khach-san" title="Automation Cho Du Lịch & Khách Sạn" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

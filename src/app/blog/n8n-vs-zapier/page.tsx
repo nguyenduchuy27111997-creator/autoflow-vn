@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "n8n vs Zapier: SME Việt Nam Nên Chọn Cái Nào? So Sánh 2026",
@@ -44,6 +45,7 @@ const tocItems = [
 export default function N8nVsZapierBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="n8n-vs-zapier" title="n8n vs Zapier — SME Việt Nam Nên Chọn?" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

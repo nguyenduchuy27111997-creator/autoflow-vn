@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Google Sheets + n8n: Biến Bảng Tính Thành Hệ Thống Tự Động",
@@ -42,6 +43,7 @@ const tocItems = [
 export default function GoogleSheetsN8nAutomationBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="google-sheets-n8n-automation" title="Google Sheets + n8n: Biến Sheet Thành Hệ Thống" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

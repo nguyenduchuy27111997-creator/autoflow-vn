@@ -11,6 +11,7 @@ import BeforeAfter from "@/components/blog/BeforeAfter";
 import BlogFooter from "@/components/blog/BlogFooter";
 import CodeBlock from "@/components/blog/CodeBlock";
 import FAQ from "@/components/blog/FAQ";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Cách Tạo Chatbot Zalo OA Bằng n8n — Hướng Dẫn Từ Zero 2026",
@@ -69,6 +70,7 @@ const faqItems = [
 export default function ChatbotZaloOAN8nBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="chatbot-zalo-oa-n8n" title="Cách Tạo Chatbot Zalo OA Bằng n8n" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

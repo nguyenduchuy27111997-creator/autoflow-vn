@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Tự Động Hóa Lead Facebook Ads Cho Bất Động Sản — Phản Hồi Trong 30 Giây",
@@ -70,6 +71,7 @@ const faqItems = [
 export default function LeadFacebookAdsBDSBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="lead-facebook-ads-bds" title="Tự Động Hóa Lead Facebook Ads Cho BĐS" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Nhắc Lịch Học Viên Qua Zalo OA — Giảm 80% Miss Lịch Cho Trung Tâm Đào Tạo",
@@ -69,6 +70,7 @@ const faqItems = [
 export default function NhacLichZaloOAGiaoDucBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="nhac-lich-zalo-oa-giao-duc" title="Nhắc Lịch Học Viên Qua Zalo OA — Giảm 80% Miss" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

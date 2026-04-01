@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "AI Agent + n8n: Tự Động Hóa Thông Minh Cho SME Việt Nam 2026",
@@ -71,6 +72,7 @@ const faqItems = [
 export default function AIAgentN8nSMEBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="ai-agent-n8n-sme" title="AI Agent + n8n Cho SME Việt Nam 2026" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

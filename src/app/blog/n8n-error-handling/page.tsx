@@ -11,6 +11,7 @@ import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
 import CodeBlock from "@/components/blog/CodeBlock";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "n8n Error Handling: Xử Lý Lỗi Workflow Như Chuyên Gia",
@@ -97,6 +98,7 @@ const sheetLogCode = `// Data để log vào Google Sheet
 export default function N8nErrorHandlingBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="n8n-error-handling" title="n8n Error Handling: Xử Lý Lỗi Như Chuyên Gia" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

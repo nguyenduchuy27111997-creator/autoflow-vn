@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Hóa Đơn Điện Tử Tự Động: n8n + MISA meInvoice — Xuất Hóa Đơn Không Cần Nhập Tay",
@@ -42,6 +43,7 @@ const tocItems = [
 export default function HoaDonDienTuTuDongBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="hoa-don-dien-tu-tu-dong" title="Hóa Đơn Điện Tử Tự Động: n8n + MISA meInvoice" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

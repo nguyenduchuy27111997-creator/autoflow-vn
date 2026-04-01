@@ -10,6 +10,7 @@ import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import CodeBlock from "@/components/blog/CodeBlock";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Webhook Là Gì? Giải Thích Đơn Giản Cho Người Không Biết Code",
@@ -68,6 +69,7 @@ const faqItems = [
 export default function WebhookLaGiBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="webhook-la-gi" title="Webhook Là Gì? Giải Thích Cho Người Không Code" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

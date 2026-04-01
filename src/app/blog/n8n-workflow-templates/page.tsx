@@ -9,6 +9,7 @@ import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "10 n8n Workflow Templates Miễn Phí Cho SME Việt Nam 2026",
@@ -85,6 +86,7 @@ const faqItems = [
 export default function N8nWorkflowTemplatesBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="n8n-workflow-templates" title="10 n8n Workflow Templates Miễn Phí Cho SME" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import BlogFooter from "@/components/blog/BlogFooter";
 import FAQ from "@/components/blog/FAQ";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Tự Động Đăng Bài Social Media Bằng n8n — 9 Nền Tảng, 1 Workflow",
@@ -67,6 +68,7 @@ const faqItems = [
 export default function TuDongDangBaiSocialMediaBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="tu-dong-dang-bai-social-media" title="Tự Động Đăng Bài Social Media — 9 Nền Tảng" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

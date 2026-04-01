@@ -11,6 +11,7 @@ import BeforeAfter from "@/components/blog/BeforeAfter";
 import BlogFooter from "@/components/blog/BlogFooter";
 import CodeBlock from "@/components/blog/CodeBlock";
 import FAQ from "@/components/blog/FAQ";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Telegram Bot + n8n: Thông Báo & Quản Lý Kinh Doanh Từ Xa 2026",
@@ -69,6 +70,7 @@ const faqItems = [
 export default function TelegramBotN8nBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="telegram-bot-n8n" title="Telegram Bot + n8n: Thông Báo & Quản Lý Từ Xa" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

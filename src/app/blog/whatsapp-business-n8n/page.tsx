@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import BlogFooter from "@/components/blog/BlogFooter";
 import FAQ from "@/components/blog/FAQ";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "WhatsApp Business + n8n: Tự Động Hóa Giao Tiếp Khách Hàng Quốc Tế 2026",
@@ -70,6 +71,7 @@ const faqItems = [
 export default function WhatsAppBusinessN8nBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="whatsapp-business-n8n" title="WhatsApp Business + n8n: Giao Tiếp Khách Quốc Tế" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

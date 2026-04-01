@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "80% SME Việt Nam Tìm Giải Pháp Công Nghệ Nhưng Không Biết Bắt Đầu — Lộ Trình 2026",
@@ -40,6 +41,7 @@ const tocItems = [
 export default function SmeChuyenDoiSo2026Blog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="sme-chuyen-doi-so-2026" title="80% SME Tìm Giải Pháp Nhưng Không Biết Bắt Đầu" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

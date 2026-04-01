@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Sapo + n8n: Quản Lý Đa Kênh Tự Động Cho Cửa Hàng Việt Nam",
@@ -45,6 +46,7 @@ const tocItems = [
 export default function SapoN8nDaKenhBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="sapo-n8n-da-kenh" title="Sapo + n8n: Quản Lý Đa Kênh Tự Động" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

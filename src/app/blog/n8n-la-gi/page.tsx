@@ -11,6 +11,7 @@ import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import CodeBlock from "@/components/blog/CodeBlock";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "n8n Là Gì? Hướng Dẫn Toàn Diện Cho Người Mới 2026",
@@ -81,6 +82,7 @@ const faqItems = [
 export default function N8nLaGiBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="n8n-la-gi" title="n8n Là Gì? Hướng Dẫn Toàn Diện 2026" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

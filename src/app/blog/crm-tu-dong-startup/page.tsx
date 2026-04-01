@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "CRM Tự Động Cho Startup B2B — Đừng Để Lead Rơi",
@@ -71,6 +72,7 @@ const faqItems = [
 export default function CRMTuDongStartupBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="crm-tu-dong-startup" title="CRM Tự Động Cho Startup B2B — Đừng Để Lead Rơi" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

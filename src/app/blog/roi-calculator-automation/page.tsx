@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "ROI Calculator: Tính Tiết Kiệm Khi Tự Động Hóa — Công Thức + Ví Dụ Thực Tế",
@@ -63,6 +64,7 @@ const faqItems = [
 export default function RoiCalculatorAutomationBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="roi-calculator-automation" title="ROI Calculator: Tính Tiết Kiệm Khi Tự Động Hóa" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

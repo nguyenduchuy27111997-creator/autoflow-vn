@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Logistics & Vận Chuyển Tự Động: GHN, GHTK + n8n — Từ 500 Đơn Theo Tay Đến Zero Thủ Công",
@@ -44,6 +45,7 @@ const tocItems = [
 export default function LogisticsVanChuyenTuDongBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="logistics-van-chuyen-tu-dong" title="Logistics & Vận Chuyển Tự Động: GHN, GHTK + n8n" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

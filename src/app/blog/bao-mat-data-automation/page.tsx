@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Bảo Mật Data Khi Dùng Automation — Hướng Dẫn Cho SME Việt Nam",
@@ -62,6 +63,7 @@ const faqItems = [
 export default function BaoMatDataAutomationBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="bao-mat-data-automation" title="Bảo Mật Data Khi Dùng Automation — Hướng Dẫn SME" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

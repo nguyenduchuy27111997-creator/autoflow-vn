@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Đồng Bộ Shopee MISA Tự Động — Hết Nhập Tay, Hết Sai Sót",
@@ -43,6 +44,7 @@ const tocItems = [
 export default function DongBoShopeeMisaBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="dong-bo-shopee-misa" title="Đồng Bộ Đơn Shopee → MISA Tự Động" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

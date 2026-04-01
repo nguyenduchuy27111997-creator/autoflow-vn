@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "KiotViet + n8n: Đồng Bộ Tồn Kho & Đơn Hàng Tự Động Hoàn Toàn",
@@ -44,6 +45,7 @@ const tocItems = [
 export default function KiotVietN8nBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="kiotviet-n8n-tich-hop" title="KiotViet + n8n: Đồng Bộ Tồn Kho Tự Động" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

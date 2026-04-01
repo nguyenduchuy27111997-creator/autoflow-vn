@@ -9,6 +9,7 @@ import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Tự Động Hóa Zalo OA Cho Nhà Hàng, Quán Cafe — Hướng Dẫn Chi Tiết",
@@ -38,6 +39,7 @@ const tocItems = [
 export default function ZaloOAFnBBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="zalo-oa-fnb" title="Tự Động Hóa Zalo OA Cho Nhà Hàng, Quán Cafe" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

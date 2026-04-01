@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Email Marketing Automation Với n8n — ROI 3,600% Không Phải Chuyện Đùa",
@@ -71,6 +72,7 @@ const faqItems = [
 export default function EmailMarketingAutomationBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="email-marketing-automation-n8n" title="Email Marketing Automation — ROI 3,600%" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

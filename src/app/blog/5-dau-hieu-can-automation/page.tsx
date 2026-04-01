@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "5 Dấu Hiệu Doanh Nghiệp Bạn Cần Tự Động Hóa — Ngay Bây Giờ",
@@ -41,6 +42,7 @@ const tocItems = [
 export default function DauHieuCanAutomationBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="5-dau-hieu-can-automation" title="5 Dấu Hiệu Cần Tự Động Hóa — Ngay Bây Giờ" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

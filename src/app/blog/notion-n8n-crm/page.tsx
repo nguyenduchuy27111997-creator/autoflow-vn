@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Notion + n8n: Biến Notion Thành CRM & Project Hub Tự Động 2026",
@@ -63,6 +64,7 @@ const faqItems = [
 export default function NotionN8nCrmBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="notion-n8n-crm" title="Notion + n8n: Biến Notion Thành CRM Tự Động" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

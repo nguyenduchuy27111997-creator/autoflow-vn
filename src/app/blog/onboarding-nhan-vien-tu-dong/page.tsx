@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Onboarding Nhân Viên Tự Động Cho SME — Từ Offer Letter Đến Ngày Đầu Tiên",
@@ -70,6 +71,7 @@ const faqItems = [
 export default function OnboardingNhanVienTuDongBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="onboarding-nhan-vien-tu-dong" title="Onboarding Nhân Viên Tự Động Cho SME" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">

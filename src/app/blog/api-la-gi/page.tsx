@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "API Là Gì? Giải Thích Cho Chủ Doanh Nghiệp Không Biết Code",
@@ -62,6 +63,7 @@ const faqItems = [
 export default function ApiLaGiBlog() {
   return (
     <>
+      <BreadcrumbJsonLd slug="api-la-gi" title="API Là Gì? Giải Thích Cho Chủ Doanh Nghiệp" />
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">
