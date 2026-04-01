@@ -46,12 +46,13 @@ export default function DauHieuCanAutomationBlog() {
         <article className="max-w-6xl mx-auto px-6">
           {/* Header */}
           <div className="max-w-3xl mb-10">
-            <a
-              href="/blog"
-              className="text-sm text-primary hover:text-primary-dark font-medium mb-4 inline-block"
-            >
-              ← Blog
-            </a>
+            <nav className="flex items-center gap-2 text-xs text-slate-400 mb-5">
+              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
+              <span>/</span>
+              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
+              <span>/</span>
+              <span className="text-slate-600 truncate max-w-[300px]">Kiến thức</span>
+            </nav>
             <div className="flex items-center gap-3 mb-4">
               <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
                 Automation
