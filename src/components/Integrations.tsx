@@ -1,5 +1,3 @@
-"use client";
-
 /* ------------------------------------------------------------------ */
 /*  Integration brand icons — real SVG logos                          */
 /*  Sources:                                                          */

@@ -149,7 +149,7 @@ export default function Hero() {
               playsInline
               poster="/videos/hero-poster.jpg"
               className="w-full h-auto block"
-              preload="auto"
+              preload="metadata"
             >
               <source src="/videos/hero-loop.webm" type="video/webm" />
               <source src="/videos/hero-loop.mp4" type="video/mp4" />

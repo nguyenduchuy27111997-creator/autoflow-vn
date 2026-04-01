@@ -1,5 +1,3 @@
-"use client";
-
 import SectionHeader from "./ui/SectionHeader";
 import Container from "./ui/Container";
 import Card from "./ui/Card";
