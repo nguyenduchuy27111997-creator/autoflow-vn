@@ -43,6 +43,19 @@ export default function SocialProof() {
     if (EXCLUDED_PATHS.some((p) => pathname.startsWith(p))) return;
 
     async function fetchRecent() {
+      // Return cached data if available (avoid re-querying on every page visit)
+      const cached = sessionStorage.getItem("sp_proof_cache");
+      if (cached) {
+        try {
+          const proofs: ProofItem[] = JSON.parse(cached);
+          proofs.sort(() => Math.random() - 0.5);
+          setItems(proofs);
+          return;
+        } catch {
+          sessionStorage.removeItem("sp_proof_cache");
+        }
+      }
+
       const supabase = createClient();
 
       const { data } = await supabase
@@ -62,6 +75,9 @@ export default function SocialProof() {
         action: actionMap[r.action_type] || "vừa tương tác",
         timeAgo: getTimeAgo(r.created_at),
       }));
+
+      // Cache in sessionStorage — expires when tab closes
+      sessionStorage.setItem("sp_proof_cache", JSON.stringify(proofs));
 
       // Shuffle
       proofs.sort(() => Math.random() - 0.5);
