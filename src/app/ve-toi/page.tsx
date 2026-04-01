@@ -1,5 +1,19 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Về Tôi — Huy Nguyen | AutoFlow VN",
+  description:
+    "Founder AutoFlow VN. Chuyên gia tự động hóa quy trình cho SME Việt Nam bằng n8n.",
+  alternates: { canonical: "https://autoflowvn.net/ve-toi" },
+  openGraph: {
+    title: "Về Tôi — Huy Nguyen | AutoFlow VN",
+    description:
+      "Founder AutoFlow VN. Chuyên gia tự động hóa quy trình cho SME Việt Nam bằng n8n.",
+    url: "https://autoflowvn.net/ve-toi",
+  },
+};
 
 const techStack = [
   { name: "n8n", desc: "Nền tảng automation chính", color: "#EA4B71" },
