@@ -138,6 +138,16 @@ export default function ZaloOAFnBBlog() {
                   { title: "Không xác nhận → thông báo quản lý", desc: "Nếu khách không reply sau 2 lần nhắc → manager được thông báo để gọi xác nhận" },
                 ]} />
 
+                <WorkflowFlow
+                  accentColor="#3B82F6"
+                  steps={[
+                    { icon: <span className="text-lg">📅</span>, label: "Khách đặt bàn", sub: "Form / Zalo / Điện thoại" },
+                    { icon: <span className="text-lg">🕐</span>, label: "24h trước", sub: "Zalo nhắc lần 1" },
+                    { icon: <span className="text-lg">🕑</span>, label: "2h trước", sub: "Zalo nhắc lần 2" },
+                    { icon: <span className="text-lg">✅</span>, label: "Xác nhận", sub: "Hoặc alert quản lý" },
+                  ]}
+                />
+
                 <h3 id="workflow-3">Workflow 3: Chăm sóc sau bữa ăn</h3>
 
                 <p>
@@ -151,6 +161,17 @@ export default function ZaloOAFnBBlog() {
                   { title: "Feedback chưa tốt → thông báo quản lý", desc: "Rating < 4 → manager nhận alert để xử lý ngay" },
                 ]} />
 
+                <WorkflowFlow
+                  accentColor="#10B981"
+                  steps={[
+                    { icon: <span className="text-lg">🍽️</span>, label: "Khách ăn xong", sub: "Trigger theo giờ đặt bàn" },
+                    { icon: <span className="text-lg">⏰</span>, label: "Đợi 2 giờ", sub: "Timing tự nhiên" },
+                    { icon: <span className="text-lg">💬</span>, label: "Zalo cảm ơn", sub: "+ link khảo sát" },
+                    { icon: <span className="text-lg">⭐</span>, label: "Rating ≥ 4", sub: "→ Mời review Google" },
+                    { icon: <span className="text-lg">🔔</span>, label: "Rating < 4", sub: "→ Alert quản lý" },
+                  ]}
+                />
+
                 <CalloutBox type="success" title="Kết quả thực tế">
                   Một chuỗi cafe ở TP.HCM dùng workflow này trong 2 tháng: Google Maps review tăng từ 4.1 → 4.6 sao,
                   và 35% khách nhận tin nhắn đã quay lại trong 30 ngày.
@@ -163,6 +184,16 @@ export default function ZaloOAFnBBlog() {
                   { title: "Gửi khuyến mãi phù hợp", desc: "Coffee Lover nhận voucher cappuccino. Gia đình nhận combo weekend." },
                   { title: "Khách chưa quay lại 14 ngày", desc: "Tự động gửi: 'Lâu rồi chưa thấy bạn ghé! Tặng 20% cho lần tới nhé'" },
                 ]} />
+
+                <WorkflowFlow
+                  accentColor="#8B5CF6"
+                  steps={[
+                    { icon: <span className="text-lg">🏷️</span>, label: "Tag hành vi", sub: "Coffee Lover, Gia đình..." },
+                    { icon: <span className="text-lg">🎯</span>, label: "Phân nhóm", sub: "Theo sở thích" },
+                    { icon: <span className="text-lg">🎁</span>, label: "Voucher phù hợp", sub: "Cá nhân hóa" },
+                    { icon: <span className="text-lg">💌</span>, label: "Zalo OA gửi", sub: "Đúng người, đúng lúc" },
+                  ]}
+                />
 
                 {/* Section 3 */}
                 <h2 id="ket-qua">📊 Kết Quả Thực Tế</h2>
