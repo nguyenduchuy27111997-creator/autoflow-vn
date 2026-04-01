@@ -7,6 +7,16 @@ import { usePathname } from "next/navigation";
 
 const EXCLUDED_PATHS = ["/portal"];
 
+/** Simple chat text formatter — bold + line breaks only. No arbitrary HTML. */
+function formatChat(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\n/g, "<br />");
+}
+
 const QUICK_REPLIES = [
   { label: "📋 Xem bảng giá", value: "Bảng giá các gói dịch vụ của AutoFlow là bao nhiêu?" },
   { label: "🎯 Đặt audit miễn phí", value: "Mình muốn đặt lịch audit miễn phí 30 phút" },
@@ -119,10 +129,16 @@ export default function ChatWidget() {
                       : "bg-slate-100 text-slate-700 rounded-bl-md"
                   }`}
                 >
-                  {m.parts
-                    ?.filter((p): p is { type: "text"; text: string } => p.type === "text")
-                    .map((p) => p.text)
-                    .join("")}
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: formatChat(
+                        m.parts
+                          ?.filter((p): p is { type: "text"; text: string } => p.type === "text")
+                          .map((p) => p.text)
+                          .join("") || ""
+                      ),
+                    }}
+                  />
                 </div>
               </div>
             ))}

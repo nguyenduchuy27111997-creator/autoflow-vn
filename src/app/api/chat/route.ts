@@ -66,7 +66,7 @@ export async function POST(req: Request) {
     model: anthropic("claude-haiku-4-5"),
     system: SYSTEM_PROMPT,
     messages: modelMessages,
-    maxOutputTokens: 300,
+    maxOutputTokens: 500,
     temperature: 0.7,
     onFinish: async ({ text }) => {
       // Save assistant response to Supabase
