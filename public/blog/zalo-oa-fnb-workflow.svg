@@ -1,150 +1,113 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="50%" stop-color="#1E293B"/>
       <stop offset="100%" stop-color="#0F172A"/>
     </linearGradient>
-    <linearGradient id="orangeGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#F59E0B"/>
-      <stop offset="100%" stop-color="#F97316"/>
+    <linearGradient id="line1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#F59E0B" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#3B82F6"/>
-      <stop offset="100%" stop-color="#06B6D4"/>
+    <linearGradient id="line2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#3B82F6" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#10B981"/>
-      <stop offset="100%" stop-color="#34D399"/>
+    <linearGradient id="line3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#10B981" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="purpleGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#8B5CF6"/>
-      <stop offset="100%" stop-color="#A78BFA"/>
+    <linearGradient id="line4" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#8B5CF6" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="lineGrad1" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.6"/>
-    </linearGradient>
-    <linearGradient id="lineGrad2" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#10B981" stop-opacity="0.6"/>
-    </linearGradient>
-    <linearGradient id="lineGrad3" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#10B981" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.6"/>
-    </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="shadow">
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.15"/>
-    </filter>
-    <!-- Dot pattern -->
-    <pattern id="dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="0.8" fill="white" opacity="0.05"/>
-    </pattern>
   </defs>
 
   <!-- Background -->
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#dots)"/>
 
-  <!-- Decorative blobs -->
-  <circle cx="100" cy="80" r="200" fill="#F59E0B" opacity="0.03"/>
-  <circle cx="1100" cy="550" r="250" fill="#8B5CF6" opacity="0.03"/>
-  <circle cx="600" cy="300" r="300" fill="#3B82F6" opacity="0.02"/>
+  <!-- Subtle radial glow center -->
+  <circle cx="600" cy="315" r="280" fill="#334155" opacity="0.15"/>
+  <circle cx="600" cy="315" r="160" fill="#475569" opacity="0.08"/>
 
-  <!-- Title area -->
-  <text x="600" y="72" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#94A3B8" letter-spacing="2">AUTOFLOW VN</text>
-  <text x="600" y="110" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="28" font-weight="800" fill="white">Tự Động Hóa Zalo OA Cho F&amp;B</text>
-  <text x="600" y="142" text-anchor="middle" font-family="Be Vietnam Pro, system-ui, sans-serif" font-size="14" fill="#94A3B8">4 Workflows — Chạy 24/7 — 0 Nhân Viên Thêm</text>
+  <!-- Horizontal flow line -->
+  <line x1="100" y1="315" x2="1100" y2="315" stroke="#334155" stroke-width="1" opacity="0.3"/>
 
-  <!-- Center hub: Zalo OA -->
-  <circle cx="600" cy="340" r="52" fill="#1E293B" stroke="#334155" stroke-width="2" filter="url(#shadow)"/>
-  <circle cx="600" cy="340" r="48" fill="#1E293B" stroke="#475569" stroke-width="1"/>
-  <text x="600" y="332" text-anchor="middle" font-size="28">💬</text>
-  <text x="600" y="356" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="10" font-weight="700" fill="white">Zalo OA</text>
+  <!-- ═══ 4 Nodes on horizontal line ═══ -->
 
-  <!-- Workflow 1: Top-left — Đơn hàng (Orange) -->
-  <line x1="540" y1="308" x2="340" y2="248" stroke="url(#lineGrad1)" stroke-width="2" stroke-dasharray="6 4" opacity="0.5"/>
-  <g filter="url(#shadow)">
-    <rect x="160" y="190" width="220" height="110" rx="16" fill="#1E293B" stroke="#F59E0B" stroke-width="1.5" stroke-opacity="0.4"/>
-    <circle cx="200" cy="225" r="20" fill="url(#orangeGrad)" opacity="0.15"/>
-    <text x="200" y="231" text-anchor="middle" font-size="18">📱</text>
-    <text x="230" y="224" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="white">Xác nhận đơn hàng</text>
-    <text x="230" y="242" font-family="Be Vietnam Pro, system-ui, sans-serif" font-size="10" fill="#94A3B8">GrabFood → n8n → Zalo → Bếp</text>
-    <!-- Mini flow dots -->
-    <circle cx="190" cy="272" r="4" fill="#F59E0B" opacity="0.8"/>
-    <line x1="198" y1="272" x2="224" y2="272" stroke="#F59E0B" stroke-width="1" stroke-opacity="0.4"/>
-    <circle cx="232" cy="272" r="4" fill="#F59E0B" opacity="0.6"/>
-    <line x1="240" y1="272" x2="266" y2="272" stroke="#F59E0B" stroke-width="1" stroke-opacity="0.4"/>
-    <circle cx="274" cy="272" r="4" fill="#F59E0B" opacity="0.4"/>
-    <line x1="282" y1="272" x2="308" y2="272" stroke="#F59E0B" stroke-width="1" stroke-opacity="0.4"/>
-    <circle cx="316" cy="272" r="4" fill="#F59E0B" opacity="0.3"/>
-    <text x="350" y="275" font-family="Be Vietnam Pro, system-ui, sans-serif" font-size="9" fill="#F59E0B" font-weight="600">30 giây</text>
-  </g>
+  <!-- Node 1: Đơn hàng (Orange) -->
+  <circle cx="210" cy="315" r="36" fill="#1E293B" stroke="#F59E0B" stroke-width="1.5" stroke-opacity="0.5"/>
+  <text x="210" y="310" text-anchor="middle" font-size="22">📱</text>
+  <text x="210" y="328" text-anchor="middle" font-family="system-ui" font-size="7" fill="#F59E0B" font-weight="600" letter-spacing="0.5">ĐƠN HÀNG</text>
+  <text x="210" y="370" text-anchor="middle" font-family="system-ui" font-size="10" fill="white" font-weight="700">Xác nhận tự động</text>
+  <text x="210" y="385" text-anchor="middle" font-family="system-ui" font-size="8" fill="#64748B">30 giây → Bếp + Khách</text>
 
-  <!-- Workflow 2: Top-right — Đặt bàn (Blue) -->
-  <line x1="660" y1="308" x2="860" y2="248" stroke="url(#lineGrad1)" stroke-width="2" stroke-dasharray="6 4" opacity="0.5"/>
-  <g filter="url(#shadow)">
-    <rect x="820" y="190" width="220" height="110" rx="16" fill="#1E293B" stroke="#3B82F6" stroke-width="1.5" stroke-opacity="0.4"/>
-    <circle cx="860" cy="225" r="20" fill="url(#blueGrad)" opacity="0.15"/>
-    <text x="860" y="231" text-anchor="middle" font-size="18">📅</text>
-    <text x="890" y="224" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="white">Nhắc lịch đặt bàn</text>
-    <text x="890" y="242" font-family="Be Vietnam Pro, system-ui, sans-serif" font-size="10" fill="#94A3B8">24h trước → 2h trước → Xác nhận</text>
-    <!-- Mini timeline -->
-    <circle cx="860" cy="272" r="4" fill="#3B82F6" opacity="0.8"/>
-    <line x1="868" y1="272" x2="906" y2="272" stroke="#3B82F6" stroke-width="1" stroke-opacity="0.4"/>
-    <circle cx="914" cy="272" r="4" fill="#3B82F6" opacity="0.5"/>
-    <line x1="922" y1="272" x2="960" y2="272" stroke="#3B82F6" stroke-width="1" stroke-opacity="0.4"/>
-    <circle cx="968" cy="272" r="4" fill="#3B82F6" opacity="0.3"/>
-    <text x="990" y="275" font-family="Be Vietnam Pro, system-ui, sans-serif" font-size="9" fill="#3B82F6" font-weight="600">-80% miss</text>
-  </g>
+  <!-- Connector 1→2 -->
+  <line x1="250" y1="315" x2="370" y2="315" stroke="url(#line1)" stroke-width="2"/>
+  <circle cx="310" cy="315" r="2" fill="#F59E0B" opacity="0.4"/>
 
-  <!-- Workflow 3: Bottom-left — Chăm sóc (Green) -->
-  <line x1="540" y1="372" x2="340" y2="432" stroke="url(#lineGrad2)" stroke-width="2" stroke-dasharray="6 4" opacity="0.5"/>
-  <g filter="url(#shadow)">
-    <rect x="160" y="390" width="220" height="110" rx="16" fill="#1E293B" stroke="#10B981" stroke-width="1.5" stroke-opacity="0.4"/>
-    <circle cx="200" cy="425" r="20" fill="url(#greenGrad)" opacity="0.15"/>
-    <text x="200" y="431" text-anchor="middle" font-size="18">⭐</text>
-    <text x="230" y="424" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="white">Chăm sóc sau bữa ăn</text>
-    <text x="230" y="442" font-family="Be Vietnam Pro, system-ui, sans-serif" font-size="10" fill="#94A3B8">Cảm ơn → Feedback → Google Review</text>
-    <!-- Rating stars -->
-    <text x="190" y="475" font-size="12">⭐⭐⭐⭐⭐</text>
-    <text x="300" y="475" font-family="Be Vietnam Pro, system-ui, sans-serif" font-size="9" fill="#10B981" font-weight="600">4.1 → 4.6</text>
-  </g>
+  <!-- Node 2: Đặt bàn (Blue) -->
+  <circle cx="420" cy="315" r="36" fill="#1E293B" stroke="#3B82F6" stroke-width="1.5" stroke-opacity="0.5"/>
+  <text x="420" y="310" text-anchor="middle" font-size="22">📅</text>
+  <text x="420" y="328" text-anchor="middle" font-family="system-ui" font-size="7" fill="#3B82F6" font-weight="600" letter-spacing="0.5">ĐẶT BÀN</text>
+  <text x="420" y="370" text-anchor="middle" font-family="system-ui" font-size="10" fill="white" font-weight="700">Nhắc lịch Zalo</text>
+  <text x="420" y="385" text-anchor="middle" font-family="system-ui" font-size="8" fill="#64748B">24h + 2h trước</text>
 
-  <!-- Workflow 4: Bottom-right — Khuyến mãi (Purple) -->
-  <line x1="660" y1="372" x2="860" y2="432" stroke="url(#lineGrad3)" stroke-width="2" stroke-dasharray="6 4" opacity="0.5"/>
-  <g filter="url(#shadow)">
-    <rect x="820" y="390" width="220" height="110" rx="16" fill="#1E293B" stroke="#8B5CF6" stroke-width="1.5" stroke-opacity="0.4"/>
-    <circle cx="860" cy="425" r="20" fill="url(#purpleGrad)" opacity="0.15"/>
-    <text x="860" y="431" text-anchor="middle" font-size="18">🎁</text>
-    <text x="890" y="424" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="white">Khuyến mãi cá nhân hóa</text>
-    <text x="890" y="442" font-family="Be Vietnam Pro, system-ui, sans-serif" font-size="10" fill="#94A3B8">Tag hành vi → Voucher phù hợp</text>
-    <!-- Tags -->
-    <rect x="855" y="460" width="70" height="20" rx="10" fill="#8B5CF6" opacity="0.15"/>
-    <text x="890" y="474" text-anchor="middle" font-family="Be Vietnam Pro, system-ui, sans-serif" font-size="8" fill="#A78BFA" font-weight="600">Coffee Lover</text>
-    <rect x="935" y="460" width="55" height="20" rx="10" fill="#8B5CF6" opacity="0.15"/>
-    <text x="962" y="474" text-anchor="middle" font-family="Be Vietnam Pro, system-ui, sans-serif" font-size="8" fill="#A78BFA" font-weight="600">Gia đình</text>
-    <text x="1005" y="474" font-family="Be Vietnam Pro, system-ui, sans-serif" font-size="9" fill="#8B5CF6" font-weight="600">+40%</text>
-  </g>
+  <!-- Connector 2→center -->
+  <line x1="460" y1="315" x2="550" y2="315" stroke="url(#line2)" stroke-width="2"/>
+  <circle cx="505" cy="315" r="2" fill="#3B82F6" opacity="0.4"/>
 
-  <!-- Bottom stats bar -->
-  <rect x="200" y="555" width="800" height="50" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1"/>
-  <line x1="400" y1="565" x2="400" y2="595" stroke="#334155" stroke-width="1"/>
-  <line x1="600" y1="565" x2="600" y2="595" stroke="#334155" stroke-width="1"/>
-  <line x1="800" y1="565" x2="800" y2="595" stroke="#334155" stroke-width="1"/>
+  <!-- Center: Zalo OA -->
+  <circle cx="600" cy="315" r="46" fill="#1E293B" stroke="#475569" stroke-width="2"/>
+  <circle cx="600" cy="315" r="42" fill="#1E293B"/>
+  <text x="600" y="307" text-anchor="middle" font-size="26">💬</text>
+  <text x="600" y="328" text-anchor="middle" font-family="system-ui" font-size="9" fill="white" font-weight="800">Zalo OA</text>
 
-  <text x="300" y="577" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="16" font-weight="800" fill="#F59E0B">0 giờ</text>
-  <text x="300" y="595" text-anchor="middle" font-family="Be Vietnam Pro, system-ui, sans-serif" font-size="9" fill="#64748B">nhập liệu thủ công</text>
+  <!-- Connector center→3 -->
+  <line x1="650" y1="315" x2="740" y2="315" stroke="url(#line3)" stroke-width="2"/>
+  <circle cx="695" cy="315" r="2" fill="#10B981" opacity="0.4"/>
 
-  <text x="500" y="577" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="16" font-weight="800" fill="#3B82F6">-80%</text>
-  <text x="500" y="595" text-anchor="middle" font-family="Be Vietnam Pro, system-ui, sans-serif" font-size="9" fill="#64748B">miss lịch đặt bàn</text>
+  <!-- Node 3: Chăm sóc (Green) -->
+  <circle cx="780" cy="315" r="36" fill="#1E293B" stroke="#10B981" stroke-width="1.5" stroke-opacity="0.5"/>
+  <text x="780" y="310" text-anchor="middle" font-size="22">⭐</text>
+  <text x="780" y="328" text-anchor="middle" font-family="system-ui" font-size="7" fill="#10B981" font-weight="600" letter-spacing="0.5">CHĂM SÓC</text>
+  <text x="780" y="370" text-anchor="middle" font-family="system-ui" font-size="10" fill="white" font-weight="700">Feedback + Review</text>
+  <text x="780" y="385" text-anchor="middle" font-family="system-ui" font-size="8" fill="#64748B">4.1 → 4.6 ⭐</text>
 
-  <text x="700" y="577" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="16" font-weight="800" fill="#10B981">+40%</text>
-  <text x="700" y="595" text-anchor="middle" font-family="Be Vietnam Pro, system-ui, sans-serif" font-size="9" fill="#64748B">khách quay lại</text>
+  <!-- Connector 3→4 -->
+  <line x1="820" y1="315" x2="940" y2="315" stroke="url(#line4)" stroke-width="2"/>
+  <circle cx="880" cy="315" r="2" fill="#8B5CF6" opacity="0.4"/>
 
-  <text x="900" y="577" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="16" font-weight="800" fill="#8B5CF6">4.6⭐</text>
-  <text x="900" y="595" text-anchor="middle" font-family="Be Vietnam Pro, system-ui, sans-serif" font-size="9" fill="#64748B">Google Maps rating</text>
+  <!-- Node 4: Khuyến mãi (Purple) -->
+  <circle cx="990" cy="315" r="36" fill="#1E293B" stroke="#8B5CF6" stroke-width="1.5" stroke-opacity="0.5"/>
+  <text x="990" y="310" text-anchor="middle" font-size="22">🎁</text>
+  <text x="990" y="328" text-anchor="middle" font-family="system-ui" font-size="7" fill="#8B5CF6" font-weight="600" letter-spacing="0.5">KHUYẾN MÃI</text>
+  <text x="990" y="370" text-anchor="middle" font-family="system-ui" font-size="10" fill="white" font-weight="700">Cá nhân hóa</text>
+  <text x="990" y="385" text-anchor="middle" font-family="system-ui" font-size="8" fill="#64748B">+40% quay lại</text>
+
+  <!-- Top title -->
+  <text x="600" y="100" text-anchor="middle" font-family="system-ui" font-size="11" fill="#64748B" letter-spacing="3" font-weight="600">AUTOFLOW VN</text>
+  <text x="600" y="135" text-anchor="middle" font-family="system-ui" font-size="28" fill="white" font-weight="800">4 Workflow Zalo OA Cho F&amp;B</text>
+  <text x="600" y="162" text-anchor="middle" font-family="system-ui" font-size="12" fill="#475569">Chạy 24/7 · 0 nhân viên thêm · Kết quả trong 2 tuần</text>
+
+  <!-- Bottom metrics -->
+  <text x="210" y="460" text-anchor="middle" font-family="system-ui" font-size="20" fill="#F59E0B" font-weight="800">0 giờ</text>
+  <text x="210" y="478" text-anchor="middle" font-family="system-ui" font-size="9" fill="#475569">nhập liệu</text>
+
+  <text x="420" y="460" text-anchor="middle" font-family="system-ui" font-size="20" fill="#3B82F6" font-weight="800">-80%</text>
+  <text x="420" y="478" text-anchor="middle" font-family="system-ui" font-size="9" fill="#475569">miss lịch</text>
+
+  <text x="780" y="460" text-anchor="middle" font-family="system-ui" font-size="20" fill="#10B981" font-weight="800">+40%</text>
+  <text x="780" y="478" text-anchor="middle" font-family="system-ui" font-size="9" fill="#475569">quay lại</text>
+
+  <text x="990" y="460" text-anchor="middle" font-family="system-ui" font-size="20" fill="#8B5CF6" font-weight="800">4.6⭐</text>
+  <text x="990" y="478" text-anchor="middle" font-family="system-ui" font-size="9" fill="#475569">Google Maps</text>
+
+  <!-- Subtle bottom line -->
+  <line x1="150" y1="510" x2="1050" y2="510" stroke="#1E293B" stroke-width="1"/>
+  <text x="600" y="545" text-anchor="middle" font-family="system-ui" font-size="10" fill="#334155">autoflowvn.net/blog/zalo-oa-fnb</text>
 </svg>
