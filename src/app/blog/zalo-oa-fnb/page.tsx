@@ -6,6 +6,8 @@ import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
 import TableOfContents from "@/components/blog/TableOfContents";
+import WorkflowFlow from "@/components/blog/WorkflowFlow";
+import BeforeAfter from "@/components/blog/BeforeAfter";
 
 export const metadata: Metadata = {
   title: "Tự Động Hóa Zalo OA Cho Nhà Hàng, Quán Cafe — Hướng Dẫn Chi Tiết",
@@ -111,6 +113,17 @@ export default function ZaloOAFnBBlog() {
                   { title: "Thông báo bếp qua Telegram", desc: "Chef nhận order ngay lập tức, không cần check app" },
                 ]} />
 
+                <WorkflowFlow
+                  accentColor="#F59E0B"
+                  steps={[
+                    { icon: <span className="text-lg">📱</span>, label: "Đơn từ GrabFood", sub: "Webhook real-time" },
+                    { icon: <span className="text-lg">⚡</span>, label: "n8n xử lý", sub: "Validate + format" },
+                    { icon: <span className="text-lg">📊</span>, label: "Lưu Google Sheet", sub: "Log đơn hàng" },
+                    { icon: <span className="text-lg">💬</span>, label: "Zalo OA → Khách", sub: "Xác nhận 30 giây" },
+                    { icon: <span className="text-lg">👨‍🍳</span>, label: "Telegram → Bếp", sub: "Order ngay lập tức" },
+                  ]}
+                />
+
                 <CalloutBox type="tip">
                   Zalo OA gửi tin nhắn miễn phí cho người đã follow. Nếu khách chưa follow,
                   dùng QR code trên bàn hoặc bill để khuyến khích follow — đổi lại voucher 10%.
@@ -163,6 +176,29 @@ export default function ZaloOAFnBBlog() {
 
                 {/* Section 4 */}
                 <h2 id="so-sanh">⚖️ So sánh: Thủ công vs Tự động</h2>
+
+                <BeforeAfter
+                  before={{
+                    title: "Trước — Thủ công 100%",
+                    items: [
+                      "Nhân viên check app delivery mỗi 5 phút",
+                      "Gọi điện từng khách nhắc đặt bàn",
+                      "Khách ăn xong = biến mất, không feedback",
+                      "Khuyến mãi gửi đại, không phân loại",
+                      "Mất 2-3 FTE cho việc lặp lại",
+                    ],
+                  }}
+                  after={{
+                    title: "Sau — Zalo OA + n8n",
+                    items: [
+                      "Đơn xác nhận tự động trong 30 giây",
+                      "Zalo nhắc lịch 24h + 2h trước tự động",
+                      "Feedback + Google review tự thu thập",
+                      "Khuyến mãi theo hành vi (Coffee Lover, Gia đình...)",
+                      "0 nhân viên thêm, chạy 24/7",
+                    ],
+                  }}
+                />
 
                 <ComparisonTable
                   headers={["Tiêu chí", "Thủ công", "Tự động (n8n + Zalo OA)"]}
