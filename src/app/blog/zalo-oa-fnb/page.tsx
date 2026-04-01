@@ -8,7 +8,6 @@ import ComparisonTable from "@/components/blog/ComparisonTable";
 import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
-import BlogHero from "@/components/blog/BlogHero";
 
 export const metadata: Metadata = {
   title: "Tự Động Hóa Zalo OA Cho Nhà Hàng, Quán Cafe — Hướng Dẫn Chi Tiết",
@@ -41,30 +40,29 @@ export default function ZaloOAFnBBlog() {
       <Navbar />
       <main className="pt-28 pb-20">
         <article className="max-w-6xl mx-auto px-6">
-          {/* Back link */}
-          <a href="/blog" className="text-sm text-primary hover:text-primary-dark font-medium mb-6 inline-block">
-            ← Blog
-          </a>
-
-          {/* Hero Banner */}
-          <BlogHero
-            category="F&B"
-            icon="🍽️"
-            title="Tự Động Hóa Zalo OA Cho Nhà Hàng, Quán Cafe — Hướng Dẫn Chi Tiết 2026"
-            readTime="12 phút đọc"
-            stats={[
-              { value: "4", label: "Workflows" },
-              { value: "+40%", label: "Khách quay lại" },
-              { value: "0 FTE", label: "Thêm nhân viên" },
-              { value: "24/7", label: "Hoạt động" },
-            ]}
-          />
-
-          {/* Description below hero */}
-          <p className="text-lg text-slate-500 leading-relaxed max-w-3xl mb-10">
-            Khách đặt bàn qua Zalo nhưng không ai xác nhận. Đơn GrabFood về nhưng chưa cập nhật.
-            Khách ăn xong không bao giờ quay lại. 4 workflow Zalo OA giải quyết tất cả — chạy 24/7, không cần thêm nhân viên.
-          </p>
+          {/* Header */}
+          <div className="max-w-3xl mb-10">
+            <a href="/blog" className="text-sm text-primary hover:text-primary-dark font-medium mb-4 inline-block">
+              ← Blog
+            </a>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold">
+                F&B
+              </span>
+              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
+                Zalo OA
+              </span>
+              <span className="text-xs text-slate-400">12 phút đọc</span>
+            </div>
+            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
+              Tự Động Hóa Zalo OA Cho Nhà Hàng, Quán Cafe —{" "}
+              <span className="gradient-text">Hướng Dẫn Chi Tiết 2026</span>
+            </h1>
+            <p className="text-lg text-slate-500 leading-relaxed">
+              Khách đặt bàn qua Zalo nhưng không ai xác nhận. Đơn GrabFood về nhưng chưa cập nhật.
+              Khách ăn xong không bao giờ quay lại. 4 workflow Zalo OA giải quyết tất cả — chạy 24/7, không cần thêm nhân viên.
+            </p>
+          </div>
 
           {/* Content + TOC */}
           <div className="flex gap-12 items-start relative">
