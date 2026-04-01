@@ -31,11 +31,11 @@ export default function ChatWidget() {
     messages: [
       {
         id: "greeting",
-        role: "assistant",
+        role: "assistant" as const,
         content: "Chào bạn! 👋 Mình là trợ lý AI của AutoFlow VN. Hỏi mình bất cứ điều gì về tự động hóa quy trình cho doanh nghiệp nhé!",
         parts: [{ type: "text" as const, text: "Chào bạn! 👋 Mình là trợ lý AI của AutoFlow VN. Hỏi mình bất cứ điều gì về tự động hóa quy trình cho doanh nghiệp nhé!" }],
       },
-    ],
+    ] as unknown as import("ai").UIMessage[],
   });
 
   const isBusy = status === "streaming" || status === "submitted";
@@ -119,12 +119,10 @@ export default function ChatWidget() {
                       : "bg-slate-100 text-slate-700 rounded-bl-md"
                   }`}
                 >
-                  {m.role === "assistant"
-                    ? (m.parts
-                        ?.filter((p): p is { type: "text"; text: string } => p.type === "text")
-                        .map((p) => p.text)
-                        .join("") || m.content)
-                    : m.content}
+                  {m.parts
+                    ?.filter((p): p is { type: "text"; text: string } => p.type === "text")
+                    .map((p) => p.text)
+                    .join("")}
                 </div>
               </div>
             ))}
