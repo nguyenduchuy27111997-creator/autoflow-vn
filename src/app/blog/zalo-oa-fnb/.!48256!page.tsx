@@ -45,7 +45,7 @@ export default function ZaloOAFnBBlog() {
           <div className="max-w-3xl mb-10">
             <a href="/blog" className="text-sm text-primary hover:text-primary-dark font-medium mb-4 inline-block">
               ← Blog
-            </a>
+            </nav>
             <div className="flex items-center gap-3 mb-4">
               <span className="px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold">
                 F&B
@@ -266,7 +266,7 @@ export default function ZaloOAFnBBlog() {
                     className="inline-flex items-center gap-1 text-primary font-semibold text-sm hover:underline"
                   >
                     Đặt lịch audit miễn phí →
-                  </a>
+                  </nav>
                 </CalloutBox>
 
               </div>
@@ -275,10 +275,4 @@ export default function ZaloOAFnBBlog() {
             {/* Table of Contents */}
             <TableOfContents items={tocItems} />
           </div>
-          <BlogFooter title="Tự Động Hóa Zalo OA Cho Nhà Hàng, Quán Cafe" slug="zalo-oa-fnb" date="2026-04-01" />
-        </article>
-      </main>
-      <Footer />
-    </>
-  );
-}
+

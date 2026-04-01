@@ -9,6 +9,7 @@ import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
+import BlogFooter from "@/components/blog/BlogFooter";
 
 export const metadata: Metadata = {
   title: "n8n vs Zapier: SME Việt Nam Nên Chọn Cái Nào? So Sánh 2026",
@@ -416,6 +417,7 @@ export default function N8nVsZapierBlog() {
             {/* Table of Contents */}
             <TableOfContents items={tocItems} />
           </div>
+          <BlogFooter title="n8n vs Zapier — SME Việt Nam Nên Chọn Cái Nào?" slug="n8n-vs-zapier" date="2026-04-01" />
         </article>
       </main>
       <Footer />

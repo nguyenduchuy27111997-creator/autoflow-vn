@@ -9,6 +9,7 @@ import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
+import BlogFooter from "@/components/blog/BlogFooter";
 
 export const metadata: Metadata = {
   title: "AI Agent + n8n: Tự Động Hóa Thông Minh Cho SME Việt Nam 2026",
@@ -456,6 +457,7 @@ export default function AIAgentN8nSMEBlog() {
             {/* Table of Contents */}
             <TableOfContents items={tocItems} />
           </div>
+          <BlogFooter title="AI Agent + n8n Cho SME Việt Nam 2026" slug="ai-agent-n8n-sme" date="2026-04-01" />
         </article>
       </main>
       <Footer />

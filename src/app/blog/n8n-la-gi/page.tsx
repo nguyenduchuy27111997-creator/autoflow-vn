@@ -10,6 +10,7 @@ import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import CodeBlock from "@/components/blog/CodeBlock";
+import BlogFooter from "@/components/blog/BlogFooter";
 
 export const metadata: Metadata = {
   title: "n8n Là Gì? Hướng Dẫn Toàn Diện Cho Người Mới 2026",
@@ -775,6 +776,7 @@ export default function N8nLaGiBlog() {
             {/* Table of Contents */}
             <TableOfContents items={tocItems} />
           </div>
+          <BlogFooter title="n8n Là Gì? Hướng Dẫn Toàn Diện 2026" slug="n8n-la-gi" date="2026-04-01" />
         </article>
       </main>
       <Footer />

@@ -9,6 +9,7 @@ import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
+import BlogFooter from "@/components/blog/BlogFooter";
 
 export const metadata: Metadata = {
   title: "Nhắc Lịch Học Viên Qua Zalo OA — Giảm 80% Miss Lịch Cho Trung Tâm Đào Tạo",
@@ -434,6 +435,7 @@ export default function NhacLichZaloOAGiaoDucBlog() {
             {/* Table of Contents */}
             <TableOfContents items={tocItems} />
           </div>
+          <BlogFooter title="Nhắc Lịch Học Viên Qua Zalo OA" slug="nhac-lich-zalo-oa-giao-duc" date="2026-04-01" />
         </article>
       </main>
       <Footer />

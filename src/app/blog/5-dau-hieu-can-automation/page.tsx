@@ -9,6 +9,7 @@ import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
+import BlogFooter from "@/components/blog/BlogFooter";
 
 export const metadata: Metadata = {
   title: "5 Dấu Hiệu Doanh Nghiệp Bạn Cần Tự Động Hóa — Ngay Bây Giờ",
@@ -599,6 +600,7 @@ export default function DauHieuCanAutomationBlog() {
             {/* Table of Contents */}
             <TableOfContents items={tocItems} />
           </div>
+          <BlogFooter title="5 Dấu Hiệu Doanh Nghiệp Bạn Cần Tự Động Hóa" slug="5-dau-hieu-can-automation" date="2026-04-01" />
         </article>
       </main>
       <Footer />

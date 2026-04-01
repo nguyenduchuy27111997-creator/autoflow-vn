@@ -9,6 +9,7 @@ import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
+import BlogFooter from "@/components/blog/BlogFooter";
 
 export const metadata: Metadata = {
   title: "Tự Động Hóa Lead Facebook Ads Cho Bất Động Sản — Phản Hồi Trong 30 Giây",
@@ -689,6 +690,7 @@ export default function LeadFacebookAdsBDSBlog() {
             {/* Table of Contents */}
             <TableOfContents items={tocItems} />
           </div>
+          <BlogFooter title="Tự Động Hóa Lead Facebook Ads Cho BĐS" slug="lead-facebook-ads-bds" date="2026-04-01" />
         </article>
       </main>
       <Footer />

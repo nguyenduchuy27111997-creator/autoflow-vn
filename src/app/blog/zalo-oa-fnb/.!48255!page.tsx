@@ -44,7 +44,7 @@ export default function ZaloOAFnBBlog() {
           {/* Header */}
           <div className="max-w-3xl mb-10">
             <a href="/blog" className="text-sm text-primary hover:text-primary-dark font-medium mb-4 inline-block">
-              ← Blog
+              <a href="/blog" className="hover:text-primary transition-colors">Blog</a><span>/</span><span className="text-slate-600">Bài viết</span>
             </a>
             <div className="flex items-center gap-3 mb-4">
               <span className="px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold">
@@ -275,10 +275,4 @@ export default function ZaloOAFnBBlog() {
             {/* Table of Contents */}
             <TableOfContents items={tocItems} />
           </div>
-          <BlogFooter title="Tự Động Hóa Zalo OA Cho Nhà Hàng, Quán Cafe" slug="zalo-oa-fnb" date="2026-04-01" />
-        </article>
-      </main>
-      <Footer />
-    </>
-  );
-}
+

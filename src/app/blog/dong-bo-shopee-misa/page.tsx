@@ -9,6 +9,7 @@ import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
+import BlogFooter from "@/components/blog/BlogFooter";
 
 export const metadata: Metadata = {
   title: "Đồng Bộ Shopee MISA Tự Động — Hết Nhập Tay, Hết Sai Sót",
@@ -610,6 +611,7 @@ export default function DongBoShopeeMisaBlog() {
             {/* Table of Contents */}
             <TableOfContents items={tocItems} />
           </div>
+          <BlogFooter title="Đồng Bộ Đơn Shopee → MISA Tự Động" slug="dong-bo-shopee-misa" date="2026-04-01" />
         </article>
       </main>
       <Footer />
