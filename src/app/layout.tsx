@@ -74,8 +74,11 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true },
   },
-  alternates: {
-    canonical: "https://autoflowvn.net",
+  other: {
+    "geo.region": "VN-SG",
+    "geo.placename": "Ho Chi Minh City",
+    "geo.position": "10.762622;106.660172",
+    "ICBM": "10.762622, 106.660172",
   },
 };
 
