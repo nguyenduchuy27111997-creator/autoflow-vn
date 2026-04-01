@@ -458,32 +458,34 @@ export default function N8nLaGiBlog() {
                   Docker và Docker Compose. Cần tên miền nếu muốn dùng HTTPS.
                 </CalloutBox>
 
-                <StepList steps={[
-                  { title: "Bước 1: Tạo VPS và cài Docker", desc: "Tạo VPS Ubuntu 22.04 (2GB RAM) tại DigitalOcean, Vultr, hoặc Bizfly Cloud." },
-                  { title: "Bước 2: Tạo thư mục và cấu hình", desc: "Tạo file docker-compose.yml với image n8n chính thức." },
-                  { title: "Bước 3: Khởi động n8n", desc: "Chạy docker compose và kiểm tra logs." },
-                  { title: "Bước 4: Cấu hình domain + HTTPS", desc: "Trỏ domain về IP, cài Caddy hoặc nginx-proxy-manager." },
-                  { title: "Bước 5: Tạo tài khoản admin", desc: "Truy cập URL n8n, tạo tài khoản owner đầu tiên." },
-                ]} />
+                <p><strong>Bước 1:</strong> Tạo VPS Ubuntu 22.04 (2GB RAM) tại DigitalOcean, Vultr, hoặc Bizfly Cloud. SSH vào server:</p>
 
                 <CodeBlock
-                  title="Bước 1 — Cài Docker trên VPS"
+                  title="Cài Docker trên VPS"
                   code={`ssh root@your-server-ip\ncurl -fsSL https://get.docker.com | sh\napt install -y docker-compose-plugin`}
                 />
 
+                <p><strong>Bước 2:</strong> Tạo thư mục project và file cấu hình Docker Compose:</p>
+
                 <CodeBlock
-                  title="Bước 2 — Tạo docker-compose.yml"
+                  title="docker-compose.yml"
                   lang="yaml"
                   code={`version: "3"\nservices:\n  n8n:\n    image: n8nio/n8n\n    restart: always\n    ports:\n      - "5678:5678"\n    volumes:\n      - n8n_data:/home/node/.n8n\n    environment:\n      - N8N_BASIC_AUTH_ACTIVE=true\n      - N8N_BASIC_AUTH_USER=admin\n      - N8N_BASIC_AUTH_PASSWORD=your-password\nvolumes:\n  n8n_data:`}
                 />
 
+                <p><strong>Bước 3:</strong> Khởi động n8n và kiểm tra logs:</p>
+
                 <CodeBlock
-                  title="Bước 3 — Khởi động"
+                  title="Khởi động"
                   code={`docker compose up -d\ndocker compose logs -f n8n`}
                 />
 
-                <CalloutBox type="success" title="Xong!">
-                  Sau 30-60 giây, n8n chạy tại <strong>http://your-server-ip:5678</strong>. Trỏ domain + cài Caddy để có HTTPS.
+                <p><strong>Bước 4:</strong> Trỏ domain về IP server, cài Caddy hoặc nginx-proxy-manager để có HTTPS tự động.</p>
+
+                <p><strong>Bước 5:</strong> Truy cập URL n8n, tạo tài khoản owner đầu tiên — xong!</p>
+
+                <CalloutBox type="success" title="Hoàn tất!">
+                  Sau 30-60 giây, n8n chạy tại <strong>http://your-server-ip:5678</strong>. Toàn bộ quá trình mất khoảng 10-15 phút.
                 </CalloutBox>
 
                 <WorkflowFlow
