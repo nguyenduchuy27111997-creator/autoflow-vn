@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="bg-slate-900 border-t border-slate-800">
       <div className="max-w-6xl mx-auto px-6 py-12">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-5 gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
             <Logo dark className="mb-4" />
@@ -15,21 +15,27 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-4">
               <a
-                href="#"
+                href="https://zalo.me/0935115248"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-slate-800 hover:bg-primary flex items-center justify-center text-slate-400 hover:text-white transition-all"
                 aria-label="Zalo"
               >
                 <span className="text-xs font-bold">Z</span>
               </a>
               <a
-                href="#"
+                href="https://facebook.com/autoflowvn"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-slate-800 hover:bg-primary flex items-center justify-center text-slate-400 hover:text-white transition-all"
                 aria-label="Facebook"
               >
                 <span className="text-xs font-bold">f</span>
               </a>
               <a
-                href="#"
+                href="https://linkedin.com/company/autoflowvn"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-slate-800 hover:bg-primary flex items-center justify-center text-slate-400 hover:text-white transition-all"
                 aria-label="LinkedIn"
               >
@@ -38,7 +44,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Links */}
+          {/* Dịch vụ */}
           <div>
             <h4 className="font-display font-bold text-sm text-white mb-4">
               Dịch vụ
@@ -62,14 +68,52 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Khám phá */}
+          <div>
+            <h4 className="font-display font-bold text-sm text-white mb-4">
+              Khám phá
+            </h4>
+            <ul className="space-y-2.5">
+              {[
+                { label: "Blog", href: "/blog" },
+                { label: "Bảng giá", href: "/bang-gia" },
+                { label: "Quy trình", href: "/quy-trinh" },
+                { label: "Kết quả", href: "/ket-qua" },
+                { label: "Về tôi", href: "/ve-toi" },
+              ].map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    className="text-sm text-slate-400 hover:text-primary transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Liên hệ */}
           <div>
             <h4 className="font-display font-bold text-sm text-white mb-4">
               Liên hệ
             </h4>
             <ul className="space-y-2.5">
-              <li className="text-sm text-slate-400">📱 Zalo: 0935115248</li>
               <li className="text-sm text-slate-400">
-                ✉️ support@autoflowvn.net
+                <a
+                  href="tel:0935115248"
+                  className="hover:text-primary transition-colors"
+                >
+                  📱 Zalo: 0935115248
+                </a>
+              </li>
+              <li className="text-sm text-slate-400">
+                <a
+                  href="mailto:support@autoflowvn.net"
+                  className="hover:text-primary transition-colors"
+                >
+                  ✉️ support@autoflowvn.net
+                </a>
               </li>
               <li className="text-sm text-slate-400">📍 TP. Hồ Chí Minh</li>
             </ul>
