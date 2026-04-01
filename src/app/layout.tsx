@@ -9,6 +9,7 @@ import ConsentBannerWrapper from '@/components/analytics/ConsentBannerWrapper';
 import UTMCapture from '@/components/analytics/UTMCapture';
 import ZaloTracker from '@/components/analytics/ZaloTracker';
 import ExitIntentPopup from '@/components/ExitIntentPopup';
+import SocialProof from '@/components/SocialProof';
 import "./globals.css";
 
 const beVietnam = Be_Vietnam_Pro({
@@ -207,6 +208,7 @@ export default function RootLayout({
         <Suspense fallback={null}><UTMCapture /></Suspense>
         <ZaloTracker />
         <ExitIntentPopup />
+        <SocialProof />
       </body>
     </html>
   );
