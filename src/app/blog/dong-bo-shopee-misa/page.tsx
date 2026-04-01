@@ -8,6 +8,7 @@ import ComparisonTable from "@/components/blog/ComparisonTable";
 import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
+import FAQ from "@/components/blog/FAQ";
 
 export const metadata: Metadata = {
   title: "Đồng Bộ Shopee MISA Tự Động — Hết Nhập Tay, Hết Sai Sót",
@@ -593,60 +594,15 @@ export default function DongBoShopeeMisaBlog() {
                 </CalloutBox>
 
                 {/* Section 7: FAQ */}
-                <h2 id="faq">Câu Hỏi Thường Gặp Về Đồng Bộ Shopee MISA</h2>
+                <h2 id="faq">❓ Câu Hỏi Thường Gặp</h2>
 
-                <h3>MISA AMIS có API để tích hợp không?</h3>
-                <p>
-                  Có. MISA AMIS cung cấp REST API chính thức, chủ yếu là
-                  push/write API — tức là bạn đẩy dữ liệu vào MISA từ hệ thống
-                  bên ngoài. Bạn cần đăng ký tài khoản developer trên MISA
-                  Developer Portal để lấy API key. Hầu hết các nghiệp vụ cơ
-                  bản như tạo phiếu bán hàng, cập nhật tồn kho đều được hỗ trợ.
-                </p>
-
-                <h3>Shopee có cho phép tích hợp bên thứ ba không?</h3>
-                <p>
-                  Có. Shopee Open Platform cung cấp API công khai cho seller.
-                  Bạn cần đăng ký ứng dụng (App) trên Shopee Open Platform,
-                  nhận App ID và Secret Key, sau đó authorize OAuth cho shop
-                  của mình. Quá trình này mất khoảng 30 phút.
-                </p>
-
-                <h3>
-                  Nếu Shopee hoặc MISA thay đổi API thì workflow có bị hỏng
-                  không?
-                </h3>
-                <p>
-                  Đây là rủi ro thực tế với mọi tích hợp API. Cách phòng tránh:
-                  cài alert tự động khi workflow lỗi, theo dõi changelog của
-                  Shopee Open Platform (họ thường thông báo trước 30–90 ngày
-                  khi deprecate endpoint). n8n có error handling và retry logic
-                  giúp giảm thiểu downtime khi có thay đổi nhỏ.
-                </p>
-
-                <h3>
-                  Đồng bộ Shopee MISA tự động có phù hợp với shop nhỏ dưới
-                  50 đơn/ngày không?
-                </h3>
-                <p>
-                  Hoàn toàn phù hợp. Thậm chí shop nhỏ hưởng lợi nhiều hơn vì
-                  thường không có kế toán chuyên trách — chủ shop tự nhập. Tiết
-                  kiệm 1–2 giờ/ngày cho chủ shop = thời gian đó dành cho việc
-                  tăng trưởng. Với shop dưới 50 đơn/ngày, n8n Cloud free tier
-                  (5.000 executions/tháng) có thể đủ dùng ban đầu.
-                </p>
-
-                <h3>
-                  Tích hợp này có ảnh hưởng đến việc quyết toán thuế và BCTC
-                  không?
-                </h3>
-                <p>
-                  Không ảnh hưởng tiêu cực — ngược lại, dữ liệu chính xác hơn
-                  giúp BCTC đáng tin cậy hơn. Tuy nhiên, cần test kỹ logic
-                  mapping: đơn hủy, đơn hoàn trả, chiết khấu Shopee Voucher
-                  cần được xử lý đúng để không tạo doanh thu ảo trong MISA.
-                  Luôn review với kế toán trưởng trước khi đưa vào production.
-                </p>
+                <FAQ items={[
+                  { q: "MISA AMIS có API để tích hợp không?", a: "Có. MISA AMIS cung cấp REST API chính thức, chủ yếu là push/write API — bạn đẩy dữ liệu vào MISA từ hệ thống bên ngoài. Đăng ký developer trên MISA Developer Portal để lấy API key. Các nghiệp vụ cơ bản như tạo phiếu bán hàng, cập nhật tồn kho đều được hỗ trợ." },
+                  { q: "Shopee có cho phép tích hợp bên thứ ba không?", a: "Có. Shopee Open Platform cung cấp API công khai cho seller. Đăng ký ứng dụng trên Shopee Open Platform, nhận App ID và Secret Key, authorize OAuth cho shop. Quá trình mất khoảng 30 phút." },
+                  { q: "Nếu Shopee hoặc MISA thay đổi API thì workflow có bị hỏng không?", a: "Đây là rủi ro thực tế với mọi tích hợp API. Cách phòng tránh: cài alert tự động khi workflow lỗi, theo dõi changelog của Shopee Open Platform (thường thông báo trước 30–90 ngày). n8n có error handling và retry logic giúp giảm thiểu downtime." },
+                  { q: "Có phù hợp với shop nhỏ dưới 50 đơn/ngày không?", a: "Hoàn toàn phù hợp. Shop nhỏ hưởng lợi nhiều hơn vì thường không có kế toán chuyên trách — chủ shop tự nhập. Tiết kiệm 1–2 giờ/ngày. Với shop dưới 50 đơn/ngày, n8n Cloud free tier (5.000 executions/tháng) có thể đủ dùng." },
+                  { q: "Tích hợp có ảnh hưởng đến quyết toán thuế và BCTC không?", a: "Không ảnh hưởng tiêu cực — ngược lại, dữ liệu chính xác hơn giúp BCTC đáng tin cậy hơn. Cần test kỹ logic mapping: đơn hủy, hoàn trả, chiết khấu Shopee Voucher. Luôn review với kế toán trưởng trước khi production." },
+                ]} />
 
               </div>
             </div>

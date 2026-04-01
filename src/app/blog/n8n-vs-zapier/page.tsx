@@ -8,6 +8,7 @@ import ComparisonTable from "@/components/blog/ComparisonTable";
 import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
+import FAQ from "@/components/blog/FAQ";
 
 export const metadata: Metadata = {
   title: "n8n vs Zapier: SME Việt Nam Nên Chọn Cái Nào? So Sánh 2026",
@@ -399,51 +400,15 @@ export default function N8nVsZapierBlog() {
                 </CalloutBox>
 
                 {/* FAQ */}
-                <h2 id="faq">Câu Hỏi Thường Gặp</h2>
+                <h2 id="faq">❓ Câu Hỏi Thường Gặp</h2>
 
-                <h3>n8n có thực sự miễn phí không, hay có chi phí ẩn?</h3>
-                <p>
-                  n8n Community Edition là open-source và miễn phí hoàn toàn — bạn có thể download,
-                  self-host và chạy không giới hạn workflow, không giới hạn executions, không giới hạn users.
-                  Chi phí duy nhất là VPS để chạy — khoảng $5-10/tháng trên DigitalOcean, Railway, hoặc
-                  các nhà cung cấp Việt Nam. Nếu bạn dùng n8n Cloud (không self-host), thì có tính phí
-                  theo gói từ €24/tháng.
-                </p>
-
-                <h3>Chuyển từ Zapier sang n8n mất bao lâu?</h3>
-                <p>
-                  Phụ thuộc vào độ phức tạp và số lượng workflow. Một workflow đơn giản (3-5 bước):
-                  30-60 phút. Toàn bộ hệ thống 10-20 workflow: 1-2 tuần với developer có kinh nghiệm.
-                  Giao diện n8n có learning curve — nếu bạn đã quen Zapier, cần khoảng 1-2 ngày để
-                  làm quen với cách n8n tư duy về data và nodes.
-                </p>
-
-                <h3>n8n có hỗ trợ Zalo ZNS (Zalo Notification Service) không?</h3>
-                <p>
-                  Có. n8n có thể tích hợp với Zalo OA API thông qua HTTP Request node (có trong bản
-                  core, không cần cài thêm) hoặc community node chuyên biệt. Bạn có thể gửi tin nhắn
-                  ZNS, broadcast message, xây dựng chatbot phản hồi tự động. Đây là một trong những
-                  lý do n8n được ưa chuộng tại thị trường Việt Nam.
-                </p>
-
-                <h3>Zapier có thể làm được những gì n8n không làm được không?</h3>
-                <p>
-                  Công bằng mà nói — có một số trường hợp Zapier làm tốt hơn. Cụ thể: (1) Tích hợp
-                  với các app rất nhỏ, ít phổ biến trong hệ sinh thái Mỹ/EU — Zapier có 8.000+ tích
-                  hợp được maintain chuyên nghiệp. (2) Giao diện người dùng trực quan hơn đáng kể —
-                  non-technical user có thể tự build mà không cần hỏi ai. (3) SLA và enterprise support
-                  chính thức. Nhưng với stack Việt Nam, những ưu điểm này hiếm khi đủ để bù cho chi
-                  phí và thiếu tích hợp bản địa.
-                </p>
-
-                <h3>Tôi không biết code — có dùng được n8n không?</h3>
-                <p>
-                  Được, nhưng sẽ khó hơn Zapier. n8n có giao diện kéo thả, bạn có thể build các
-                  workflow đơn giản mà không cần code. Nhưng để khai thác hết tiềm năng (JavaScript
-                  custom, xử lý data phức tạp, tích hợp API không có native node), bạn cần biết
-                  cơ bản hoặc có developer hỗ trợ. Một lựa chọn phổ biến: thuê freelancer hoặc agency
-                  setup và document hệ thống, sau đó bạn tự vận hành và chỉnh sửa nhỏ.
-                </p>
+                <FAQ items={[
+                  { q: "n8n có thực sự miễn phí không, hay có chi phí ẩn?", a: "n8n Community Edition là open-source, miễn phí hoàn toàn — không giới hạn workflow, executions, users. Chi phí duy nhất là VPS (~$5-10/tháng). Nếu dùng n8n Cloud (không self-host) thì từ €24/tháng." },
+                  { q: "Chuyển từ Zapier sang n8n mất bao lâu?", a: "Workflow đơn giản (3-5 bước): 30-60 phút. Toàn bộ 10-20 workflow: 1-2 tuần với developer có kinh nghiệm. Cần 1-2 ngày làm quen giao diện n8n nếu đã quen Zapier." },
+                  { q: "n8n có hỗ trợ Zalo ZNS không?", a: "Có. Tích hợp qua HTTP Request node (core) hoặc community node chuyên biệt. Gửi tin ZNS, broadcast, chatbot tự động. Đây là lý do n8n được ưa chuộng tại Việt Nam." },
+                  { q: "Zapier có thể làm gì n8n không làm được?", a: "Công bằng mà nói: (1) 8,000+ tích hợp app nhỏ Mỹ/EU, (2) Giao diện trực quan hơn cho non-technical user, (3) SLA và enterprise support chính thức. Nhưng với stack Việt Nam, những ưu điểm này hiếm khi bù cho chi phí và thiếu tích hợp bản địa." },
+                  { q: "Tôi không biết code — có dùng n8n được không?", a: "Được, nhưng khó hơn Zapier. Workflow đơn giản dùng kéo-thả không cần code. Để khai thác hết tiềm năng (JS custom, API phức tạp), cần developer hỗ trợ. Phổ biến: thuê freelancer setup, sau đó tự vận hành." },
+                ]} />
 
               </div>
             </div>

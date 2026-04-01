@@ -8,6 +8,7 @@ import ComparisonTable from "@/components/blog/ComparisonTable";
 import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
+import FAQ from "@/components/blog/FAQ";
 
 export const metadata: Metadata = {
   title: "5 Dấu Hiệu Doanh Nghiệp Bạn Cần Tự Động Hóa — Ngay Bây Giờ",
@@ -582,54 +583,15 @@ export default function DauHieuCanAutomationBlog() {
                 </CalloutBox>
 
                 {/* FAQ */}
-                <h2 id="faq">Câu Hỏi Thường Gặp Về Tự Động Hóa</h2>
+                <h2 id="faq">❓ Câu Hỏi Thường Gặp</h2>
 
-                <h3>Doanh nghiệp nhỏ (dưới 10 người) có cần tự động hóa không?</h3>
-                <p>
-                  Có — thậm chí còn cần hơn. Doanh nghiệp nhỏ thường không có nhiều
-                  nhân sự dự phòng để xử lý công việc lặp lại. Một người làm 3-4 vai
-                  thì automation giúp họ tập trung vào việc thực sự tạo ra giá trị.
-                  Chi phí công cụ như n8n (self-hosted miễn phí), Google Workspace
-                  (từ ~200k/tháng), Zalo OA (miễn phí) hoàn toàn phù hợp ngân sách
-                  doanh nghiệp nhỏ.
-                </p>
-
-                <h3>Tôi không biết lập trình, có tự làm được không?</h3>
-                <p>
-                  Phần lớn workflow automation hiện đại không cần code. Công cụ như
-                  n8n, Make (Integromat), và Zapier sử dụng giao diện kéo-thả. Với
-                  các workflow phức tạp hơn hoặc cần tích hợp sâu với hệ thống nội
-                  bộ, bạn có thể thuê đội chuyên gia setup một lần — sau đó tự vận
-                  hành mà không cần kỹ thuật.
-                </p>
-
-                <h3>Mất bao lâu để thấy kết quả?</h3>
-                <p>
-                  Với workflow đơn giản (nhập liệu, gửi email, cập nhật báo cáo),
-                  bạn có thể thấy kết quả ngay trong tuần đầu tiên. ROI dương thường
-                  đến trong vòng 1-3 tháng cho doanh nghiệp SME. 76% doanh nghiệp
-                  báo cáo ROI dương trong năm đầu tiên — con số này tiếp tục tăng
-                  trong năm thứ hai khi hệ thống được mở rộng.
-                </p>
-
-                <h3>Automation có thể bị lỗi không? Nếu lỗi thì sao?</h3>
-                <p>
-                  Workflow automation đều có thể gặp lỗi — thường do API của bên
-                  thứ ba thay đổi hoặc dữ liệu đầu vào không đúng định dạng. Giải
-                  pháp: thiết lập alert khi lỗi xảy ra (email/Telegram), có bước
-                  kiểm tra dữ liệu trước khi xử lý, và giữ log để dễ debug.
-                  Một workflow được thiết kế tốt sẽ có tỷ lệ uptime trên 99%.
-                </p>
-
-                <h3>Tự động hóa có làm mất việc làm của nhân viên không?</h3>
-                <p>
-                  Trong thực tế, hầu hết doanh nghiệp không sa thải nhân viên sau
-                  khi automation — họ chuyển người sang làm việc có giá trị cao hơn:
-                  chăm sóc khách hàng, phân tích dữ liệu, phát triển kinh doanh.
-                  Automation loại bỏ công việc nhàm chán, không phải con người.
-                  Doanh nghiệp phát triển nhanh hơn nghĩa là cần nhiều người hơn
-                  — nhưng làm việc thông minh hơn.
-                </p>
+                <FAQ items={[
+                  { q: "Doanh nghiệp nhỏ (dưới 10 người) có cần tự động hóa không?", a: "Có — thậm chí còn cần hơn. DN nhỏ thường không có nhân sự dự phòng. Một người làm 3-4 vai thì automation giúp họ tập trung vào việc tạo giá trị. Chi phí: n8n self-hosted miễn phí, Google Workspace ~200k/tháng, Zalo OA miễn phí." },
+                  { q: "Tôi không biết lập trình, có tự làm được không?", a: "Phần lớn workflow automation hiện đại không cần code. n8n, Make, Zapier đều dùng giao diện kéo-thả. Với workflow phức tạp, thuê chuyên gia setup một lần — sau đó tự vận hành không cần kỹ thuật." },
+                  { q: "Mất bao lâu để thấy kết quả?", a: "Workflow đơn giản: kết quả ngay tuần đầu. ROI dương trong 1-3 tháng cho SME. 76% doanh nghiệp báo cáo ROI dương trong năm đầu — tiếp tục tăng năm thứ hai khi mở rộng." },
+                  { q: "Automation có thể bị lỗi không? Nếu lỗi thì sao?", a: "Có thể — thường do API bên thứ ba thay đổi hoặc data sai định dạng. Giải pháp: alert khi lỗi (email/Telegram), kiểm tra data trước xử lý, giữ log để debug. Workflow thiết kế tốt có uptime trên 99%." },
+                  { q: "Tự động hóa có làm mất việc làm nhân viên không?", a: "Hầu hết DN không sa thải — họ chuyển người sang việc có giá trị cao hơn: chăm sóc khách, phân tích data, phát triển kinh doanh. Automation loại bỏ công việc nhàm chán, không phải con người." },
+                ]} />
 
               </div>
             </div>
