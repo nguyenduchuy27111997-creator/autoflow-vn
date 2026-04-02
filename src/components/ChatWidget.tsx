@@ -205,7 +205,7 @@ export default function ChatWidget() {
             </div>
             <button
               onClick={handleOpen}
-              className="relative rounded-full flex items-center justify-center text-white hover:-translate-y-0.5 transition-all animate-[chat-pulse_1.5s_ease-out_3] w-[50px] h-[50px] sm:w-[54px] sm:h-[54px]"
+              className="relative rounded-full flex items-center justify-center text-white hover:-translate-y-0.5 transition-all animate-[chat-pulse_2s_ease-out_infinite] w-[50px] h-[50px] sm:w-[54px] sm:h-[54px]"
               style={{
                 background: "linear-gradient(135deg, #7C3AED, #8B5CF6)",
                 boxShadow: "0 8px 24px rgba(124, 58, 237, 0.35)",
