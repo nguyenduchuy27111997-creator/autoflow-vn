@@ -10,6 +10,7 @@ import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import CodeBlock from "@/components/blog/CodeBlock";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BlogInlineCTA from "@/components/blog/BlogInlineCTA";
 import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 import AnimatedCounter from "@/components/blog/AnimatedCounter";
 import StageTimeline from "@/components/blog/StageTimeline";
@@ -817,6 +818,8 @@ Node 5 - Zalo OA Reply:
                 </p>
 
                 {/* ==================== FAQ ==================== */}
+                <BlogInlineCTA category="AI" slug="ai-agent-huong-dan-toan-dien" />
+
                 <h2 id="faq">Câu Hỏi Thường Gặp Về AI Agent</h2>
                 <FAQ items={faqItems} />
 

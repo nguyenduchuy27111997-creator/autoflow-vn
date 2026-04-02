@@ -11,6 +11,7 @@ import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import CodeBlock from "@/components/blog/CodeBlock";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BlogInlineCTA from "@/components/blog/BlogInlineCTA";
 import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
@@ -751,6 +752,8 @@ export default function N8nLaGiBlog() {
                   muốn tích hợp AI sâu vào workflow, (4) ai đã dùng Zapier và thấy chi phí tăng
                   quá nhanh theo scale.
                 </CalloutBox>
+
+                <BlogInlineCTA category="Pillar" slug="n8n-la-gi" variant="compact" />
 
                 {/* ==================== SECTION 10 ==================== */}
                 <h2 id="faq">Câu Hỏi Thường Gặp Về n8n</h2>

@@ -8,6 +8,7 @@ import TableOfContents from "@/components/blog/TableOfContents";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
+import BlogInlineCTA from "@/components/blog/BlogInlineCTA";
 import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 import AnimatedCounter from "@/components/blog/AnimatedCounter";
 import JsonLd from "@/components/JsonLd";
@@ -667,6 +668,8 @@ export default function SoSanhCongCuAutomation2026() {
                 </p>
 
                 {/* ==================== FAQ ==================== */}
+                <BlogInlineCTA category="So sánh" slug="so-sanh-cong-cu-automation-2026" />
+
                 <h2 id="faq">Câu Hỏi Thường Gặp</h2>
                 <FAQ items={faqItems} />
 

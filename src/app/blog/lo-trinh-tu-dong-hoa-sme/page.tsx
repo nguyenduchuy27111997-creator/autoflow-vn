@@ -15,6 +15,7 @@ import StageTimeline from "@/components/blog/StageTimeline";
 import ROICalculator from "@/components/blog/ROICalculator";
 import MaturityQuiz from "@/components/blog/MaturityQuiz";
 import JsonLd from "@/components/JsonLd";
+import BlogInlineCTA from "@/components/blog/BlogInlineCTA";
 
 export const metadata: Metadata = {
   title: "Lộ Trình Tự Động Hóa Cho SME Việt Nam 2026: Từ Thủ Công Đến AI Agent",
@@ -441,6 +442,8 @@ export default function LoTrinhTuDongHoaSME() {
                   <a href="/blog/roi-calculator-automation">ROI Calculator chuyên sâu</a>{" "}
                   hoặc <a href="/audit">đặt audit miễn phí 30 phút</a> để có báo cáo cá nhân hóa.
                 </p>
+
+                <BlogInlineCTA category="Pillar" slug="lo-trinh-tu-dong-hoa-sme" variant="compact" />
 
                 {/* ==================== MATURITY QUIZ ==================== */}
                 <h2 id="danh-gia">Đánh Giá: Doanh Nghiệp Bạn Ở Giai Đoạn Nào?</h2>

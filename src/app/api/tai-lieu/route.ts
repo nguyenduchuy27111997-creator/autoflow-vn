@@ -41,6 +41,12 @@ const PDF_MAP: Record<string, { file: string; title: string }> = {
     file: "AutoFlow-Lead-Magnet-10-Quy-Trinh.pdf",
     title: "10 Quy Trình SME Nên Tự Động Hóa Ngay",
   },
+  // Content upgrades — send title-only email (no PDF attachment yet)
+  "ecommerce-checklist": { file: "", title: "Checklist Automation E-commerce" },
+  "bds-checklist": { file: "", title: "Checklist Automation Bất Động Sản" },
+  "giaoduc-checklist": { file: "", title: "Checklist Automation Giáo Dục" },
+  "fnb-checklist": { file: "", title: "Checklist Automation F&B" },
+  "ai-agent-guide": { file: "", title: "Mini Guide: AI Agent Cho SME" },
 };
 
 export async function POST(req: NextRequest) {
@@ -61,7 +67,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { name, email, phone, resource,
+    const { name, email, phone, resource, blog_referrer,
       utm_source, utm_medium, utm_campaign, utm_term, utm_content } = body;
 
     if (!email || !email.includes("@")) {
@@ -104,6 +110,7 @@ export async function POST(req: NextRequest) {
       email: email.trim(),
       name: name?.trim(),
       sequenceType: "pdf",
+      metadata: { resource: resourceKey, blog_referrer: blog_referrer || null },
     }).catch((err) => console.error("Email queue error (pdf):", err));
 
     // Read PDF file and send email
@@ -114,8 +121,17 @@ export async function POST(req: NextRequest) {
     }
 
     try {
-      const pdfPath = join(process.cwd(), "public", "pdfs", pdfInfo.file);
-      const pdfBuffer = await readFile(pdfPath);
+      const hasPdf = !!pdfInfo.file;
+      let pdfBuffer: Buffer | null = null;
+
+      if (hasPdf) {
+        const pdfPath = join(process.cwd(), "public", "pdfs", pdfInfo.file);
+        pdfBuffer = await readFile(pdfPath);
+      }
+
+      const emailBody = hasPdf
+        ? `Cảm ơn bạn đã tải tài liệu <strong>"${pdfInfo.title}"</strong>. File PDF được đính kèm trong email này.`
+        : `Cảm ơn bạn đã đăng ký nhận <strong>"${pdfInfo.title}"</strong>. Chúng mình sẽ gửi tài liệu chi tiết trong email tiếp theo nhé!`;
 
       await resend.emails.send({
         from: EMAIL_FROM,
@@ -132,7 +148,7 @@ export async function POST(req: NextRequest) {
               Chào${name ? ` <strong>${name.trim()}</strong>` : ""},
             </p>
             <p style="font-size: 15px; color: #334155; line-height: 1.7;">
-              Cảm ơn bạn đã tải tài liệu <strong>"${pdfInfo.title}"</strong>. File PDF được đính kèm trong email này.
+              ${emailBody}
             </p>
 
             <div style="background: #F0F7FF; border-radius: 12px; padding: 20px; margin: 24px 0; border-left: 4px solid #0066FF;">
@@ -155,12 +171,9 @@ export async function POST(req: NextRequest) {
             </p>
           </div>
         `,
-        attachments: [
-          {
-            filename: pdfInfo.file,
-            content: pdfBuffer.toString("base64"),
-          },
-        ],
+        ...(pdfBuffer && {
+          attachments: [{ filename: pdfInfo.file, content: pdfBuffer.toString("base64") }],
+        }),
       });
     } catch (emailError) {
       console.error("Email send error:", emailError);
