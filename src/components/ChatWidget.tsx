@@ -47,9 +47,16 @@ export default function ChatWidget() {
   const [input, setInput] = useState("");
   const [msgCount, setMsgCount] = useState(0);
   const [unread, setUnread] = useState(0);
-  const [sessionId] = useState(() =>
-    typeof crypto !== "undefined" ? crypto.randomUUID() : `s_${Date.now()}`
-  );
+  const sessionIdRef = useRef<string>("");
+
+  // Generate session ID only on client to avoid hydration mismatch
+  useEffect(() => {
+    if (!sessionIdRef.current) {
+      sessionIdRef.current = crypto.randomUUID();
+    }
+  }, []);
+
+  const sessionId = sessionIdRef.current || "pending";
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
