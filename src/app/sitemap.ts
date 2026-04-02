@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog-posts";
+import { templates } from "@/data/templates";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://autoflowvn.net";
@@ -144,6 +145,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${baseUrl}/mau-workflow`,
+      lastModified: new Date("2026-04-02"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/bang-gia/retainer`,
       lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
@@ -176,5 +183,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: post.featured ? 0.9 : 0.7,
   }));
 
-  return [...staticPages, ...blogEntries];
+  const templateEntries: MetadataRoute.Sitemap = templates.map((t) => ({
+    url: `${baseUrl}/mau-workflow/${t.slug}`,
+    lastModified: new Date("2026-04-02"),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...blogEntries, ...templateEntries];
 }
