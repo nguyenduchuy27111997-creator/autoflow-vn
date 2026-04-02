@@ -92,8 +92,9 @@ export default function RootLayout({
     <html
       lang="vi"
       className={`${beVietnam.variable} ${plusJakarta.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="min-h-full flex flex-col font-sans" suppressHydrationWarning>
         {/* Organization schema */}
         <JsonLd
           data={{
