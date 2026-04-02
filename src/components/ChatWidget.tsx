@@ -44,6 +44,7 @@ const GREETING = "Chào bạn! 👋 Mình là trợ lý AI của AutoFlow VN. H�
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(true); // pill → circle after 5s
   const [input, setInput] = useState("");
   const [msgCount, setMsgCount] = useState(0);
   const [unread, setUnread] = useState(0);
@@ -87,6 +88,14 @@ export default function ChatWidget() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, status]);
+
+  // Collapse pill → circle after 5s
+  useEffect(() => {
+    if (!open && expanded) {
+      const timer = setTimeout(() => setExpanded(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [open, expanded]);
 
   // Focus input when opened
   useEffect(() => {
@@ -139,21 +148,32 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Floating button */}
+      {/* Floating button — pill first, shrinks to circle after 5s */}
       {!open && (
         <button
           onClick={handleOpen}
-          className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary shadow-lg shadow-primary/25 flex items-center justify-center text-white hover:bg-primary-dark hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all"
+          className={`fixed bottom-6 right-6 z-50 shadow-lg shadow-primary/25 flex items-center justify-center text-white hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-500 bg-gradient-to-r from-primary to-primary-dark ${
+            expanded
+              ? "rounded-full px-5 py-3 gap-2.5"
+              : "rounded-full w-14 h-14"
+          }`}
           aria-label="Mở chat"
         >
-          <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" className="shrink-0">
             <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
           </svg>
+          {expanded && (
+            <span className="text-sm font-semibold whitespace-nowrap">Hỏi AI</span>
+          )}
           {/* Unread badge */}
           {unread > 0 && (
             <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center">
               {unread}
             </span>
+          )}
+          {/* Pulse ring on expanded */}
+          {expanded && (
+            <span className="absolute inset-0 rounded-full border-2 border-primary/30 animate-ping pointer-events-none" />
           )}
         </button>
       )}
