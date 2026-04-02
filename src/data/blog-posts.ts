@@ -11,6 +11,8 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   // Pillar
   { slug: "lo-trinh-tu-dong-hoa-sme", title: "Lộ Trình Tự Động Hóa Cho SME Việt Nam 2026: Từ Thủ Công Đến AI Agent", description: "Framework 5 giai đoạn, ROI calculator, đánh giá maturity miễn phí, và lộ trình triển khai thực tế bằng n8n.", date: "2026-04-02", readTime: "25 phút", category: "Pillar", featured: true },
+  { slug: "so-sanh-cong-cu-automation-2026", title: "Toàn Cảnh Công Cụ Tự Động Hóa Tại Việt Nam 2026", description: "So sánh chi tiết n8n, Zapier, Make & 20+ nền tảng. Giá VND, tích hợp Việt Nam, decision framework.", date: "2026-04-02", readTime: "22 phút", category: "Pillar", featured: false },
+  { slug: "ai-agent-huong-dan-toan-dien", title: "AI Agent + n8n: Hướng Dẫn Toàn Diện Xây Dựng Trợ Lý AI Cho Doanh Nghiệp Việt Nam 2026", description: "Hướng dẫn từ A-Z: 5 use cases, kiến trúc, chi phí VND, lộ trình 3 giai đoạn, rủi ro cần tránh.", date: "2026-04-02", readTime: "24 phút", category: "Pillar", featured: false },
   { slug: "n8n-la-gi", title: "n8n Là Gì? Hướng Dẫn Toàn Diện 2026", description: "Hướng dẫn A-Z: cài đặt, 400+ tích hợp, 70+ AI nodes, so sánh Zapier/Make, bảng giá VND.", date: "2026-01-06", readTime: "20 phút", category: "Pillar", featured: false },
 
   // Knowledge / Comparison (older content)
