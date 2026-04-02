@@ -9,13 +9,15 @@ const services = [
   { label: "Giáo dục & Đào tạo", href: "/dich-vu/giao-duc", desc: "Trung tâm, chuỗi trường học" },
   { label: "Bất động sản", href: "/dich-vu/bat-dong-san", desc: "Agency, sàn giao dịch" },
   { label: "F&B / Nhà hàng", href: "/dich-vu/fnb", desc: "Quán cafe, chuỗi nhà hàng" },
+  { label: "divider", href: "", desc: "" },
+  { label: "Quy trình làm việc", href: "/quy-trinh", desc: "4 bước từ audit đến bàn giao" },
+  { label: "Kết quả thực tế", href: "/ket-qua", desc: "Case study khách hàng" },
+  { label: "Tài liệu ngành", href: "/tai-lieu", desc: "Use case chi tiết + PDF" },
 ];
 
 const navLinks = [
-  { label: "Quy trình", href: "/quy-trinh" },
+  { label: "Mẫu Workflow", href: "/mau-workflow" },
   { label: "Bảng giá", href: "/bang-gia" },
-  { label: "Kết quả", href: "/ket-qua" },
-  { label: "Tài liệu", href: "/tai-lieu" },
   { label: "Blog", href: "/blog" },
 ];
 
@@ -77,18 +79,22 @@ export default function Navbar() {
             {serviceOpen && (
               <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2">
                 <div className="bg-white rounded-xl border border-slate-200 shadow-lg p-2 w-64">
-                  {services.map((s) => (
-                    <a
-                      key={s.href}
-                      href={s.href}
-                      className="flex flex-col px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors"
-                    >
-                      <span className="text-sm font-medium text-slate-900">
-                        {s.label}
-                      </span>
-                      <span className="text-xs text-slate-500">{s.desc}</span>
-                    </a>
-                  ))}
+                  {services.map((s, i) =>
+                    s.label === "divider" ? (
+                      <div key={i} className="my-1.5 mx-3 border-t border-slate-100" />
+                    ) : (
+                      <a
+                        key={s.href}
+                        href={s.href}
+                        className="flex flex-col px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors"
+                      >
+                        <span className="text-sm font-medium text-slate-900">
+                          {s.label}
+                        </span>
+                        <span className="text-xs text-slate-500">{s.desc}</span>
+                      </a>
+                    )
+                  )}
                 </div>
               </div>
             )}
@@ -142,16 +148,20 @@ export default function Navbar() {
             <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">
               Dịch vụ
             </p>
-            {services.map((s) => (
-              <a
-                key={s.href}
-                href={s.href}
-                onClick={() => setMobileOpen(false)}
-                className="block text-sm font-medium text-slate-600 hover:text-primary py-1.5 pl-3"
-              >
-                {s.label}
-              </a>
-            ))}
+            {services.map((s, i) =>
+              s.label === "divider" ? (
+                <div key={i} className="my-1.5 mx-3 border-t border-slate-100" />
+              ) : (
+                <a
+                  key={s.href}
+                  href={s.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="block text-sm font-medium text-slate-600 hover:text-primary py-1.5 pl-3"
+                >
+                  {s.label}
+                </a>
+              )
+            )}
           </div>
 
           <div className="border-t border-slate-100 pt-3">
