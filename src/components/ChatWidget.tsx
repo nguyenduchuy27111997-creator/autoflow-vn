@@ -159,7 +159,7 @@ export default function ChatWidget() {
             href="https://zalo.me/0935115248"
             target="_blank"
             rel="noopener noreferrer"
-            className="relative w-11 h-11 rounded-full bg-[#0068FF] shadow-md shadow-blue-500/20 flex items-center justify-center text-white hover:shadow-lg hover:-translate-y-0.5 transition-all group"
+            className="relative w-[52px] h-[52px] rounded-full bg-[#0068FF] shadow-md shadow-blue-500/20 flex items-center justify-center text-white hover:shadow-lg hover:-translate-y-0.5 transition-all group"
             aria-label="Chat Zalo"
             onClick={() => gtag("zalo_widget_open")}
           >
