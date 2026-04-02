@@ -154,44 +154,46 @@ export default function ChatWidget() {
       {/* Floating buttons: Zalo + AI Chat */}
       {!open && (
         <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2.5">
-          {/* Zalo button — blue, smaller */}
+          {/* Zalo button — Zalo brand blue */}
           <a
             href="https://zalo.me/0935115248"
             target="_blank"
             rel="noopener noreferrer"
-            className="relative w-[52px] h-[52px] rounded-full bg-[#0068FF] shadow-md shadow-blue-500/20 flex items-center justify-center text-white hover:shadow-lg hover:-translate-y-0.5 transition-all group"
+            className="relative rounded-full bg-[#0068FF] shadow-lg shadow-blue-500/25 flex items-center justify-center text-white hover:shadow-xl hover:-translate-y-0.5 transition-all group"
+            style={{ width: 52, height: 52 }}
             aria-label="Chat Zalo"
             onClick={() => gtag("zalo_widget_open")}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.97 1.81 5.58 4.5 7.12V22l3.6-2.08c.61.12 1.24.08 1.9.08 5.52 0 10-4.03 10-9S17.52 2 12 2zm1.13 12.22l-2.54-2.72-4.97 2.72L10.84 9l2.6 2.72L18.32 9l-5.19 5.22z" /></svg>
-            {/* Hover label */}
+            {/* Zalo "Z" lettermark */}
+            <svg width="28" height="28" viewBox="0 0 48 48" fill="none">
+              <path d="M12.5 17.5h18.2L12.5 33.2V35h23v-3.5H17.3L35.5 15.8V14h-23v3.5z" fill="white"/>
+            </svg>
             <span className="absolute right-full mr-3 px-2.5 py-1 rounded-lg bg-white shadow-md border border-slate-200 text-[11px] font-medium text-slate-700 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
               Chat Zalo
             </span>
           </a>
 
-          {/* AI Chat button — dark, larger (primary action) */}
+          {/* AI Chat button — accent green, eye-catching */}
           <div className="relative">
-            {/* Tooltip — anchored directly to this button */}
             <div
               className={`absolute bottom-full right-0 mb-3 transition-all duration-300 pointer-events-none ${
                 showTooltip ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
               }`}
             >
               <div className="bg-white rounded-xl shadow-lg border border-slate-200 px-4 py-2.5 whitespace-nowrap">
-                <p className="text-sm font-medium text-slate-700">Hỏi mình bất cứ điều gì! 🤖</p>
+                <p className="text-sm font-medium text-slate-700">Hỏi mình bất cứ điều gì! 💬</p>
                 <p className="text-[10px] text-slate-400">AI trả lời ngay 24/7</p>
               </div>
               <div className="absolute -bottom-1.5 right-5 w-3 h-3 bg-white border-r border-b border-slate-200 rotate-45" />
             </div>
             <button
               onClick={handleOpen}
-              className="relative rounded-full bg-slate-900 shadow-lg shadow-slate-900/30 flex items-center justify-center text-white hover:bg-slate-800 hover:shadow-xl hover:-translate-y-0.5 transition-all"
+              className="relative rounded-full bg-primary shadow-lg shadow-primary/25 flex items-center justify-center text-white hover:bg-primary-dark hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all"
               style={{ width: 52, height: 52 }}
               aria-label="Mở chat AI"
             >
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+              <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
               </svg>
               {unread > 0 && (
                 <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center">
