@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import BlogArticleTracker from "@/components/analytics/BlogArticleTracker";
 import ReadingProgress from "@/components/blog/ReadingProgress";
-import BackToTop from "@/components/blog/BackToTop";
 
 export const metadata: Metadata = {
   title: "Blog Tự Động Hóa Cho SME | AutoFlow VN",
@@ -21,7 +20,6 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
     <>
       <ReadingProgress />
       {children}
-      <BackToTop />
       <BlogArticleTracker />
     </>
   );
