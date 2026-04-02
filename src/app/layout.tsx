@@ -131,7 +131,7 @@ export default function RootLayout({
               availableLanguage: ["vi", "en"],
             },
             sameAs: [
-              "https://facebook.com/autoflowvn",
+              "https://www.facebook.com/profile.php?id=61575409020684",
             ],
             knowsAbout: [
               "n8n automation",
