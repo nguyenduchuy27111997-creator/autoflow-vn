@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { createClient } from "@/lib/supabase/server";
 import { enqueueEmailSequence } from "@/lib/email-queue";
+import { getRateLimitKey, isRateLimited } from "@/lib/rate-limit";
 import { readFile } from "fs/promises";
 import { join } from "path";
 import { EMAIL_FROM, SITE_NAME, SITE_URL } from "@/data/constants";
@@ -10,30 +11,6 @@ function getResend() {
   const key = process.env.RESEND_API_KEY;
   if (!key) return null;
   return new Resend(key);
-}
-
-const RATE_LIMIT_WINDOW = 60 * 60 * 1000;
-const MAX_REQUESTS = 5;
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-
-function getRateLimitKey(req: NextRequest): string {
-  return (
-    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    req.headers.get("x-real-ip") ||
-    "unknown"
-  );
-}
-
-function isRateLimited(key: string): boolean {
-  const now = Date.now();
-  const entry = rateLimitMap.get(key);
-  if (!entry || now > entry.resetAt) {
-    rateLimitMap.set(key, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
-    return false;
-  }
-  if (entry.count >= MAX_REQUESTS) return true;
-  entry.count++;
-  return false;
 }
 
 const PDF_MAP: Record<string, { file: string; title: string }> = {
@@ -60,7 +37,7 @@ export async function POST(req: NextRequest) {
 
     // Rate limit
     const clientKey = getRateLimitKey(req);
-    if (isRateLimited(clientKey)) {
+    if (isRateLimited(clientKey, "tai-lieu")) {
       return NextResponse.json(
         { error: "Quá nhiều yêu cầu. Vui lòng thử lại sau." },
         { status: 429 },

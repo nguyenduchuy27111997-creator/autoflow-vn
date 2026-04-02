@@ -1,30 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { enqueueEmailSequence } from "@/lib/email-queue";
-
-const RATE_LIMIT_WINDOW = 60 * 60 * 1000;
-const MAX_REQUESTS = 10;
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-
-function getRateLimitKey(req: NextRequest): string {
-  return (
-    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    req.headers.get("x-real-ip") ||
-    "unknown"
-  );
-}
-
-function isRateLimited(key: string): boolean {
-  const now = Date.now();
-  const entry = rateLimitMap.get(key);
-  if (!entry || now > entry.resetAt) {
-    rateLimitMap.set(key, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
-    return false;
-  }
-  if (entry.count >= MAX_REQUESTS) return true;
-  entry.count++;
-  return false;
-}
+import { getRateLimitKey, isRateLimited } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
   try {
@@ -35,7 +12,7 @@ export async function POST(req: NextRequest) {
 
     // Rate limit
     const clientKey = getRateLimitKey(req);
-    if (isRateLimited(clientKey)) {
+    if (isRateLimited(clientKey, "quiz", { maxRequests: 10 })) {
       return NextResponse.json(
         { error: "Quá nhiều yêu cầu." },
         { status: 429 }

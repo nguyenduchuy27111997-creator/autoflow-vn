@@ -5,28 +5,10 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { usePathname } from "next/navigation";
 
+import { formatChat } from "@/lib/format-chat";
+
 const EXCLUDED_PATHS = ["/portal"];
 const MAX_MESSAGES_PER_SESSION = 20;
-const STORAGE_KEY = "autoflow_chat_open";
-
-/** Format: escape HTML → bold → links → newlines */
-function formatChat(text: string): string {
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-    .replace(
-      /(https?:\/\/[^\s<]+)/g,
-      '<a href="$1" target="_blank" rel="noopener" class="underline underline-offset-2">$1</a>'
-    )
-    .replace(
-      /(?<!=")\/(?:audit|quiz|bang-gia|tai-lieu|blog)(?:\/[^\s<]*)?/g,
-      (match) =>
-        `<a href="${match}" class="underline underline-offset-2">${match}</a>`
-    )
-    .replace(/\n/g, "<br />");
-}
 
 function gtag(event: string, params?: Record<string, unknown>) {
   if (typeof window !== "undefined" && typeof window.gtag === "function") {
