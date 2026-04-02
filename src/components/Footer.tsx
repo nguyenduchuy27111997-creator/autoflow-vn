@@ -79,7 +79,9 @@ export default function Footer() {
                 { label: "Bảng giá", href: "/bang-gia" },
                 { label: "Quy trình", href: "/quy-trinh" },
                 { label: "Kết quả", href: "/ket-qua" },
+                { label: "Mẫu Workflow", href: "/mau-workflow" },
                 { label: "Về chúng tôi", href: "/ve-chung-toi" },
+                { label: "Đối tác", href: "/doi-tac" },
               ].map((item) => (
                 <li key={item.label}>
                   <a
