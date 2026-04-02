@@ -295,7 +295,9 @@ export default function RoiCalculatorAutomationBlog() {
                   <p className="mb-2">
                     Đặt lịch <strong>audit miễn phí 30 phút</strong> — mình sẽ phân tích quy
                     trình của bạn, tính toán tiết kiệm thực tế, và đưa ra lộ trình automation
-                    với ROI cụ thể.
+                    với ROI cụ thể. Xem ngay{" "}
+                    <a href="/blog/lo-trinh-tu-dong-hoa-sme">lộ trình đầy đủ với ROI calculator</a> cho
+                    từng giai đoạn automation.
                   </p>
                   <a
                     href="/audit"

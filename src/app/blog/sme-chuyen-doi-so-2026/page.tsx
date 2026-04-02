@@ -433,7 +433,9 @@ export default function SmeChuyenDoiSo2026Blog() {
                 <p>
                   Cột "Trung cấp" được highlight vì đây là mức độ có <strong>ROI cao nhất
                   so với đầu tư</strong> và khả thi nhất với phần lớn SME Việt Nam trong
-                  12–18 tháng tới. Đây là "sweet spot" cần hướng tới.
+                  12–18 tháng tới. Đây là "sweet spot" cần hướng tới. Đọc thêm{" "}
+                  <a href="/blog/lo-trinh-tu-dong-hoa-sme">lộ trình tự động hóa từ thủ công đến AI Agent</a> để
+                  hiểu chi tiết từng giai đoạn và cách chuyển tiếp.
                 </p>
 
                 <CalloutBox type="info" title="Đừng bỏ qua Giai đoạn 3">

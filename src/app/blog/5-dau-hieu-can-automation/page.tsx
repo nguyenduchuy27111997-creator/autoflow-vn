@@ -576,7 +576,9 @@ export default function DauHieuCanAutomationBlog() {
                   <p className="mb-3">
                     Đặt lịch <strong>audit miễn phí 30 phút</strong> — chúng tôi sẽ phân tích
                     quy trình hiện tại, xác định 3 workflow có ROI cao nhất, và đưa ra lộ
-                    trình triển khai cụ thể — hoàn toàn không mất phí.
+                    trình triển khai cụ thể — hoàn toàn không mất phí. Hoặc xem ngay{" "}
+                    <a href="/blog/lo-trinh-tu-dong-hoa-sme">lộ trình 5 giai đoạn từ thủ công đến AI Agent</a>{" "}
+                    để biết doanh nghiệp bạn đang ở đâu.
                   </p>
                   <a
                     href="/audit"

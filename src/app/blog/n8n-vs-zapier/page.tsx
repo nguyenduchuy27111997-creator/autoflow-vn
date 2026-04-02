@@ -390,6 +390,8 @@ export default function N8nVsZapierBlog() {
                   Nếu bạn vẫn đang dùng Zapier và chi phí đang tăng dần theo lượng đơn hàng —
                   đây là thời điểm tốt để đánh giá lại. Migration từ Zapier sang n8n thường mất
                   1-2 tuần cho một developer có kinh nghiệm, và khoản tiết kiệm sẽ hoàn vốn trong 1-2 tháng đầu tiên.
+                  Xem thêm <a href="/blog/lo-trinh-tu-dong-hoa-sme">lộ trình tự động hóa chi tiết</a> để
+                  biết n8n phù hợp ở giai đoạn nào trong hành trình automation của bạn.
                 </p>
 
                 <CalloutBox type="info" title="Bạn đang dùng Zapier và muốn biết có nên chuyển không?">

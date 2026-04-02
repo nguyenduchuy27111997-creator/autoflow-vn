@@ -362,7 +362,9 @@ export default function TuLamHayThueBlog() {
                   Chúng tôi thường gặp khách hàng đã thử DIY 4–6 tháng, sau đó đến với agency.
                   Điểm chung: họ mất thời gian, build một số workflow hoạt động được nhưng không có
                   cấu trúc, và kiệt sức với việc maintain. Nếu bạn nhận ra mình đang trong tình
-                  huống đó — đó là tín hiệu tốt để đánh giá lại.
+                  huống đó — đó là tín hiệu tốt để đánh giá lại. Tham khảo{" "}
+                  <a href="/blog/lo-trinh-tu-dong-hoa-sme">framework 5 giai đoạn automation</a> để
+                  xác định đúng thời điểm cần chuyên gia.
                   <a
                     href="/audit"
                     className="inline-flex items-center gap-1 text-primary font-semibold text-sm hover:underline mt-2 block"

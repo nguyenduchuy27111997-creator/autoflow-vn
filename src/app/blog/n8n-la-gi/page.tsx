@@ -766,7 +766,9 @@ export default function N8nLaGiBlog() {
                   </p>
                   <p className="mb-3">
                     <strong>Audit miễn phí 30 phút:</strong> Chia sẻ quy trình thủ công đang gặp
-                    phải, nhận lộ trình automation cụ thể và ROI ước tính.
+                    phải, nhận lộ trình automation cụ thể và ROI ước tính. Hoặc tham khảo{" "}
+                    <a href="/blog/lo-trinh-tu-dong-hoa-sme">lộ trình 5 giai đoạn cho SME Việt Nam</a> để
+                    biết n8n nằm ở đâu trong hành trình automation.
                   </p>
                   <a
                     href="/audit"

@@ -554,7 +554,9 @@ export default function DongBoShopeeMisaBlog() {
 
                 <p>
                   Lộ trình triển khai thực tế cho một shop Shopee — từ chưa có
-                  gì đến vận hành ổn định trong 2 tuần:
+                  gì đến vận hành ổn định trong 2 tuần. Đây là{" "}
+                  <a href="/blog/lo-trinh-tu-dong-hoa-sme">Giai đoạn 2 trong lộ trình tự động hóa SME</a> —
+                  tích hợp hệ thống cốt lõi:
                 </p>
 
                 <StepList

@@ -408,6 +408,8 @@ export default function AIAgentN8nSMEBlog() {
                   Không phải lúc nào AI Agent cũng là lựa chọn tốt nhất. Với quy trình lặp lại hoàn toàn
                   (sync đơn hàng từ Shopee vào Google Sheet), automation rule-based đơn giản hơn, rẻ hơn và đáng tin cậy hơn.
                   Dùng AI Agent khi quy trình cần <strong>phán đoán, hiểu ngôn ngữ tự nhiên, hoặc xử lý ngoại lệ</strong>.
+                  Đây là <a href="/blog/lo-trinh-tu-dong-hoa-sme">Giai đoạn 5 trong lộ trình automation maturity</a> —
+                  chỉ nên triển khai khi các giai đoạn trước đã vững.
                 </CalloutBox>
 
                 {/* FAQ */}
