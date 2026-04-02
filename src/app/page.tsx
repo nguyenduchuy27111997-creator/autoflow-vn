@@ -46,6 +46,28 @@ export default function Home() {
         <Process />
         <Pricing />
         <Results />
+
+        {/* Quiz CTA */}
+        <section className="py-16 bg-gradient-to-r from-violet-50 to-blue-50">
+          <div className="max-w-3xl mx-auto px-6 text-center">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-100 text-violet-600 text-xs font-semibold mb-4">
+              📝 Quiz 2 phút
+            </span>
+            <h2 className="font-display font-bold text-2xl text-slate-900 mb-3">
+              Doanh nghiệp bạn sẵn sàng tự động hóa chưa?
+            </h2>
+            <p className="text-slate-500 mb-6 max-w-lg mx-auto">
+              Trả lời 10 câu hỏi — nhận đánh giá mức độ sẵn sàng + gợi ý gói phù hợp. Miễn phí, không ràng buộc.
+            </p>
+            <a
+              href="/quiz"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-violet-600 text-white font-semibold text-sm hover:bg-violet-700 hover:shadow-lg hover:shadow-violet-500/25 transition-all"
+            >
+              Làm Quiz Ngay →
+            </a>
+          </div>
+        </section>
+
         <FAQ />
         <CTA />
       </main>

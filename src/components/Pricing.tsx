@@ -16,7 +16,7 @@ const packages = [
       "1 workflow n8n chạy thật",
       "Video Loom hướng dẫn vận hành",
       "SOP document trên Notion",
-      "Support 7 ngày sau bàn giao",
+      "Hỗ trợ 7 ngày sau bàn giao",
     ],
     example: "Lead Facebook → Google Sheet → Zalo OA chào hàng → Nhắc follow-up 3 ngày",
     popular: false,
@@ -30,9 +30,9 @@ const packages = [
     features: [
       "Audit toàn bộ quy trình vận hành",
       "3–5 workflows n8n",
-      "Training session 2h cho team",
-      "Video library hướng dẫn từng workflow",
-      "Support 14 ngày sau bàn giao",
+      "Đào tạo team 2 giờ",
+      "Thư viện video hướng dẫn từng quy trình",
+      "Hỗ trợ 14 ngày sau bàn giao",
     ],
     example:
       "Đồng bộ đơn Shopee → MISA · Auto-reply review · Lead capture → CRM · Báo cáo tồn kho tự động",
@@ -45,11 +45,11 @@ const packages = [
     unit: "triệu đồng",
     timeline: "6–8 tuần",
     features: [
-      "Full process mapping → automation blueprint",
+      "Phân tích toàn bộ quy trình → bản thiết kế tự động hóa",
       "8–12 workflows n8n",
       "n8n self-hosted trên VPS riêng (data trong nước)",
-      "Team training 2 buổi",
-      "30-day warranty + monitoring",
+      "Đào tạo team 2 buổi",
+      "Bảo hành 30 ngày + theo dõi hệ thống",
     ],
     example:
       "Toàn bộ vận hành: đơn hàng, kho, tài chính, marketing, báo cáo — tự động hết",

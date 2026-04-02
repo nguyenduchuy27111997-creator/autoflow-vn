@@ -17,7 +17,7 @@ const packages = [
       "1 workflow n8n chạy thật",
       "Video Loom hướng dẫn vận hành",
       "SOP document trên Notion",
-      "Support 7 ngày sau bàn giao",
+      "Hỗ trợ 7 ngày sau bàn giao",
     ],
     notIncluded: ["Training team", "n8n self-hosted", "Warranty dài hạn"],
     example: {
@@ -35,9 +35,9 @@ const packages = [
     features: [
       "Audit toàn bộ quy trình vận hành",
       "3–5 workflows n8n",
-      "Training session 2h cho team",
-      "Video library hướng dẫn từng workflow",
-      "Support 14 ngày sau bàn giao",
+      "Đào tạo team 2 giờ",
+      "Thư viện video hướng dẫn từng quy trình",
+      "Hỗ trợ 14 ngày sau bàn giao",
     ],
     notIncluded: ["n8n self-hosted riêng", "Warranty 30 ngày"],
     example: {
@@ -53,11 +53,11 @@ const packages = [
     timeline: "6–8 tuần",
     ideal: "Doanh nghiệp muốn tự động hóa toàn bộ vận hành",
     features: [
-      "Full process mapping → automation blueprint",
+      "Phân tích toàn bộ quy trình → bản thiết kế tự động hóa",
       "8–12 workflows n8n",
       "n8n self-hosted trên VPS riêng (data trong nước)",
-      "Team training 2 buổi",
-      "30-day warranty + monitoring",
+      "Đào tạo team 2 buổi",
+      "Bảo hành 30 ngày + theo dõi hệ thống",
     ],
     notIncluded: [],
     example: {
@@ -332,9 +332,9 @@ export default function BangGiaPage() {
             <div className="grid sm:grid-cols-2 gap-4 mb-6">
               {[
                 "Monitor workflows hàng tuần",
-                "Fix lỗi trong 24h (SLA)",
+                "Fix lỗi trong 24h (cam kết)",
                 "1–2 workflow nhỏ mới mỗi tháng",
-                "Monthly automation report tự động",
+                "Báo cáo tự động hóa hàng tháng",
                 "Tư vấn AI tools mới phù hợp",
                 "Check-in 30/60/90 ngày",
               ].map((item, i) => (

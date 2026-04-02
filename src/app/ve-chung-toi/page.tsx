@@ -21,8 +21,8 @@ const team = [
     role: "Founder & Lead Automation Engineer",
     initial: "H",
     color: "#0066FF",
-    desc: "Kinh nghiệm phát triển phần mềm, tích hợp hệ thống và tư vấn công nghệ. Focus 100% vào giúp SME VN tự động hóa quy trình bằng n8n.",
-    skills: ["n8n", "Zalo OA API", "MISA Integration", "AI Workflows"],
+    desc: "Xin chào! Mình là Huy — người trực tiếp phân tích quy trình, viết workflow, và bàn giao cho khách hàng AutoFlow. Với kinh nghiệm phát triển phần mềm và tích hợp hệ thống, mình giúp SME Việt Nam tiết kiệm hàng chục giờ mỗi tuần bằng tự động hóa thông minh. Bạn sẽ nói chuyện trực tiếp với mình — không qua trung gian.",
+    skills: ["n8n", "Zalo OA API", "MISA", "KiotViet", "Shopee", "AI Workflows"],
   },
 ];
 
@@ -217,6 +217,18 @@ export default function VeChungToiPage() {
                           {skill}
                         </span>
                       ))}
+                    </div>
+                    {/* Direct contact */}
+                    <div className="flex flex-wrap gap-3 mt-4 pt-4 border-t border-slate-100">
+                      <a href="https://zalo.me/0935115248" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-medium text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full hover:bg-blue-100 transition-colors">
+                        💬 Chat Zalo
+                      </a>
+                      <a href="tel:0935115248" className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full hover:bg-slate-200 transition-colors">
+                        📱 0935.115.248
+                      </a>
+                      <a href="mailto:hello@autoflowvn.net" className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full hover:bg-slate-200 transition-colors">
+                        ✉️ hello@autoflowvn.net
+                      </a>
                     </div>
                   </div>
                 </div>

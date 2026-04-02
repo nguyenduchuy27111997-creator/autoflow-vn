@@ -21,7 +21,7 @@ const included = [
     desc: "Kiểm tra tất cả workflows đang chạy, phát hiện lỗi trước khi ảnh hưởng business.",
   },
   {
-    title: "Fix lỗi trong 24h (SLA)",
+    title: "Fix lỗi trong 24h (cam kết)",
     desc: "Cam kết fix mọi lỗi workflow trong 24h làm việc. Liên hệ trực tiếp qua Zalo.",
   },
   {
@@ -29,7 +29,7 @@ const included = [
     desc: "Thêm automation mới theo nhu cầu phát sinh — không cần mua gói mới.",
   },
   {
-    title: "Monthly Automation Report",
+    title: "Báo cáo tự động hóa hàng tháng",
     desc: "Báo cáo cuối tháng tự động: số execution, thời gian tiết kiệm, ROI thực tế. Gửi qua Zalo.",
   },
   {
@@ -52,7 +52,7 @@ const faqs = [
     a: "Workflow dưới 10 nodes, build trong 2–4 giờ. Ví dụ: thêm 1 notification mới, tạo 1 report đơn giản, tích hợp 1 tool mới. Workflow lớn hơn sẽ quote riêng.",
   },
   {
-    q: "SLA fix 24h có nghĩa là gì?",
+    q: "Cam kết fix 24h có nghĩa là gì?",
     a: "Khi bạn báo lỗi qua Zalo, mình bắt đầu xử lý trong 24h làm việc (T2–T6, 8h–18h). Lỗi critical (workflow ngừng hoàn toàn) được ưu tiên fix trong 4h.",
   },
   {
@@ -105,10 +105,10 @@ export default function RetainerPage() {
             {/* Stats */}
             <div className="grid grid-cols-2 gap-4">
               {[
-                { value: "70%+", label: "clients chọn retainer sau project" },
-                { value: "24h", label: "SLA fix lỗi" },
+                { value: "70%+", label: "khách hàng chọn retainer" },
+                { value: "24h", label: "cam kết fix lỗi" },
                 { value: "1–2", label: "workflow mới/tháng" },
-                { value: "100%", label: "uptime monitoring" },
+                { value: "100%", label: "theo dõi hoạt động" },
               ].map((s, i) => (
                 <div
                   key={i}

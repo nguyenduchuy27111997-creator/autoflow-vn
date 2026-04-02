@@ -151,9 +151,9 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Floating button + tooltip */}
+      {/* Floating buttons: Zalo + AI Chat */}
       {!open && (
-        <div className="fixed bottom-6 right-6 z-50">
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
           {/* Tooltip bubble */}
           <div
             className={`absolute bottom-full right-0 mb-3 transition-all duration-300 pointer-events-none ${
@@ -164,20 +164,30 @@ export default function ChatWidget() {
               <p className="text-sm font-medium text-slate-700">Hỏi mình bất cứ điều gì! 💬</p>
               <p className="text-[10px] text-slate-400">AI trả lời ngay 24/7</p>
             </div>
-            {/* Arrow */}
             <div className="absolute -bottom-1.5 right-5 w-3 h-3 bg-white border-r border-b border-slate-200 rotate-45" />
           </div>
 
-          {/* Circle button */}
+          {/* Zalo button */}
+          <a
+            href="https://zalo.me/0935115248"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-12 h-12 rounded-full bg-[#0068FF] shadow-lg shadow-blue-500/25 flex items-center justify-center text-white hover:shadow-xl hover:-translate-y-0.5 transition-all"
+            aria-label="Chat Zalo"
+            onClick={() => gtag("zalo_widget_open")}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.97 1.81 5.58 4.5 7.12V22l3.6-2.08c.61.12 1.24.08 1.9.08 5.52 0 10-4.03 10-9S17.52 2 12 2zm1.13 12.22l-2.54-2.72-4.97 2.72L10.84 9l2.6 2.72L18.32 9l-5.19 5.22z" /></svg>
+          </a>
+
+          {/* AI Chat button */}
           <button
             onClick={handleOpen}
             className="w-14 h-14 rounded-full bg-primary shadow-lg shadow-primary/25 flex items-center justify-center text-white hover:bg-primary-dark hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all"
-            aria-label="Mở chat"
+            aria-label="Mở chat AI"
           >
             <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
             </svg>
-            {/* Unread badge */}
             {unread > 0 && (
               <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center">
                 {unread}
