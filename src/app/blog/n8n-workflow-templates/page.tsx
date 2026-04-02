@@ -93,7 +93,7 @@ export default function N8nWorkflowTemplatesBlog() {
 
           {/* Header */}
           <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-400 mb-5">
+            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
               <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
               <span>/</span>
               <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
@@ -110,7 +110,7 @@ export default function N8nWorkflowTemplatesBlog() {
               <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold">
                 Miễn phí
               </span>
-              <span className="text-xs text-slate-400">15 phút đọc</span>
+              <span className="text-xs text-slate-500">15 phút đọc</span>
             </div>
             <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
               10 n8n Workflow Templates Miễn Phí{" "}

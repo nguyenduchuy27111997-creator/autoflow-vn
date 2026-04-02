@@ -1,5 +1,19 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Gói Retainer — Hỗ Trợ Automation Hàng Tháng | AutoFlow VN",
+  description:
+    "Gói retainer tự động hóa hàng tháng: monitor workflows, fix lỗi trong 24h, thêm 1–2 workflow mới mỗi tháng, báo cáo ROI thực tế. Dành cho SME Việt Nam.",
+  alternates: { canonical: "https://autoflowvn.net/bang-gia/retainer" },
+  openGraph: {
+    title: "Gói Retainer — Hỗ Trợ Automation Hàng Tháng | AutoFlow VN",
+    description:
+      "Monitor workflows, fix lỗi 24h, thêm workflow mới mỗi tháng. Gói retainer tự động hóa cho SME Việt Nam.",
+    url: "https://autoflowvn.net/bang-gia/retainer",
+  },
+};
 
 const included = [
   {
@@ -75,7 +89,7 @@ export default function RetainerPage() {
                 <span className="font-display font-extrabold text-5xl text-slate-900">
                   8–15
                 </span>
-                <span className="text-lg text-slate-400">triệu đ/tháng</span>
+                <span className="text-lg text-slate-500">triệu đ/tháng</span>
               </div>
               <a
                 href="/audit"

@@ -117,7 +117,7 @@ export default function BangGiaPage() {
                   onChange={(e) => setEmployees(Number(e.target.value))}
                   className="w-full accent-primary"
                 />
-                <div className="flex justify-between text-xs text-slate-400 mt-2">
+                <div className="flex justify-between text-xs text-slate-500 mt-2">
                   <span>1</span>
                   <span className="font-bold text-primary text-lg">
                     {employees} người
@@ -137,7 +137,7 @@ export default function BangGiaPage() {
                   onChange={(e) => setHours(Number(e.target.value))}
                   className="w-full accent-primary"
                 />
-                <div className="flex justify-between text-xs text-slate-400 mt-2">
+                <div className="flex justify-between text-xs text-slate-500 mt-2">
                   <span>1</span>
                   <span className="font-bold text-primary text-lg">
                     {hours} giờ
@@ -152,7 +152,7 @@ export default function BangGiaPage() {
                 <p className="font-display font-extrabold text-3xl text-red-500">
                   {costPerYear}
                 </p>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-slate-500 mt-1">
                   triệu đ/năm
                   <br />
                   chi phí lương nhập tay
@@ -162,7 +162,7 @@ export default function BangGiaPage() {
                 <p className="font-display font-extrabold text-3xl text-primary">
                   {savedHours}
                 </p>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-slate-500 mt-1">
                   giờ/tháng
                   <br />
                   có thể tiết kiệm
@@ -172,7 +172,7 @@ export default function BangGiaPage() {
                 <p className="font-display font-extrabold text-3xl text-accent">
                   {savedCost}
                 </p>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-slate-500 mt-1">
                   triệu đ/năm
                   <br />
                   tiết kiệm được
@@ -211,17 +211,17 @@ export default function BangGiaPage() {
                 <h3 className="font-display font-bold text-xl text-slate-900">
                   {pkg.name}
                 </h3>
-                <p className="text-sm text-slate-400 mt-1">{pkg.tagline}</p>
+                <p className="text-sm text-slate-500 mt-1">{pkg.tagline}</p>
 
                 <div className="my-5">
                   <span className="font-display font-extrabold text-4xl text-slate-900">
                     {pkg.price}
                   </span>
-                  <span className="text-sm text-slate-400 ml-1">
+                  <span className="text-sm text-slate-500 ml-1">
                     triệu đồng
                   </span>
                 </div>
-                <p className="text-xs text-slate-400 mb-1">
+                <p className="text-xs text-slate-500 mb-1">
                   Timeline: {pkg.timeline}
                 </p>
                 <p className="text-xs text-primary font-medium mb-6">
@@ -260,7 +260,7 @@ export default function BangGiaPage() {
                       >
                         <path d="M4 8h8" />
                       </svg>
-                      <span className="text-slate-400">{f}</span>
+                      <span className="text-slate-500">{f}</span>
                     </li>
                   ))}
                 </ul>
@@ -270,7 +270,7 @@ export default function BangGiaPage() {
                   <p className="text-xs font-semibold text-slate-700 mb-1.5">
                     Ví dụ: {pkg.example.title}
                   </p>
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-500 leading-relaxed">
                     {pkg.example.flow}
                   </p>
                 </div>
@@ -364,7 +364,7 @@ export default function BangGiaPage() {
                     <p className="text-sm font-semibold text-slate-900">
                       Upfront trước khi bắt đầu
                     </p>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-slate-500">
                       Chuyển khoản ngân hàng
                     </p>
                   </div>
@@ -377,7 +377,7 @@ export default function BangGiaPage() {
                     <p className="text-sm font-semibold text-slate-900">
                       Khi bàn giao hoàn tất
                     </p>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-slate-500">
                       Có hợp đồng dịch vụ rõ ràng
                     </p>
                   </div>
@@ -419,7 +419,7 @@ export default function BangGiaPage() {
                   >
                     <span className="text-slate-500">{row.label}</span>
                     <span className="font-semibold text-accent">{row.n8n}</span>
-                    <span className="text-slate-400">{row.zapier}</span>
+                    <span className="text-slate-500">{row.zapier}</span>
                   </div>
                 ))}
               </div>
@@ -443,7 +443,7 @@ export default function BangGiaPage() {
               bạn được hoàn 100% chi phí. Không điều kiện ẩn, không kéo dài.
               Mình cam kết vì mình tin vào chất lượng công việc.
             </p>
-            <div className="flex flex-wrap justify-center gap-6 mt-6 text-xs text-slate-400">
+            <div className="flex flex-wrap justify-center gap-6 mt-6 text-xs text-slate-500">
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                 Scope rõ ràng trong hợp đồng

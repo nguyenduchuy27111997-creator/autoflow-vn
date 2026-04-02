@@ -51,8 +51,8 @@ export default function RelatedPosts({
             <h4 className="font-display font-bold text-sm text-slate-900 leading-snug mb-2 group-hover:text-primary transition-colors line-clamp-2">
               {post.title}
             </h4>
-            <p className="text-xs text-slate-400 line-clamp-2">{post.description}</p>
-            <div className="flex items-center gap-2 mt-3 text-[10px] text-slate-400">
+            <p className="text-xs text-slate-500 line-clamp-2">{post.description}</p>
+            <div className="flex items-center gap-2 mt-3 text-[10px] text-slate-500">
               <span>{post.readTime}</span>
               <span>·</span>
               <span>{post.date}</span>

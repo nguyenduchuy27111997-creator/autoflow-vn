@@ -11,7 +11,7 @@ export default function StatCard({
             {s.value}
           </div>
           <div className="text-xs font-semibold text-slate-700 mt-1">{s.label}</div>
-          {s.sub && <div className="text-[11px] text-slate-400 mt-0.5">{s.sub}</div>}
+          {s.sub && <div className="text-[11px] text-slate-500 mt-0.5">{s.sub}</div>}
         </div>
       ))}
     </div>

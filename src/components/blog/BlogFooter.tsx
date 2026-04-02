@@ -18,7 +18,7 @@ export default function BlogFooter({
       {/* Share + Date row */}
       <div className="mt-12 pt-8 border-t border-slate-200 flex items-center justify-between flex-wrap gap-4">
         <ShareButtons title={title} />
-        <div className="text-xs text-slate-400">
+        <div className="text-xs text-slate-500">
           Cập nhật: {new Date(date).toLocaleDateString("vi-VN", { year: "numeric", month: "long", day: "numeric" })}
         </div>
       </div>

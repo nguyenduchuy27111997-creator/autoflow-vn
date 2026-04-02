@@ -94,7 +94,7 @@ export default function BlogPage() {
                     <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">
                       ⭐ Bài nổi bật
                     </span>
-                    <span className="text-xs text-slate-400">{featured.readTime}</span>
+                    <span className="text-xs text-slate-500">{featured.readTime}</span>
                   </div>
                   <h2 className="font-display font-extrabold text-2xl md:text-3xl text-slate-900 group-hover:text-primary transition-colors mb-3 leading-tight">
                     {featured.title}
@@ -138,7 +138,7 @@ export default function BlogPage() {
                           {post.category}
                         </span>
                       </div>
-                      <span className="text-[10px] text-slate-400">{post.readTime}</span>
+                      <span className="text-[10px] text-slate-500">{post.readTime}</span>
                     </div>
 
                     {/* Title */}
@@ -147,7 +147,7 @@ export default function BlogPage() {
                     </h2>
 
                     {/* Description */}
-                    <p className="text-xs text-slate-400 leading-relaxed line-clamp-2 mb-3">
+                    <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 mb-3">
                       {post.description}
                     </p>
 
@@ -166,7 +166,7 @@ export default function BlogPage() {
 
           {filtered.length === 0 && (
             <div className="text-center py-20">
-              <p className="text-slate-400">Không có bài viết nào trong danh mục này.</p>
+              <p className="text-slate-500">Không có bài viết nào trong danh mục này.</p>
             </div>
           )}
         </section>

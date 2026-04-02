@@ -283,7 +283,7 @@ export default function DichVuPage() {
                 <h3 className="font-display font-bold text-lg text-slate-900 mb-1 group-hover:text-primary transition-colors">
                   {ind.label}
                 </h3>
-                <p className="text-xs text-slate-400 mb-3">{ind.desc}</p>
+                <p className="text-xs text-slate-500 mb-3">{ind.desc}</p>
                 <p className="text-sm text-slate-500 leading-relaxed mb-4">
                   {ind.pain}
                 </p>
@@ -301,7 +301,7 @@ export default function DichVuPage() {
             <h2 className="font-display font-extrabold text-2xl text-white mb-3">
               Chưa biết nên bắt đầu từ đâu?
             </h2>
-            <p className="text-slate-400 mb-6">
+            <p className="text-slate-500 mb-6">
               30 phút audit miễn phí — mình phân tích quy trình và chỉ ra chính xác workflow nào nên tự động hóa trước.
             </p>
             <a

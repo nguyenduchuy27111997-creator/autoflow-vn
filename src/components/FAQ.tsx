@@ -81,7 +81,7 @@ export default function FAQ() {
                   className={`shrink-0 mt-0.5 w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold transition-colors ${
                     openIndex === i
                       ? "bg-primary text-white"
-                      : "bg-slate-100 text-slate-400"
+                      : "bg-slate-100 text-slate-500"
                   }`}
                 >
                   {openIndex === i ? "−" : "+"}

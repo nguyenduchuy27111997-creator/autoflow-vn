@@ -146,7 +146,7 @@ export default function AuditPage() {
                           className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
                             step >= s
                               ? "bg-primary text-white"
-                              : "bg-slate-100 text-slate-400"
+                              : "bg-slate-100 text-slate-500"
                           }`}
                         >
                           {step > s ? (
@@ -180,7 +180,7 @@ export default function AuditPage() {
                       <h2 className="font-display font-bold text-xl text-slate-900 mb-1">
                         Thông tin liên hệ
                       </h2>
-                      <p className="text-sm text-slate-400 mb-6">
+                      <p className="text-sm text-slate-500 mb-6">
                         Để mình liên hệ sắp xếp cuộc gọi audit
                       </p>
 
@@ -235,7 +235,7 @@ export default function AuditPage() {
                         type="button"
                         onClick={() => setStep(2)}
                         disabled={!canProceed1}
-                        className="mt-6 w-full bg-primary hover:bg-primary-dark disabled:bg-slate-200 disabled:text-slate-400 text-white font-semibold py-3.5 rounded-xl transition-all"
+                        className="mt-6 w-full bg-primary hover:bg-primary-dark disabled:bg-slate-200 disabled:text-slate-500 text-white font-semibold py-3.5 rounded-xl transition-all"
                       >
                         Tiếp tục →
                       </button>
@@ -248,7 +248,7 @@ export default function AuditPage() {
                       <h2 className="font-display font-bold text-xl text-slate-900 mb-1">
                         Về doanh nghiệp của bạn
                       </h2>
-                      <p className="text-sm text-slate-400 mb-6">
+                      <p className="text-sm text-slate-500 mb-6">
                         Giúp mình chuẩn bị tốt hơn cho cuộc gọi audit
                       </p>
 
@@ -314,7 +314,7 @@ export default function AuditPage() {
                           type="button"
                           onClick={() => setStep(3)}
                           disabled={!canProceed2}
-                          className="flex-1 bg-primary hover:bg-primary-dark disabled:bg-slate-200 disabled:text-slate-400 text-white font-semibold py-3.5 rounded-xl transition-all"
+                          className="flex-1 bg-primary hover:bg-primary-dark disabled:bg-slate-200 disabled:text-slate-500 text-white font-semibold py-3.5 rounded-xl transition-all"
                         >
                           Tiếp tục →
                         </button>
@@ -328,7 +328,7 @@ export default function AuditPage() {
                       <h2 className="font-display font-bold text-xl text-slate-900 mb-1">
                         Vấn đề bạn đang gặp
                       </h2>
-                      <p className="text-sm text-slate-400 mb-6">
+                      <p className="text-sm text-slate-500 mb-6">
                         Chọn tất cả những gì phù hợp
                       </p>
 
@@ -408,7 +408,7 @@ export default function AuditPage() {
                         </button>
                       </div>
 
-                      <p className="text-xs text-center text-slate-400 mt-4">
+                      <p className="text-xs text-center text-slate-500 mt-4">
                         Không spam. Không chia sẻ thông tin cho bên thứ ba.
                       </p>
                     </div>

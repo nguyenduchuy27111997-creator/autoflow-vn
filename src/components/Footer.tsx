@@ -102,6 +102,8 @@ export default function Footer() {
               <li className="text-sm text-slate-400">
                 <a
                   href="tel:0935115248"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:text-primary transition-colors"
                 >
                   📱 Zalo: 0935115248
@@ -110,6 +112,8 @@ export default function Footer() {
               <li className="text-sm text-slate-400">
                 <a
                   href="mailto:support@autoflowvn.net"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:text-primary transition-colors"
                 >
                   ✉️ support@autoflowvn.net

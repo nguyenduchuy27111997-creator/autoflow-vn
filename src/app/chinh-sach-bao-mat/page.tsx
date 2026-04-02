@@ -10,7 +10,7 @@ export default function ChinhSachBaoMatPage() {
           <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 tracking-tight mb-3">
             Chính sách bảo mật
           </h1>
-          <p className="text-sm text-slate-400 mb-10">
+          <p className="text-sm text-slate-500 mb-10">
             Cập nhật lần cuối: 29/03/2026
           </p>
 

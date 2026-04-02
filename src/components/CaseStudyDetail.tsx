@@ -37,7 +37,7 @@ export default function CaseStudyDetail({ cs }: { cs: CaseStudy }) {
             >
               <p className="font-display font-extrabold text-3xl text-primary">
                 {m.value}
-                <span className="text-sm font-medium text-slate-400 ml-1">
+                <span className="text-sm font-medium text-slate-500 ml-1">
                   {m.unit}
                 </span>
               </p>
@@ -179,7 +179,7 @@ export default function CaseStudyDetail({ cs }: { cs: CaseStudy }) {
               <p className="font-display font-extrabold text-2xl text-accent">
                 {cs.roi.savings}
               </p>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500">
                 {cs.roi.savingsDetail}
               </p>
             </div>

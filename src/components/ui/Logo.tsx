@@ -6,12 +6,13 @@ interface LogoProps {
 export default function Logo({ dark = false, className = "" }: LogoProps) {
   return (
     <span className={`flex items-center gap-2 ${className}`}>
-      <span className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+      <span className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center" role="img" aria-label="AutoFlow VN">
         <svg
           width="18"
           height="18"
           viewBox="0 0 192 192"
           fill="none"
+          aria-hidden="true"
         >
           {/* 3x3 grid dots */}
           <circle cx="56" cy="56" r="10" fill="rgba(255,255,255,0.35)" />

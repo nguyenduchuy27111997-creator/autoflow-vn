@@ -139,7 +139,7 @@ export default function WhyUs() {
                 <h3 className="font-display font-bold text-slate-900">
                   Workflow demo
                 </h3>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-xs text-slate-500 mt-0.5">
                   Đồng bộ đơn Shopee → MISA → Zalo tự động
                 </p>
               </div>
@@ -198,7 +198,7 @@ export default function WhyUs() {
                   >
                     <p
                       className={`text-sm font-semibold transition-colors ${
-                        activeStep >= i ? "text-slate-900" : "text-slate-400"
+                        activeStep >= i ? "text-slate-900" : "text-slate-500"
                       }`}
                     >
                       {step.label}
@@ -210,7 +210,7 @@ export default function WhyUs() {
                       </span>
                     )}
                     {activeStep > i && (
-                      <span className="text-xs text-slate-400 mt-1">
+                      <span className="text-xs text-slate-500 mt-1">
                         Hoàn thành ✓
                       </span>
                     )}
@@ -233,7 +233,7 @@ export default function WhyUs() {
                 </svg>
                 Toàn bộ quy trình: 10 giây thay vì 45 phút
               </p>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-slate-500 mt-1">
                 Không cần nhập tay. Không sai sót. Chạy 24/7.
               </p>
             </div>

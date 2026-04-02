@@ -26,7 +26,7 @@ export default async function LeadDetailPage({
   return (
     <div className="px-8 py-8 max-w-4xl">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-slate-400 mb-6">
+        <div className="flex items-center gap-2 text-sm text-slate-500 mb-6">
           <a href="/portal/dashboard/leads" className="hover:text-primary transition-colors">Leads</a>
           <span>/</span>
           <span className="text-slate-700">{primary.name || decodedEmail}</span>
@@ -41,7 +41,7 @@ export default async function LeadDetailPage({
               </h1>
               <p className="text-sm text-slate-500 mt-1">{decodedEmail}</p>
               {primary.phone && (
-                <p className="text-sm text-slate-400 mt-0.5">{primary.phone}</p>
+                <p className="text-sm text-slate-500 mt-0.5">{primary.phone}</p>
               )}
             </div>
             <div className="text-right">
@@ -56,7 +56,7 @@ export default async function LeadDetailPage({
 
           {/* Score Breakdown */}
           <div className="mt-6 pt-6 border-t border-slate-100">
-            <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
+            <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
               Score Breakdown
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -86,7 +86,7 @@ export default async function LeadDetailPage({
 
         {/* Timeline */}
         <div className="bg-white rounded-xl border border-slate-200 p-6">
-          <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">
+          <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">
             Timeline
           </h3>
 
@@ -116,7 +116,7 @@ export default async function LeadDetailPage({
             ))}
 
             {leads.length === 0 && emails.length === 0 && (
-              <p className="text-sm text-slate-400">No activity recorded</p>
+              <p className="text-sm text-slate-500">No activity recorded</p>
             )}
           </div>
         </div>
@@ -127,9 +127,9 @@ export default async function LeadDetailPage({
 function ScoreCard({ label, value, sub }: { label: string; value: string; sub: string }) {
   return (
     <div className="bg-slate-50 rounded-lg p-3">
-      <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">{label}</div>
+      <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">{label}</div>
       <div className="font-display font-bold text-sm text-slate-900 mt-1">{value}</div>
-      <div className="text-[11px] text-slate-400 mt-0.5">{sub}</div>
+      <div className="text-[11px] text-slate-500 mt-0.5">{sub}</div>
     </div>
   );
 }
@@ -163,11 +163,11 @@ function TimelineItem({
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between gap-2">
           <span className="text-sm font-medium text-slate-700">{title}</span>
-          <span className="text-[11px] text-slate-400 tabular-nums shrink-0">
+          <span className="text-[11px] text-slate-500 tabular-nums shrink-0">
             {d.toLocaleDateString("vi-VN")} {d.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}
           </span>
         </div>
-        {subtitle && <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>}
+        {subtitle && <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>}
       </div>
     </div>
   );

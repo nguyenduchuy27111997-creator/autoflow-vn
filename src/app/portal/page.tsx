@@ -57,7 +57,7 @@ export default function PortalLoginPage() {
           <h1 className="font-display font-bold text-xl text-slate-900 mb-1">
             Client Portal
           </h1>
-          <p className="text-sm text-slate-400 mb-6">
+          <p className="text-sm text-slate-500 mb-6">
             Đăng nhập để xem tiến độ project.
           </p>
 
@@ -92,7 +92,7 @@ export default function PortalLoginPage() {
             </button>
           </form>
 
-          <p className="text-xs text-center text-slate-400 mt-4">
+          <p className="text-xs text-center text-slate-500 mt-4">
             Quên mật khẩu?{" "}
             <a
               href="mailto:hello@autoflowvn.net"

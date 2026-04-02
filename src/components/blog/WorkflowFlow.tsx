@@ -71,7 +71,7 @@ export default function WorkflowFlow({
             <h4 className="font-display font-bold text-base text-slate-900">{title}</h4>
           )}
           {subtitle && (
-            <p className="text-sm text-slate-400 mt-0.5">{subtitle}</p>
+            <p className="text-sm text-slate-500 mt-0.5">{subtitle}</p>
           )}
         </div>
       )}
@@ -100,7 +100,7 @@ export default function WorkflowFlow({
                   {step.label}
                 </div>
                 {step.sub && (
-                  <div className="text-[10px] text-slate-400 mt-0.5 max-w-[120px]">
+                  <div className="text-[10px] text-slate-500 mt-0.5 max-w-[120px]">
                     {step.sub}
                   </div>
                 )}
@@ -160,7 +160,7 @@ export default function WorkflowFlow({
                 <div className="pt-1">
                   <div className="text-sm font-semibold text-slate-800">{step.label}</div>
                   {step.sub && (
-                    <div className="text-xs text-slate-400 mt-0.5">{step.sub}</div>
+                    <div className="text-xs text-slate-500 mt-0.5">{step.sub}</div>
                   )}
                 </div>
               </div>

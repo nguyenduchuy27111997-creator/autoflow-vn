@@ -44,7 +44,7 @@ function WorkflowDiagram({
                 {step.icon}
               </div>
               <p className="text-sm font-semibold text-slate-800 mb-0.5 max-w-[120px]">{step.label}</p>
-              <p className="text-xs text-slate-400 max-w-[130px]">{step.sub}</p>
+              <p className="text-xs text-slate-500 max-w-[130px]">{step.sub}</p>
             </div>
             {i < steps.length - 1 && (
               <div className="flex-1 flex items-center pt-7 px-1">
@@ -87,7 +87,7 @@ function WorkflowDiagram({
               </div>
               <div>
                 <p className="text-sm font-semibold text-slate-800">{step.label}</p>
-                <p className="text-xs text-slate-400">{step.sub}</p>
+                <p className="text-xs text-slate-500">{step.sub}</p>
               </div>
             </div>
             {i < steps.length - 1 && (
@@ -136,10 +136,10 @@ function AnimatedMetric({ value, suffix, label, sub, color }: { value: string; s
     >
       <div className="font-display font-extrabold text-3xl md:text-4xl" style={{ color }}>
         {value}
-        {suffix && <span className="text-base font-medium text-slate-400 ml-1">{suffix}</span>}
+        {suffix && <span className="text-base font-medium text-slate-500 ml-1">{suffix}</span>}
       </div>
       <div className="text-sm font-semibold text-slate-700 mt-1">{label}</div>
-      <div className="text-xs text-slate-400 mt-0.5">{sub}</div>
+      <div className="text-xs text-slate-500 mt-0.5">{sub}</div>
     </div>
   );
 }
@@ -165,7 +165,7 @@ export default function RealEstateUseCasePage() {
                 <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
                 Bất động sản
               </span>
-              <span className="text-xs text-slate-400 bg-slate-50 px-2.5 py-1 rounded-md">Case Study</span>
+              <span className="text-xs text-slate-500 bg-slate-50 px-2.5 py-1 rounded-md">Case Study</span>
             </div>
             <h1 className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-slate-900 leading-tight tracking-tight mb-5">
               Agency BĐS 20 sales, 500+ lead/tháng —{" "}
@@ -285,7 +285,7 @@ export default function RealEstateUseCasePage() {
               <span className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 font-display font-extrabold text-lg">1</span>
               <div>
                 <h3 className="font-display font-bold text-xl text-slate-900">Lead capture tự động</h3>
-                <p className="text-sm text-slate-400">Facebook Lead Ads → Google Sheet CRM + timestamp</p>
+                <p className="text-sm text-slate-500">Facebook Lead Ads → Google Sheet CRM + timestamp</p>
               </div>
             </div>
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8">
@@ -311,7 +311,7 @@ export default function RealEstateUseCasePage() {
               <span className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 font-display font-extrabold text-lg">2</span>
               <div>
                 <h3 className="font-display font-bold text-xl text-slate-900">Phân lead tự động theo khu vực</h3>
-                <p className="text-sm text-slate-400">Lead mới → phân theo quận/huyện → đúng sales phụ trách</p>
+                <p className="text-sm text-slate-500">Lead mới → phân theo quận/huyện → đúng sales phụ trách</p>
               </div>
             </div>
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8">
@@ -337,7 +337,7 @@ export default function RealEstateUseCasePage() {
               <span className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 font-display font-extrabold text-lg">3</span>
               <div>
                 <h3 className="font-display font-bold text-xl text-slate-900">Chào hàng tự động 30 giây</h3>
-                <p className="text-sm text-slate-400">Lead mới → Zalo OA gửi tin chào + thông tin dự án</p>
+                <p className="text-sm text-slate-500">Lead mới → Zalo OA gửi tin chào + thông tin dự án</p>
               </div>
             </div>
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8">
@@ -363,7 +363,7 @@ export default function RealEstateUseCasePage() {
               <span className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 font-display font-extrabold text-lg">4</span>
               <div>
                 <h3 className="font-display font-bold text-xl text-slate-900">Nhắc sales follow-up</h3>
-                <p className="text-sm text-slate-400">Nếu sales chưa liên hệ sau 2h → nhắc → escalation</p>
+                <p className="text-sm text-slate-500">Nếu sales chưa liên hệ sau 2h → nhắc → escalation</p>
               </div>
             </div>
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8">
@@ -389,7 +389,7 @@ export default function RealEstateUseCasePage() {
               <span className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 font-display font-extrabold text-lg">5</span>
               <div>
                 <h3 className="font-display font-bold text-xl text-slate-900">Báo cáo conversion rate từng sales</h3>
-                <p className="text-sm text-slate-400">CRM data → phân tích → ranking → Telegram mỗi tuần</p>
+                <p className="text-sm text-slate-500">CRM data → phân tích → ranking → Telegram mỗi tuần</p>
               </div>
             </div>
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8">
@@ -415,7 +415,7 @@ export default function RealEstateUseCasePage() {
               <span className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 font-display font-extrabold text-lg">6</span>
               <div>
                 <h3 className="font-display font-bold text-xl text-slate-900">Lead nurture tự động 14 ngày</h3>
-                <p className="text-sm text-slate-400">Lead chưa mua → brochure → bảng giá → video tour → nhắc hẹn</p>
+                <p className="text-sm text-slate-500">Lead chưa mua → brochure → bảng giá → video tour → nhắc hẹn</p>
               </div>
             </div>
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8">
@@ -493,7 +493,7 @@ export default function RealEstateUseCasePage() {
                   <svg width="20" height="20" fill="none" stroke="#8B5CF6" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                 </div>
                 <p className="text-sm font-semibold text-slate-800">{tool.name}</p>
-                <p className="text-xs text-slate-400">{tool.desc}</p>
+                <p className="text-xs text-slate-500">{tool.desc}</p>
               </div>
             ))}
           </div>
@@ -549,7 +549,7 @@ export default function RealEstateUseCasePage() {
               <p className="text-sm text-slate-600">
                 <strong className="text-purple-600 font-display text-lg">ROI: tiết kiệm ~962 triệu/năm</strong>
                 <br />
-                <span className="text-slate-400">Hoàn vốn chỉ sau ~5 tuần sử dụng</span>
+                <span className="text-slate-500">Hoàn vốn chỉ sau ~5 tuần sử dụng</span>
               </p>
             </div>
           </div>

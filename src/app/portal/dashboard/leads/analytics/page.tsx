@@ -59,7 +59,7 @@ export default async function AnalyticsPage() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="font-display font-bold text-xl text-slate-900">Analytics</h1>
-        <p className="text-sm text-slate-400 mt-0.5">{stats.uniqueLeads} unique leads across all sources</p>
+        <p className="text-sm text-slate-500 mt-0.5">{stats.uniqueLeads} unique leads across all sources</p>
       </div>
 
       {/* Charts */}

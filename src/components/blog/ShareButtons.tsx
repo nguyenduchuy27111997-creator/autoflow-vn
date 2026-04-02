@@ -18,14 +18,14 @@ export default function ShareButtons({ title }: { title: string }) {
 
   return (
     <div className="flex items-center gap-2 not-prose">
-      <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mr-1">Chia sẻ</span>
+      <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider mr-1">Chia sẻ</span>
 
       {/* Facebook */}
       <a
         href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-blue-50 flex items-center justify-center text-slate-400 hover:text-blue-600 transition-colors"
+        className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-blue-50 flex items-center justify-center text-slate-500 hover:text-blue-600 transition-colors"
         title="Chia sẻ Facebook"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -38,7 +38,7 @@ export default function ShareButtons({ title }: { title: string }) {
         href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-blue-50 flex items-center justify-center text-slate-400 hover:text-blue-700 transition-colors"
+        className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-blue-50 flex items-center justify-center text-slate-500 hover:text-blue-700 transition-colors"
         title="Chia sẻ LinkedIn"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -50,7 +50,7 @@ export default function ShareButtons({ title }: { title: string }) {
       <button
         onClick={handleCopy}
         className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
-          copied ? "bg-green-50 text-green-600" : "bg-slate-100 hover:bg-slate-200 text-slate-400"
+          copied ? "bg-green-50 text-green-600" : "bg-slate-100 hover:bg-slate-200 text-slate-500"
         }`}
         title={copied ? "Đã copy!" : "Copy link"}
       >

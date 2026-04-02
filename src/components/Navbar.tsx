@@ -68,6 +68,7 @@ export default function Navbar() {
                 stroke="currentColor"
                 strokeWidth="2"
                 className={`transition-transform ${serviceOpen ? "rotate-180" : ""}`}
+                aria-hidden="true"
               >
                 <path d="M3 5l3 3 3-3" />
               </svg>
@@ -85,7 +86,7 @@ export default function Navbar() {
                       <span className="text-sm font-medium text-slate-900">
                         {s.label}
                       </span>
-                      <span className="text-xs text-slate-400">{s.desc}</span>
+                      <span className="text-xs text-slate-500">{s.desc}</span>
                     </a>
                   ))}
                 </div>
@@ -122,6 +123,7 @@ export default function Navbar() {
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
+            aria-hidden="true"
           >
             {mobileOpen ? (
               <path d="M18 6L6 18M6 6l12 12" />
@@ -137,7 +139,7 @@ export default function Navbar() {
         <div className="md:hidden bg-white border-t border-slate-100 px-6 py-4 space-y-3">
           {/* Mobile services */}
           <div className="py-2">
-            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">
               Dịch vụ
             </p>
             {services.map((s) => (

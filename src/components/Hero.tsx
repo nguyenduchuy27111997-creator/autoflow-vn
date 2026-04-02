@@ -96,6 +96,7 @@ export default function Hero() {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"
+                aria-hidden="true"
               >
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
@@ -121,7 +122,7 @@ export default function Hero() {
                 <span className="w-3 h-3 rounded-full bg-green-400" />
               </div>
               <div className="flex-1 flex justify-center">
-                <div className="flex items-center gap-2 px-4 py-1 rounded-lg bg-white border border-slate-200 text-xs text-slate-400 max-w-xs w-full justify-center">
+                <div className="flex items-center gap-2 px-4 py-1 rounded-lg bg-white border border-slate-200 text-xs text-slate-500 max-w-xs w-full justify-center">
                   <svg
                     width="12"
                     height="12"
@@ -130,6 +131,7 @@ export default function Hero() {
                     stroke="currentColor"
                     strokeWidth="2"
                     className="text-slate-300"
+                    aria-hidden="true"
                   >
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
@@ -162,7 +164,7 @@ export default function Hero() {
           {metrics.map((m, i) => (
             <div key={i} className="md:px-8 md:py-6 text-center">
               <AnimatedCounter value={m.value} />
-              <span className="text-sm font-medium text-slate-400 ml-1">
+              <span className="text-sm font-medium text-slate-500 ml-1">
                 {m.unit}
               </span>
               <p className="text-xs text-slate-500 mt-1">{m.label}</p>

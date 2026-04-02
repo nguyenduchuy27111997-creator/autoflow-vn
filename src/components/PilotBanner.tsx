@@ -105,7 +105,7 @@ export default function PilotBanner() {
                   </svg>
                   <div>
                     <p className="text-sm font-semibold text-slate-800">{item.title}</p>
-                    <p className="text-xs text-slate-400">{item.desc}</p>
+                    <p className="text-xs text-slate-500">{item.desc}</p>
                   </div>
                 </li>
               ))}
@@ -160,19 +160,19 @@ export default function PilotBanner() {
           </h3>
           <div className="grid grid-cols-3 gap-4 text-center">
             <div>
-              <p className="text-xs text-slate-400 mb-1">Nhân viên nhập liệu</p>
+              <p className="text-xs text-slate-500 mb-1">Nhân viên nhập liệu</p>
               <p className="font-display font-bold text-red-500">8-12 tr/tháng</p>
-              <p className="text-xs text-slate-400">= 96-144 tr/năm</p>
+              <p className="text-xs text-slate-500">= 96-144 tr/năm</p>
             </div>
             <div className="border-x border-slate-100">
-              <p className="text-xs text-slate-400 mb-1">Gói Pilot AutoFlow</p>
+              <p className="text-xs text-slate-500 mb-1">Gói Pilot AutoFlow</p>
               <p className="font-display font-bold text-accent">5-8 tr (1 lần)</p>
-              <p className="text-xs text-slate-400">Hoàn vốn sau 1 tháng</p>
+              <p className="text-xs text-slate-500">Hoàn vốn sau 1 tháng</p>
             </div>
             <div>
-              <p className="text-xs text-slate-400 mb-1">ROI năm đầu</p>
+              <p className="text-xs text-slate-500 mb-1">ROI năm đầu</p>
               <p className="font-display font-bold text-primary">Tiết kiệm 80-130 tr</p>
-              <p className="text-xs text-slate-400">= ROI 12-15x</p>
+              <p className="text-xs text-slate-500">= ROI 12-15x</p>
             </div>
           </div>
         </div>
@@ -208,7 +208,7 @@ export default function PilotBanner() {
               Hoặc đặt lịch audit miễn phí →
             </a>
           </div>
-          <p className="text-xs text-slate-400 mt-3">
+          <p className="text-xs text-slate-500 mt-3">
             30 phút · Miễn phí · Không cam kết · Qua Zoom hoặc Google Meet
           </p>
         </div>

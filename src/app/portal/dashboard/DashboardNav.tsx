@@ -81,7 +81,7 @@ export default function DashboardNav({ userEmail }: { userEmail: string }) {
                   : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
               }`}
             >
-              <span className={active ? "text-primary" : "text-slate-400"}>{item.icon}</span>
+              <span className={active ? "text-primary" : "text-slate-500"}>{item.icon}</span>
               {item.label}
             </a>
           );
@@ -92,7 +92,7 @@ export default function DashboardNav({ userEmail }: { userEmail: string }) {
       <div className="px-3 py-4 border-t border-slate-100">
         <div className="px-3 mb-3">
           <div className="text-xs font-medium text-slate-900 truncate">{userEmail}</div>
-          <div className="text-[10px] text-slate-400">Admin</div>
+          <div className="text-[10px] text-slate-500">Admin</div>
         </div>
         <button
           onClick={handleLogout}

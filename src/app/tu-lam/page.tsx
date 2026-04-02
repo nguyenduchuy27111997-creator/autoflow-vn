@@ -133,7 +133,7 @@ export default function TuLamPage() {
                   {step.description}
                 </p>
                 <div className="pt-4 border-t border-slate-100">
-                  <p className="text-xs font-semibold text-slate-400 mb-2">
+                  <p className="text-xs font-semibold text-slate-500 mb-2">
                     Resources:
                   </p>
                   <ul className="space-y-1">
@@ -302,7 +302,7 @@ export default function TuLamPage() {
                     <path d="M5 8h6M8 5l3 3-3 3" />
                   </svg>
                 </a>
-                <p className="text-xs text-slate-500 mt-3">
+                <p className="text-xs text-slate-400 mt-3">
                   Không bán hàng. Nếu tự làm hợp lý hơn, mình sẽ nói thẳng.
                 </p>
               </div>

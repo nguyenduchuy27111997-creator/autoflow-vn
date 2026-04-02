@@ -20,7 +20,7 @@ export default async function LeadsPage() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="font-display font-bold text-xl text-slate-900">All Leads</h1>
-          <p className="text-sm text-slate-400 mt-0.5">{leads.length} entries from quiz, audit, PDF</p>
+          <p className="text-sm text-slate-500 mt-0.5">{leads.length} entries from quiz, audit, PDF</p>
         </div>
       </div>
 
@@ -45,10 +45,10 @@ function StatCard({
 }) {
   return (
     <div className="bg-white rounded-xl border border-slate-200 p-4">
-      <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">{label}</div>
+      <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">{label}</div>
       <div className={`font-display font-extrabold mt-1 ${isText ? "text-base" : "text-2xl"} ${color || "text-slate-900"}`}>
         {value}
-        {sub && <span className="text-sm font-normal text-slate-400">{sub}</span>}
+        {sub && <span className="text-sm font-normal text-slate-500">{sub}</span>}
       </div>
     </div>
   );

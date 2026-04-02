@@ -308,7 +308,7 @@ export default function VeChungToiPage() {
                   </div>
                   <div>
                     <p className="font-semibold text-sm text-slate-900">{tech.name}</p>
-                    <p className="text-xs text-slate-400">{tech.desc}</p>
+                    <p className="text-xs text-slate-500">{tech.desc}</p>
                   </div>
                 </div>
               ))}

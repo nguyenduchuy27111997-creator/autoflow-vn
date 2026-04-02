@@ -202,7 +202,7 @@ export default function FbAdsLanding() {
                   <h2 className="font-display font-bold text-lg text-slate-900 mb-1">
                     Nhận audit quy trình miễn phí
                   </h2>
-                  <p className="text-sm text-slate-400 mb-6">
+                  <p className="text-sm text-slate-500 mb-6">
                     Điền form dưới đây — mình liên hệ trong 24h
                   </p>
 
@@ -300,7 +300,7 @@ export default function FbAdsLanding() {
                   <button
                     type="submit"
                     disabled={!canSubmit || submitting}
-                    className="mt-6 w-full bg-primary hover:bg-primary-dark disabled:bg-slate-200 disabled:text-slate-400 text-white font-semibold py-3.5 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/25 flex items-center justify-center gap-2"
+                    className="mt-6 w-full bg-primary hover:bg-primary-dark disabled:bg-slate-200 disabled:text-slate-500 text-white font-semibold py-3.5 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/25 flex items-center justify-center gap-2"
                   >
                     {submitting ? (
                       "Đang gửi..."
@@ -324,7 +324,7 @@ export default function FbAdsLanding() {
                     {["Miễn phí 100%", "Không spam", "Bảo mật"].map((t) => (
                       <span
                         key={t}
-                        className="inline-flex items-center gap-1 text-xs text-slate-400"
+                        className="inline-flex items-center gap-1 text-xs text-slate-500"
                       >
                         <svg
                           className="text-accent"
@@ -374,7 +374,7 @@ export default function FbAdsLanding() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col items-center">
             {/* Platforms */}
-            <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-4">
+            <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider mb-4">
               Tích hợp với
             </p>
             <div className="flex flex-wrap justify-center gap-3 mb-8">
@@ -459,7 +459,7 @@ export default function FbAdsLanding() {
 
       {/* ── Footer minimal ── */}
       <footer className="py-6 text-center border-t border-slate-100">
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-slate-500">
           © 2025 AutoFlow.vn — Tự động hóa quy trình cho SME Việt Nam
         </p>
       </footer>

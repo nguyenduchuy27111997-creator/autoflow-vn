@@ -140,7 +140,7 @@ export default function FnBPage() {
         {/* Integrations */}
         <section className="py-10 border-y border-slate-100 bg-slate-50/50 mb-20">
           <div className="max-w-6xl mx-auto px-6">
-            <p className="text-center text-sm font-medium text-slate-400 mb-6">
+            <p className="text-center text-sm font-medium text-slate-500 mb-6">
               Tích hợp với hệ sinh thái F&B Việt Nam
             </p>
             <div className="flex flex-wrap justify-center gap-6">
@@ -269,7 +269,7 @@ export default function FnBPage() {
                   onChange={(e) => setStaff(Number(e.target.value))}
                   className="w-full accent-primary"
                 />
-                <div className="flex justify-between text-xs text-slate-400 mt-1">
+                <div className="flex justify-between text-xs text-slate-500 mt-1">
                   <span>1</span>
                   <span className="font-bold text-primary text-lg">
                     {staff} người
@@ -289,7 +289,7 @@ export default function FnBPage() {
                   onChange={(e) => setHours(Number(e.target.value))}
                   className="w-full accent-primary"
                 />
-                <div className="flex justify-between text-xs text-slate-400 mt-1">
+                <div className="flex justify-between text-xs text-slate-500 mt-1">
                   <span>1</span>
                   <span className="font-bold text-primary text-lg">
                     {hours} giờ
@@ -303,7 +303,7 @@ export default function FnBPage() {
                 <p className="font-display font-extrabold text-3xl text-red-500">
                   {costPerYear}
                 </p>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-slate-500 mt-1">
                   triệu đ/năm chi phí vận hành
                 </p>
               </div>
@@ -311,7 +311,7 @@ export default function FnBPage() {
                 <p className="font-display font-extrabold text-3xl text-accent">
                   {savedCost}
                 </p>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-slate-500 mt-1">
                   triệu đ/năm tiết kiệm được
                 </p>
               </div>
@@ -331,12 +331,12 @@ export default function FnBPage() {
               <h3 className="font-display font-bold text-xl text-slate-900">
                 Growth
               </h3>
-              <p className="text-sm text-slate-400 mt-1 mb-4">
+              <p className="text-sm text-slate-500 mt-1 mb-4">
                 Cho nhà hàng 1–3 chi nhánh
               </p>
               <p className="font-display font-extrabold text-3xl text-slate-900 mb-4">
                 20–35
-                <span className="text-sm font-normal text-slate-400 ml-1">
+                <span className="text-sm font-normal text-slate-500 ml-1">
                   triệu đồng
                 </span>
               </p>
@@ -364,12 +364,12 @@ export default function FnBPage() {
               <h3 className="font-display font-bold text-xl text-slate-900">
                 Scale
               </h3>
-              <p className="text-sm text-slate-400 mt-1 mb-4">
+              <p className="text-sm text-slate-500 mt-1 mb-4">
                 Cho chuỗi 4+ chi nhánh
               </p>
               <p className="font-display font-extrabold text-3xl text-slate-900 mb-4">
                 50–80
-                <span className="text-sm font-normal text-slate-400 ml-1">
+                <span className="text-sm font-normal text-slate-500 ml-1">
                   triệu đồng
                 </span>
               </p>
@@ -409,7 +409,7 @@ export default function FnBPage() {
                   className="w-full flex items-center justify-between px-6 py-4 text-left"
                 >
                   <span className="font-semibold text-sm text-slate-900">{faq.q}</span>
-                  <svg className={`shrink-0 w-5 h-5 text-slate-400 transition-transform ${openFaq === i ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" /></svg>
+                  <svg className={`shrink-0 w-5 h-5 text-slate-500 transition-transform ${openFaq === i ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" /></svg>
                 </button>
                 {openFaq === i && (
                   <div className="px-6 pb-4 text-sm text-slate-500 leading-relaxed">

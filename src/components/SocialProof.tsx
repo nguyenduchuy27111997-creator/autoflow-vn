@@ -153,7 +153,7 @@ export default function SocialProof() {
               <strong className="font-semibold">{current.name}</strong>{" "}
               {current.action}
             </p>
-            <p className="text-[10px] text-slate-400 mt-0.5">{current.timeAgo}</p>
+            <p className="text-[10px] text-slate-500 mt-0.5">{current.timeAgo}</p>
           </div>
         </div>
       </div>

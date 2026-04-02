@@ -64,7 +64,7 @@ export default function Process() {
                   <span className="font-display font-extrabold text-3xl text-primary/15 group-hover:text-primary/30 transition-colors">
                     {step.number}
                   </span>
-                  <span className="text-xs font-semibold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-full">
+                  <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
                     {step.duration}
                   </span>
                 </div>

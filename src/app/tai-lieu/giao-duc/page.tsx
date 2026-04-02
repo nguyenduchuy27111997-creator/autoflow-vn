@@ -44,7 +44,7 @@ function WorkflowDiagram({
                 {step.icon}
               </div>
               <p className="text-sm font-semibold text-slate-800 mb-0.5 max-w-[120px]">{step.label}</p>
-              <p className="text-xs text-slate-400 max-w-[130px]">{step.sub}</p>
+              <p className="text-xs text-slate-500 max-w-[130px]">{step.sub}</p>
             </div>
             {i < steps.length - 1 && (
               <div className="flex-1 flex items-center pt-7 px-1">
@@ -87,7 +87,7 @@ function WorkflowDiagram({
               </div>
               <div>
                 <p className="text-sm font-semibold text-slate-800">{step.label}</p>
-                <p className="text-xs text-slate-400">{step.sub}</p>
+                <p className="text-xs text-slate-500">{step.sub}</p>
               </div>
             </div>
             {i < steps.length - 1 && (
@@ -136,10 +136,10 @@ function AnimatedMetric({ value, suffix, label, sub, color }: { value: string; s
     >
       <div className="font-display font-extrabold text-3xl md:text-4xl" style={{ color }}>
         {value}
-        {suffix && <span className="text-base font-medium text-slate-400 ml-1">{suffix}</span>}
+        {suffix && <span className="text-base font-medium text-slate-500 ml-1">{suffix}</span>}
       </div>
       <div className="text-sm font-semibold text-slate-700 mt-1">{label}</div>
-      <div className="text-xs text-slate-400 mt-0.5">{sub}</div>
+      <div className="text-xs text-slate-500 mt-0.5">{sub}</div>
     </div>
   );
 }
@@ -165,7 +165,7 @@ export default function EducationUseCasePage() {
                 <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>
                 Giáo dục & Đào tạo
               </span>
-              <span className="text-xs text-slate-400 bg-slate-50 px-2.5 py-1 rounded-md">Case Study</span>
+              <span className="text-xs text-slate-500 bg-slate-50 px-2.5 py-1 rounded-md">Case Study</span>
             </div>
             <h1 className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-slate-900 leading-tight tracking-tight mb-5">
               Chuỗi trung tâm Anh ngữ 8 chi nhánh —{" "}
@@ -283,7 +283,7 @@ export default function EducationUseCasePage() {
               <span className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 font-display font-extrabold text-lg">1</span>
               <div>
                 <h3 className="font-display font-bold text-xl text-slate-900">Nhắc lịch học tự động qua Zalo OA</h3>
-                <p className="text-sm text-slate-400">24h trước buổi học → Zalo OA → Học viên</p>
+                <p className="text-sm text-slate-500">24h trước buổi học → Zalo OA → Học viên</p>
               </div>
             </div>
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8">
@@ -309,7 +309,7 @@ export default function EducationUseCasePage() {
               <span className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 font-display font-extrabold text-lg">2</span>
               <div>
                 <h3 className="font-display font-bold text-xl text-slate-900">Nhắc lại 3h trước + thông báo giáo viên</h3>
-                <p className="text-sm text-slate-400">Nếu chưa xác nhận → nhắc lại → báo giáo viên</p>
+                <p className="text-sm text-slate-500">Nếu chưa xác nhận → nhắc lại → báo giáo viên</p>
               </div>
             </div>
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8">
@@ -335,7 +335,7 @@ export default function EducationUseCasePage() {
               <span className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 font-display font-extrabold text-lg">3</span>
               <div>
                 <h3 className="font-display font-bold text-xl text-slate-900">Lead capture từ Facebook Ads</h3>
-                <p className="text-sm text-slate-400">Facebook Lead Form → Google Sheet CRM → Tư vấn viên</p>
+                <p className="text-sm text-slate-500">Facebook Lead Form → Google Sheet CRM → Tư vấn viên</p>
               </div>
             </div>
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8">
@@ -362,7 +362,7 @@ export default function EducationUseCasePage() {
               <span className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 font-display font-extrabold text-lg">4</span>
               <div>
                 <h3 className="font-display font-bold text-xl text-slate-900">Báo cáo 8 chi nhánh tự động</h3>
-                <p className="text-sm text-slate-400">8 Google Sheet → Tổng hợp → Telegram mỗi sáng thứ 2</p>
+                <p className="text-sm text-slate-500">8 Google Sheet → Tổng hợp → Telegram mỗi sáng thứ 2</p>
               </div>
             </div>
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8">
@@ -389,7 +389,7 @@ export default function EducationUseCasePage() {
               <span className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 font-display font-extrabold text-lg">5</span>
               <div>
                 <h3 className="font-display font-bold text-xl text-slate-900">Khảo sát hài lòng tự động</h3>
-                <p className="text-sm text-slate-400">Kết thúc khóa → Zalo OA khảo sát → Tổng hợp feedback</p>
+                <p className="text-sm text-slate-500">Kết thúc khóa → Zalo OA khảo sát → Tổng hợp feedback</p>
               </div>
             </div>
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8">
@@ -466,7 +466,7 @@ export default function EducationUseCasePage() {
                   <svg width="20" height="20" fill="none" stroke="#3B82F6" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                 </div>
                 <p className="text-sm font-semibold text-slate-800">{tool.name}</p>
-                <p className="text-xs text-slate-400">{tool.desc}</p>
+                <p className="text-xs text-slate-500">{tool.desc}</p>
               </div>
             ))}
           </div>
@@ -523,7 +523,7 @@ export default function EducationUseCasePage() {
               <p className="text-sm text-slate-600">
                 <strong className="text-blue-600 font-display text-lg">ROI: tiết kiệm ~315 triệu/năm</strong>
                 <br />
-                <span className="text-slate-400">Hoàn vốn chỉ sau ~10 tuần sử dụng</span>
+                <span className="text-slate-500">Hoàn vốn chỉ sau ~10 tuần sử dụng</span>
               </p>
             </div>
           </div>

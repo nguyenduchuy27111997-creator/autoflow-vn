@@ -37,7 +37,7 @@ export default function PortalDashboard({ userEmail }: { userEmail: string }) {
         <h1 className="font-display font-bold text-xl text-slate-900">
           Overview
         </h1>
-        <p className="text-sm text-slate-400 mt-0.5">
+        <p className="text-sm text-slate-500 mt-0.5">
           Theo dõi tiến độ và trạng thái các project automation.
         </p>
       </div>
@@ -55,7 +55,7 @@ export default function PortalDashboard({ userEmail }: { userEmail: string }) {
               >
                 {project.status}
               </span>
-              <span className="text-xs text-slate-400">{project.package}</span>
+              <span className="text-xs text-slate-500">{project.package}</span>
             </div>
 
             <h3 className="font-display font-bold text-sm text-slate-900 mb-4">
@@ -64,15 +64,15 @@ export default function PortalDashboard({ userEmail }: { userEmail: string }) {
 
             <div className="space-y-2 pt-3 border-t border-slate-100">
               <div className="flex justify-between text-xs">
-                <span className="text-slate-400">Bắt đầu</span>
+                <span className="text-slate-500">Bắt đầu</span>
                 <span className="text-slate-600 font-medium">{project.startDate}</span>
               </div>
               <div className="flex justify-between text-xs">
-                <span className="text-slate-400">Bàn giao</span>
+                <span className="text-slate-500">Bàn giao</span>
                 <span className="text-slate-600 font-medium">{project.deliveryDate}</span>
               </div>
               <div className="flex justify-between text-xs">
-                <span className="text-slate-400">Workflows</span>
+                <span className="text-slate-500">Workflows</span>
                 <span className="text-slate-600 font-medium">{project.workflows}</span>
               </div>
             </div>
@@ -82,7 +82,7 @@ export default function PortalDashboard({ userEmail }: { userEmail: string }) {
 
       {/* Support */}
       <div className="mt-8 p-5 bg-white rounded-xl border border-slate-200 text-center">
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-slate-500">
           Cần hỗ trợ? Liên hệ{" "}
           <a
             href="mailto:hello@autoflowvn.net"

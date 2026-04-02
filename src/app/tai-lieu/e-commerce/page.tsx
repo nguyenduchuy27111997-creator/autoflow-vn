@@ -46,7 +46,7 @@ function WorkflowDiagram({
                 {step.icon}
               </div>
               <p className="text-sm font-semibold text-slate-800 mb-0.5 max-w-[120px]">{step.label}</p>
-              <p className="text-xs text-slate-400 max-w-[130px]">{step.sub}</p>
+              <p className="text-xs text-slate-500 max-w-[130px]">{step.sub}</p>
             </div>
             {/* Connector arrow */}
             {i < steps.length - 1 && (
@@ -94,7 +94,7 @@ function WorkflowDiagram({
               </div>
               <div>
                 <p className="text-sm font-semibold text-slate-800">{step.label}</p>
-                <p className="text-xs text-slate-400">{step.sub}</p>
+                <p className="text-xs text-slate-500">{step.sub}</p>
               </div>
             </div>
             {i < steps.length - 1 && (
@@ -143,10 +143,10 @@ function AnimatedMetric({ value, suffix, label, sub, color }: { value: string; s
     >
       <div className="font-display font-extrabold text-3xl md:text-4xl" style={{ color }}>
         {value}
-        {suffix && <span className="text-base font-medium text-slate-400 ml-1">{suffix}</span>}
+        {suffix && <span className="text-base font-medium text-slate-500 ml-1">{suffix}</span>}
       </div>
       <div className="text-sm font-semibold text-slate-700 mt-1">{label}</div>
-      <div className="text-xs text-slate-400 mt-0.5">{sub}</div>
+      <div className="text-xs text-slate-500 mt-0.5">{sub}</div>
     </div>
   );
 }
@@ -172,7 +172,7 @@ export default function EcommerceUseCasePage() {
                 <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
                 E-commerce
               </span>
-              <span className="text-xs text-slate-400 bg-slate-50 px-2.5 py-1 rounded-md">Case Study</span>
+              <span className="text-xs text-slate-500 bg-slate-50 px-2.5 py-1 rounded-md">Case Study</span>
             </div>
             <h1 className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-slate-900 leading-tight tracking-tight mb-5">
               Shop thời trang 15 NV, 3 sàn TMĐT —{" "}
@@ -285,7 +285,7 @@ export default function EcommerceUseCasePage() {
               <span className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 font-display font-extrabold text-lg">1</span>
               <div>
                 <h3 className="font-display font-bold text-xl text-slate-900">Đồng bộ đơn hàng tự động</h3>
-                <p className="text-sm text-slate-400">Shopee + Tiki + TikTok Shop → MISA</p>
+                <p className="text-sm text-slate-500">Shopee + Tiki + TikTok Shop → MISA</p>
               </div>
             </div>
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8">
@@ -313,7 +313,7 @@ export default function EcommerceUseCasePage() {
               <span className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 font-display font-extrabold text-lg">2</span>
               <div>
                 <h3 className="font-display font-bold text-xl text-slate-900">Đồng bộ tồn kho real-time</h3>
-                <p className="text-sm text-slate-400">MISA → Shopee + Tiki + TikTok Shop</p>
+                <p className="text-sm text-slate-500">MISA → Shopee + Tiki + TikTok Shop</p>
               </div>
             </div>
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8">
@@ -340,7 +340,7 @@ export default function EcommerceUseCasePage() {
               <span className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 font-display font-extrabold text-lg">3</span>
               <div>
                 <h3 className="font-display font-bold text-xl text-slate-900">Thông báo vận chuyển tự động</h3>
-                <p className="text-sm text-slate-400">Trạng thái đơn → Zalo OA → Khách hàng</p>
+                <p className="text-sm text-slate-500">Trạng thái đơn → Zalo OA → Khách hàng</p>
               </div>
             </div>
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8">
@@ -366,7 +366,7 @@ export default function EcommerceUseCasePage() {
               <span className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 font-display font-extrabold text-lg">4</span>
               <div>
                 <h3 className="font-display font-bold text-xl text-slate-900">Báo cáo doanh thu tự động</h3>
-                <p className="text-sm text-slate-400">3 sàn + MISA → Telegram mỗi sáng</p>
+                <p className="text-sm text-slate-500">3 sàn + MISA → Telegram mỗi sáng</p>
               </div>
             </div>
             <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8">
@@ -444,7 +444,7 @@ export default function EcommerceUseCasePage() {
                   <svg width="20" height="20" fill="none" stroke="#F59E0B" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                 </div>
                 <p className="text-sm font-semibold text-slate-800">{tool.name}</p>
-                <p className="text-xs text-slate-400">{tool.desc}</p>
+                <p className="text-xs text-slate-500">{tool.desc}</p>
               </div>
             ))}
           </div>
@@ -500,7 +500,7 @@ export default function EcommerceUseCasePage() {
               <p className="text-sm text-slate-600">
                 <strong className="text-primary font-display text-lg">ROI: tiết kiệm ~310 triệu/năm</strong>
                 <br />
-                <span className="text-slate-400">Hoàn vốn chỉ sau ~4 tuần sử dụng</span>
+                <span className="text-slate-500">Hoàn vốn chỉ sau ~4 tuần sử dụng</span>
               </p>
             </div>
           </div>

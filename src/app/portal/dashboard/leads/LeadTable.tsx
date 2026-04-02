@@ -73,7 +73,7 @@ const columns: ColumnDef<ScoredLead>[] = [
     accessorKey: "utm_source",
     header: "UTM",
     cell: ({ getValue }) => (
-      <span className="text-xs text-slate-400">{(getValue() as string) || "direct"}</span>
+      <span className="text-xs text-slate-500">{(getValue() as string) || "direct"}</span>
     ),
   },
   {
@@ -82,7 +82,7 @@ const columns: ColumnDef<ScoredLead>[] = [
     cell: ({ getValue }) => {
       const d = new Date(getValue() as string);
       return (
-        <span className="text-xs text-slate-400 tabular-nums">
+        <span className="text-xs text-slate-500 tabular-nums">
           {d.toLocaleDateString("vi-VN")} {d.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}
         </span>
       );
@@ -127,7 +127,7 @@ export default function LeadTable({ leads }: { leads: ScoredLead[] }) {
           placeholder="Search name or email..."
           value={globalFilter}
           onChange={(e) => setGlobalFilter(e.target.value)}
-          className="px-3 py-2 rounded-lg border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 w-64"
+          className="px-3 py-2 rounded-lg border border-slate-200 text-sm text-slate-800 placeholder:text-slate-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 w-64"
         />
         <select
           value={tierFilter}
@@ -149,7 +149,7 @@ export default function LeadTable({ leads }: { leads: ScoredLead[] }) {
           <option value="audit">Audit</option>
           <option value="pdf">PDF</option>
         </select>
-        <span className="text-xs text-slate-400 ml-auto">
+        <span className="text-xs text-slate-500 ml-auto">
           {table.getFilteredRowModel().rows.length} leads
         </span>
       </div>
@@ -196,7 +196,7 @@ export default function LeadTable({ leads }: { leads: ScoredLead[] }) {
         </table>
 
         {table.getRowModel().rows.length === 0 && (
-          <div className="py-12 text-center text-sm text-slate-400">
+          <div className="py-12 text-center text-sm text-slate-500">
             No leads found
           </div>
         )}
@@ -205,7 +205,7 @@ export default function LeadTable({ leads }: { leads: ScoredLead[] }) {
       {/* Pagination */}
       {table.getPageCount() > 1 && (
         <div className="flex items-center justify-between mt-4">
-          <span className="text-xs text-slate-400">
+          <span className="text-xs text-slate-500">
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
           </span>
           <div className="flex gap-2">

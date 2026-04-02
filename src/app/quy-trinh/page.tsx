@@ -221,7 +221,7 @@ export default function QuyTrinhPage() {
                           <h3 className="font-display font-bold text-xl text-slate-900">
                             {step.title}
                           </h3>
-                          <span className="text-xs font-semibold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-full">
+                          <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
                             {step.duration}
                           </span>
                         </div>
@@ -303,7 +303,7 @@ export default function QuyTrinhPage() {
                 >
                   <span className="font-semibold text-sm text-slate-900">{faq.q}</span>
                   <svg
-                    className={`shrink-0 w-5 h-5 text-slate-400 transition-transform ${openFaq === i ? "rotate-180" : ""}`}
+                    className={`shrink-0 w-5 h-5 text-slate-500 transition-transform ${openFaq === i ? "rotate-180" : ""}`}
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"

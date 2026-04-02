@@ -94,7 +94,7 @@ export default function KetQuaPage() {
                       <p className="font-display font-extrabold text-2xl text-primary">
                         {m.value}
                         {m.unit && (
-                          <span className="text-sm font-medium text-slate-400 ml-1">
+                          <span className="text-sm font-medium text-slate-500 ml-1">
                             {m.unit}
                           </span>
                         )}
@@ -109,7 +109,7 @@ export default function KetQuaPage() {
                   <p className="text-sm text-slate-500 italic">
                     &ldquo;{cs.testimonial.quote}&rdquo;
                   </p>
-                  <p className="text-xs text-slate-400 mt-2">
+                  <p className="text-xs text-slate-500 mt-2">
                     — {cs.testimonial.name}, {cs.testimonial.role}
                   </p>
                 </div>
@@ -118,13 +118,13 @@ export default function KetQuaPage() {
                 <div className="px-8 py-4 bg-accent/5 border-t border-accent/10 flex flex-wrap items-center justify-between gap-4">
                   <div className="flex items-center gap-6">
                     <div>
-                      <span className="text-xs text-slate-400">Chi phí</span>
+                      <span className="text-xs text-slate-500">Chi phí</span>
                       <p className="text-sm font-bold text-slate-900">
                         {cs.roi.cost}
                       </p>
                     </div>
                     <div>
-                      <span className="text-xs text-slate-400">
+                      <span className="text-xs text-slate-500">
                         {cs.roi.savingsLabel}
                       </span>
                       <p className="text-sm font-bold text-accent">
@@ -132,7 +132,7 @@ export default function KetQuaPage() {
                       </p>
                     </div>
                     <div>
-                      <span className="text-xs text-slate-400">
+                      <span className="text-xs text-slate-500">
                         {cs.roi.paybackLabel}
                       </span>
                       <p className="text-sm font-bold text-primary">

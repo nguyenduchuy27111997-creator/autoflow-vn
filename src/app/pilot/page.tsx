@@ -270,7 +270,7 @@ export default function PilotPage() {
                       </span>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400">{t.day}</p>
+                      <p className="text-xs text-slate-500">{t.day}</p>
                       <p className="font-display font-bold text-slate-900">
                         {t.phase}
                       </p>
@@ -317,33 +317,33 @@ export default function PilotPage() {
           <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
             <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-100">
               <div className="p-8 text-center">
-                <p className="text-xs text-slate-400 mb-2">
+                <p className="text-xs text-slate-500 mb-2">
                   Thuê nhân viên nhập liệu
                 </p>
                 <p className="font-display font-extrabold text-2xl text-red-500 mb-1">
                   8-12 triệu/tháng
                 </p>
-                <p className="text-sm text-slate-400">= 96-144 triệu/năm</p>
+                <p className="text-sm text-slate-500">= 96-144 triệu/năm</p>
                 <p className="text-xs text-red-400 mt-2">
                   + Sai sót, nghỉ phép, training
                 </p>
               </div>
               <div className="p-8 text-center bg-accent/5">
-                <p className="text-xs text-slate-400 mb-2">Gói Pilot AutoFlow</p>
+                <p className="text-xs text-slate-500 mb-2">Gói Pilot AutoFlow</p>
                 <p className="font-display font-extrabold text-2xl text-accent mb-1">
                   5-8 triệu (1 lần)
                 </p>
-                <p className="text-sm text-slate-400">Hoàn vốn sau 1 tháng</p>
+                <p className="text-sm text-slate-500">Hoàn vốn sau 1 tháng</p>
                 <p className="text-xs text-accent mt-2">
                   Chạy 24/7, không sai sót
                 </p>
               </div>
               <div className="p-8 text-center">
-                <p className="text-xs text-slate-400 mb-2">ROI năm đầu</p>
+                <p className="text-xs text-slate-500 mb-2">ROI năm đầu</p>
                 <p className="font-display font-extrabold text-2xl text-primary mb-1">
                   Tiết kiệm 80-130 triệu
                 </p>
-                <p className="text-sm text-slate-400">ROI 12-15x</p>
+                <p className="text-sm text-slate-500">ROI 12-15x</p>
                 <p className="text-xs text-primary mt-2">
                   Chưa tính tăng doanh thu
                 </p>
@@ -502,7 +502,7 @@ export default function PilotPage() {
                 <p className="font-display font-extrabold text-2xl text-primary mb-1">
                   {pkg.price}
                 </p>
-                <p className="text-xs text-slate-400 mb-4">
+                <p className="text-xs text-slate-500 mb-4">
                   Timeline: {pkg.timeline}
                 </p>
                 <p className="text-xs text-accent font-semibold">
@@ -527,7 +527,7 @@ export default function PilotPage() {
                 <p className="text-xs text-slate-500 mt-1">
                   Trước khi bắt đầu build
                 </p>
-                <p className="text-xs text-slate-400">(Ngày 1-2)</p>
+                <p className="text-xs text-slate-500">(Ngày 1-2)</p>
               </div>
               <div className="bg-yellow-50 rounded-xl p-4">
                 <p className="font-display font-bold text-yellow-600 text-lg">
@@ -536,17 +536,17 @@ export default function PilotPage() {
                 <p className="text-xs text-slate-500 mt-1">
                   Trong quá trình build
                 </p>
-                <p className="text-xs text-slate-400">(Ngày 3-5)</p>
+                <p className="text-xs text-slate-500">(Ngày 3-5)</p>
               </div>
               <div className="bg-slate-50 rounded-xl p-4">
-                <p className="font-display font-bold text-slate-400 text-lg">
+                <p className="font-display font-bold text-slate-500 text-lg">
                   0%
                 </p>
                 <p className="text-xs text-slate-500 mt-1">Sau bàn giao</p>
-                <p className="text-xs text-slate-400">(Ngày 6+)</p>
+                <p className="text-xs text-slate-500">(Ngày 6+)</p>
               </div>
             </div>
-            <p className="text-xs text-center text-slate-400 mt-4">
+            <p className="text-xs text-center text-slate-500 mt-4">
               Mỗi bên có thể chấm dứt thỏa thuận bằng email thông báo trước 3
               ngày.
             </p>

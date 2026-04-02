@@ -44,7 +44,7 @@ export default function SectionHeader({
         )}
       </h2>
       {subtitle && (
-        <p className={`text-lg ${dark ? "text-slate-400" : "text-slate-500"}`}>
+        <p className={`text-lg ${dark ? "text-slate-500" : "text-slate-500"}`}>
           {subtitle}
         </p>
       )}

@@ -74,7 +74,7 @@ export default function TuDongDangBaiSocialMediaBlog() {
         <article className="max-w-6xl mx-auto px-6">
           {/* Header */}
           <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-400 mb-5">
+            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
               <a href="/" className="hover:text-primary transition-colors">
                 Trang chủ
               </a>
@@ -94,7 +94,7 @@ export default function TuDongDangBaiSocialMediaBlog() {
               <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
                 Social Media
               </span>
-              <span className="text-xs text-slate-400">14 phút đọc</span>
+              <span className="text-xs text-slate-500">14 phút đọc</span>
             </div>
             <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
               Tự Động Đăng Bài Social Media Bằng n8n —{" "}

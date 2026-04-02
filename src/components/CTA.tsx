@@ -91,7 +91,7 @@ export default function CTA() {
                 <h3 className="font-display font-bold text-xl text-slate-900 mb-2">
                   Cảm ơn bạn!
                 </h3>
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-slate-400">
                   Mình sẽ liên hệ qua Zalo/Email trong vòng 24h để sắp xếp cuộc
                   gọi audit. Hẹn gặp bạn sớm!
                 </p>

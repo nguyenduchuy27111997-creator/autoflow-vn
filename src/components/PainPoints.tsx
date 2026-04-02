@@ -92,7 +92,7 @@ export default function PainPoints() {
                 <span className="font-display font-extrabold text-2xl text-red-500">
                   {pain.stat}
                 </span>
-                <span className="text-xs text-slate-400">{pain.statLabel}</span>
+                <span className="text-xs text-slate-500">{pain.statLabel}</span>
               </div>
             </Card>
           ))}
@@ -100,7 +100,7 @@ export default function PainPoints() {
 
         {/* Bridge to solution */}
         <div className="text-center mt-16">
-          <p className="text-slate-400 text-sm mb-2">Nếu bạn thấy quen →</p>
+          <p className="text-slate-500 text-sm mb-2">Nếu bạn thấy quen →</p>
           <p className="font-display font-bold text-xl text-slate-900">
             AutoFlow giải quyết{" "}
             <span className="text-primary">tất cả những vấn đề này</span> trong

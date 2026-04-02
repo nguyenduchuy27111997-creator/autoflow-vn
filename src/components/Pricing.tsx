@@ -96,7 +96,7 @@ export default function Pricing() {
                 onChange={(e) => setEmployees(Number(e.target.value))}
                 className="w-full accent-primary"
               />
-              <div className="flex justify-between text-xs text-slate-400 mt-1">
+              <div className="flex justify-between text-xs text-slate-500 mt-1">
                 <span>1 người</span>
                 <span className="font-semibold text-primary text-sm">
                   {employees} người
@@ -116,7 +116,7 @@ export default function Pricing() {
                 onChange={(e) => setHours(Number(e.target.value))}
                 className="w-full accent-primary"
               />
-              <div className="flex justify-between text-xs text-slate-400 mt-1">
+              <div className="flex justify-between text-xs text-slate-500 mt-1">
                 <span>1 giờ</span>
                 <span className="font-semibold text-primary text-sm">
                   {hours} giờ
@@ -132,19 +132,19 @@ export default function Pricing() {
               <p className="font-display font-extrabold text-2xl text-red-500">
                 {costPerYear}
               </p>
-              <p className="text-xs text-slate-400">triệu đ/năm chi phí lương</p>
+              <p className="text-xs text-slate-500">triệu đ/năm chi phí lương</p>
             </div>
             <div className="text-center border-x border-slate-100">
               <p className="font-display font-extrabold text-2xl text-primary">
                 {savedHours}
               </p>
-              <p className="text-xs text-slate-400">giờ/tháng có thể tiết kiệm</p>
+              <p className="text-xs text-slate-500">giờ/tháng có thể tiết kiệm</p>
             </div>
             <div className="text-center">
               <p className="font-display font-extrabold text-2xl text-accent">
                 {savedCost}
               </p>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500">
                 triệu đ/năm tiết kiệm được
               </p>
             </div>
@@ -171,15 +171,15 @@ export default function Pricing() {
               <h3 className="font-display font-bold text-xl text-slate-900">
                 {pkg.name}
               </h3>
-              <p className="text-sm text-slate-400 mt-1 mb-5">{pkg.tagline}</p>
+              <p className="text-sm text-slate-500 mt-1 mb-5">{pkg.tagline}</p>
 
               <div className="mb-1">
                 <span className="font-display font-extrabold text-3xl text-slate-900">
                   {pkg.price}
                 </span>
-                <span className="text-sm text-slate-400 ml-1">{pkg.unit}</span>
+                <span className="text-sm text-slate-500 ml-1">{pkg.unit}</span>
               </div>
-              <p className="text-xs text-slate-400 mb-6">
+              <p className="text-xs text-slate-500 mb-6">
                 Timeline: {pkg.timeline}
               </p>
 
@@ -206,7 +206,7 @@ export default function Pricing() {
                 <p className="text-xs font-semibold text-slate-500 mb-1">
                   Ví dụ workflow:
                 </p>
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-500 leading-relaxed">
                   {pkg.example}
                 </p>
               </div>

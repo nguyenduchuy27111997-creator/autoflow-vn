@@ -31,7 +31,7 @@ export default function CodeBlock({ code, lang = "bash", title }: CodeBlockProps
             <span className="text-[10px] font-medium text-slate-400 ml-2">{title}</span>
           )}
           {!title && lang && (
-            <span className="text-[10px] font-medium text-slate-500 ml-2">{lang}</span>
+            <span className="text-[10px] font-medium text-slate-400 ml-2">{lang}</span>
           )}
         </div>
         <button
@@ -81,7 +81,7 @@ function highlightLine(line: string, lang: string): React.ReactNode {
   if (lang === "bash") {
     // Highlight commands, flags, strings, comments
     return line.split(/(\s+)/).map((part, i) => {
-      if (part.startsWith("#")) return <span key={i} className="text-slate-500 italic">{part}</span>;
+      if (part.startsWith("#")) return <span key={i} className="text-slate-400 italic">{part}</span>;
       if (part.startsWith("-")) return <span key={i} className="text-cyan-400">{part}</span>;
       if (part.startsWith('"') || part.startsWith("'")) return <span key={i} className="text-green-400">{part}</span>;
       if (["docker", "npm", "npx", "curl", "git", "mkdir", "cd", "apt", "brew", "ssh", "sudo", "chmod", "cat", "echo"].includes(part))
@@ -93,13 +93,13 @@ function highlightLine(line: string, lang: string): React.ReactNode {
   }
 
   if (lang === "yaml" || lang === "yml") {
-    if (line.trim().startsWith("#")) return <span className="text-slate-500 italic">{line}</span>;
+    if (line.trim().startsWith("#")) return <span className="text-slate-400 italic">{line}</span>;
     const colonIdx = line.indexOf(":");
     if (colonIdx > -1) {
       return (
         <>
           <span className="text-cyan-400">{line.slice(0, colonIdx)}</span>
-          <span className="text-slate-500">:</span>
+          <span className="text-slate-400">:</span>
           <span className="text-green-400">{line.slice(colonIdx + 1)}</span>
         </>
       );

@@ -252,7 +252,7 @@ export default function QuizPage() {
               >
                 Bắt Đầu Làm Quiz
               </button>
-              <p className="mt-4 text-xs text-slate-400">
+              <p className="mt-4 text-xs text-slate-500">
                 Kết quả được gửi qua email. Không spam, hủy bất cứ lúc nào.
               </p>
             </div>
@@ -357,7 +357,7 @@ export default function QuizPage() {
                       onChange={(e) =>
                         setLeadData((p) => ({ ...p, name: e.target.value }))
                       }
-                      className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 text-sm text-slate-800 placeholder:text-slate-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                     />
                   </div>
                   <div>
@@ -371,7 +371,7 @@ export default function QuizPage() {
                       onChange={(e) =>
                         setLeadData((p) => ({ ...p, email: e.target.value }))
                       }
-                      className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 text-sm text-slate-800 placeholder:text-slate-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                     />
                   </div>
                   <div>
@@ -385,7 +385,7 @@ export default function QuizPage() {
                       onChange={(e) =>
                         setLeadData((p) => ({ ...p, phone: e.target.value }))
                       }
-                      className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 text-sm text-slate-800 placeholder:text-slate-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                     />
                   </div>
                   {/* Honeypot */}
@@ -398,7 +398,7 @@ export default function QuizPage() {
                   />
                 </div>
 
-                <p className="text-[0.7rem] text-slate-400 mt-2 mb-5">
+                <p className="text-[0.7rem] text-slate-500 mt-2 mb-5">
                   Chúng tôi tôn trọng quyền riêng tư của bạn. Không spam, không
                   chia sẻ cho bên thứ ba.
                 </p>
@@ -500,7 +500,7 @@ export default function QuizPage() {
           )}
         </div>
       </main>
-      <div className="bg-slate-900 text-center py-4 text-xs text-slate-500">
+      <div className="bg-slate-900 text-center py-4 text-xs text-slate-400">
         Powered by{" "}
         <a
           href="https://autoflowvn.net"

@@ -88,7 +88,7 @@ export default function Results() {
                 <p className="text-sm text-slate-500 italic">
                   &ldquo;{cs.testimonial.quote}&rdquo;
                 </p>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-slate-500 mt-1">
                   — {cs.testimonial.name}, {cs.testimonial.role}
                 </p>
               </div>
@@ -99,7 +99,7 @@ export default function Results() {
                   📈 {cs.homepageResult}
                 </p>
                 <div className="flex items-center gap-3">
-                  <span className="text-xs text-slate-400">
+                  <span className="text-xs text-slate-500">
                     ⏱ {cs.homepageTimeline}
                   </span>
                   <span className="text-xs font-medium text-primary group-hover:translate-x-1 transition-transform">

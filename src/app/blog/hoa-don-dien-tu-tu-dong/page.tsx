@@ -49,7 +49,7 @@ export default function HoaDonDienTuTuDongBlog() {
         <article className="max-w-6xl mx-auto px-6">
           {/* Header */}
           <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-400 mb-5">
+            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
               <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
               <span>/</span>
               <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
@@ -63,7 +63,7 @@ export default function HoaDonDienTuTuDongBlog() {
               <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
                 MISA meInvoice · n8n
               </span>
-              <span className="text-xs text-slate-400">11 phút đọc</span>
+              <span className="text-xs text-slate-500">11 phút đọc</span>
             </div>
             <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
               Hóa Đơn Điện Tử Tự Động:{" "}

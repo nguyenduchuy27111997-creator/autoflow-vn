@@ -111,7 +111,7 @@ export default function Integrations() {
   return (
     <section className="py-12 border-y border-slate-100 bg-slate-50/50">
       <div className="max-w-6xl mx-auto px-6">
-        <p className="text-center text-sm font-medium text-slate-400 mb-8">
+        <p className="text-center text-sm font-medium text-slate-500 mb-8">
           Tích hợp trực tiếp với hệ sinh thái Việt Nam
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-6 justify-items-center">
