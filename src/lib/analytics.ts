@@ -6,7 +6,7 @@ function gtag(event: string, params?: Record<string, unknown>) {
 // ── Conversions ──
 
 export function trackGenerateLead(params: {
-  form_type: "audit" | "quiz" | "pdf" | "fb-ads";
+  form_type: "audit" | "quiz" | "pdf" | "fb-ads" | "chat";
   score?: number;
   result_tier?: string;
   resource?: string;
