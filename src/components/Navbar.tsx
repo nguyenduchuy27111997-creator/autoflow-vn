@@ -110,13 +110,6 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="tel:0935115248"
-            className="text-sm font-medium text-slate-500 hover:text-primary transition-colors hidden lg:inline-flex items-center gap-1"
-          >
-            <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-            0935.115.248
-          </a>
-          <a
             href="/audit"
             className="text-sm font-semibold text-white bg-primary hover:bg-primary-dark px-5 py-2.5 rounded-lg transition-all hover:shadow-lg hover:shadow-primary/25"
           >
@@ -147,9 +140,11 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu with backdrop */}
       {mobileOpen && (
-        <div className="md:hidden bg-white border-t border-slate-100 px-6 py-4 space-y-3">
+        <>
+        <div className="md:hidden fixed inset-0 top-16 bg-slate-900/40 backdrop-blur-sm z-40" onClick={() => setMobileOpen(false)} />
+        <div className="md:hidden relative z-50 bg-white border-t border-slate-100 px-6 py-4 space-y-3">
           {/* Mobile services */}
           <div className="py-2">
             <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">
@@ -192,6 +187,7 @@ export default function Navbar() {
             Audit miễn phí
           </a>
         </div>
+        </>
       )}
     </nav>
   );
