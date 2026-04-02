@@ -36,7 +36,7 @@ const faqs = [
   },
   {
     q: "Tích hợp với POS nào?",
-    a: "Hỗ trợ KiotViet, Sapo, và các POS có API. Ngoài ra tích hợp với GrabFood, ShopeeFood, Zalo OA cho đơn online.",
+    a: "Hỗ trợ KiotViet, iPOS, CukCuk, Sapo POS và các POS có API. AutoFlow tương thích với hầu hết hệ thống POS phổ biến tại Việt Nam. Ngoài ra tích hợp với GrabFood, ShopeeFood, Zalo OA cho đơn online.",
   },
   {
     q: "Có quản lý được nguyên vật liệu không?",
@@ -141,25 +141,25 @@ export default function FnBPage() {
         <section className="py-10 border-y border-slate-100 bg-slate-50/50 mb-20">
           <div className="max-w-6xl mx-auto px-6">
             <p className="text-center text-sm font-medium text-slate-500 mb-6">
-              Tích hợp với hệ sinh thái F&B Việt Nam
+              Tích hợp với hệ sinh thái F&amp;B Việt Nam — hỗ trợ nhiều hệ thống POS phổ biến
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               {[
-                { name: "GrabFood", color: "#00B14F" },
-                { name: "ShopeeFood", color: "#EE4D2D" },
-                { name: "Zalo OA", color: "#0068FF" },
-                { name: "Google Sheet", color: "#0F9D58" },
-                { name: "KiotViet", color: "#00A651" },
-                { name: "MISA", color: "#E31937" },
-                { name: "Facebook", color: "#1877F2" },
-                { name: "Telegram", color: "#26A5E4" },
+                { name: "GrabFood", icon: "\ud83d\udeb5" },
+                { name: "ShopeeFood", icon: "\ud83d\uded2" },
+                { name: "Zalo OA", icon: "\ud83d\udcac" },
+                { name: "Google Sheets", icon: "\ud83d\udcd7" },
+                { name: "KiotViet", icon: "\ud83c\udfea" },
+                { name: "iPOS", icon: "\ud83d\udcf1" },
+                { name: "CukCuk", icon: "\ud83c\udf7d\ufe0f" },
+                { name: "Sapo POS", icon: "\ud83d\udce6" },
+                { name: "MISA", icon: "\ud83d\udcca" },
+                { name: "Facebook", icon: "\ud83d\udce3" },
+                { name: "Telegram", icon: "\u2708\ufe0f" },
               ].map((item) => (
                 <div key={item.name} className="flex items-center gap-2 group">
-                  <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold"
-                    style={{ backgroundColor: item.color }}
-                  >
-                    {item.name.charAt(0)}
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center text-lg bg-slate-100">
+                    {item.icon}
                   </div>
                   <span className="text-sm font-medium text-slate-500">
                     {item.name}
@@ -323,76 +323,96 @@ export default function FnBPage() {
         <section className="max-w-6xl mx-auto px-6 mb-20">
           <div className="text-center mb-10">
             <h2 className="font-display font-extrabold text-2xl md:text-3xl text-slate-900 tracking-tight mb-3">
-              Gói phù hợp cho F&B
+              Gói phù hợp cho F&amp;B
             </h2>
           </div>
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl border border-slate-200 p-8">
-              <h3 className="font-display font-bold text-xl text-slate-900">
-                Growth
-              </h3>
-              <p className="text-sm text-slate-500 mt-1 mb-4">
-                Cho nhà hàng 1–3 chi nhánh
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+            {/* Pilot */}
+            <div className="bg-white rounded-2xl border-2 border-primary p-7 relative">
+              <div className="absolute -top-3 left-4 bg-primary text-white text-[11px] font-bold px-3 py-0.5 rounded-full">
+                Rào cản thấp nhất
+              </div>
+              <h3 className="font-display font-bold text-lg text-slate-900 mt-1">Pilot</h3>
+              <p className="text-xs text-slate-500 mt-1 mb-3">Thử trước, không rủi ro</p>
+              <p className="font-display font-extrabold text-2xl text-slate-900 mb-3">
+                5–8<span className="text-sm font-normal text-slate-500 ml-1">triệu</span>
               </p>
-              <p className="font-display font-extrabold text-3xl text-slate-900 mb-4">
-                20–35
-                <span className="text-sm font-normal text-slate-500 ml-1">
-                  triệu đồng
-                </span>
-              </p>
-              <ul className="space-y-2 mb-6">
-                {[
-                  "3–5 workflows (đơn delivery, chăm khách, ca làm, tồn kho, báo cáo)",
-                  "Training session 2h cho quản lý",
-                  "Support 14 ngày",
-                  "Timeline: 3–4 tuần",
-                ].map((f, i) => (
+              <ul className="space-y-1.5 mb-5">
+                {["1 workflow trọn vẹn", "Timeline: 1 tuần", "Thấy kết quả ngay"].map((f, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
-                    <span className="text-accent mt-0.5">✓</span>
-                    {f}
+                    <span className="text-accent mt-0.5">✓</span>{f}
                   </li>
                 ))}
               </ul>
-              <a
-                href="/audit"
-                className="block text-center bg-primary hover:bg-primary-dark text-white font-semibold py-3 rounded-xl transition-all"
-              >
-                Audit miễn phí
+              <a href="/audit" className="block text-center bg-primary hover:bg-primary-dark text-white font-semibold py-2.5 rounded-xl transition-all text-sm">
+                Bắt đầu Pilot
               </a>
             </div>
-            <div className="bg-white rounded-2xl border border-slate-200 p-8">
-              <h3 className="font-display font-bold text-xl text-slate-900">
-                Scale
-              </h3>
-              <p className="text-sm text-slate-500 mt-1 mb-4">
-                Cho chuỗi 4+ chi nhánh
+            {/* Starter */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-7">
+              <h3 className="font-display font-bold text-lg text-slate-900">Starter</h3>
+              <p className="text-xs text-slate-500 mt-1 mb-3">Cho quán đơn lẻ</p>
+              <p className="font-display font-extrabold text-2xl text-slate-900 mb-3">
+                8–15<span className="text-sm font-normal text-slate-500 ml-1">triệu</span>
               </p>
-              <p className="font-display font-extrabold text-3xl text-slate-900 mb-4">
-                50–80
-                <span className="text-sm font-normal text-slate-500 ml-1">
-                  triệu đồng
-                </span>
-              </p>
-              <ul className="space-y-2 mb-6">
-                {[
-                  "8–12 workflows toàn bộ vận hành",
-                  "n8n self-hosted (data trong nước)",
-                  "Training 2 buổi + 30-day warranty",
-                  "Timeline: 6–8 tuần",
-                ].map((f, i) => (
+              <ul className="space-y-1.5 mb-5">
+                {["1 workflow + mở rộng", "Timeline: 1–2 tuần", "Support 7 ngày"].map((f, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
-                    <span className="text-accent mt-0.5">✓</span>
-                    {f}
+                    <span className="text-accent mt-0.5">✓</span>{f}
                   </li>
                 ))}
               </ul>
-              <a
-                href="/audit"
-                className="block text-center bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 rounded-xl transition-all"
-              >
+              <a href="/audit" className="block text-center bg-primary hover:bg-primary-dark text-white font-semibold py-2.5 rounded-xl transition-all text-sm">
                 Audit miễn phí
               </a>
             </div>
+            {/* Growth */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-7">
+              <h3 className="font-display font-bold text-lg text-slate-900">Growth</h3>
+              <p className="text-xs text-slate-500 mt-1 mb-3">Cho nhà hàng 1–3 chi nhánh</p>
+              <p className="font-display font-extrabold text-2xl text-slate-900 mb-3">
+                20–35<span className="text-sm font-normal text-slate-500 ml-1">triệu</span>
+              </p>
+              <ul className="space-y-1.5 mb-5">
+                {["3–5 workflows", "Training 2h cho quản lý", "Support 14 ngày", "Timeline: 3–4 tuần"].map((f, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
+                    <span className="text-accent mt-0.5">✓</span>{f}
+                  </li>
+                ))}
+              </ul>
+              <a href="/audit" className="block text-center bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-xl transition-all text-sm">
+                Audit miễn phí
+              </a>
+            </div>
+            {/* Scale */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-7">
+              <h3 className="font-display font-bold text-lg text-slate-900">Scale</h3>
+              <p className="text-xs text-slate-500 mt-1 mb-3">Cho chuỗi 4+ chi nhánh</p>
+              <p className="font-display font-extrabold text-2xl text-slate-900 mb-3">
+                50–80<span className="text-sm font-normal text-slate-500 ml-1">triệu</span>
+              </p>
+              <ul className="space-y-1.5 mb-5">
+                {["8–12 workflows toàn bộ", "n8n self-hosted", "Training 2 buổi + 30-day warranty", "Timeline: 6–8 tuần"].map((f, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
+                    <span className="text-accent mt-0.5">✓</span>{f}
+                  </li>
+                ))}
+              </ul>
+              <a href="/audit" className="block text-center bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-xl transition-all text-sm">
+                Audit miễn phí
+              </a>
+            </div>
+          </div>
+          {/* Compliance callout */}
+          <div className="flex flex-wrap justify-center gap-4 mt-8 max-w-4xl mx-auto">
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full">
+              <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Hỗ trợ hóa đơn điện tử theo quy định
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full">
+              <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Data lưu trữ tại Việt Nam, tuân thủ quy định bảo mật dữ liệu
+            </span>
           </div>
         </section>
 
