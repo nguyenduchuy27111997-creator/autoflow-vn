@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PricingCalculator from "@/components/PricingCalculator";
 
 const packages = [
   {
@@ -91,6 +92,22 @@ export default function BangGiaPage() {
               không sai sót. Hoàn vốn sau 5–7 tháng.
             </p>
           </div>
+        </section>
+
+        {/* Interactive Pricing Calculator */}
+        <section className="max-w-3xl mx-auto px-6 mb-16">
+          <div className="text-center mb-6">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-3">
+              ⚡ Ước tính trong 60 giây
+            </span>
+            <h2 className="font-display font-bold text-xl text-slate-900">
+              Chưa biết gói nào phù hợp?
+            </h2>
+            <p className="text-sm text-slate-500 mt-1">
+              Trả lời 3 câu hỏi — nhận ước tính chi phí ngay lập tức.
+            </p>
+          </div>
+          <PricingCalculator />
         </section>
 
         {/* ROI Calculator */}
