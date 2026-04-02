@@ -84,10 +84,17 @@ export default function ChatWidget() {
   const isBusy = status === "streaming" || status === "submitted";
   const rateLimited = msgCount >= MAX_MESSAGES_PER_SESSION;
 
-  // Auto-scroll
+  // Auto-scroll on new messages and when chat opens
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, status]);
+
+  useEffect(() => {
+    if (open) {
+      // Scroll to bottom when chat panel opens
+      setTimeout(() => messagesEndRef.current?.scrollIntoView({ behavior: "instant" }), 50);
+    }
+  }, [open]);
 
   // Show tooltip after 2s, hide after 6s + smart re-trigger on high-intent sections
   const tooltipRetriggerCount = useRef(0);
