@@ -95,6 +95,18 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col font-sans" suppressHydrationWarning>
+        {/* WebSite schema (sitelinks search box) */}
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "AutoFlow VN",
+            url: "https://autoflowvn.net",
+            description: "Chuyên gia #1 về n8n automation cho SME Việt Nam",
+            inLanguage: "vi",
+            publisher: { "@type": "Organization", name: "AutoFlow VN" },
+          }}
+        />
         {/* Organization schema */}
         <JsonLd
           data={{
@@ -111,8 +123,22 @@ export default function RootLayout({
               addressLocality: "TP. Hồ Chí Minh",
               addressCountry: "VN",
             },
+            contactPoint: {
+              "@type": "ContactPoint",
+              contactType: "customer service",
+              email: "hello@autoflowvn.net",
+              url: "https://autoflowvn.net/audit",
+              availableLanguage: ["vi", "en"],
+            },
             sameAs: [
               "https://facebook.com/autoflowvn",
+            ],
+            knowsAbout: [
+              "n8n automation",
+              "workflow automation",
+              "business process automation",
+              "Zalo OA integration",
+              "Vietnamese SME digital transformation",
             ],
           }}
         />
@@ -132,6 +158,16 @@ export default function RootLayout({
               addressCountry: "VN",
             },
             priceRange: "$$",
+            areaServed: {
+              "@type": "Country",
+              name: "Vietnam",
+            },
+            openingHoursSpecification: {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              opens: "09:00",
+              closes: "18:00",
+            },
             serviceType: [
               "Automation Consulting",
               "n8n Workflow Development",
