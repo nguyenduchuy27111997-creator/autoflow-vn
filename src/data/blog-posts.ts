@@ -10,7 +10,8 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   // Pillar
-  { slug: "n8n-la-gi", title: "n8n Là Gì? Hướng Dẫn Toàn Diện 2026", description: "Hướng dẫn A-Z: cài đặt, 400+ tích hợp, 70+ AI nodes, so sánh Zapier/Make, bảng giá VND.", date: "2026-01-06", readTime: "20 phút", category: "Pillar", featured: true },
+  { slug: "lo-trinh-tu-dong-hoa-sme", title: "Lộ Trình Tự Động Hóa Cho SME Việt Nam 2026: Từ Thủ Công Đến AI Agent", description: "Framework 5 giai đoạn, ROI calculator, đánh giá maturity miễn phí, và lộ trình triển khai thực tế bằng n8n.", date: "2026-04-02", readTime: "25 phút", category: "Pillar", featured: true },
+  { slug: "n8n-la-gi", title: "n8n Là Gì? Hướng Dẫn Toàn Diện 2026", description: "Hướng dẫn A-Z: cài đặt, 400+ tích hợp, 70+ AI nodes, so sánh Zapier/Make, bảng giá VND.", date: "2026-01-06", readTime: "20 phút", category: "Pillar", featured: false },
 
   // Knowledge / Comparison (older content)
   { slug: "5-dau-hieu-can-automation", title: "5 Dấu Hiệu Cần Tự Động Hóa — Ngay Bây Giờ", description: "94% doanh nghiệp làm việc lặp lại.", date: "2026-01-10", readTime: "10 phút", category: "Kiến thức", featured: false },
