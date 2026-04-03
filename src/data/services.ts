@@ -74,16 +74,16 @@ export interface ServiceConfig {
 export const ecommerceService: ServiceConfig = {
   slug: "e-commerce",
   industry: "E-commerce",
-  badge: { text: "Dich vu cho E-commerce", bgClass: "bg-[#EE4D2D]/10", textClass: "text-[#EE4D2D]" },
+  badge: { text: "Dịch vụ cho E-commerce", bgClass: "bg-[#EE4D2D]/10", textClass: "text-[#EE4D2D]" },
   hero: {
-    titlePrefix: "Tu dong hoa ",
+    titlePrefix: "Tự động hóa ",
     titleHighlight: "shop online",
-    titleSuffix: " — tu don hang den cham khach",
+    titleSuffix: " — từ đơn hàng đến chăm khách",
     description:
-      "AutoFlow giup shop Shopee, Tiki, TikTok Shop tu dong dong bo don hang, quan ly ton kho, reply review, va follow-up khach — giam 65% thoi gian van hanh, 0 loi nhap tay.",
-    ctaText: "Nhan audit mien phi cho shop",
+      "AutoFlow giúp shop Shopee, Tiki, TikTok Shop tự động đồng bộ đơn hàng, quản lý tồn kho, reply review, và follow-up khách — giảm 65% thời gian vận hành, 0 lỗi nhập tay.",
+    ctaText: "Nhận audit miễn phí cho shop",
   },
-  integrationsLabel: "Tich hop truc tiep voi he sinh thai e-commerce Viet Nam",
+  integrationsLabel: "Tích hợp trực tiếp với hệ sinh thái e-commerce Việt Nam",
   integrations: [
     { name: "Shopee", icon: "\ud83d\uded2" },
     { name: "Tiki", icon: "\ud83d\udcd8" },
