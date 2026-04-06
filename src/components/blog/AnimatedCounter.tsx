@@ -32,7 +32,7 @@ export default function AnimatedCounter({ stats }: { stats: CounterStat[] }) {
   }, []);
 
   return (
-    <div ref={ref} className={`grid grid-cols-2 md:grid-cols-${Math.min(stats.length, 4)} gap-4 my-8 not-prose`}>
+    <div ref={ref} className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 my-8 not-prose">
       {stats.map((s, i) => (
         <div
           key={i}

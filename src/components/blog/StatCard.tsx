@@ -4,7 +4,7 @@ export default function StatCard({
   stats: { value: string; label: string; sub?: string; color?: string }[];
 }) {
   return (
-    <div className={`grid grid-cols-${Math.min(stats.length, 4)} gap-4 my-8 not-prose`}>
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 my-8 not-prose">
       {stats.map((s, i) => (
         <div key={i} className="bg-slate-50 rounded-xl p-4 text-center">
           <div className={`font-display font-extrabold text-2xl ${s.color || "text-primary"}`}>
