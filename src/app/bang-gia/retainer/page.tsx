@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import InlineContactForm from "@/components/InlineContactForm";
 
 export const metadata: Metadata = {
   title: "Gói Retainer — Hỗ Trợ Automation Hàng Tháng | AutoFlow VN",
@@ -222,23 +223,32 @@ export default function RetainerPage() {
           </div>
         </section>
 
+        {/* Inline Form */}
+        <section className="max-w-3xl mx-auto px-6 mb-16">
+          <InlineContactForm
+            source="retainer"
+            title="Trao Đổi Về Retainer"
+            subtitle="Điền thông tin — mình liên hệ qua Zalo để bàn scope retainer phù hợp. Tháng đầu giảm 20%."
+          />
+        </section>
+
         {/* CTA */}
         <section className="max-w-3xl mx-auto px-6 text-center">
           <div className="bg-slate-900 rounded-2xl p-10">
             <p className="text-sm text-primary font-semibold mb-3">
-              Tháng đầu giảm 20% khi ký ngay sau project
+              Hoặc đặt audit miễn phí trước
             </p>
             <h2 className="font-display font-extrabold text-2xl text-white mb-3">
-              Yên tâm vận hành, tập trung kinh doanh
+              Chưa có project? Bắt đầu từ audit
             </h2>
             <p className="text-slate-400 mb-6">
-              Liên hệ để bàn scope retainer phù hợp với doanh nghiệp bạn.
+              Audit miễn phí 30 phút — mình phân tích quy trình và gợi ý gói phù hợp.
             </p>
             <a
               href="/audit"
               className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-8 py-4 rounded-xl transition-all"
             >
-              Trao đổi về retainer
+              Đặt lịch audit miễn phí
               <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M5 8h6M8 5l3 3-3 3" />
               </svg>

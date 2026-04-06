@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { caseStudies } from "@/lib/case-studies";
+import InlineContactForm from "@/components/InlineContactForm";
 
 export const metadata: Metadata = {
   title: "Chương Trình Pilot — Giảm 40-50% | AutoFlow VN",
@@ -553,15 +554,23 @@ export default function PilotPage() {
           </div>
         </section>
 
+        {/* ── Inline Form ── */}
+        <section className="max-w-3xl mx-auto px-6 mb-16">
+          <InlineContactForm
+            source="pilot"
+            title="Đăng Ký Pilot — Chỉ 3 Slot"
+            subtitle="Điền thông tin bên dưới. Mình liên hệ qua Zalo trong 2 giờ để trao đổi chi tiết."
+          />
+        </section>
+
         {/* ── CTA ── */}
         <section className="max-w-6xl mx-auto px-6">
           <div className="bg-gradient-to-br from-primary to-blue-700 rounded-3xl p-10 md:p-14 text-center text-white">
             <h2 className="font-display font-extrabold text-2xl md:text-4xl mb-4">
-              Sẵn sàng thử?
+              Hoặc đặt audit miễn phí trước
             </h2>
             <p className="text-white/70 text-lg mb-8 max-w-xl mx-auto">
-              Đặt lịch audit miễn phí 30 phút. Mình sẽ phân tích quy trình và
-              gửi đề xuất pilot cụ thể cho doanh nghiệp của bạn.
+              Chưa chắc chắn? Đặt lịch audit miễn phí 30 phút — mình phân tích quy trình và gửi đề xuất pilot cụ thể.
             </p>
             <a
               href="/audit"
