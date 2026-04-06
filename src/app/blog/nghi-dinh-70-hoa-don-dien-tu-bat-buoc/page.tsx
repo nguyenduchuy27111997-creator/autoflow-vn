@@ -11,7 +11,6 @@ import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import BlogFooter from "@/components/blog/BlogFooter";
 import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
-import BlogCTA from "@/components/blog/BlogCTA";
 import BlogInlineCTA from "@/components/blog/BlogInlineCTA";
 import ReadingProgress from "@/components/blog/ReadingProgress";
 
@@ -150,7 +149,7 @@ export default function NghiDinh70Blog() {
           ]} />
 
           {/* ── Layout: TOC + Content ── */}
-          <div className="flex gap-12">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
             <div className="flex-1 min-w-0">
 
               {/* ═══ SECTION 1: Nghị Định 70 Là Gì ═══ */}
@@ -503,9 +502,6 @@ export default function NghiDinh70Blog() {
                 <FAQ items={faqItems} />
               </section>
 
-              {/* ═══ Blog Footer CTA ═══ */}
-              <BlogCTA />
-
               <BlogFooter
                 slug="nghi-dinh-70-hoa-don-dien-tu-bat-buoc"
                 title="Nghị Định 70/2025: Hóa Đơn Điện Tử Bắt Buộc Từ 1/6/2025"
@@ -514,9 +510,9 @@ export default function NghiDinh70Blog() {
             </div>
 
             {/* ── TOC Sidebar ── */}
-            <div className="hidden xl:block w-64 shrink-0">
+            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
               <TableOfContents items={tocItems} />
-            </div>
+            </aside>
           </div>
         </article>
       </main>

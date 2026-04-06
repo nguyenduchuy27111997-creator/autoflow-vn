@@ -107,7 +107,7 @@ export default function WebhookLaGiBlog() {
           </div>
 
           {/* Content + TOC */}
-          <div className="flex gap-12 items-start relative">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
             {/* Main content */}
             <div className="flex-1 min-w-0 max-w-3xl">
               <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
@@ -460,7 +460,7 @@ data:
             </div>
 
             {/* Sticky TOC */}
-            <aside className="hidden xl:block w-64 shrink-0 sticky top-32 self-start">
+            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
               <TableOfContents items={tocItems} />
             </aside>
           </div>

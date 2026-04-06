@@ -79,7 +79,7 @@ export default function N8nVsZapierBlog() {
           </div>
 
           {/* Content + TOC */}
-          <div className="flex gap-12 items-start relative">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
             {/* Main content */}
             <div className="flex-1 min-w-0 max-w-3xl">
               <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
@@ -423,7 +423,9 @@ export default function N8nVsZapierBlog() {
             </div>
 
             {/* Table of Contents */}
-            <TableOfContents items={tocItems} />
+            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
+              <TableOfContents items={tocItems} />
+            </aside>
           </div>
           <BlogFooter title="n8n vs Zapier — SME Việt Nam Nên Chọn Cái Nào?" slug="n8n-vs-zapier" date="2026-04-01" />
         </article>
