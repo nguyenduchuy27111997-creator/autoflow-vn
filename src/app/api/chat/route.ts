@@ -2,6 +2,7 @@ import { anthropic } from "@ai-sdk/anthropic";
 import { streamText, tool, stepCountIs } from "ai";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
+import { notifyTelegram, formatChatLeadNotify } from "@/lib/telegram";
 
 export const maxDuration = 30;
 
@@ -183,6 +184,13 @@ export async function POST(req: Request) {
               });
             }
           } catch {} // fire-and-forget
+
+          // Telegram notification
+          notifyTelegram(formatChatLeadNotify({
+            phone: params.phone,
+            email: params.email,
+            name: params.name,
+          })).catch(() => {});
 
           return {
             ok: true,

@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { createClient } from "@/lib/supabase/server";
 import { enqueueEmailSequence } from "@/lib/email-queue";
 import { getRateLimitKey, isRateLimited } from "@/lib/rate-limit";
+import { notifyTelegram, formatPdfNotify } from "@/lib/telegram";
 import { readFile } from "fs/promises";
 import { join } from "path";
 import { EMAIL_FROM, SITE_NAME, SITE_URL } from "@/data/constants";
@@ -81,6 +82,9 @@ export async function POST(req: NextRequest) {
     if (dbError) {
       console.error("Supabase insert error:", dbError);
     }
+
+    // Telegram notification
+    notifyTelegram(formatPdfNotify({ email: email.trim(), name, resource: pdfInfo.title })).catch(() => {});
 
     // Enqueue PDF email sequence
     enqueueEmailSequence({

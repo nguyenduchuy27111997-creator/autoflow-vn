@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { enqueueEmailSequence } from "@/lib/email-queue";
 import { getRateLimitKey, isRateLimited } from "@/lib/rate-limit";
-
-const WEBHOOK_URL = process.env.AUDIT_WEBHOOK_URL;
+import { notifyTelegram, formatAuditNotify } from "@/lib/telegram";
 
 export async function POST(req: NextRequest) {
   try {
@@ -73,16 +72,11 @@ export async function POST(req: NextRequest) {
       }).catch((err) => console.error("Email queue error (audit):", err));
     }
 
-    // Forward to webhook (n8n, Zapier, Make, etc.)
-    if (WEBHOOK_URL) {
-      await fetch(WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...submission, submittedAt: new Date().toISOString() }),
-      }).catch((err) => {
-        console.error("Webhook error:", err);
-      });
-    }
+    // Telegram notification
+    notifyTelegram(formatAuditNotify({
+      name, phone, company, industry,
+      source: submission.source,
+    })).catch(() => {});
 
     return NextResponse.json({ success: true });
   } catch {

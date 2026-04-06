@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { notifyTelegram, formatPartnerNotify } from "@/lib/telegram";
 
 export async function POST(req: NextRequest) {
   try {
@@ -33,6 +34,9 @@ export async function POST(req: NextRequest) {
       console.error("Partner application error:", error);
       return NextResponse.json({ error: "Có lỗi xảy ra." }, { status: 500 });
     }
+
+    // Telegram notification
+    notifyTelegram(formatPartnerNotify({ name, company, phone, partner_type })).catch(() => {});
 
     return NextResponse.json({ success: true, referral_code: code });
   } catch {
