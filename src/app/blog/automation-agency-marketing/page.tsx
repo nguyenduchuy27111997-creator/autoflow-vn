@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import BlogLayout from "@/components/blog/BlogLayout";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Automation Cho Agency Marketing — Quản Lý 10 Client Như 1",
@@ -63,45 +59,19 @@ const faqItems = [
 
 export default function AutomationAgencyMarketingBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="automation-agency-marketing" title="Automation Cho Agency Marketing — 10 Client Như 1" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Marketing</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-purple-50 text-purple-600 text-xs font-semibold">
-                Agency
-              </span>
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-                Marketing
-              </span>
-              <span className="text-xs text-slate-500">15 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Automation Cho Agency Marketing —{" "}
-              <span className="gradient-text">Quản Lý 10 Client Như 1</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              544% ROI, 80% nhiều lead hơn, tiết kiệm 12 giờ mỗi tuần — đây là những con số thực
-              từ các agency marketing đã triển khai automation. Vấn đề của bạn không phải thiếu client.
-              Vấn đề là bạn đang dành quá nhiều thời gian cho công việc lặp lại thay vì công việc chiến lược.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="automation-agency-marketing"
+      title={<>Automation Cho Agency Marketing —{" "}<span className="gradient-text">Quản Lý 10 Client Như 1</span></>}
+      description="544% ROI, 80% nhiều lead hơn, tiết kiệm 12 giờ mỗi tuần — đây là những con số thực từ các agency marketing đã triển khai automation. Vấn đề của bạn không phải thiếu client. Vấn đề là bạn đang dành quá nhiều thời gian cho công việc lặp lại thay vì công việc chiến lược."
+      breadcrumbLabel="Marketing"
+      badges={[
+        { text: "Agency", color: "purple" },
+        { text: "Marketing", color: "blue" },
+      ]}
+      readTime="15 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 <StatCard stats={[
                   { value: "544%", label: "ROI trung bình", sub: "từ marketing automation (nguồn: Nucleus Research)", color: "text-accent" },
@@ -328,18 +298,6 @@ export default function AutomationAgencyMarketingBlog() {
                   </a>
                 </CalloutBox>
 
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-          <BlogFooter title="Automation Agency Marketing" slug="automation-agency-marketing" date="2026-04-01" />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

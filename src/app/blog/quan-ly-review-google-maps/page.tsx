@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
+import BlogLayout from "@/components/blog/BlogLayout";
 
 export const metadata: Metadata = {
   title: "Quản Lý Review Google Maps Tự Động — Tăng Sao, Tăng Khách 2026",
@@ -62,45 +58,19 @@ const faqItems = [
 
 export default function QuanLyReviewGoogleMapsBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="quan-ly-review-google-maps" title="Quản Lý Review Google Maps Tự Động" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Marketing</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-yellow-50 text-yellow-700 text-xs font-semibold">
-                Google Maps
-              </span>
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-                Marketing
-              </span>
-              <span className="text-xs text-slate-500">11 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Quản Lý Review Google Maps Tự Động —{" "}
-              <span className="gradient-text">Tăng Sao, Tăng Khách</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              88% khách hàng đọc review trước khi chọn dịch vụ. 97% đọc phản hồi của chủ cơ sở.
-              Nhưng hầu hết doanh nghiệp không trả lời review vì không có thời gian.
-              3 workflow dưới đây giải quyết điều đó — monitor 24/7, AI soạn draft, tự động thu thập review mới.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="quan-ly-review-google-maps"
+      title={<>Quản Lý Review Google Maps Tự Động —{" "}<span className="gradient-text">Tăng Sao, Tăng Khách</span></>}
+      description="88% khách hàng đọc review trước khi chọn dịch vụ. 97% đọc phản hồi của chủ cơ sở. Nhưng hầu hết doanh nghiệp không trả lời review vì không có thời gian. 3 workflow dưới đây giải quyết điều đó — monitor 24/7, AI soạn draft, tự động thu thập review mới."
+      breadcrumbLabel="Marketing"
+      badges={[
+        { text: "Google Maps", color: "amber" },
+        { text: "Marketing", color: "blue" },
+      ]}
+      readTime="11 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 <StatCard stats={[
                   { value: "88%", label: "khách đọc review trước khi chọn", sub: "nguồn: BrightLocal Local Consumer Review Survey", color: "text-yellow-600" },
@@ -301,18 +271,6 @@ export default function QuanLyReviewGoogleMapsBlog() {
                   </a>
                 </CalloutBox>
 
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-          <BlogFooter title="Quản Lý Review Google Maps" slug="quan-ly-review-google-maps" date="2026-04-01" />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

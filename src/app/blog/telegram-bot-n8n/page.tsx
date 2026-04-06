@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import BlogLayout from "@/components/blog/BlogLayout";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
-import BlogFooter from "@/components/blog/BlogFooter";
 import CodeBlock from "@/components/blog/CodeBlock";
 import FAQ from "@/components/blog/FAQ";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Telegram Bot + n8n: Thông Báo & Quản Lý Kinh Doanh Từ Xa 2026",
@@ -69,61 +65,20 @@ const faqItems = [
 
 export default function TelegramBotN8nBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="telegram-bot-n8n" title="Telegram Bot + n8n: Thông Báo & Quản Lý Từ Xa" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">
-                Trang chủ
-              </a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">
-                Blog
-              </a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">
-                Hướng dẫn
-              </span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-sky-50 text-sky-600 text-xs font-semibold">
-                Telegram Bot
-              </span>
-              <span className="px-3 py-1 rounded-full bg-violet-50 text-violet-600 text-xs font-semibold">
-                n8n
-              </span>
-              <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold">
-                Tự động hóa
-              </span>
-              <span className="text-xs text-slate-500">14 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Telegram Bot + n8n:{" "}
-              <span className="gradient-text">
-                Thông Báo &amp; Quản Lý Kinh Doanh Từ Xa
-              </span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Telegram có 1 tỷ người dùng toàn cầu và 1.2 tỷ tương tác bot mỗi
-              tháng. Nhưng hầu hết doanh nghiệp Việt vẫn dùng điện thoại để
-              hỏi nhân viên tình trạng đơn hàng, đợi email báo cáo cuối ngày, hay
-              bỏ lỡ cảnh báo tồn kho vào cuối tuần. Bài này hướng dẫn bạn xây
-              4 Telegram Bot bằng n8n: từ cảnh báo đơn hàng real-time đến quản
-              lý task nhóm — điều hành doanh nghiệp ngay từ điện thoại, không
-              cần gọi điện cho ai.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
-
+    <BlogLayout
+      slug="telegram-bot-n8n"
+      title={<>Telegram Bot + n8n:{" "}<span className="gradient-text">Thông Báo &amp; Quản Lý Kinh Doanh Từ Xa</span></>}
+      description="Telegram có 1 tỷ người dùng toàn cầu và 1.2 tỷ tương tác bot mỗi tháng. Nhưng hầu hết doanh nghiệp Việt vẫn dùng điện thoại để hỏi nhân viên tình trạng đơn hàng, đợi email báo cáo cuối ngày, hay bỏ lỡ cảnh báo tồn kho vào cuối tuần. Bài này hướng dẫn bạn xây 4 Telegram Bot bằng n8n: từ cảnh báo đơn hàng real-time đến quản lý task nhóm — điều hành doanh nghiệp ngay từ điện thoại, không cần gọi điện cho ai."
+      breadcrumbLabel="Hướng dẫn"
+      badges={[
+        { text: "Telegram Bot", color: "sky" },
+        { text: "n8n", color: "violet" },
+        { text: "Tự động hóa", color: "emerald" },
+      ]}
+      readTime="14 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
                 {/* Section 1 — PAS Intro */}
                 <h2 id="van-de">Vấn Đề: Điều Hành Kinh Doanh Bằng Gọi Điện và Excel</h2>
 
@@ -874,23 +829,6 @@ return [{
                   </a>
                 </CalloutBox>
 
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-
-          <BlogFooter
-            title="Telegram Bot + n8n"
-            slug="telegram-bot-n8n"
-            date="2026-04-01"
-          />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

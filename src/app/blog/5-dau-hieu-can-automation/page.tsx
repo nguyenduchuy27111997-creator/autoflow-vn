@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import BlogLayout from "@/components/blog/BlogLayout";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "5 Dấu Hiệu Doanh Nghiệp Bạn Cần Tự Động Hóa — Ngay Bây Giờ",
@@ -41,46 +37,19 @@ const tocItems = [
 
 export default function DauHieuCanAutomationBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="5-dau-hieu-can-automation" title="5 Dấu Hiệu Cần Tự Động Hóa — Ngay Bây Giờ" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Kiến thức</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
-                Automation
-              </span>
-              <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold">
-                Dành cho SME
-              </span>
-              <span className="text-xs text-slate-500">10 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              5 Dấu Hiệu Doanh Nghiệp Bạn{" "}
-              <span className="gradient-text">Cần Tự Động Hóa</span> — Ngay Bây Giờ
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Nếu bạn đang đọc bài này lúc 11 giờ đêm vì ngày mai lại phải gom báo cáo,
-              hoặc vừa phát hiện một lô dữ liệu nhập sai — bạn đang trải qua đúng những
-              dấu hiệu mà bài viết này nói đến. Đã đến lúc máy móc làm thay bạn.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
-
+    <BlogLayout
+      slug="5-dau-hieu-can-automation"
+      title={<>5 Dấu Hiệu Doanh Nghiệp Bạn{" "}<span className="gradient-text">Cần Tự Động Hóa</span> — Ngay Bây Giờ</>}
+      description="Nếu bạn đang đọc bài này lúc 11 giờ đêm vì ngày mai lại phải gom báo cáo, hoặc vừa phát hiện một lô dữ liệu nhập sai — bạn đang trải qua đúng những dấu hiệu mà bài viết này nói đến. Đã đến lúc máy móc làm thay bạn."
+      breadcrumbLabel="Kiến thức"
+      badges={[
+        { text: "Automation", color: "primary" },
+        { text: "Dành cho SME", color: "slate" },
+      ]}
+      readTime="10 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
                 {/* Hook section */}
                 <h2 id="van-de">94% Doanh Nghiệp Đang Lãng Phí Thời Gian Vào Việc Máy Làm Được</h2>
 
@@ -598,19 +567,6 @@ export default function DauHieuCanAutomationBlog() {
                   { q: "Automation có thể bị lỗi không? Nếu lỗi thì sao?", a: "Có thể — thường do API bên thứ ba thay đổi hoặc data sai định dạng. Giải pháp: alert khi lỗi (email/Telegram), kiểm tra data trước xử lý, giữ log để debug. Workflow thiết kế tốt có uptime trên 99%." },
                   { q: "Tự động hóa có làm mất việc làm nhân viên không?", a: "Hầu hết DN không sa thải — họ chuyển người sang việc có giá trị cao hơn: chăm sóc khách, phân tích data, phát triển kinh doanh. Automation loại bỏ công việc nhàm chán, không phải con người." },
                 ]} />
-
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-          <BlogFooter title="5 Dấu Hiệu Doanh Nghiệp Bạn Cần Tự Động Hóa" slug="5-dau-hieu-can-automation" date="2026-04-01" />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

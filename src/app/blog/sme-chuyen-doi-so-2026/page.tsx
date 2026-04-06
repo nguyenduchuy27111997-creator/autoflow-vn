@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import BlogLayout from "@/components/blog/BlogLayout";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "80% SME Việt Nam Tìm Giải Pháp Công Nghệ Nhưng Không Biết Bắt Đầu — Lộ Trình 2026",
@@ -40,47 +36,19 @@ const tocItems = [
 
 export default function SmeChuyenDoiSo2026Blog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="sme-chuyen-doi-so-2026" title="80% SME Tìm Giải Pháp Nhưng Không Biết Bắt Đầu" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Kiến thức</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
-                Chuyển đổi số
-              </span>
-              <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold">
-                Dành cho SME
-              </span>
-              <span className="text-xs text-slate-500">12 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              80% SME Việt Nam Tìm Giải Pháp Công Nghệ Nhưng{" "}
-              <span className="gradient-text">Không Biết Bắt Đầu</span> — Lộ Trình 2026
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              99% doanh nghiệp vừa và nhỏ đã dùng hóa đơn điện tử — con số ấn tượng. Nhưng
-              chỉ 14% thực sự đổi mới quy trình nội bộ. Khoảng cách giữa "đã số hóa" và
-              "thực sự chuyển đổi" đang giữ hàng trăm nghìn SME mắc kẹt. Bài này cho bạn
-              lộ trình cụ thể để thoát ra.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
-
+    <BlogLayout
+      slug="sme-chuyen-doi-so-2026"
+      title={<>80% SME Việt Nam Tìm Giải Pháp Công Nghệ Nhưng{" "}<span className="gradient-text">Không Biết Bắt Đầu</span> — Lộ Trình 2026</>}
+      description={'99% doanh nghiệp vừa và nhỏ đã dùng hóa đơn điện tử — con số ấn tượng. Nhưng chỉ 14% thực sự đổi mới quy trình nội bộ. Khoảng cách giữa "đã số hóa" và "thực sự chuyển đổi" đang giữ hàng trăm nghìn SME mắc kẹt. Bài này cho bạn lộ trình cụ thể để thoát ra.'}
+      breadcrumbLabel="Kiến thức"
+      badges={[
+        { text: "Chuyển đổi số", color: "primary" },
+        { text: "Dành cho SME", color: "slate" },
+      ]}
+      readTime="12 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
                 {/* Hook: Nghich ly */}
                 <h2 id="nghich-ly">Nghịch Lý 99% vs 14% — Câu Chuyện Chưa Ai Kể Đủ</h2>
 
@@ -485,24 +453,6 @@ export default function SmeChuyenDoiSo2026Blog() {
                   ]}
                 />
 
-              </div>
-            </div>
-
-            {/* TOC */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-
-          {/* Blog Footer */}
-          <BlogFooter
-            title="SME Chuyển Đổi Số 2026"
-            slug="sme-chuyen-doi-so-2026"
-            date="2026-04-01"
-          />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

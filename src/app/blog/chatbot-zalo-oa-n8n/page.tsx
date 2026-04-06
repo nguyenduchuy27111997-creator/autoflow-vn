@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import BlogLayout from "@/components/blog/BlogLayout";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
-import BlogFooter from "@/components/blog/BlogFooter";
 import CodeBlock from "@/components/blog/CodeBlock";
 import FAQ from "@/components/blog/FAQ";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Cách Tạo Chatbot Zalo OA Bằng n8n — Hướng Dẫn Từ Zero 2026",
@@ -69,55 +65,20 @@ const faqItems = [
 
 export default function ChatbotZaloOAN8nBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="chatbot-zalo-oa-n8n" title="Cách Tạo Chatbot Zalo OA Bằng n8n" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">
-                Trang chủ
-              </a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">
-                Blog
-              </a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">
-                Hướng dẫn
-              </span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-                Zalo OA
-              </span>
-              <span className="px-3 py-1 rounded-full bg-violet-50 text-violet-600 text-xs font-semibold">
-                n8n
-              </span>
-              <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold">
-                AI Chatbot
-              </span>
-              <span className="text-xs text-slate-500">15 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Cách Tạo Chatbot Zalo OA Bằng n8n —{" "}
-              <span className="gradient-text">Hướng Dẫn Từ Zero 2026</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Zalo có 79.6 triệu người dùng và 2.1 tỷ tin nhắn mỗi ngày. Nhưng
-              85% doanh nghiệp vẫn đang trả lời thủ công — chậm, sai, bỏ sót.
-              Bài này hướng dẫn bạn xây 3 loại chatbot Zalo OA bằng n8n: từ
-              FAQ đơn giản đến AI chatbot với RAG, không cần biết lập trình.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="chatbot-zalo-oa-n8n"
+      title={<>Cách Tạo Chatbot Zalo OA Bằng n8n —{" "}<span className="gradient-text">Hướng Dẫn Từ Zero 2026</span></>}
+      description="Zalo có 79.6 triệu người dùng và 2.1 tỷ tin nhắn mỗi ngày. Nhưng 85% doanh nghiệp vẫn đang trả lời thủ công — chậm, sai, bỏ sót. Bài này hướng dẫn bạn xây 3 loại chatbot Zalo OA bằng n8n: từ FAQ đơn giản đến AI chatbot với RAG, không cần biết lập trình."
+      breadcrumbLabel="Hướng dẫn"
+      badges={[
+        { text: "Zalo OA", color: "blue" },
+        { text: "n8n", color: "violet" },
+        { text: "AI Chatbot", color: "emerald" },
+      ]}
+      readTime="15 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 {/* Section 1 — PAS Intro */}
                 <h2 id="van-de">Vấn Đề: Khách Nhắn Zalo Mà Không Ai Trả Lời</h2>
@@ -733,23 +694,6 @@ system_prompt: |
                   </a>
                 </CalloutBox>
 
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-
-          <BlogFooter
-            title="Chatbot Zalo OA Bằng n8n"
-            slug="chatbot-zalo-oa-n8n"
-            date="2026-04-01"
-          />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

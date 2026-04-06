@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
+import BlogLayout from "@/components/blog/BlogLayout";
 
 export const metadata: Metadata = {
   title: "Nhắc Lịch Học Viên Qua Zalo OA — Giảm 80% Miss Lịch Cho Trung Tâm Đào Tạo",
@@ -69,45 +65,19 @@ const faqItems = [
 
 export default function NhacLichZaloOAGiaoDucBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="nhac-lich-zalo-oa-giao-duc" title="Nhắc Lịch Học Viên Qua Zalo OA — Giảm 80% Miss" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Giáo dục</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-green-50 text-green-600 text-xs font-semibold">
-                Giáo Dục
-              </span>
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-                Zalo OA
-              </span>
-              <span className="text-xs text-slate-500">14 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Nhắc Lịch Học Viên Qua Zalo OA —{" "}
-              <span className="gradient-text">Giảm 80% Miss Lịch Cho Trung Tâm Đào Tạo</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Nhân viên dành 3 giờ mỗi ngày gọi điện nhắc lịch. Học viên vẫn miss buổi học. Doanh thu
-              thất thoát âm thầm mỗi tháng. 5 workflow Zalo OA tự động hóa toàn bộ quy trình nhắc lịch —
-              từ 24h trước đến check-in điểm danh — không cần thêm nhân sự.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="nhac-lich-zalo-oa-giao-duc"
+      title={<>Nhắc Lịch Học Viên Qua Zalo OA —{" "}<span className="gradient-text">Giảm 80% Miss Lịch Cho Trung Tâm Đào Tạo</span></>}
+      description="Nhân viên dành 3 giờ mỗi ngày gọi điện nhắc lịch. Học viên vẫn miss buổi học. Doanh thu thất thoát âm thầm mỗi tháng. 5 workflow Zalo OA tự động hóa toàn bộ quy trình nhắc lịch — từ 24h trước đến check-in điểm danh — không cần thêm nhân sự."
+      breadcrumbLabel="Giáo dục"
+      badges={[
+        { text: "Giáo Dục", color: "green" },
+        { text: "Zalo OA", color: "blue" },
+      ]}
+      readTime="14 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 {/* Section 1: Problem */}
                 <h2 id="van-de">Nhân Viên Gọi Điện 3 Giờ/Ngày — Học Viên Vẫn Nghỉ Không Báo</h2>
@@ -435,18 +405,6 @@ export default function NhacLichZaloOAGiaoDucBlog() {
                   </div>
                 </CalloutBox>
 
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-          <BlogFooter title="Nhắc Lịch Học Viên Qua Zalo OA" slug="nhac-lich-zalo-oa-giao-duc" date="2026-04-01" />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

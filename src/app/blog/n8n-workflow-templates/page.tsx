@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
+import BlogLayout from "@/components/blog/BlogLayout";
 
 export const metadata: Metadata = {
   title: "10 n8n Workflow Templates Miễn Phí Cho SME Việt Nam 2026",
@@ -85,49 +81,20 @@ const faqItems = [
 
 export default function N8nWorkflowTemplatesBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="n8n-workflow-templates" title="10 n8n Workflow Templates Miễn Phí Cho SME" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Hướng dẫn</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-violet-50 text-violet-600 text-xs font-semibold">
-                Templates
-              </span>
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-                n8n
-              </span>
-              <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold">
-                Miễn phí
-              </span>
-              <span className="text-xs text-slate-500">15 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              10 n8n Workflow Templates Miễn Phí{" "}
-              <span className="gradient-text">Cho SME Việt Nam 2026</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Thư viện n8n hiện có hơn 9.022 templates — nhưng bạn cần cái nào? Bài viết này chọn
-              lọc 10 templates tốt nhất, thực chiến nhất cho doanh nghiệp vừa và nhỏ Việt Nam, chia
-              theo 5 nhóm: Lead Gen, E-commerce, Chăm sóc khách hàng, Báo cáo, và AI.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="n8n-workflow-templates"
+      title={<>10 n8n Workflow Templates Miễn Phí{" "}<span className="gradient-text">Cho SME Việt Nam 2026</span></>}
+      description="Thư viện n8n hiện có hơn 9.022 templates — nhưng bạn cần cái nào? Bài viết này chọn lọc 10 templates tốt nhất, thực chiến nhất cho doanh nghiệp vừa và nhỏ Việt Nam, chia theo 5 nhóm: Lead Gen, E-commerce, Chăm sóc khách hàng, Báo cáo, và AI."
+      breadcrumbLabel="Hướng dẫn"
+      badges={[
+        { text: "Templates", color: "violet" },
+        { text: "n8n", color: "blue" },
+        { text: "Miễn phí", color: "emerald" },
+      ]}
+      readTime="15 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 {/* ==================== INTRO ==================== */}
                 <h2 id="gioi-thieu">Thư Viện Templates n8n — Con Số Ấn Tượng</h2>
@@ -814,27 +781,8 @@ export default function N8nWorkflowTemplatesBlog() {
 
                 {/* ==================== FAQ ==================== */}
                 <h2 id="faq">Câu Hỏi Thường Gặp Về n8n Templates</h2>
-              </div>
 
-              <FAQ items={faqItems} />
-
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold">
-                <BlogFooter
-                  title="10 n8n Workflow Templates"
-                  slug="n8n-workflow-templates"
-                  date="2026-04-01"
-                />
-              </div>
-            </div>
-
-            {/* Sticky TOC */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-        </article>
-      </main>
-      <Footer />
-    </>
+                <FAQ items={faqItems} />
+    </BlogLayout>
   );
 }

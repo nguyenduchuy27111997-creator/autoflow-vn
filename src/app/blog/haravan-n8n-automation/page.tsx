@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
+import BlogLayout from "@/components/blog/BlogLayout";
 
 export const metadata: Metadata = {
   title: "Haravan + n8n: Tự Động Hóa Shop Online Đa Kênh Toàn Diện",
@@ -44,47 +40,19 @@ const tocItems = [
 
 export default function HaravanN8nAutomationBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="haravan-n8n-automation" title="Haravan + n8n: Tự Động Hóa Shop Online Đa Kênh" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">E-commerce</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-teal-50 text-teal-600 text-xs font-semibold">
-                E-commerce
-              </span>
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-                Haravan · n8n
-              </span>
-              <span className="text-xs text-slate-500">12 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Haravan + n8n: Tự Động Hóa Shop Online{" "}
-              <span className="gradient-text">Đa Kênh Toàn Diện</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Haravan phục vụ hơn 50.000 doanh nghiệp Việt với nền tảng thương
-              mại điện tử đa kênh mạnh nhất nước. Nhưng khi đơn về từ website,
-              Shopee, TikTok Shop cùng lúc — không có automation, đội vận hành
-              sẽ chìm trong công việc thủ công. 4 workflow n8n giải quyết toàn
-              bộ, chạy 24/7.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="haravan-n8n-automation"
+      title={<>Haravan + n8n: Tự Động Hóa Shop Online{" "}<span className="gradient-text">Đa Kênh Toàn Diện</span></>}
+      description="Haravan phục vụ hơn 50.000 doanh nghiệp Việt với nền tảng thương mại điện tử đa kênh mạnh nhất nước. Nhưng khi đơn về từ website, Shopee, TikTok Shop cùng lúc — không có automation, đội vận hành sẽ chìm trong công việc thủ công. 4 workflow n8n giải quyết toàn bộ, chạy 24/7."
+      breadcrumbLabel="E-commerce"
+      badges={[
+        { text: "E-commerce", color: "emerald" },
+        { text: "Haravan · n8n", color: "blue" },
+      ]}
+      readTime="12 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 {/* Hook Stats */}
                 <StatCard
@@ -649,19 +617,6 @@ export default function HaravanN8nAutomationBlog() {
                     a: "Triển khai đầy đủ 4 workflow mất khoảng 2–3 tuần. Chi phí setup khoảng 5–10 triệu tùy độ phức tạp. Chi phí vận hành hàng tháng: 500k–1,5 triệu cho server n8n. ROI dương thường đạt được trong tháng đầu tiên với shop có từ 50 đơn/ngày trở lên.",
                   },
                 ]} />
-
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-          <BlogFooter title="Haravan + n8n Automation" slug="haravan-n8n-automation" date="2026-04-01" />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

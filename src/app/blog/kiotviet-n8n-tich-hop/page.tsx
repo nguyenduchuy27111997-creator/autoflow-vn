@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
+import BlogLayout from "@/components/blog/BlogLayout";
 
 export const metadata: Metadata = {
   title: "KiotViet + n8n: Đồng Bộ Tồn Kho & Đơn Hàng Tự Động Hoàn Toàn",
@@ -42,48 +38,21 @@ const tocItems = [
   { id: "faq", text: "Câu hỏi thường gặp", level: 2 },
 ];
 
-export default function KiotVietN8nBlog() {
+export default function KiotVietN8nTichHopBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="kiotviet-n8n-tich-hop" title="KiotViet + n8n: Đồng Bộ Tồn Kho Tự Động" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">E-commerce</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-semibold">
-                E-commerce
-              </span>
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-                KiotViet · n8n
-              </span>
-              <span className="text-xs text-slate-500">11 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              KiotViet + n8n: Đồng Bộ Tồn Kho &amp; Đơn Hàng{" "}
-              <span className="gradient-text">Tự Động Hoàn Toàn</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              KiotViet quản lý 150.000+ cửa hàng tại Việt Nam — nhưng dữ liệu
-              tồn kho, đơn hàng và khách hàng vẫn đang nằm im trong phần mềm,
-              không kết nối với kế toán hay CRM. 4 workflow n8n thay đổi điều
-              đó: đồng bộ real-time, 0 nhập tay, hoạt động 24/7.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="kiotviet-n8n-tich-hop"
+      title={<>KiotViet + n8n: Đồng Bộ Tồn Kho &amp; Đơn Hàng{" "}<span className="gradient-text">Tự Động Hoàn Toàn</span></>}
+      description="KiotViet quản lý 150.000+ cửa hàng tại Việt Nam — nhưng dữ liệu tồn kho, đơn hàng và khách hàng vẫn đang nằm im trong phần mềm, không kết nối với kế toán hay CRM. 4 workflow n8n thay đổi điều đó: đồng bộ real-time, 0 nhập tay, hoạt động 24/7."
+      breadcrumbLabel="E-commerce"
+      badges={[
+        { text: "E-commerce", color: "green" },
+        { text: "KiotViet · n8n", color: "blue" },
+      ]}
+      readTime="11 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 {/* Hook Stats */}
                 <StatCard
@@ -654,23 +623,6 @@ export default function KiotVietN8nBlog() {
                     a: "Chi phí setup: 4–7 triệu nếu tự làm hoặc thuê đội tích hợp. Chi phí vận hành: VPS chạy n8n khoảng 200–500k/tháng. Hoặc dùng n8n Cloud: free tier đủ cho cửa hàng nhỏ (<5.000 lần chạy/tháng), gói trả phí từ $20/tháng. Cửa hàng 50+ hóa đơn/ngày thường hoàn vốn trong tháng đầu.",
                   },
                 ]} />
-
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-          <BlogFooter
-            title="KiotViet + n8n Tích Hợp"
-            slug="kiotviet-n8n-tich-hop"
-            date="2026-04-01"
-          />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

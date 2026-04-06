@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import BlogLayout from "@/components/blog/BlogLayout";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Tự Làm Automation Hay Thuê Chuyên Gia? So Sánh Chi Tiết 2026",
@@ -43,49 +39,19 @@ const tocItems = [
 
 export default function TuLamHayThueBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="tu-lam-hay-thue" title="Tự Làm Automation Hay Thuê Chuyên Gia?" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Kiến thức</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-violet-50 text-violet-600 text-xs font-semibold">
-                Kiến thức
-              </span>
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-                Automation
-              </span>
-              <span className="text-xs text-slate-500">12 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Tự Làm Automation Hay Thuê Chuyên Gia?{" "}
-              <span className="gradient-text">So Sánh Chi Tiết 2026</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Chủ doanh nghiệp thường nghĩ{" "}
-              <strong className="text-slate-700">tự làm sẽ tiết kiệm hơn</strong>. Nhưng khi tính
-              đủ thời gian học, thử-sai, và chi phí cơ hội — con số thực tế là{" "}
-              <strong className="text-slate-700">$9,240/năm</strong> cho DIY, so với{" "}
-              <strong className="text-slate-700">$2,900–$4,200 một lần</strong> khi thuê agency. Đây
-              là phân tích trung thực nhất bạn sẽ đọc về quyết định này.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
-
+    <BlogLayout
+      slug="tu-lam-hay-thue"
+      title={<>Tự Làm Automation Hay Thuê Chuyên Gia?{" "}<span className="gradient-text">So Sánh Chi Tiết 2026</span></>}
+      description="Chủ doanh nghiệp thường nghĩ tự làm sẽ tiết kiệm hơn. Nhưng khi tính đủ thời gian học, thử-sai, và chi phí cơ hội — con số thực tế là $9,240/năm cho DIY, so với $2,900–$4,200 một lần khi thuê agency. Đây là phân tích trung thực nhất bạn sẽ đọc về quyết định này."
+      breadcrumbLabel="Kiến thức"
+      badges={[
+        { text: "Kiến thức", color: "violet" },
+        { text: "Automation", color: "blue" },
+      ]}
+      readTime="12 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
                 {/* Key stats */}
                 <StatCard stats={[
                   { value: "$9,240", label: "Chi phí DIY/năm", sub: "Tính đủ thời gian + tool + sai sót", color: "text-red-500" },
@@ -403,18 +369,6 @@ export default function TuLamHayThueBlog() {
                   },
                 ]} />
 
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-          <BlogFooter title="Tự Làm Hay Thuê Chuyên Gia?" slug="tu-lam-hay-thue" date="2026-04-01" />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

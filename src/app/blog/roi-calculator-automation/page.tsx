@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
+import BlogLayout from "@/components/blog/BlogLayout";
 
 export const metadata: Metadata = {
   title: "ROI Calculator: Tính Tiết Kiệm Khi Tự Động Hóa — Công Thức + Ví Dụ Thực Tế",
@@ -63,44 +59,19 @@ const faqItems = [
 
 export default function RoiCalculatorAutomationBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="roi-calculator-automation" title="ROI Calculator: Tính Tiết Kiệm Khi Tự Động Hóa" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Kiến thức</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-green-50 text-green-600 text-xs font-semibold">
-                Kiến thức
-              </span>
-              <span className="px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-xs font-semibold">
-                ROI
-              </span>
-              <span className="text-xs text-slate-500">13 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              ROI Calculator: Tính Tiết Kiệm Khi Tự Động Hóa —{" "}
-              <span className="gradient-text">Có Công Thức và Ví Dụ Thực Tế</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              "Automation nghe hay nhưng không biết có đáng đầu tư không." — Đây là câu hỏi
-              thực tế nhất. Bài này cho bạn công thức tính ROI cụ thể, 3 ví dụ tính toán thực
-              tế, và bảng benchmark để bạn biết mình đang ở đâu trước khi quyết định.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="roi-calculator-automation"
+      title={<>ROI Calculator: Tính Tiết Kiệm Khi Tự Động Hóa —{" "}<span className="gradient-text">Có Công Thức và Ví Dụ Thực Tế</span></>}
+      description="&quot;Automation nghe hay nhưng không biết có đáng đầu tư không.&quot; — Đây là câu hỏi thực tế nhất. Bài này cho bạn công thức tính ROI cụ thể, 3 ví dụ tính toán thực tế, và bảng benchmark để bạn biết mình đang ở đâu trước khi quyết định."
+      breadcrumbLabel="Kiến thức"
+      badges={[
+        { text: "Kiến thức", color: "green" },
+        { text: "ROI", color: "amber" },
+      ]}
+      readTime="13 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 <StatCard stats={[
                   { value: "3-6 tháng", label: "payback period trung bình", sub: "cho SME Việt Nam", color: "text-green-500" },
@@ -307,23 +278,6 @@ export default function RoiCalculatorAutomationBlog() {
                   </a>
                 </CalloutBox>
 
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-
-          <BlogFooter
-            title="ROI Calculator Automation"
-            slug="roi-calculator-automation"
-            date="2026-04-01"
-          />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

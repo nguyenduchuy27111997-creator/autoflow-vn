@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import BlogLayout from "@/components/blog/BlogLayout";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Báo Cáo Doanh Thu Tự Động Cho Chuỗi Cửa Hàng — Hết Gom Excel",
@@ -42,46 +38,19 @@ const tocItems = [
 
 export default function BaoCaoDoanhThuTuDongBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="bao-cao-doanh-thu-tu-dong" title="Báo Cáo Doanh Thu Tự Động Cho Chuỗi Cửa Hàng" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Retail</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold">
-                Retail
-              </span>
-              <span className="px-3 py-1 rounded-full bg-violet-50 text-violet-600 text-xs font-semibold">
-                Báo Cáo · n8n
-              </span>
-              <span className="text-xs text-slate-500">11 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Báo Cáo Doanh Thu Tự Động Cho Chuỗi Cửa Hàng —{" "}
-              <span className="gradient-text">Hết Gom Excel</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Cuối tháng, kế toán trưởng ngồi 2 ngày liền gom báo cáo từ 50 cửa
-              hàng: file Excel sai cột, thiếu dữ liệu, định dạng mỗi nơi một
-              kiểu. 3 workflow n8n thay thế toàn bộ quy trình đó — báo cáo ngày,
-              tuần, tháng tự tổng hợp và gửi về, không cần ai làm gì.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="bao-cao-doanh-thu-tu-dong"
+      title={<>Báo Cáo Doanh Thu Tự Động Cho Chuỗi Cửa Hàng —{" "}<span className="gradient-text">Hết Gom Excel</span></>}
+      description="Cuối tháng, kế toán trưởng ngồi 2 ngày liền gom báo cáo từ 50 cửa hàng: file Excel sai cột, thiếu dữ liệu, định dạng mỗi nơi một kiểu. 3 workflow n8n thay thế toàn bộ quy trình đó — báo cáo ngày, tuần, tháng tự tổng hợp và gửi về, không cần ai làm gì."
+      breadcrumbLabel="Retail"
+      badges={[
+        { text: "Retail", color: "emerald" },
+        { text: "Báo Cáo · n8n", color: "violet" },
+      ]}
+      readTime="11 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 {/* Hook Stats */}
                 <StatCard
@@ -597,22 +566,6 @@ export default function BaoCaoDoanhThuTuDongBlog() {
                     },
                   ]}
                 />
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-          <BlogFooter
-            title="Báo Cáo Doanh Thu Tự Động"
-            slug="bao-cao-doanh-thu-tu-dong"
-            date="2026-04-01"
-          />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

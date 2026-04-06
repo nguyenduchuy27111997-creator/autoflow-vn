@@ -23,7 +23,7 @@ export default function BeforeAfter({ before, after }: BeforeAfterProps) {
   }, []);
 
   return (
-    <div ref={ref} className="grid md:grid-cols-2 gap-4 my-8 not-prose">
+    <div ref={ref} className="grid md:grid-cols-2 gap-4 my-8 not-prose overflow-hidden">
       {/* Before */}
       <div
         className="bg-red-50/50 border border-red-100 rounded-xl p-5 transition-all duration-500"

@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
 import CodeBlock from "@/components/blog/CodeBlock";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
+import BlogLayout from "@/components/blog/BlogLayout";
 
 export const metadata: Metadata = {
   title: "n8n Error Handling: Xử Lý Lỗi Workflow Như Chuyên Gia",
@@ -97,46 +93,19 @@ const sheetLogCode = `// Data để log vào Google Sheet
 
 export default function N8nErrorHandlingBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="n8n-error-handling" title="n8n Error Handling: Xử Lý Lỗi Như Chuyên Gia" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Hướng dẫn</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold">
-                Hướng dẫn
-              </span>
-              <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold">
-                n8n
-              </span>
-              <span className="text-xs text-slate-500">15 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              n8n Error Handling:{" "}
-              <span className="gradient-text">Xử Lý Lỗi Workflow Như Chuyên Gia</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Workflow chạy tốt trong môi trường test — rồi crash lúc 2 giờ sáng khi có đơn
-              hàng quan trọng. API third-party timeout, data format sai, rate limit vượt ngưỡng.
-              Đây là hướng dẫn xây dựng hệ thống 3 lớp xử lý lỗi để workflow của bạn
-              production-ready thực sự.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
-
+    <BlogLayout
+      slug="n8n-error-handling"
+      title={<>n8n Error Handling:{" "}<span className="gradient-text">Xử Lý Lỗi Workflow Như Chuyên Gia</span></>}
+      description="Workflow chạy tốt trong môi trường test — rồi crash lúc 2 giờ sáng khi có đơn hàng quan trọng. API third-party timeout, data format sai, rate limit vượt ngưỡng. Đây là hướng dẫn xây dựng hệ thống 3 lớp xử lý lỗi để workflow của bạn production-ready thực sự."
+      breadcrumbLabel="Hướng dẫn"
+      badges={[
+        { text: "Hướng dẫn", color: "orange" },
+        { text: "n8n", color: "slate" },
+      ]}
+      readTime="15 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
                 <StatCard stats={[
                   { value: "3", label: "loại error node trong n8n", sub: "Try/Catch, Error Trigger, Stop & Error", color: "text-orange-500" },
                   { value: "3-5 lần", label: "số lần retry khuyến nghị", sub: "với exponential backoff" },
@@ -145,7 +114,7 @@ export default function N8nErrorHandlingBlog() {
                 ]} />
 
                 {/* Section 1 */}
-                <h2 id="van-de">Tại Sao Workflow "Hoàn Hảo" Lại Bị Lỗi?</h2>
+                <h2 id="van-de">Tại Sao Workflow &ldquo;Hoàn Hảo&rdquo; Lại Bị Lỗi?</h2>
 
                 <p>
                   Trong môi trường development, workflow chạy với dữ liệu sạch, API phản hồi
@@ -170,7 +139,7 @@ export default function N8nErrorHandlingBlog() {
                 <h3>1. Retry On Fail</h3>
                 <p>
                   Cài đặt đơn giản nhất: khi node fail, thử lại tự động. Không cần thêm node mới.
-                  Chỉ cần vào node settings → &ldquo;Retry On Fail&rdquo;.
+                  Chỉ cần vào node settings &rarr; &ldquo;Retry On Fail&rdquo;.
                 </p>
                 <p>
                   Phù hợp cho: API call có thể bị lỗi tạm thời (timeout, rate limit, network
@@ -364,24 +333,6 @@ export default function N8nErrorHandlingBlog() {
                     Đặt lịch audit miễn phí →
                   </a>
                 </CalloutBox>
-
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-
-          <BlogFooter
-            title="n8n Error Handling"
-            slug="n8n-error-handling"
-            date="2026-04-01"
-          />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

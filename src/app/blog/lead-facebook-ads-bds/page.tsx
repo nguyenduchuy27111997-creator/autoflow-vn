@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
+import BlogLayout from "@/components/blog/BlogLayout";
 
 export const metadata: Metadata = {
   title: "Tự Động Hóa Lead Facebook Ads Cho Bất Động Sản — Phản Hồi Trong 30 Giây",
@@ -70,45 +66,19 @@ const faqItems = [
 
 export default function LeadFacebookAdsBDSBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="lead-facebook-ads-bds" title="Tự Động Hóa Lead Facebook Ads Cho BĐS" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Bất động sản</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-                Bất Động Sản
-              </span>
-              <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-semibold">
-                Facebook Ads
-              </span>
-              <span className="text-xs text-slate-500">14 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Tự Động Hóa Lead Facebook Ads Cho Bất Động Sản —{" "}
-              <span className="gradient-text">Phản Hồi Trong 30 Giây</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Sale BDS Việt Nam mất trung bình 917 phút để gọi lại cho khách hàng tiềm năng.
-              Trong khi đó, 78% người mua nhà chốt với người phản hồi đầu tiên.
-              Đây là hệ thống 4 workflow biến mỗi lead Facebook thành cuộc gọi trong vòng 30 giây.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="lead-facebook-ads-bds"
+      title={<>Tự Động Hóa Lead Facebook Ads Cho BĐS —{" "}<span className="gradient-text">Phản Hồi Trong 30 Giây</span></>}
+      description="Sale BDS Việt Nam mất trung bình 917 phút để gọi lại cho khách hàng tiềm năng. Trong khi đó, 78% người mua nhà chốt với người phản hồi đầu tiên. Đây là hệ thống 4 workflow biến mỗi lead Facebook thành cuộc gọi trong vòng 30 giây."
+      breadcrumbLabel="Bất động sản"
+      badges={[
+        { text: "Bất động sản", color: "blue" },
+        { text: "Facebook Ads · n8n", color: "purple" },
+      ]}
+      readTime="14 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 {/* Hook StatCard */}
                 <StatCard
@@ -686,19 +656,6 @@ export default function LeadFacebookAdsBDSBlog() {
                     Đặt lịch audit miễn phí →
                   </a>
                 </CalloutBox>
-
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-          <BlogFooter title="Tự Động Hóa Lead Facebook Ads Cho BĐS" slug="lead-facebook-ads-bds" date="2026-04-01" />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

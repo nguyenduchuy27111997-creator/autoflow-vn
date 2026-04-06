@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import BlogLayout from "@/components/blog/BlogLayout";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import CodeBlock from "@/components/blog/CodeBlock";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Webhook Là Gì? Giải Thích Đơn Giản Cho Người Không Biết Code",
@@ -68,49 +64,20 @@ const faqItems = [
 
 export default function WebhookLaGiBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="webhook-la-gi" title="Webhook Là Gì? Giải Thích Cho Người Không Code" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Kiến thức</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-                Kiến thức
-              </span>
-              <span className="px-3 py-1 rounded-full bg-violet-50 text-violet-600 text-xs font-semibold">
-                Webhook
-              </span>
-              <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold">
-                n8n
-              </span>
-              <span className="text-xs text-slate-500">8 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Webhook Là Gì?{" "}
-              <span className="gradient-text">Giải Thích Đơn Giản Cho Người Không Biết Code</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Webhook là cách các ứng dụng "nói chuyện" với nhau theo thời gian thực — thay vì bạn
-              phải hỏi liên tục, hệ thống tự động báo cho bạn khi có chuyện xảy ra. Bài viết này
-              giải thích webhook bằng ngôn ngữ đời thường, so sánh với API, và hướng dẫn dùng
-              webhook trong n8n.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="webhook-la-gi"
+      title={<>Webhook Là Gì?{" "}<span className="gradient-text">Giải Thích Đơn Giản Cho Người Không Biết Code</span></>}
+      description={'Webhook là cách các ứng dụng "nói chuyện" với nhau theo thời gian thực — thay vì bạn phải hỏi liên tục, hệ thống tự động báo cho bạn khi có chuyện xảy ra. Bài viết này giải thích webhook bằng ngôn ngữ đời thường, so sánh với API, và hướng dẫn dùng webhook trong n8n.'}
+      breadcrumbLabel="Kiến thức"
+      badges={[
+        { text: "Kiến thức", color: "blue" },
+        { text: "Webhook", color: "violet" },
+        { text: "n8n", color: "emerald" },
+      ]}
+      readTime="8 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 {/* ==================== SECTION 1 ==================== */}
                 <h2 id="webhook-la-gi">Webhook Là Gì?</h2>
@@ -451,22 +418,6 @@ data:
                   </div>
                 </div>
 
-                <BlogFooter
-                  title="Webhook Là Gì?"
-                  slug="webhook-la-gi"
-                  date="2026-04-01"
-                />
-              </div>
-            </div>
-
-            {/* Sticky TOC */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

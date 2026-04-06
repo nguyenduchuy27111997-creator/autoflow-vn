@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
+import BlogLayout from "@/components/blog/BlogLayout";
 
 export const metadata: Metadata = {
   title: "Logistics & Vận Chuyển Tự Động: GHN, GHTK + n8n — Từ 500 Đơn Theo Tay Đến Zero Thủ Công",
@@ -44,46 +40,19 @@ const tocItems = [
 
 export default function LogisticsVanChuyenTuDongBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="logistics-van-chuyen-tu-dong" title="Logistics & Vận Chuyển Tự Động: GHN, GHTK + n8n" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Logistics</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-green-50 text-green-600 text-xs font-semibold">
-                Logistics
-              </span>
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-                GHN · GHTK · n8n
-              </span>
-              <span className="text-xs text-slate-500">11 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Logistics & Vận Chuyển Tự Động:{" "}
-              <span className="gradient-text">GHN, GHTK + n8n</span> — Từ 500 Đơn Theo Tay Đến Zero Thủ Công
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Mỗi ngày nhân viên kho mở GHN, GHTK, gõ từng địa chỉ, in từng
-              vận đơn — 500 đơn, 3–4 giờ đồng hồ. Khách hỏi đơn đâu, ai đó
-              phải tra thủ công. Giao thất bại, không ai biết để xử lý kịp. 4
-              workflow n8n kết thúc vòng lặp đó — tự động hoàn toàn, 24/7.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="logistics-van-chuyen-tu-dong"
+      title={<>Logistics & Vận Chuyển Tự Động:{" "}<span className="gradient-text">GHN, GHTK + n8n</span> — Từ 500 Đơn Theo Tay Đến Zero Thủ Công</>}
+      description="Mỗi ngày nhân viên kho mở GHN, GHTK, gõ từng địa chỉ, in từng vận đơn — 500 đơn, 3–4 giờ đồng hồ. Khách hỏi đơn đâu, ai đó phải tra thủ công. Giao thất bại, không ai biết để xử lý kịp. 4 workflow n8n kết thúc vòng lặp đó — tự động hoàn toàn, 24/7."
+      breadcrumbLabel="Logistics"
+      badges={[
+        { text: "Logistics", color: "green" },
+        { text: "GHN · GHTK · n8n", color: "blue" },
+      ]}
+      readTime="11 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 {/* Hook Stats */}
                 <StatCard
@@ -672,22 +641,6 @@ export default function LogisticsVanChuyenTuDongBlog() {
                     },
                   ]}
                 />
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-          <BlogFooter
-            title="Logistics Vận Chuyển Tự Động"
-            slug="logistics-van-chuyen-tu-dong"
-            date="2026-04-01"
-          />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

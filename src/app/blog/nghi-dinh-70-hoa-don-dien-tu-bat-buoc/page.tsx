@@ -1,18 +1,14 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 import BlogInlineCTA from "@/components/blog/BlogInlineCTA";
 import ReadingProgress from "@/components/blog/ReadingProgress";
+import BlogLayout from "@/components/blog/BlogLayout";
 
 export const metadata: Metadata = {
   title: "Nghị Định 70/2025: Hóa Đơn Điện Tử Bắt Buộc Từ 1/6/2025 — SME Cần Làm Gì?",
@@ -93,64 +89,27 @@ const faqItems = [
 
 export default function NghiDinh70Blog() {
   return (
-    <>
-      <BreadcrumbJsonLd
-        slug="nghi-dinh-70-hoa-don-dien-tu-bat-buoc"
-        title="Nghị Định 70/2025: Hóa Đơn Điện Tử Bắt Buộc Từ 1/6/2025"
-      />
-      <ReadingProgress />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-
-          {/* ── Header ── */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Kế toán</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4 flex-wrap">
-              <span className="px-3 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">
-                🔴 Cập nhật pháp lý
-              </span>
-              <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold">
-                Kế toán · n8n
-              </span>
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-                MISA · meInvoice
-              </span>
-              <span className="text-xs text-slate-500">14 phút đọc</span>
-              <span className="text-xs text-slate-400">Cập nhật: tháng 4/2026</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Nghị Định 70/2025:{" "}
-              <span className="gradient-text">Hóa Đơn Điện Tử Bắt Buộc</span>{" "}
-              Từ 1/6/2025 — SME Cần Làm Gì?
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Từ ngày 1/6/2025, Nghị định 70/2025/NĐ-CP yêu cầu toàn bộ doanh
-              nghiệp và hộ kinh doanh có doanh thu từ 1 tỷ đồng/năm phải sử dụng
-              hóa đơn điện tử theo chuẩn mới. Phạt lên đến{" "}
-              <strong>50 triệu đồng</strong> nếu vi phạm. Nhưng tuân thủ bằng
-              cách nào — nhập tay từng hóa đơn hay tự động hóa toàn bộ quy
-              trình? Bài này trả lời đầy đủ.
-            </p>
-          </div>
-
-          {/* ── Stats ── */}
-          <StatCard stats={[
+    <BlogLayout
+      slug="nghi-dinh-70-hoa-don-dien-tu-bat-buoc"
+      title={<>Nghị Định 70/2025:{" "}<span className="gradient-text">Hóa Đơn Điện Tử Bắt Buộc</span>{" "}Từ 1/6/2025 — SME Cần Làm Gì?</>}
+      description="Từ ngày 1/6/2025, Nghị định 70/2025/NĐ-CP yêu cầu toàn bộ doanh nghiệp và hộ kinh doanh có doanh thu từ 1 tỷ đồng/năm phải sử dụng hóa đơn điện tử theo chuẩn mới. Phạt lên đến 50 triệu đồng nếu vi phạm. Nhưng tuân thủ bằng cách nào — nhập tay từng hóa đơn hay tự động hóa toàn bộ quy trình? Bài này trả lời đầy đủ."
+      breadcrumbLabel="Kế toán"
+      badges={[
+        { text: "Cập nhật pháp lý", color: "red" },
+        { text: "Kế toán · n8n", color: "emerald" },
+        { text: "MISA · meInvoice", color: "blue" },
+      ]}
+      readTime="14 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-06"
+      extraHead={<ReadingProgress />}
+    >
+                <StatCard stats={[
             { value: "1/6/2025", label: "Ngày hiệu lực", color: "text-red-600" },
             { value: "50M VNĐ", label: "Mức phạt tối đa", color: "text-red-600" },
             { value: "764K+", label: "DN đã đăng ký HĐĐT", color: "text-blue-600" },
             { value: "99%", label: "Giảm sai sót khi tự động hóa", color: "text-emerald-600" },
           ]} />
-
-          {/* ── Layout: TOC + Content ── */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            <div className="flex-1 min-w-0">
 
               {/* ═══ SECTION 1: Nghị Định 70 Là Gì ═══ */}
               <section id="nghi-dinh-70-la-gi" className="mb-12">
@@ -500,21 +459,6 @@ export default function NghiDinh70Blog() {
                 <FAQ items={faqItems} />
               </section>
 
-              <BlogFooter
-                slug="nghi-dinh-70-hoa-don-dien-tu-bat-buoc"
-                title="Nghị Định 70/2025: Hóa Đơn Điện Tử Bắt Buộc Từ 1/6/2025"
-                date="2026-04-06"
-              />
-            </div>
-
-            {/* ── TOC Sidebar ── */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

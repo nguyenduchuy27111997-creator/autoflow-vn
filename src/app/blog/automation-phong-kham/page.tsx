@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import BlogLayout from "@/components/blog/BlogLayout";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Tự Động Hóa Phòng Khám: Nhắc Lịch, Xác Nhận & Chăm Sóc Bệnh Nhân",
@@ -70,47 +66,19 @@ const faqItems = [
 
 export default function AutomationPhongKhamBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="automation-phong-kham" title="Tự Động Hóa Phòng Khám: Nhắc Lịch Bệnh Nhân" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Y tế</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">
-                Y Tế
-              </span>
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-                Phòng Khám
-              </span>
-              <span className="text-xs text-slate-500">13 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Tự Động Hóa Phòng Khám —{" "}
-              <span className="gradient-text">Nhắc Lịch, Xác Nhận & Chăm Sóc Bệnh Nhân</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Trung bình 5-30% bệnh nhân không đến theo lịch hẹn mà không báo trước. Mỗi ca
-              no-show là doanh thu mất đi không thu hồi được, khung giờ bỏ trống lãng phí, và
-              bệnh nhân khác không đặt được lịch. 4 workflow tự động hóa toàn bộ vòng đời lịch
-              hẹn — từ nhắc lịch đến chăm sóc sau khám — giúp phòng khám giảm no-show 38-60%
-              mà không cần thêm nhân sự lễ tân.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="automation-phong-kham"
+      title={<>Tự Động Hóa Phòng Khám —{" "}<span className="gradient-text">Nhắc Lịch, Xác Nhận & Chăm Sóc Bệnh Nhân</span></>}
+      description="Trung bình 5-30% bệnh nhân không đến theo lịch hẹn mà không báo trước. Mỗi ca no-show là doanh thu mất đi không thu hồi được, khung giờ bỏ trống lãng phí, và bệnh nhân khác không đặt được lịch. 4 workflow tự động hóa toàn bộ vòng đời lịch hẹn — từ nhắc lịch đến chăm sóc sau khám — giúp phòng khám giảm no-show 38-60% mà không cần thêm nhân sự lễ tân."
+      breadcrumbLabel="Y tế"
+      badges={[
+        { text: "Y Tế", color: "red" },
+        { text: "Phòng Khám", color: "blue" },
+      ]}
+      readTime="13 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 {/* Section 1: Problem */}
                 <h2 id="van-de">No-Show Đang Ăn Mòn Doanh Thu Phòng Khám Mỗi Ngày</h2>
@@ -495,18 +463,6 @@ export default function AutomationPhongKhamBlog() {
                   </div>
                 </CalloutBox>
 
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-          <BlogFooter title="Automation Phòng Khám" slug="automation-phong-kham" date="2026-04-01" />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

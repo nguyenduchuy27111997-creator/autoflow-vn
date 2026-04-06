@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import BlogLayout from "@/components/blog/BlogLayout";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Tự Động Hóa Salon & Spa: Đặt Lịch, Nhắc Hẹn & Chăm Khách VIP",
@@ -71,48 +67,19 @@ const faqItems = [
 
 export default function AutomationSalonSpaBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="automation-salon-spa" title="Tự Động Hóa Salon & Spa: Đặt Lịch, Nhắc Hẹn, VIP" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Làm đẹp</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-pink-50 text-pink-600 text-xs font-semibold">
-                Làm Đẹp
-              </span>
-              <span className="px-3 py-1 rounded-full bg-purple-50 text-purple-600 text-xs font-semibold">
-                Salon & Spa
-              </span>
-              <span className="text-xs text-slate-500">14 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Tự Động Hóa Salon & Spa —{" "}
-              <span className="gradient-text">Đặt Lịch, Nhắc Hẹn & Chăm Khách VIP</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              15-30% khách đặt lịch salon & spa không đến mà không báo trước — mỗi ghế trống là
-              doanh thu biến mất không thu hồi được. Trong khi đó, 46% khách hàng làm đẹp Việt
-              Nam đặt lịch online và 67% ưu tiên kênh di động. 4 workflow tự động hóa toàn bộ
-              vòng đời lịch hẹn — từ xác nhận đặt lịch đến nuôi dưỡng khách VIP — giảm no-show
-              đến 70% mà không cần thêm nhân sự.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
-
+    <BlogLayout
+      slug="automation-salon-spa"
+      title={<>Tự Động Hóa Salon & Spa —{" "}<span className="gradient-text">Đặt Lịch, Nhắc Hẹn & Chăm Khách VIP</span></>}
+      description="15-30% khách đặt lịch salon & spa không đến mà không báo trước — mỗi ghế trống là doanh thu biến mất không thu hồi được. Trong khi đó, 46% khách hàng làm đẹp Việt Nam đặt lịch online và 67% ưu tiên kênh di động. 4 workflow tự động hóa toàn bộ vòng đời lịch hẹn — từ xác nhận đặt lịch đến nuôi dưỡng khách VIP — giảm no-show đến 70% mà không cần thêm nhân sự."
+      breadcrumbLabel="Làm đẹp"
+      badges={[
+        { text: "Làm Đẹp", color: "pink" },
+        { text: "Salon & Spa", color: "purple" },
+      ]}
+      readTime="14 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
                 {/* Section 1: Problem */}
                 <h2 id="van-de">No-Show Đang Ăn Mòn Doanh Thu Salon & Spa Mỗi Ngày</h2>
 
@@ -520,18 +487,6 @@ export default function AutomationSalonSpaBlog() {
                   </div>
                 </CalloutBox>
 
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-          <BlogFooter title="Automation Salon & Spa" slug="automation-salon-spa" date="2026-04-01" />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

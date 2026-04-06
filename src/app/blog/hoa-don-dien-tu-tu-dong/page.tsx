@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
+import BlogLayout from "@/components/blog/BlogLayout";
 
 export const metadata: Metadata = {
   title: "Hóa Đơn Điện Tử Tự Động: n8n + MISA meInvoice — Xuất Hóa Đơn Không Cần Nhập Tay",
@@ -42,48 +38,19 @@ const tocItems = [
 
 export default function HoaDonDienTuTuDongBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="hoa-don-dien-tu-tu-dong" title="Hóa Đơn Điện Tử Tự Động: n8n + MISA meInvoice" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Kế toán</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold">
-                Kế toán
-              </span>
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-                MISA meInvoice · n8n
-              </span>
-              <span className="text-xs text-slate-500">11 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Hóa Đơn Điện Tử Tự Động:{" "}
-              <span className="gradient-text">n8n + MISA meInvoice</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Kế toán ngồi xuất từng hóa đơn sau khi chốt đơn hàng. Điền tay
-              thông tin khách, MST, số tiền. Sai một ký tự — hủy, lập lại từ
-              đầu. Với hơn 764.000 doanh nghiệp đã đăng ký hóa đơn điện tử,
-              quy trình thủ công này không còn phù hợp. 3 workflow n8n kết
-              nối trực tiếp với MISA meInvoice giải quyết toàn bộ — đúng
-              luật, không nhập tay, chạy 24/7.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="hoa-don-dien-tu-tu-dong"
+      title={<>Hóa Đơn Điện Tử Tự Động:{" "}<span className="gradient-text">n8n + MISA meInvoice</span></>}
+      description="Kế toán ngồi xuất từng hóa đơn sau khi chốt đơn hàng. Điền tay thông tin khách, MST, số tiền. Sai một ký tự — hủy, lập lại từ đầu. Với hơn 764.000 doanh nghiệp đã đăng ký hóa đơn điện tử, quy trình thủ công này không còn phù hợp. 3 workflow n8n kết nối trực tiếp với MISA meInvoice giải quyết toàn bộ — đúng luật, không nhập tay, chạy 24/7."
+      breadcrumbLabel="Kế toán"
+      badges={[
+        { text: "Kế toán", color: "emerald" },
+        { text: "MISA meInvoice · n8n", color: "blue" },
+      ]}
+      readTime="11 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 {/* Hook Stats */}
                 <StatCard
@@ -631,19 +598,6 @@ export default function HoaDonDienTuTuDongBlog() {
                     a: "Vẫn có lợi, đặc biệt nếu không có kế toán chuyên trách. Chi phí n8n Cloud free tier (5.000 executions/tháng) đủ cho khoảng 150 hóa đơn/tháng — không phát sinh thêm chi phí phần mềm. Lợi ích chính không chỉ là tiết kiệm thời gian mà còn là gửi hóa đơn cho khách ngay lập tức, đúng lúc, tạo ấn tượng chuyên nghiệp.",
                   },
                 ]} />
-
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-          <BlogFooter title="Hóa Đơn Điện Tử Tự Động" slug="hoa-don-dien-tu-tu-dong" date="2026-04-01" />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

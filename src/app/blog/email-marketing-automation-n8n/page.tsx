@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
+import BlogLayout from "@/components/blog/BlogLayout";
 
 export const metadata: Metadata = {
   title: "Email Marketing Automation Với n8n — ROI 3,600% Không Phải Chuyện Đùa",
@@ -71,45 +67,19 @@ const faqItems = [
 
 export default function EmailMarketingAutomationBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="email-marketing-automation-n8n" title="Email Marketing Automation — ROI 3,600%" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Marketing</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold">
-                Email Marketing
-              </span>
-              <span className="px-3 py-1 rounded-full bg-violet-50 text-violet-600 text-xs font-semibold">
-                n8n Automation
-              </span>
-              <span className="text-xs text-slate-500">18 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Email Marketing Automation Với n8n —{" "}
-              <span className="gradient-text">ROI 3,600% Không Phải Chuyện Đùa</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Email automation chỉ chiếm 2% tổng lượng email được gửi — nhưng tạo ra 37% tổng doanh
-              thu từ email marketing. Nếu bạn vẫn gửi email thủ công, bạn đang bỏ phần lớn doanh thu
-              trên bàn mỗi ngày.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="email-marketing-automation-n8n"
+      title={<>Email Marketing Automation Với n8n —{" "}<span className="gradient-text">ROI 3,600% Không Phải Chuyện Đùa</span></>}
+      description="Email automation chỉ chiếm 2% tổng lượng email được gửi — nhưng tạo ra 37% tổng doanh thu từ email marketing. Nếu bạn vẫn gửi email thủ công, bạn đang bỏ phần lớn doanh thu trên bàn mỗi ngày."
+      breadcrumbLabel="Marketing"
+      badges={[
+        { text: "Email Marketing", color: "orange" },
+        { text: "n8n Automation", color: "violet" },
+      ]}
+      readTime="18 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 {/* Hook StatCard */}
                 <StatCard
@@ -736,25 +706,6 @@ export default function EmailMarketingAutomationBlog() {
                   Đây là lý do tại sao 41% marketer xếp email là kênh quan trọng nhất
                   và tại sao ROI 3,600% không phải là con số bịa đặt.
                 </CalloutBox>
-
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-
-          {/* Blog Footer */}
-          <BlogFooter
-            title="Email Marketing Automation n8n"
-            slug="email-marketing-automation-n8n"
-            date="2026-04-01"
-          />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

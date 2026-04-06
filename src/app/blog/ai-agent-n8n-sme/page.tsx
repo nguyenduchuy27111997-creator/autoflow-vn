@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import BlogLayout from "@/components/blog/BlogLayout";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "AI Agent + n8n: Tự Động Hóa Thông Minh Cho SME Việt Nam 2026",
@@ -71,48 +67,20 @@ const faqItems = [
 
 export default function AIAgentN8nSMEBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="ai-agent-n8n-sme" title="AI Agent + n8n Cho SME Việt Nam 2026" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">AI</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-violet-50 text-violet-600 text-xs font-semibold">
-                AI Agent
-              </span>
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-                n8n
-              </span>
-              <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold">
-                SME
-              </span>
-              <span className="text-xs text-slate-500">15 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              AI Agent + n8n:{" "}
-              <span className="gradient-text">Tự Động Hóa Thông Minh Cho SME Việt Nam 2026</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Đến 2026, 40% ứng dụng doanh nghiệp toàn cầu sẽ tích hợp AI agent — tăng 8 lần so với mức dưới 5% năm 2025.
-              Trong khi đó, 73% doanh nghiệp Việt đã ứng dụng AI ở một mức độ nào đó nhưng chỉ 12% dùng chuyên sâu.
-              Khoảng cách này chính là lợi thế cạnh tranh của bạn — nếu hành động ngay hôm nay.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            {/* Main content */}
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="ai-agent-n8n-sme"
+      title={<>AI Agent + n8n:{" "}<span className="gradient-text">Tự Động Hóa Thông Minh Cho SME Việt Nam 2026</span></>}
+      description="Đến 2026, 40% ứng dụng doanh nghiệp toàn cầu sẽ tích hợp AI agent — tăng 8 lần so với mức dưới 5% năm 2025. Trong khi đó, 73% doanh nghiệp Việt đã ứng dụng AI ở một mức độ nào đó nhưng chỉ 12% dùng chuyên sâu. Khoảng cách này chính là lợi thế cạnh tranh của bạn — nếu hành động ngay hôm nay."
+      breadcrumbLabel="AI"
+      badges={[
+        { text: "AI Agent", color: "violet" },
+        { text: "n8n", color: "blue" },
+        { text: "SME", color: "emerald" },
+      ]}
+      readTime="15 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 {/* Gartner Stats */}
                 <StatCard stats={[
@@ -459,18 +427,6 @@ export default function AIAgentN8nSMEBlog() {
                   </div>
                 </div>
 
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-          <BlogFooter title="AI Agent + n8n Cho SME Việt Nam 2026" slug="ai-agent-n8n-sme" date="2026-04-01" />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

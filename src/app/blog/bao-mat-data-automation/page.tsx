@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import BlogLayout from "@/components/blog/BlogLayout";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StepList from "@/components/blog/StepList";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
-import BlogFooter from "@/components/blog/BlogFooter";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Bảo Mật Data Khi Dùng Automation — Hướng Dẫn Cho SME Việt Nam",
@@ -62,44 +58,19 @@ const faqItems = [
 
 export default function BaoMatDataAutomationBlog() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="bao-mat-data-automation" title="Bảo Mật Data Khi Dùng Automation — Hướng Dẫn SME" />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">Kiến thức</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">
-                Bảo mật
-              </span>
-              <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold">
-                Kiến thức
-              </span>
-              <span className="text-xs text-slate-500">12 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              Bảo Mật Data Khi Dùng Automation —{" "}
-              <span className="gradient-text">Hướng Dẫn Thực Tế Cho SME</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              Chi phí vi phạm dữ liệu trung bình $4.4 triệu USD mỗi sự cố. Automation kết nối
-              nhiều hệ thống — đồng nghĩa với nhiều điểm có thể bị tấn công. Nhưng đây không
-              phải lý do để tránh automation. Đây là lý do để làm đúng từ đầu.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="bao-mat-data-automation"
+      title={<>Bảo Mật Data Khi Dùng Automation —{" "}<span className="gradient-text">Hướng Dẫn Thực Tế Cho SME</span></>}
+      description="Chi phí vi phạm dữ liệu trung bình $4.4 triệu USD mỗi sự cố. Automation kết nối nhiều hệ thống — đồng nghĩa với nhiều điểm có thể bị tấn công. Nhưng đây không phải lý do để tránh automation. Đây là lý do để làm đúng từ đầu."
+      breadcrumbLabel="Kiến thức"
+      badges={[
+        { text: "Bảo mật", color: "red" },
+        { text: "Kiến thức", color: "slate" },
+      ]}
+      readTime="12 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-01"
+    >
 
                 <StatCard stats={[
                   { value: "$4.4M", label: "chi phí vi phạm dữ liệu trung bình", sub: "IBM Cost of a Data Breach 2024", color: "text-red-500" },
@@ -290,23 +261,6 @@ export default function BaoMatDataAutomationBlog() {
                   </a>
                 </CalloutBox>
 
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-
-          <BlogFooter
-            title="Bảo Mật Data Automation"
-            slug="bao-mat-data-automation"
-            date="2026-04-01"
-          />
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }

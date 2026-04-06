@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import BlogLayout from "@/components/blog/BlogLayout";
 import CalloutBox from "@/components/blog/CalloutBox";
 import StatCard from "@/components/blog/StatCard";
 import ComparisonTable from "@/components/blog/ComparisonTable";
-import TableOfContents from "@/components/blog/TableOfContents";
 import WorkflowFlow from "@/components/blog/WorkflowFlow";
 import BeforeAfter from "@/components/blog/BeforeAfter";
 import FAQ from "@/components/blog/FAQ";
 import CodeBlock from "@/components/blog/CodeBlock";
-import BlogFooter from "@/components/blog/BlogFooter";
 import BlogInlineCTA from "@/components/blog/BlogInlineCTA";
-import BreadcrumbJsonLd from "@/components/blog/BreadcrumbJsonLd";
 import AnimatedCounter from "@/components/blog/AnimatedCounter";
 import StageTimeline from "@/components/blog/StageTimeline";
 import JsonLd from "@/components/JsonLd";
@@ -102,67 +98,50 @@ const faqItems = [
 
 export default function AIAgentHuongDanToanDien() {
   return (
-    <>
-      <BreadcrumbJsonLd slug="ai-agent-huong-dan-toan-dien" title="AI Agent + n8n: Hướng Dẫn Toàn Diện Cho Doanh Nghiệp Việt Nam 2026" />
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "HowTo",
-          name: "Xây Dựng AI Agent Với n8n Cho Doanh Nghiệp Việt Nam",
-          description: "Hướng dẫn 3 giai đoạn xây dựng AI Agent từ chatbot đơn giản đến multi-agent system.",
-          totalTime: "P8W",
-          estimatedCost: { "@type": "MonetaryAmount", currency: "VND", value: "25000000" },
-          step: [
-            { "@type": "HowToStep", position: 1, name: "Giai đoạn 1: Single Chatbot", text: "Xây dựng AI chatbot CSKH đầu tiên với n8n + LLM, kết nối Zalo OA hoặc website." },
-            { "@type": "HowToStep", position: 2, name: "Giai đoạn 2: Multi-tool Agent", text: "Mở rộng agent với nhiều tools: tra cứu đơn hàng, CRM, knowledge base." },
-            { "@type": "HowToStep", position: 3, name: "Giai đoạn 3: Multi-agent System", text: "Nhiều agent chuyên biệt phối hợp: CSKH, content, sales, với human handoff." },
-          ],
-        }}
-      />
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: faqItems.map((item) => ({
-            "@type": "Question",
-            name: item.q,
-            acceptedAnswer: { "@type": "Answer", text: item.a },
-          })),
-        }}
-      />
-      <Navbar />
-      <main className="pt-28 pb-20">
-        <article className="max-w-6xl mx-auto px-6">
-          {/* Header */}
-          <div className="max-w-3xl mb-10">
-            <nav className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-              <a href="/" className="hover:text-primary transition-colors">Trang chủ</a>
-              <span>/</span>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <span>/</span>
-              <span className="text-slate-600 truncate max-w-[300px]">AI Agent hướng dẫn toàn diện</span>
-            </nav>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-violet-50 text-violet-600 text-xs font-semibold">Pillar</span>
-              <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold">AI</span>
-              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">n8n</span>
-              <span className="text-xs text-slate-500">24 phút đọc</span>
-            </div>
-            <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 leading-tight mb-4">
-              AI Agent + n8n: Hướng Dẫn Toàn Diện{" "}
-              <span className="gradient-text">Xây Dựng Trợ Lý AI Cho Doanh Nghiệp Việt Nam 2026</span>
-            </h1>
-            <p className="text-lg text-slate-500 leading-relaxed">
-              40% ứng dụng doanh nghiệp sẽ tích hợp AI Agent vào 2028 (Gartner). Bài viết này hướng dẫn
-              bạn xây dựng trợ lý AI cho doanh nghiệp bằng <a href="/blog/n8n-la-gi" className="text-primary hover:underline">n8n</a> — từ chatbot đơn giản đến multi-agent system — với
-              chi phí triển khai cụ thể bằng VND và 5 use cases thực tế cho thị trường Việt Nam.
-            </p>
-          </div>
-
-          {/* Content + TOC */}
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative">
-            <div className="flex-1 min-w-0 max-w-3xl">
-              <div className="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <BlogLayout
+      slug="ai-agent-huong-dan-toan-dien"
+      title={<>AI Agent + n8n: Hướng Dẫn Toàn Diện{" "}<span className="gradient-text">Xây Dựng Trợ Lý AI Cho Doanh Nghiệp Việt Nam 2026</span></>}
+      description="40% ứng dụng doanh nghiệp sẽ tích hợp AI Agent vào 2028 (Gartner). Bài viết này hướng dẫn bạn xây dựng trợ lý AI cho doanh nghiệp bằng n8n — từ chatbot đơn giản đến multi-agent system — với chi phí triển khai cụ thể bằng VND và 5 use cases thực tế cho thị trường Việt Nam."
+      breadcrumbLabel="AI Agent hướng dẫn toàn diện"
+      badges={[
+        { text: "Pillar", color: "violet" },
+        { text: "AI", color: "emerald" },
+        { text: "n8n", color: "blue" },
+      ]}
+      readTime="24 phút đọc"
+      tocItems={tocItems}
+      date="2026-04-02"
+      extraHead={
+        <>
+          <JsonLd
+            data={{
+              "@context": "https://schema.org",
+              "@type": "HowTo",
+              name: "Xây Dựng AI Agent Với n8n Cho Doanh Nghiệp Việt Nam",
+              description: "Hướng dẫn 3 giai đoạn xây dựng AI Agent từ chatbot đơn giản đến multi-agent system.",
+              totalTime: "P8W",
+              estimatedCost: { "@type": "MonetaryAmount", currency: "VND", value: "25000000" },
+              step: [
+                { "@type": "HowToStep", position: 1, name: "Giai đoạn 1: Single Chatbot", text: "Xây dựng AI chatbot CSKH đầu tiên với n8n + LLM, kết nối Zalo OA hoặc website." },
+                { "@type": "HowToStep", position: 2, name: "Giai đoạn 2: Multi-tool Agent", text: "Mở rộng agent với nhiều tools: tra cứu đơn hàng, CRM, knowledge base." },
+                { "@type": "HowToStep", position: 3, name: "Giai đoạn 3: Multi-agent System", text: "Nhiều agent chuyên biệt phối hợp: CSKH, content, sales, với human handoff." },
+              ],
+            }}
+          />
+          <JsonLd
+            data={{
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: faqItems.map((item) => ({
+                "@type": "Question",
+                name: item.q,
+                acceptedAnswer: { "@type": "Answer", text: item.a },
+              })),
+            }}
+          />
+        </>
+      }
+    >
 
                 {/* Key stats */}
                 <AnimatedCounter stats={[
@@ -823,24 +802,6 @@ Node 5 - Zalo OA Reply:
                 <h2 id="faq">Câu Hỏi Thường Gặp Về AI Agent</h2>
                 <FAQ items={faqItems} />
 
-              </div>
-
-              {/* Footer */}
-              <BlogFooter
-                title="AI Agent + n8n: Hướng Dẫn Toàn Diện Xây Dựng Trợ Lý AI Cho Doanh Nghiệp Việt Nam 2026"
-                slug="ai-agent-huong-dan-toan-dien"
-                date="2026-04-02"
-              />
-            </div>
-
-            {/* TOC Sidebar */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start">
-              <TableOfContents items={tocItems} />
-            </aside>
-          </div>
-        </article>
-      </main>
-      <Footer />
-    </>
+    </BlogLayout>
   );
 }
