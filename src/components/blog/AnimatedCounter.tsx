@@ -36,14 +36,14 @@ export default function AnimatedCounter({ stats }: { stats: CounterStat[] }) {
       {stats.map((s, i) => (
         <div
           key={i}
-          className="bg-slate-50 rounded-xl p-5 text-center transition-all duration-600"
+          className="bg-slate-50 rounded-xl p-3 sm:p-5 text-center transition-all duration-600"
           style={{
             opacity: visible ? 1 : 0,
             transform: visible ? "translateY(0)" : "translateY(20px)",
             transitionDelay: `${i * 100}ms`,
           }}
         >
-          <div className={`font-display font-extrabold text-3xl ${s.color || "text-primary"}`}>
+          <div className={`font-display font-extrabold text-xl sm:text-3xl ${s.color || "text-primary"}`}>
             {s.prefix}
             <CountUp target={s.value} active={visible} delay={i * 100} />
             {s.suffix}
