@@ -330,13 +330,11 @@ export default function NghiDinh70Blog() {
                     ],
                   }}
                 />
-                <div className="grid sm:grid-cols-3 gap-4 mt-6">
-                  <StatCard stats={[
-                    { value: "99%", label: "Giảm sai sót nhập liệu", color: "text-emerald-600" },
-                    { value: "8 giờ", label: "Tiết kiệm/ngày cho 100 đơn", color: "text-blue-600" },
-                    { value: "24h", label: "Vẫn đáp ứng deadline pháp lý", color: "text-emerald-600" },
-                  ]} />
-                </div>
+                <StatCard stats={[
+                  { value: "99%", label: "Giảm sai sót nhập liệu", color: "text-emerald-600" },
+                  { value: "8 giờ", label: "Tiết kiệm/ngày cho 100 đơn", color: "text-blue-600" },
+                  { value: "24h", label: "Vẫn đáp ứng deadline pháp lý", color: "text-emerald-600" },
+                ]} />
               </section>
 
               {/* ═══ SECTION 5: Giải Pháp n8n ═══ */}
@@ -478,18 +476,18 @@ export default function NghiDinh70Blog() {
                     },
                   ]}
                 />
-                <div className="grid sm:grid-cols-3 gap-4 mt-6">
-                  <div className="bg-violet-50 border border-violet-200 rounded-xl p-5 text-center">
-                    <div className="text-2xl font-black text-violet-600 mb-1">5–8 triệu</div>
-                    <div className="text-sm text-slate-600">Gói Pilot (1 workflow)</div>
+                <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-6">
+                  <div className="bg-violet-50 border border-violet-200 rounded-xl p-3 sm:p-5 text-center">
+                    <div className="text-base sm:text-2xl font-black text-violet-600 mb-1">5–8 triệu</div>
+                    <div className="text-[10px] sm:text-sm text-slate-600">Gói Pilot (1 workflow)</div>
                   </div>
-                  <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 text-center">
-                    <div className="text-2xl font-black text-blue-600 mb-1">7 ngày</div>
-                    <div className="text-sm text-slate-600">Từ audit đến go-live</div>
+                  <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 sm:p-5 text-center">
+                    <div className="text-base sm:text-2xl font-black text-blue-600 mb-1">7 ngày</div>
+                    <div className="text-[10px] sm:text-sm text-slate-600">Từ audit đến go-live</div>
                   </div>
-                  <div className="bg-green-50 border border-green-200 rounded-xl p-5 text-center">
-                    <div className="text-2xl font-black text-green-600 mb-1">1–2 tháng</div>
-                    <div className="text-sm text-slate-600">Hoàn vốn đầu tư</div>
+                  <div className="bg-green-50 border border-green-200 rounded-xl p-3 sm:p-5 text-center">
+                    <div className="text-base sm:text-2xl font-black text-green-600 mb-1">1–2 tháng</div>
+                    <div className="text-[10px] sm:text-sm text-slate-600">Hoàn vốn đầu tư</div>
                   </div>
                 </div>
               </section>

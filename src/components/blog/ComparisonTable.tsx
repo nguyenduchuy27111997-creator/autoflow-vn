@@ -9,7 +9,7 @@ export default function ComparisonTable({
 }) {
   return (
     <div className="my-8 overflow-x-auto not-prose">
-      <table className="w-full text-sm border-collapse">
+      <table className="w-full text-sm border-collapse min-w-[480px]">
         <thead>
           <tr>
             {headers.map((h, i) => (
