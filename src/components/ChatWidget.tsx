@@ -107,10 +107,11 @@ export default function ChatWidget() {
     }
   }, [open]);
 
-  // Focus input when opened
+  // Focus input when opened (desktop only — mobile auto-focus triggers keyboard + zoom)
   useEffect(() => {
     if (open) {
-      inputRef.current?.focus();
+      const isDesktop = window.matchMedia("(min-width: 640px)").matches;
+      if (isDesktop) inputRef.current?.focus();
       setUnread(0);
     }
   }, [open]);
@@ -216,7 +217,7 @@ export default function ChatWidget() {
 
       {/* Chat panel — responsive: full-screen mobile, floating desktop */}
       {open && (
-        <div className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 z-50 sm:w-[380px] sm:max-h-[560px] flex flex-col bg-white sm:rounded-2xl shadow-2xl shadow-black/10 sm:border sm:border-slate-200 overflow-hidden">
+        <div className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 z-50 sm:w-[380px] sm:max-h-[560px] flex flex-col bg-white sm:rounded-2xl shadow-2xl shadow-black/10 sm:border sm:border-slate-200 overflow-hidden h-[100dvh] sm:h-auto">
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 bg-primary text-white shrink-0">
             <div className="flex items-center gap-2.5">
@@ -330,7 +331,7 @@ export default function ChatWidget() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={rateLimited ? "Đã hết lượt chat" : "Nhập tin nhắn..."}
-              className="flex-1 px-3 py-2 rounded-xl bg-slate-50 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-50"
+              className="flex-1 px-3 py-2 rounded-xl bg-slate-50 text-base sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-50"
               disabled={isBusy || rateLimited}
             />
             <button
