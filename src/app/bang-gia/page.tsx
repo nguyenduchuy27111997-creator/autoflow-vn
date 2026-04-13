@@ -364,6 +364,270 @@ export default function BangGiaPage() {
           </div>
         </section>
 
+        {/* Managed Hosting */}
+        <section id="managed-hosting" className="max-w-6xl mx-auto px-6 mb-20">
+          <div className="text-center mb-10">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4">
+              Managed Hosting
+            </span>
+            <h2 className="font-display font-bold text-2xl md:text-3xl text-slate-900 mb-3">
+              Managed Hosting — Server riêng, tôi quản lý hết
+            </h2>
+            <p className="text-slate-500 max-w-2xl mx-auto">
+              Chọn gói phù hợp quy mô doanh nghiệp. Tất cả đều bao gồm: VPS
+              riêng, backup, monitoring, update.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            {/* Essential */}
+            <div className="relative rounded-2xl border border-slate-200 bg-white p-8 transition-all duration-300 hover:shadow-lg hover:border-slate-300 flex flex-col">
+              <h3 className="font-display font-bold text-xl text-slate-900">
+                Essential
+              </h3>
+              <p className="text-sm text-slate-500 mt-1">
+                Cho doanh nghiệp nhỏ, 1–3 workflows
+              </p>
+              <div className="my-5">
+                <span className="font-display font-extrabold text-4xl text-slate-900">
+                  3 triệu
+                </span>
+                <span className="text-sm text-slate-500 ml-1">/tháng</span>
+              </div>
+              <ul className="space-y-3 mb-6 flex-1">
+                {[
+                  "VPS 2 vCPU / 4GB RAM",
+                  "Backup hàng ngày (30 bản)",
+                  "Monitoring + cảnh báo Zalo",
+                  "Update bảo mật hàng tháng",
+                  "Support Zalo giờ hành chính",
+                  "SLA 99.9%",
+                ].map((f) => (
+                  <li key={f} className="flex items-start gap-2.5 text-sm">
+                    <svg
+                      className="shrink-0 mt-0.5 text-accent"
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M2 8l4 4 8-8" />
+                    </svg>
+                    <span className="text-slate-600">{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/audit"
+                className="block text-center font-semibold py-3.5 rounded-xl transition-all bg-slate-100 hover:bg-slate-200 text-slate-700"
+              >
+                Bắt đầu Essential
+              </a>
+            </div>
+
+            {/* Growth - highlighted */}
+            <div className="relative rounded-2xl border border-primary bg-white shadow-md shadow-primary/5 ring-1 ring-primary/20 p-8 transition-all duration-300 hover:shadow-lg flex flex-col">
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-4 py-1 rounded-full">
+                Phổ biến nhất
+              </span>
+              <h3 className="font-display font-bold text-xl text-slate-900">
+                Growth
+              </h3>
+              <p className="text-sm text-slate-500 mt-1">
+                Cho doanh nghiệp 5–20 workflows
+              </p>
+              <div className="my-5">
+                <span className="font-display font-extrabold text-4xl text-slate-900">
+                  5 triệu
+                </span>
+                <span className="text-sm text-slate-500 ml-1">/tháng</span>
+              </div>
+              <ul className="space-y-3 mb-6 flex-1">
+                {[
+                  "VPS 4 vCPU / 8GB RAM",
+                  "Backup hàng ngày + weekly snapshot",
+                  "Monitoring + cảnh báo Zalo",
+                  "Update bảo mật + phiên bản mới",
+                  "Support Zalo giờ hành chính + ngoài giờ (khẩn cấp)",
+                  "SLA 99.9%",
+                  "Staging environment cho test",
+                ].map((f) => (
+                  <li key={f} className="flex items-start gap-2.5 text-sm">
+                    <svg
+                      className="shrink-0 mt-0.5 text-accent"
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M2 8l4 4 8-8" />
+                    </svg>
+                    <span className="text-slate-600">{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/audit"
+                className="block text-center font-semibold py-3.5 rounded-xl transition-all bg-primary hover:bg-primary-dark text-white hover:shadow-lg hover:shadow-primary/25"
+              >
+                Bắt đầu Growth
+              </a>
+            </div>
+
+            {/* Scale */}
+            <div className="relative rounded-2xl border border-slate-200 bg-white p-8 transition-all duration-300 hover:shadow-lg hover:border-slate-300 flex flex-col">
+              <h3 className="font-display font-bold text-xl text-slate-900">
+                Scale
+              </h3>
+              <p className="text-sm text-slate-500 mt-1">
+                Cho doanh nghiệp 20+ workflows, nhiều chi nhánh
+              </p>
+              <div className="my-5">
+                <span className="font-display font-extrabold text-4xl text-slate-900">
+                  10 triệu
+                </span>
+                <span className="text-sm text-slate-500 ml-1">/tháng</span>
+              </div>
+              <ul className="space-y-3 mb-6 flex-1">
+                {[
+                  "VPS 8 vCPU / 16GB RAM",
+                  "Backup hàng ngày + weekly + monthly snapshot",
+                  "Monitoring 24/7 + cảnh báo Zalo + email",
+                  "Update bảo mật + phiên bản ngay khi có",
+                  "Support Zalo 24/7 + priority response",
+                  "SLA 99.95%",
+                  "Staging + production environment",
+                  "Dedicated account manager",
+                ].map((f) => (
+                  <li key={f} className="flex items-start gap-2.5 text-sm">
+                    <svg
+                      className="shrink-0 mt-0.5 text-accent"
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M2 8l4 4 8-8" />
+                    </svg>
+                    <span className="text-slate-600">{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/audit"
+                className="block text-center font-semibold py-3.5 rounded-xl transition-all bg-slate-100 hover:bg-slate-200 text-slate-700"
+              >
+                Bắt đầu Scale
+              </a>
+            </div>
+          </div>
+
+          <p className="text-center text-sm text-slate-500">
+            Chưa biết gói nào phù hợp?{" "}
+            <a
+              href="/dich-vu/n8n-hosting"
+              className="text-primary font-semibold hover:underline"
+            >
+              Xem chi tiết dịch vụ hosting
+            </a>
+          </p>
+        </section>
+
+        {/* Hosting Comparison Table */}
+        <section className="max-w-6xl mx-auto px-6 mb-20">
+          <div className="text-center mb-10">
+            <h2 className="font-display font-bold text-2xl md:text-3xl text-slate-900 mb-3">
+              Bạn có 3 lựa chọn
+            </h2>
+            <p className="text-slate-500">
+              So sánh chi phí và công sức thực tế
+            </p>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr>
+                  <th className="text-left py-4 px-4 font-display font-bold text-slate-700 border-b-2 border-slate-200">
+                    Tiêu chí
+                  </th>
+                  <th className="text-left py-4 px-4 font-display font-bold text-slate-500 border-b-2 border-slate-200">
+                    Tự host (bạn quản lý)
+                  </th>
+                  <th className="text-left py-4 px-4 font-display font-bold text-primary border-b-2 border-primary bg-primary/5 rounded-t-xl">
+                    AutoFlow host (tôi quản lý)
+                  </th>
+                  <th className="text-left py-4 px-4 font-display font-bold text-slate-500 border-b-2 border-slate-200">
+                    Thuê developer
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  {
+                    label: "Chi phí/tháng",
+                    self: "~500K VPS + thời gian bạn",
+                    autoflow: "3–10 triệu (trọn gói)",
+                    dev: "15–30 triệu/người",
+                  },
+                  {
+                    label: "Setup",
+                    self: "Tự cài đặt (3–5 ngày nếu biết Linux)",
+                    autoflow: "AutoFlow setup trong 24h",
+                    dev: "1–2 tuần",
+                  },
+                  {
+                    label: "Backup",
+                    self: "Tự setup backup script",
+                    autoflow: "Tự động, 30 bản, khôi phục 15 phút",
+                    dev: "Tùy developer",
+                  },
+                  {
+                    label: "Monitoring",
+                    self: "Tự cài Uptime Kuma/Grafana",
+                    autoflow: "24/7, cảnh báo Zalo tự động",
+                    dev: "Tùy developer",
+                  },
+                  {
+                    label: "Update bảo mật",
+                    self: "Bạn tự update (hoặc quên)",
+                    autoflow: "AutoFlow update giờ thấp điểm",
+                    dev: "Theo hợp đồng",
+                  },
+                  {
+                    label: "Khi sự cố",
+                    self: "Tự fix hoặc Google",
+                    autoflow: "AutoFlow xử lý, thông báo Zalo",
+                    dev: "Gọi developer (nếu còn hợp đồng)",
+                  },
+                  {
+                    label: "Phù hợp cho",
+                    self: "Developer muốn tự quản lý",
+                    autoflow: "Chủ DN muốn tập trung kinh doanh",
+                    dev: "Công ty có budget IT lớn",
+                  },
+                ].map((row, i) => (
+                  <tr
+                    key={row.label}
+                    className={i % 2 === 0 ? "bg-slate-50/50" : ""}
+                  >
+                    <td className="py-3.5 px-4 font-medium text-slate-700">
+                      {row.label}
+                    </td>
+                    <td className="py-3.5 px-4 text-slate-500">{row.self}</td>
+                    <td className="py-3.5 px-4 text-slate-900 font-medium bg-primary/5 border-x border-primary/10">
+                      {row.autoflow}
+                    </td>
+                    <td className="py-3.5 px-4 text-slate-500">{row.dev}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
         {/* Payment & Comparison */}
         <section className="max-w-6xl mx-auto px-6 mb-16">
           <div className="grid md:grid-cols-2 gap-6">
