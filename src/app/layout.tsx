@@ -35,19 +35,19 @@ export const metadata: Metadata = {
     template: "%s | AutoFlow VN",
   },
   description:
-    "Giúp doanh nghiệp vừa và nhỏ Việt Nam tự động hóa quy trình lặp lại bằng n8n — tích hợp Zalo, MISA, Shopee, KiotViet — kết quả trong 2–4 tuần.",
+    "Giúp doanh nghiệp vừa và nhỏ Việt Nam tự động hóa quy trình lặp lại — tích hợp Zalo, MISA, Shopee, KiotViet — kết quả trong 2–4 tuần.",
   keywords: [
     "tự động hóa",
     "automation",
     "SME Việt Nam",
-    "n8n",
+    "tự động hóa quy trình",
     "Zalo OA",
     "MISA",
     "KiotViet",
     "Shopee",
     "zalo oa automation",
     "tự động hóa Shopee",
-    "n8n tiếng Việt",
+    "tiết kiệm thời gian doanh nghiệp",
   ],
   metadataBase: new URL("https://autoflowvn.net"),
   openGraph: {
@@ -102,7 +102,7 @@ export default function RootLayout({
             "@type": "WebSite",
             name: "AutoFlow VN",
             url: "https://autoflowvn.net",
-            description: "Chuyên gia #1 về n8n automation cho SME Việt Nam",
+            description: "Tự động hóa quy trình kinh doanh cho SME Việt Nam",
             inLanguage: "vi",
             publisher: { "@type": "Organization", name: "AutoFlow VN" },
           }}
@@ -117,7 +117,7 @@ export default function RootLayout({
             logo: "https://autoflowvn.net/icon.svg",
             email: "hello@autoflowvn.net",
             description:
-              "Giúp doanh nghiệp vừa và nhỏ Việt Nam tự động hóa quy trình lặp lại bằng n8n — tích hợp Zalo, MISA, Shopee, KiotViet.",
+              "Giúp doanh nghiệp vừa và nhỏ Việt Nam tự động hóa quy trình lặp lại — tích hợp Zalo, MISA, Shopee, KiotViet.",
             address: {
               "@type": "PostalAddress",
               addressLocality: "TP. Hồ Chí Minh",
@@ -134,7 +134,7 @@ export default function RootLayout({
               "https://www.facebook.com/profile.php?id=61575409020684",
             ],
             knowsAbout: [
-              "n8n automation",
+              "business process automation",
               "workflow automation",
               "business process automation",
               "Zalo OA integration",
@@ -149,7 +149,7 @@ export default function RootLayout({
             "@type": "LocalBusiness",
             name: "AutoFlow VN",
             description:
-              "Giúp doanh nghiệp vừa và nhỏ Việt Nam tự động hóa quy trình lặp lại bằng n8n — tích hợp Zalo, MISA, Shopee, KiotViet.",
+              "Giúp doanh nghiệp vừa và nhỏ Việt Nam tự động hóa quy trình lặp lại — tích hợp Zalo, MISA, Shopee, KiotViet.",
             url: "https://autoflowvn.net",
             email: "hello@autoflowvn.net",
             address: {
@@ -170,7 +170,7 @@ export default function RootLayout({
             },
             serviceType: [
               "Automation Consulting",
-              "n8n Workflow Development",
+              "Workflow Development",
               "Business Process Automation",
             ],
             hasOfferCatalog: {

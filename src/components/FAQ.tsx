@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     q: "Data của tôi có an toàn không?",
-    a: "Rất an toàn. n8n được self-host trên VPS ở Việt Nam — dữ liệu đơn hàng, khách hàng, tài chính đều nằm trong nước, trên server riêng của bạn. Không gửi ra nước ngoài, không phụ thuộc bên thứ ba.",
+    a: "Rất an toàn. Hệ thống chạy trên server riêng tại Việt Nam — dữ liệu đơn hàng, khách hàng, tài chính đều nằm trong nước, trên server riêng của bạn. Không gửi ra nước ngoài, không phụ thuộc bên thứ ba.",
   },
   {
     q: "Nếu workflow bị lỗi thì sao?",
@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     q: "Tại sao không dùng Zapier cho rẻ?",
-    a: "Zapier $20/tháng, giới hạn tasks, và không tích hợp được Zalo OA, MISA, KiotViet. n8n self-host $5/tháng (chỉ phí VPS), không giới hạn, và tích hợp native với ecosystem Việt Nam. Với SME dùng nhiều, n8n tiết kiệm hơn nhiều.",
+    a: "Zapier $20/tháng, giới hạn tasks, và không tích hợp được Zalo OA, MISA, KiotViet. AutoFlow dùng nền tảng mã nguồn mở, self-host chỉ $5/tháng (phí VPS), không giới hạn, và tích hợp native với ecosystem Việt Nam. Tiết kiệm hơn nhiều cho SME.",
   },
   {
     q: "Thanh toán như thế nào?",

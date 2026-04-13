@@ -27,7 +27,7 @@ export default function Home() {
           },
           areaServed: { "@type": "Country", name: "Vietnam" },
           description:
-            "Tự động hóa quy trình cho SME Việt Nam bằng n8n — tích hợp Zalo, MISA, Shopee, KiotViet. Kết quả trong 2–4 tuần.",
+            "Tự động hóa quy trình cho SME Việt Nam — tích hợp Zalo, MISA, Shopee, KiotViet. Kết quả trong 2–4 tuần.",
           offers: {
             "@type": "AggregateOffer",
             lowPrice: "8000000",
