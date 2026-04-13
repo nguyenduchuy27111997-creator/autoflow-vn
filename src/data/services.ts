@@ -76,11 +76,11 @@ export const ecommerceService: ServiceConfig = {
   industry: "E-commerce",
   badge: { text: "Dịch vụ cho E-commerce", bgClass: "bg-[#EE4D2D]/10", textClass: "text-[#EE4D2D]" },
   hero: {
-    titlePrefix: "Tự động hóa ",
-    titleHighlight: "shop online",
-    titleSuffix: " — từ đơn hàng đến chăm khách",
+    titlePrefix: "",
+    titleHighlight: "Tự động nhập đơn Shopee/TikTok Shop vào MISA",
+    titleSuffix: " — trong 5 giây, không sai 1 số",
     description:
-      "AutoFlow giúp shop Shopee, Tiki, TikTok Shop tự động đồng bộ đơn hàng, quản lý tồn kho, reply review, và follow-up khách — giảm 65% thời gian vận hành, 0 lỗi nhập tay.",
+      "Shop bạn đang mất 4-5 giờ/ngày copy-paste đơn từ sàn vào MISA? AutoFlow đồng bộ tự động: đơn mới vào → MISA cập nhật → tồn kho đồng bộ. Không nhập tay, không sai sót.",
     ctaText: "Nhận audit miễn phí cho shop",
   },
   integrationsLabel: "Tích hợp trực tiếp với hệ sinh thái e-commerce Việt Nam",
@@ -103,28 +103,28 @@ export const ecommerceService: ServiceConfig = {
   painPointHoverBorder: "hover:border-red-200",
   painPoints: [
     {
-      stat: "4.5 gi\u1edd/ng\u00e0y",
-      title: "Nh\u1eadp \u0111\u01a1n t\u1eeb 3\u20135 s\u00e0n b\u1eb1ng tay",
-      desc: "Shopee, Tiki, TikTok Shop, Lazada \u2014 m\u1ed7i s\u00e0n m\u1ed9t giao di\u1ec7n. Nh\u00e2n vi\u00ean copy-paste t\u1eeb s\u00e1ng \u0111\u1ebfn chi\u1ec1u, sai 1 s\u1ed1 l\u00e0 m\u1ea5t ti\u1ec1n.",
+      stat: "4.5 giờ/ngày",
+      title: "Copy-paste đơn từ 3-5 sàn vào MISA bằng tay",
+      desc: "Mỗi sàn một giao diện. Nhân viên mở Shopee Seller Center → copy mã đơn, tên khách, số tiền → paste vào MISA. Sai 1 ô = sai cả báo cáo tháng.",
     },
     {
-      stat: "8\u201310 l\u1ed7i/tu\u1ea7n",
-      title: "Sai t\u1ed3n kho li\u00ean t\u1ee5c",
-      desc: "B\u00e1n tr\u00ean s\u00e0n A nh\u01b0ng ch\u01b0a update s\u00e0n B \u2192 oversell \u2192 ph\u1ea3i h\u1ee7y \u0111\u01a1n \u2192 kh\u00e1ch \u0111\u00e1nh gi\u00e1 x\u1ea5u \u2192 m\u1ea5t uy t\u00edn.",
+      stat: "8-10 lỗi/tuần",
+      title: "Oversell vì tồn kho không đồng bộ giữa các sàn",
+      desc: "Bán hết trên Shopee nhưng Lazada vẫn hiện còn hàng → khách đặt → phải hủy đơn → đánh giá 1 sao → mất uy tín, mất tiền quảng cáo.",
     },
     {
       stat: "67%",
-      title: "Lead m\u1ea5t v\u00ec reply ch\u1eadm",
-      desc: "Kh\u00e1ch inbox Zalo l\u00fac 11 gi\u1edd \u0111\u00eam h\u1ecfi gi\u00e1. S\u00e1ng h\u00f4m sau reply th\u00ec h\u1ecd \u0111\u00e3 mua b\u00ean \u0111\u1ed1i th\u1ee7.",
+      title: "Lead inbox Zalo mất vì reply sau 12 tiếng",
+      desc: "Khách nhắn tin hỏi giá lúc 11 giờ đêm. Sáng hôm sau reply thì họ đã chốt bên đối thủ. Không có auto-reply = mất deal.",
     },
     {
-      stat: "3 ng\u00e0y",
-      title: "B\u00e1o c\u00e1o cu\u1ed1i th\u00e1ng gom t\u1eeb 5 ngu\u1ed3n",
-      desc: "D\u1eef li\u1ec7u n\u1eb1m r\u1ea3i r\u00e1c: Shopee Seller Center, MISA, Google Sheet, group Zalo. T\u1ed5ng h\u1ee3p b\u1eb1ng tay, sai s\u1ed1 l\u00e0 chuy\u1ec7n th\u01b0\u1eddng.",
+      stat: "3 ngày",
+      title: "Gom báo cáo cuối tháng từ 5 nguồn khác nhau",
+      desc: "Shopee Seller Center, MISA, Google Sheet, group Zalo, KiotViet. Tổng hợp bằng tay, sai số là chuyện thường. *Kết quả ước tính dựa trên khách hàng e-commerce trung bình.*",
     },
   ],
   workflowsSection: {
-    title: "5 workflows AutoFlow build cho ",
+    title: "5 workflows giải quyết vấn đề cho ",
     highlight: "E-commerce",
     subtitle: "M\u1ed7i workflow thay th\u1ebf h\u00e0ng gi\u1edd l\u00e0m vi\u1ec7c th\u1ee7 c\u00f4ng m\u1ed7i ng\u00e0y",
   },
@@ -232,21 +232,25 @@ export const ecommerceService: ServiceConfig = {
       a: "G\u00f3i Starter (1 workflow): 1-2 tu\u1ea7n. G\u00f3i Growth (3-5 workflows): 3-4 tu\u1ea7n. B\u1ea1n th\u1ea5y k\u1ebft qu\u1ea3 ngay t\u1eeb workflow \u0111\u1ea7u ti\u00ean.",
     },
     {
-      q: "Chi ph\u00ed h\u00e0ng th\u00e1ng sau khi setup xong?",
-      a: "Ch\u1ec9 ph\u00ed VPS hosting (~100-200k/th\u00e1ng) \u0111\u1ec3 ch\u1ea1y n8n. Kh\u00f4ng c\u00f3 ph\u00ed subscription hay gi\u1edbi h\u1ea1n s\u1ed1 l\u01b0\u1ee3ng \u0111\u01a1n x\u1eed l\u00fd. Ho\u1eb7c ch\u1ecdn g\u00f3i retainer 8-15 tri\u1ec7u/th\u00e1ng n\u1ebfu c\u1ea7n b\u1ea3o tr\u00ec + ph\u00e1t tri\u1ec3n th\u00eam.",
+      q: "Chi phí hàng tháng sau khi setup xong?",
+      a: "Chỉ phí VPS hosting (~100-200k/tháng) để chạy n8n. Không có phí subscription hay giới hạn số lượng đơn xử lý. Hoặc chọn gói retainer 8-15 triệu/tháng nếu cần bảo trì + phát triển thêm.",
+    },
+    {
+      q: "Kết quả case study có chính xác không?",
+      a: "Các số liệu case study trên trang này là kết quả ước tính dựa trên dữ liệu trung bình của ngành và khách hàng AutoFlow. Kết quả thực tế có thể khác tùy quy mô và quy trình hiện tại của doanh nghiệp bạn.",
     },
   ],
   cta: {
-    title: "Shop b\u1ea1n \u0111ang m\u1ea5t bao nhi\u00eau gi\u1edd cho vi\u1ec7c nh\u1eadp tay?",
+    title: "Shop bạn đang mất bao nhiêu giờ cho việc nhập tay?",
     subtitle:
-      "30 ph\u00fat audit mi\u1ec5n ph\u00ed \u2014 m\u00ecnh ch\u1ec9 ra c\u1ee5 th\u1ec3 workflow n\u00e0o n\u00ean t\u1ef1 \u0111\u1ed9ng h\u00f3a tr\u01b0\u1edbc.",
-    buttonText: "Audit mi\u1ec5n ph\u00ed cho shop",
+      "30 phút audit miễn phí — mình chỉ ra cụ thể workflow nào nên tự động hóa trước.",
+    buttonText: "Nhận audit miễn phí cho shop",
   },
-  fbPixelContentName: "D\u1ecbch v\u1ee5 E-commerce",
+  fbPixelContentName: "Dịch vụ E-commerce",
   metadata: {
-    title: "T\u1ef1 \u0111\u1ed9ng h\u00f3a E-commerce | AutoFlow",
+    title: "Tự Động Nhập Đơn Shopee/TikTok Shop Vào MISA | AutoFlow",
     description:
-      "AutoFlow gi\u00fap shop Shopee, Tiki, TikTok Shop t\u1ef1 \u0111\u1ed9ng \u0111\u1ed3ng b\u1ed9 \u0111\u01a1n h\u00e0ng, qu\u1ea3n l\u00fd t\u1ed3n kho, reply review, v\u00e0 follow-up kh\u00e1ch.",
+      "Hết nhập tay, hết sai tồn kho. AutoFlow đồng bộ đơn hàng Shopee, TikTok Shop, Lazada vào MISA tự động — giảm 4h nhập tay/ngày, 0 lỗi.",
   },
 };
 
@@ -261,12 +265,12 @@ export const fnbService: ServiceConfig = {
     textClass: "text-orange-600",
   },
   hero: {
-    titlePrefix: "T\u1ef1 \u0111\u1ed9ng h\u00f3a ",
-    titleHighlight: "nh\u00e0 h\u00e0ng & qu\u00e1n cafe",
-    titleSuffix: " \u2014 t\u1eeb \u0111\u01a1n h\u00e0ng \u0111\u1ebfn ch\u0103m kh\u00e1ch",
+    titlePrefix: "",
+    titleHighlight: "Hết lo tồn kho sai, hết gọi nhà cung cấp",
+    titleSuffix: " — tự động từ kiểm kê đến đặt hàng",
     description:
-      "AutoFlow gi\u00fap chu\u1ed7i F&B t\u1ef1 \u0111\u1ed9ng \u0111\u1ed3ng b\u1ed9 \u0111\u01a1n delivery, ch\u0103m s\u00f3c kh\u00e1ch quay l\u1ea1i, qu\u1ea3n l\u00fd ca l\u00e0m, c\u1ea3nh b\u00e1o t\u1ed3n kho, v\u00e0 b\u00e1o c\u00e1o doanh thu \u0111a chi nh\u00e1nh \u2014 gi\u1ea3m 55% th\u1eddi gian v\u1eadn h\u00e0nh.",
-    ctaText: "Nh\u1eadn audit mi\u1ec5n ph\u00ed cho nh\u00e0 h\u00e0ng",
+      "Nhà hàng bạn đang mất 45 phút/ngày kiểm kê nguyên liệu và gọi nhà cung cấp bằng tay? AutoFlow tự động cảnh báo khi nguyên liệu sắp hết → tạo PO → gửi nhà cung cấp qua Zalo. Không bao giờ hết hàng bất ngờ.",
+    ctaText: "Nhận audit miễn phí cho nhà hàng",
   },
   integrationsLabel:
     "T\u00edch h\u1ee3p v\u1edbi h\u1ec7 sinh th\u00e1i F&B Vi\u1ec7t Nam \u2014 h\u1ed7 tr\u1ee3 nhi\u1ec1u h\u1ec7 th\u1ed1ng POS ph\u1ed5 bi\u1ebfn",
@@ -435,21 +439,25 @@ export const fnbService: ServiceConfig = {
       a: "\u0110\u01b0\u1ee3c. AutoFlow t\u1ed5ng h\u1ee3p d\u1eef li\u1ec7u t\u1eeb t\u1ea5t c\u1ea3 chi nh\u00e1nh v\u00e0o 1 dashboard. B\u00e1o c\u00e1o doanh thu, t\u1ed3n kho, chi ph\u00ed theo t\u1eebng chi nh\u00e1nh ho\u1eb7c t\u1ed5ng.",
     },
     {
-      q: "N\u1ebfu internet qu\u00e1n b\u1ecb m\u1ea5t th\u00ec sao?",
-      a: "Workflow ch\u1ea1y tr\u00ean cloud server ri\u00eang, kh\u00f4ng ph\u1ee5 thu\u1ed9c internet qu\u00e1n. Khi internet qu\u00e1n kh\u00f4i ph\u1ee5c, d\u1eef li\u1ec7u t\u1ef1 \u0111\u1ed3ng b\u1ed9 l\u1ea1i. \u0110\u01a1n offline v\u1eabn \u0111\u01b0\u1ee3c x\u1eed l\u00fd khi k\u1ebft n\u1ed1i l\u1ea1i.",
+      q: "Nếu internet quán bị mất thì sao?",
+      a: "Workflow chạy trên cloud server riêng, không phụ thuộc internet quán. Khi internet quán khôi phục, dữ liệu tự đồng bộ lại. Đơn offline vẫn được xử lý khi kết nối lại.",
+    },
+    {
+      q: "Kết quả case study có chính xác không?",
+      a: "Các số liệu case study trên trang này là kết quả ước tính dựa trên dữ liệu trung bình của ngành và khách hàng AutoFlow. Kết quả thực tế có thể khác tùy quy mô và quy trình hiện tại của doanh nghiệp bạn.",
     },
   ],
   cta: {
-    title: "Nh\u00e0 h\u00e0ng b\u1ea1n \u0111ang m\u1ea5t bao nhi\u00eau kh\u00e1ch v\u00ec kh\u00f4ng ch\u0103m s\u00f3c?",
+    title: "Nhà hàng bạn đang mất bao nhiêu giờ cho vận hành thủ công?",
     subtitle:
-      "30 ph\u00fat audit mi\u1ec5n ph\u00ed \u2014 m\u00ecnh ph\u00e2n t\u00edch v\u1eadn h\u00e0nh v\u00e0 ch\u1ec9 ra workflow n\u00e0o t\u0103ng kh\u00e1ch quay l\u1ea1i ngay.",
-    buttonText: "Audit mi\u1ec5n ph\u00ed cho nh\u00e0 h\u00e0ng",
+      "30 phút audit miễn phí — mình chỉ ra cụ thể workflow nào giúp giảm 55% thời gian vận hành.",
+    buttonText: "Nhận audit miễn phí cho nhà hàng",
   },
-  fbPixelContentName: "D\u1ecbch v\u1ee5 F&B",
+  fbPixelContentName: "Dịch vụ F&B",
   metadata: {
-    title: "T\u1ef1 \u0111\u1ed9ng h\u00f3a F&B / Nh\u00e0 h\u00e0ng | AutoFlow",
+    title: "Tự Động Quản Lý Tồn Kho + Đặt Hàng NCC Cho F&B | AutoFlow",
     description:
-      "AutoFlow gi\u00fap chu\u1ed7i F&B t\u1ef1 \u0111\u1ed9ng \u0111\u1ed3ng b\u1ed9 \u0111\u01a1n delivery, ch\u0103m s\u00f3c kh\u00e1ch quay l\u1ea1i, qu\u1ea3n l\u00fd ca l\u00e0m, c\u1ea3nh b\u00e1o t\u1ed3n kho.",
+      "AutoFlow giúp nhà hàng, quán cafe tự động kiểm kê tồn kho, đặt hàng nhà cung cấp, chăm khách quay lại qua Zalo. Giảm 55% thời gian vận hành.",
   },
 };
 
@@ -464,12 +472,12 @@ export const giaoDucService: ServiceConfig = {
     textClass: "text-indigo-600",
   },
   hero: {
-    titlePrefix: "T\u1ef1 \u0111\u1ed9ng h\u00f3a ",
-    titleHighlight: "trung t\u00e2m \u0111\u00e0o t\u1ea1o",
-    titleSuffix: " \u2014 t\u1eeb nh\u1eafc l\u1ecbch \u0111\u1ebfn ch\u0103m h\u1ecdc vi\u00ean",
+    titlePrefix: "",
+    titleHighlight: "Giảm 80% miss lịch học",
+    titleSuffix: " — nhắc tự động qua Zalo, không cần gọi từng người",
     description:
-      "AutoFlow gi\u00fap trung t\u00e2m \u0111\u00e0o t\u1ea1o, chu\u1ed7i tr\u01b0\u1eddng h\u1ecdc t\u1ef1 \u0111\u1ed9ng nh\u1eafc l\u1ecbch qua Zalo, nurture lead, \u0111i\u1ec3m danh, b\u00e1o c\u00e1o \u0111a chi nh\u00e1nh \u2014 gi\u1ea3m 60% th\u1eddi gian admin, miss l\u1ecbch gi\u1ea3m t\u1eeb 15% xu\u1ed1ng 3%.",
-    ctaText: "Nh\u1eadn audit mi\u1ec5n ph\u00ed cho trung t\u00e2m",
+      "Trung tâm bạn đang có 15% học viên miss lịch mỗi tuần? AutoFlow tự động nhắc lịch qua Zalo OA trước 24h + 1h, nhắc học phí khi gần hạn, theo dõi chuyên cần — không cần admin gọi từng người.",
+    ctaText: "Nhận audit miễn phí cho trung tâm",
   },
   integrationsLabel: "T\u00edch h\u1ee3p v\u1edbi h\u1ec7 sinh th\u00e1i gi\u00e1o d\u1ee5c & qu\u1ea3n l\u00fd",
   integrations: [
@@ -489,29 +497,29 @@ export const giaoDucService: ServiceConfig = {
   painPointHoverBorder: "hover:border-indigo-200",
   painPoints: [
     {
-      stat: "3 gi\u1edd/ng\u00e0y",
-      title: "G\u1ecdi \u0111i\u1ec7n nh\u1eafc l\u1ecbch h\u1ecdc vi\u00ean b\u1eb1ng tay",
-      desc: "M\u1ed7i bu\u1ed5i h\u1ecdc, nh\u00e2n vi\u00ean ph\u1ea3i g\u1ecdi/nh\u1eafn t\u1eebng h\u1ecdc vi\u00ean. 100 h\u1ecdc vi\u00ean = 3 gi\u1edd. Miss 1 cu\u1ed9c = h\u1ecdc vi\u00ean v\u1eafng, trung t\u00e2m m\u1ea5t ti\u1ec1n.",
+      stat: "15% miss/tuần",
+      title: "Học viên quên lịch vì không ai nhắc",
+      desc: "Admin phải gọi điện từng người trước mỗi buổi học. 50 học viên = 50 cuộc gọi. Bỏ sót 1 người = mất 1 buổi doanh thu.",
     },
     {
-      stat: "15%",
-      title: "H\u1ecdc vi\u00ean miss l\u1ecbch m\u1ed7i th\u00e1ng",
-      desc: "Kh\u00f4ng nh\u1eafc \u0111\u00fang l\u00fac \u2192 qu\u00ean l\u1ecbch \u2192 v\u1eafng \u2192 gi\u1ea3m ch\u1ea5t l\u01b0\u1ee3ng \u2192 kh\u00f4ng gia h\u1ea1n. M\u1ed7i h\u1ecdc vi\u00ean miss = m\u1ea5t 3\u20135 tri\u1ec7u doanh thu.",
+      stat: "35% rời bỏ",
+      title: "Học viên hết khóa không gia hạn vì không chăm sóc",
+      desc: "Kết thúc khóa, không ai follow-up. 2 tuần sau học viên đã đăng ký trung tâm khác. Mỗi học viên mất = mất 5-10 triệu tiềm năng.",
     },
     {
-      stat: "67%",
-      title: "Lead m\u1ea5t v\u00ec follow-up ch\u1eadm",
-      desc: "Ph\u1ee5 huynh h\u1ecfi h\u1ecdc ph\u00ed l\u00fac 10 gi\u1edd \u0111\u00eam. S\u00e1ng h\u00f4m sau reply th\u00ec h\u1ecd \u0111\u00e3 \u0111\u0103ng k\u00fd trung t\u00e2m kh\u00e1c. Kh\u00f4ng ai follow-up \u0111\u01b0\u1ee3c 24/7.",
+      stat: "2 giờ/ngày",
+      title: "Admin nhập điểm danh, học phí bằng tay",
+      desc: "Ghi sổ giấy hoặc Google Sheet. Cuối tháng gom lại, đối chiếu với chuyển khoản ngân hàng — sai số liên tục.",
     },
     {
-      stat: "3 ng\u00e0y",
-      title: "Gom b\u00e1o c\u00e1o t\u1eeb nhi\u1ec1u chi nh\u00e1nh",
-      desc: "8 chi nh\u00e1nh, m\u1ed7i n\u01a1i b\u00e1o c\u00e1o kh\u00e1c nhau: Google Sheet, Zalo group, email. Cu\u1ed1i th\u00e1ng m\u1ea5t 3 ng\u00e0y t\u1ed5ng h\u1ee3p, sai s\u1ed1 l\u00e0 chuy\u1ec7n th\u01b0\u1eddng.",
+      stat: "0 data",
+      title: "Không biết học viên nào sắp rời, học viên nào nên upsell",
+      desc: "Không có dashboard chuyên cần. Không biết ai vắng 3 buổi liên tiếp, ai sắp hết khóa cần gia hạn.",
     },
   ],
   workflowsSection: {
     title: "5 workflows AutoFlow build cho ",
-    highlight: "Gi\u00e1o d\u1ee5c",
+    highlight: "Giáo dục",
     subtitle: "M\u1ed7i workflow thay th\u1ebf h\u00e0ng gi\u1edd l\u00e0m vi\u1ec7c admin m\u1ed7i ng\u00e0y",
   },
   workflows: [
@@ -628,21 +636,25 @@ export const giaoDucService: ServiceConfig = {
       a: "Kh\u00f4ng. 1 h\u1ec7 th\u1ed1ng qu\u1ea3n l\u00fd t\u1eadp trung cho t\u1ea5t c\u1ea3 c\u01a1 s\u1edf. D\u1eef li\u1ec7u t\u00e1ch bi\u1ec7t theo c\u01a1 s\u1edf nh\u01b0ng b\u00e1o c\u00e1o t\u1ed5ng h\u1ee3p \u0111\u01b0\u1ee3c. Th\u00eam c\u01a1 s\u1edf m\u1edbi ch\u1ec9 c\u1ea7n c\u1ea5u h\u00ecnh, kh\u00f4ng c\u1ea7n build l\u1ea1i.",
     },
     {
-      q: "B\u1ea3o m\u1eadt th\u00f4ng tin h\u1ecdc vi\u00ean th\u1ebf n\u00e0o?",
-      a: "Data ch\u1ea1y tr\u00ean VPS ri\u00eang t\u1ea1i Vi\u1ec7t Nam, kh\u00f4ng chia s\u1ebb b\u00ean th\u1ee9 ba. Ph\u00f9 h\u1ee3p quy \u0111\u1ecbnh b\u1ea3o v\u1ec7 d\u1eef li\u1ec7u c\u00e1 nh\u00e2n. Ch\u1ec9 nh\u1eefng ng\u01b0\u1eddi \u0111\u01b0\u1ee3c ph\u00e2n quy\u1ec1n m\u1edbi truy c\u1eadp \u0111\u01b0\u1ee3c.",
+      q: "Bảo mật thông tin học viên thế nào?",
+      a: "Data chạy trên VPS riêng tại Việt Nam, không chia sẻ bên thứ ba. Phù hợp quy định bảo vệ dữ liệu cá nhân. Chỉ những người được phân quyền mới truy cập được.",
+    },
+    {
+      q: "Kết quả case study có chính xác không?",
+      a: "Các số liệu case study trên trang này là kết quả ước tính dựa trên dữ liệu trung bình của ngành và khách hàng AutoFlow. Kết quả thực tế có thể khác tùy quy mô và quy trình hiện tại của doanh nghiệp bạn.",
     },
   ],
   cta: {
-    title: "Trung t\u00e2m b\u1ea1n \u0111ang m\u1ea5t bao nhi\u00eau h\u1ecdc vi\u00ean v\u00ec qu\u00ean l\u1ecbch?",
+    title: "Trung tâm bạn đang mất bao nhiêu học viên vì quên lịch?",
     subtitle:
-      "30 ph\u00fat audit mi\u1ec5n ph\u00ed \u2014 m\u00ecnh ph\u00e2n t\u00edch quy tr\u00ecnh v\u00e0 ch\u1ec9 ra workflow n\u00e0o gi\u1ea3m miss l\u1ecbch ngay l\u1eadp t\u1ee9c.",
-    buttonText: "Audit mi\u1ec5n ph\u00ed cho trung t\u00e2m",
+      "30 phút audit miễn phí — mình phân tích quy trình và chỉ ra workflow nào giúp giữ học viên tốt nhất.",
+    buttonText: "Nhận audit miễn phí cho trung tâm",
   },
-  fbPixelContentName: "D\u1ecbch v\u1ee5 Gi\u00e1o d\u1ee5c",
+  fbPixelContentName: "Dịch vụ Giáo dục",
   metadata: {
-    title: "T\u1ef1 \u0111\u1ed9ng h\u00f3a Gi\u00e1o d\u1ee5c & \u0110\u00e0o t\u1ea1o | AutoFlow",
+    title: "Tự Động Nhắc Lịch Học Qua Zalo — Giảm 80% Miss | AutoFlow",
     description:
-      "AutoFlow gi\u00fap trung t\u00e2m \u0111\u00e0o t\u1ea1o t\u1ef1 \u0111\u1ed9ng nh\u1eafc l\u1ecbch qua Zalo, nurture lead, \u0111i\u1ec3m danh, b\u00e1o c\u00e1o \u0111a chi nh\u00e1nh.",
+      "AutoFlow giúp trung tâm đào tạo nhắc lịch học tự động qua Zalo OA, nhắc học phí, theo dõi chuyên cần. Giảm miss từ 15% xuống 3%.",
   },
 };
 
@@ -657,12 +669,12 @@ export const batDongSanService: ServiceConfig = {
     textClass: "text-emerald-600",
   },
   hero: {
-    titlePrefix: "T\u1ef1 \u0111\u1ed9ng h\u00f3a ",
-    titleHighlight: "agency B\u0110S",
-    titleSuffix: " \u2014 t\u1eeb lead \u0111\u1ebfn ch\u1ed1t deal",
+    titlePrefix: "",
+    titleHighlight: "Tự động phân bổ leads Facebook",
+    titleSuffix: " vào từng sales — 0 lead rơi, 0 lead trùng",
     description:
-      "AutoFlow gi\u00fap s\u00e0n giao d\u1ecbch, agency B\u0110S t\u1ef1 \u0111\u1ed9ng capture lead \u0111a k\u00eanh, follow-up qua Zalo, matching B\u0110S v\u1edbi kh\u00e1ch, v\u00e0 b\u00e1o c\u00e1o pipeline \u2014 kh\u00f4ng miss lead, kh\u00f4ng qu\u00ean follow-up.",
-    ctaText: "Nh\u1eadn audit mi\u1ec5n ph\u00ed cho agency",
+      "Agency bạn đang có leads Facebook chờ 6-12 tiếng mới được assign? AutoFlow tự động capture lead mới → phân bổ đều cho sales → gửi tin Zalo chào hàng trong 30 giây. Lead nóng không bao giờ bị bỏ quên.",
+    ctaText: "Nhận audit miễn phí cho agency",
   },
   integrationsLabel: "T\u00edch h\u1ee3p v\u1edbi h\u1ec7 sinh th\u00e1i B\u0110S Vi\u1ec7t Nam",
   integrations: [
@@ -682,24 +694,24 @@ export const batDongSanService: ServiceConfig = {
   painPointHoverBorder: "hover:border-emerald-200",
   painPoints: [
     {
-      stat: "40%",
-      title: "Lead m\u1ea5t v\u00ec kh\u00f4ng reply k\u1ecbp t\u1eeb \u0111a k\u00eanh",
-      desc: "Lead \u0111\u1ebfn t\u1eeb Facebook, Zalo, Batdongsan.com.vn, hotline \u2014 m\u1ed7i k\u00eanh m\u1ed9t giao di\u1ec7n. Sales ph\u1ea3i nh\u1ea3y qua nh\u1ea3y l\u1ea1i, miss lead l\u00e0 chuy\u1ec7n h\u00e0ng ng\u00e0y.",
+      stat: "6-12 giờ",
+      title: "Lead Facebook chờ nửa ngày mới có sales gọi",
+      desc: "Lead submit form lúc 9h sáng. Admin thấy lúc 2h chiều. Assign cho sales lúc 3h. Sales gọi lúc 5h. Lead đã đi xem nhà với broker khác.",
     },
     {
-      stat: "100+ leads",
-      title: "Follow-up b\u1eb1ng tay kh\u00f4ng xu\u1ec3",
-      desc: "M\u1ed7i sales qu\u1ea3n l\u00fd 100+ leads \u1edf c\u00e1c giai \u0111o\u1ea1n kh\u00e1c nhau. Nh\u1edb ai c\u1ea7n g\u1ecdi l\u1ea1i, ai c\u1ea7n g\u1eedi th\u00eam th\u00f4ng tin \u2014 t\u1ea5t c\u1ea3 b\u1eb1ng \u0111\u1ea7u v\u00e0 Excel.",
+      stat: "30% trùng",
+      title: "2 sales cùng gọi 1 lead — khách khó chịu, team mâu thuẫn",
+      desc: "Lead từ 3-4 nguồn (Facebook, Zalo, website, hotline) đổ vào, không ai check trùng. Sales A gọi xong, Sales B gọi tiếp — khách nghĩ agency không chuyên nghiệp.",
     },
     {
-      stat: "2 gi\u1edd/ng\u00e0y",
-      title: "Matching B\u0110S v\u1edbi kh\u00e1ch h\u00e0ng th\u1ee7 c\u00f4ng",
-      desc: "Kh\u00e1ch c\u1ea7n c\u0103n 2PN qu\u1eadn 7, budget 3 t\u1ef7. Sales ph\u1ea3i l\u1eadt danh s\u00e1ch 500 c\u0103n \u0111\u1ec3 t\u00ecm ph\u00f9 h\u1ee3p. M\u1ea5t th\u1eddi gian, hay b\u1ecf s\u00f3t.",
+      stat: "45% mất",
+      title: "Lead cũ không ai follow-up — mất deal âm thầm",
+      desc: "Sales focus lead mới, quên lead tuần trước chưa chốt. Không có sequence nhắc follow-up ngày 3, 7, 14. Lead nguội dần, chuyển sang đối thủ.",
     },
     {
-      stat: "5 ng\u00e0y",
-      title: "B\u00e1o c\u00e1o pipeline sales cu\u1ed1i th\u00e1ng",
-      desc: "Qu\u1ea3n l\u00fd c\u1ea7n bi\u1ebft: bao nhi\u00eau lead m\u1edbi, bao nhi\u00eau \u0111ang xem nh\u00e0, bao nhi\u00eau s\u1eafp ch\u1ed1t. Data n\u1eb1m r\u1ea3i r\u00e1c trong Zalo, Sheet, s\u1ed5 tay.",
+      stat: "0 visibility",
+      title: "Không biết sales nào đang giỏi, ai đang miss target",
+      desc: "Không có pipeline dashboard. Cuối tháng mới biết ai chốt bao nhiêu deal. Không kịp can thiệp khi sales đang underperform.",
     },
   ],
   workflowsSection: {
@@ -826,20 +838,24 @@ export const batDongSanService: ServiceConfig = {
       a: "Kh\u00f4ng nh\u1ea5t thi\u1ebft. Workflow \u0111\u01b0\u1ee3c thi\u1ebft k\u1ebf linh ho\u1ea1t \u2014 1 workflow c\u00f3 th\u1ec3 x\u1eed l\u00fd nhi\u1ec1u d\u1ef1 \u00e1n, t\u1ef1 \u0111\u1ed9ng ph\u00e2n lo\u1ea1i theo d\u1ef1 \u00e1n. Ch\u1ec9 c\u1ea7n th\u00eam d\u1ef1 \u00e1n m\u1edbi v\u00e0o h\u1ec7 th\u1ed1ng.",
     },
     {
-      q: "Bao l\u00e2u th\u00ec th\u1ea5y ROI?",
-      a: "Th\u00f4ng th\u01b0\u1eddng 3-5 th\u00e1ng. V\u1edbi B\u0110S, ch\u1ec9 c\u1ea7n ch\u1ed1t th\u00eam 1 deal nh\u1edd kh\u00f4ng m\u1ea5t lead l\u00e0 \u0111\u00e3 ho\u00e0n v\u1ed1n g\u1ea5p nhi\u1ec1u l\u1ea7n.",
+      q: "Bao lâu thì thấy ROI?",
+      a: "Thông thường 3-5 tháng. Với BĐS, chỉ cần chốt thêm 1 deal nhờ không mất lead là đã hoàn vốn gấp nhiều lần.",
+    },
+    {
+      q: "Kết quả case study có chính xác không?",
+      a: "Các số liệu case study trên trang này là kết quả ước tính dựa trên dữ liệu trung bình của ngành và khách hàng AutoFlow. Kết quả thực tế có thể khác tùy quy mô và quy trình hiện tại của doanh nghiệp bạn.",
     },
   ],
   cta: {
-    title: "Agency b\u1ea1n \u0111ang miss bao nhi\u00eau lead m\u1ed7i ng\u00e0y?",
+    title: "Agency bạn đang mất bao nhiêu lead mỗi ngày?",
     subtitle:
-      "30 ph\u00fat audit mi\u1ec5n ph\u00ed \u2014 m\u00ecnh ph\u00e2n t\u00edch pipeline v\u00e0 ch\u1ec9 ra workflow n\u00e0o ch\u1ed1t deal nhanh h\u01a1n.",
-    buttonText: "Audit mi\u1ec5n ph\u00ed cho agency",
+      "30 phút audit miễn phí — mình phân tích quy trình lead management và chỉ ra lỗ hổng cụ thể.",
+    buttonText: "Nhận audit miễn phí cho agency",
   },
-  fbPixelContentName: "D\u1ecbch v\u1ee5 B\u1ea5t \u0111\u1ed9ng s\u1ea3n",
+  fbPixelContentName: "Dịch vụ Bất động sản",
   metadata: {
-    title: "T\u1ef1 \u0111\u1ed9ng h\u00f3a B\u1ea5t \u0111\u1ed9ng s\u1ea3n | AutoFlow",
+    title: "Tự Động Phân Bổ Leads BĐS Từ Facebook | AutoFlow",
     description:
-      "AutoFlow gi\u00fap s\u00e0n giao d\u1ecbch, agency B\u0110S t\u1ef1 \u0111\u1ed9ng capture lead \u0111a k\u00eanh, follow-up qua Zalo, matching B\u0110S v\u1edbi kh\u00e1ch.",
+      "AutoFlow giúp agency BĐS tự động capture leads Facebook, phân bổ cho sales, follow-up qua Zalo. Tăng 40% tỉ lệ chốt deal.",
   },
 };
