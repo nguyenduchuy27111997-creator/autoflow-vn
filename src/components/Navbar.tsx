@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Logo from "./ui/Logo";
 
 const services = [
-  { label: "E-commerce", href: "/dich-vu/e-commerce", desc: "Shopee, Tiki, TikTok Shop" },
+  { label: "E-commerce", href: "/dich-vu/ecommerce", desc: "Shopee, Tiki, TikTok Shop" },
   { label: "Giáo dục & Đào tạo", href: "/dich-vu/giao-duc", desc: "Trung tâm, chuỗi trường học" },
   { label: "Bất động sản", href: "/dich-vu/bat-dong-san", desc: "Agency, sàn giao dịch" },
   { label: "F&B / Nhà hàng", href: "/dich-vu/fnb", desc: "Quán cafe, chuỗi nhà hàng" },

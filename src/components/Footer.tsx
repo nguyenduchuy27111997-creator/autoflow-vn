@@ -51,7 +51,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5">
               {[
-                { label: "E-commerce Automation", href: "/dich-vu/e-commerce" },
+                { label: "E-commerce Automation", href: "/dich-vu/ecommerce" },
                 { label: "Giáo dục & Đào tạo", href: "/dich-vu/giao-duc" },
                 { label: "Bất động sản", href: "/dich-vu/bat-dong-san" },
                 { label: "F&B / Nhà hàng", href: "/dich-vu/fnb" },

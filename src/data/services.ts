@@ -72,7 +72,7 @@ export interface ServiceConfig {
 // ─── E-commerce ──────────────────────────────────────────────
 
 export const ecommerceService: ServiceConfig = {
-  slug: "e-commerce",
+  slug: "ecommerce",
   industry: "E-commerce",
   badge: { text: "Dịch vụ cho E-commerce", bgClass: "bg-[#EE4D2D]/10", textClass: "text-[#EE4D2D]" },
   hero: {

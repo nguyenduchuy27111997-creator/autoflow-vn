@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 const industries = [
   {
     label: "E-commerce",
-    href: "/dich-vu/e-commerce",
+    href: "/dich-vu/ecommerce",
     color: "#EE4D2D",
     desc: "Shopee, Tiki, TikTok Shop, Lazada",
     pain: "Nhập đơn tay 4–5 giờ/ngày, sai tồn kho, lead rơi",

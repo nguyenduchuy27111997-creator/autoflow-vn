@@ -31,7 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/dich-vu/e-commerce`,
+      url: `${baseUrl}/dich-vu/ecommerce`,
       lastModified: new Date("2026-03-15"),
       changeFrequency: "monthly",
       priority: 0.8,
