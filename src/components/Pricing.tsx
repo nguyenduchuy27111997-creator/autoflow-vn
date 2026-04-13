@@ -13,7 +13,7 @@ const packages = [
     timeline: "1–2 tuần",
     features: [
       "Audit quy trình chuyên sâu (2h)",
-      "1 workflow n8n chạy thật",
+      "1 quy trình tự động chạy thật",
       "Video Loom hướng dẫn vận hành",
       "SOP document trên Notion",
       "Hỗ trợ 7 ngày sau bàn giao",
@@ -29,7 +29,7 @@ const packages = [
     timeline: "3–4 tuần",
     features: [
       "Audit toàn bộ quy trình vận hành",
-      "3–5 workflows n8n",
+      "3–5 quy trình tự động",
       "Đào tạo team 2 giờ",
       "Thư viện video hướng dẫn từng quy trình",
       "Hỗ trợ 14 ngày sau bàn giao",
@@ -46,8 +46,8 @@ const packages = [
     timeline: "6–8 tuần",
     features: [
       "Phân tích toàn bộ quy trình → bản thiết kế tự động hóa",
-      "8–12 workflows n8n",
-      "n8n self-hosted trên VPS riêng (data trong nước)",
+      "8–12 quy trình tự động",
+      "Server riêng tại Việt Nam (data trong nước)",
       "Đào tạo team 2 buổi",
       "Bảo hành 30 ngày + theo dõi hệ thống",
     ],

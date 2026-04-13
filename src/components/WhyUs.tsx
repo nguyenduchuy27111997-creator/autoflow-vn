@@ -7,7 +7,7 @@ const advantages = [
   {
     title: "Giá SME, chất lượng enterprise",
     description:
-      "Công ty IT lớn charge 200–500 triệu cho 1 project. AutoFlow làm tương tự với 20–80 triệu vì dùng n8n — nền tảng mã nguồn mở, không phí license.",
+      "Công ty IT lớn charge 200–500 triệu cho 1 project. AutoFlow làm tương tự với 20–80 triệu vì dùng nền tảng mã nguồn mở — không phí license, không vendor lock-in.",
     icon: (
       <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
         <path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
@@ -28,7 +28,7 @@ const advantages = [
   {
     title: "Data ở trong nước",
     description:
-      "n8n self-hosted trên VPS Việt Nam. Dữ liệu khách hàng, đơn hàng, tài chính — tất cả ở trong nước. Không gửi ra server nước ngoài.",
+      "Hệ thống chạy trên server riêng tại Việt Nam. Dữ liệu khách hàng, đơn hàng, tài chính — tất cả ở trong nước. Không gửi ra server nước ngoài.",
     icon: (
       <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -102,7 +102,7 @@ export default function WhyUs() {
           badge="Tại sao chọn AutoFlow?"
           title="Không phải lý thuyết."
           gradientText="Kết quả thực."
-          subtitle="AutoFlow kết hợp chuyên môn n8n sâu với hiểu biết thực tế về doanh nghiệp Việt Nam."
+          subtitle="AutoFlow kết hợp chuyên môn tự động hóa sâu với hiểu biết thực tế về doanh nghiệp Việt Nam."
           className="mb-16"
         />
 

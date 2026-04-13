@@ -94,7 +94,7 @@ export default function PilotBanner() {
             <ul className="space-y-3">
               {[
                 { title: "Audit chuyên sâu (2 giờ online)", desc: "Phân tích quy trình, chỉ ra điểm nghẽn, tính ROI cụ thể" },
-                { title: "1 workflow n8n chạy thật", desc: "VD: Đơn Shopee → tự động vào MISA + thông báo Zalo OA" },
+                { title: "1 quy trình tự động chạy thật", desc: "VD: Đơn Shopee → tự động vào MISA + thông báo Zalo OA" },
                 { title: "Video Loom hướng dẫn", desc: "Team xem lại bất cứ lúc nào" },
                 { title: "Tài liệu SOP trên Notion", desc: "Bước-bước rõ ràng, ai cũng làm được" },
                 { title: "Hỗ trợ 7 ngày sau bàn giao", desc: "Fix lỗi, trả lời thắc mắc qua Zalo" },

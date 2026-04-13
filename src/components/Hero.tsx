@@ -63,7 +63,7 @@ export default function Hero() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-light text-primary text-xs font-semibold mb-6 opacity-0 animate-fade-up">
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-            Chuyên gia #1 về n8n automation tại Việt Nam
+            Đã giúp 20+ SME tiết kiệm 4 giờ/ngày
           </div>
 
           {/* Headline */}
@@ -75,11 +75,7 @@ export default function Hero() {
 
           {/* Sub-headline */}
           <p className="text-lg md:text-xl text-slate-500 leading-relaxed mb-8 max-w-2xl mx-auto opacity-0 animate-fade-up delay-200">
-            AutoFlow giúp SME Việt Nam tự động hóa quy trình lặp lại — tích hợp{" "}
-            <strong className="text-slate-700">
-              Zalo, MISA, Shopee, KiotViet
-            </strong>{" "}
-            — kết quả trong 2 tuần, dữ liệu ở trong nước, giá phù hợp SME.
+            Tự động hóa quy trình kinh doanh cho SME Việt Nam. Bạn bán hàng, tôi lo phần còn lại — tích hợp Zalo, MISA, Shopee, KiotViet. Kết quả trong 2 tuần, dữ liệu ở trong nước.
           </p>
 
           {/* CTAs */}
