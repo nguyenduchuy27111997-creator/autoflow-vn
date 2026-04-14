@@ -30,8 +30,8 @@ export default function Home() {
             "Tự động hóa quy trình cho SME Việt Nam — tích hợp Zalo, MISA, Shopee, KiotViet. Kết quả trong 2–4 tuần.",
           offers: {
             "@type": "AggregateOffer",
-            lowPrice: "8000000",
-            highPrice: "80000000",
+            lowPrice: "990000",
+            highPrice: "8000000",
             priceCurrency: "VND",
           },
         }}
