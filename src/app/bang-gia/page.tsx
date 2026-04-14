@@ -1,26 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-const hostingFeatures = [
-  "Server riêng đặt tại Việt Nam",
-  "Backup tự động mỗi ngày, mã hóa an toàn",
-  "Giám sát 24/7, cảnh báo tự động qua Zalo",
-  "Chứng chỉ bảo mật SSL tự động",
-  "Hỗ trợ tiếng Việt qua Zalo trong giờ hành chính",
-  "Chạy không giới hạn số lần — không bị tính phí theo lượt",
-  "Cam kết uptime 99.9%",
-];
 
 const workflowTiers = [
   {
     name: "Cơ bản",
-    desc: "Kết nối 2 hệ thống, xử lý tự động 1 bước",
+    desc: "Kết nối 2 hệ thống, tự động 1 bước",
     price: "3",
     example:
-      "Có đơn hàng mới trên Shopee → tự động ghi vào bảng tính + gửi tin nhắn xác nhận cho khách qua Zalo",
+      "Có đơn mới trên Shopee → tự ghi vào bảng tính + gửi tin xác nhận cho khách qua Zalo",
     icon: "⚡",
     popular: false,
   },
@@ -29,7 +18,7 @@ const workflowTiers = [
     desc: "Nhiều bước xử lý, kết nối 3-4 hệ thống",
     price: "5",
     example:
-      "Có đơn hàng mới → tự tạo hóa đơn kế toán + cập nhật tồn kho + gửi tin xác nhận cho khách + ghi báo cáo doanh thu",
+      "Có đơn mới → tự tạo hóa đơn kế toán + cập nhật tồn kho + gửi xác nhận cho khách + ghi báo cáo doanh thu",
     icon: "🔗",
     popular: true,
   },
@@ -38,7 +27,7 @@ const workflowTiers = [
     desc: "Quy trình phức tạp, nhiều điều kiện, tích hợp sâu",
     price: "8",
     example:
-      "Khách để lại thông tin trên Facebook → AI tự phân loại → ghi vào CRM → gửi email chào hàng → nhắc nhở sales khi khách 'nóng'",
+      "Khách để lại thông tin Facebook → AI phân loại → ghi vào CRM → gửi email chào hàng → nhắc sales khi khách 'nóng'",
     icon: "🚀",
     popular: false,
   },
@@ -65,14 +54,14 @@ const comparisonRows = [
   },
   {
     label: "Giám sát & cảnh báo",
-    self: "Phải tự cài đặt thêm",
-    autoflow: "24/7, cảnh báo qua Zalo tự động",
+    self: "Phải tự cài thêm",
+    autoflow: "24/7, cảnh báo qua Zalo",
     cloud: "Bảng theo dõi cơ bản",
   },
   {
     label: "Hỗ trợ tiếng Việt",
-    self: "Không có",
-    autoflow: "Có — Zalo, giờ hành chính",
+    self: "Không",
+    autoflow: "Có — qua Zalo",
     cloud: "Không (chỉ tiếng Anh)",
   },
   {
@@ -83,22 +72,13 @@ const comparisonRows = [
   },
   {
     label: "Phù hợp cho",
-    self: "Lập trình viên muốn tự quản lý",
+    self: "Người biết kỹ thuật",
     autoflow: "Chủ doanh nghiệp muốn tập trung bán hàng",
-    cloud: "Cá nhân, ít quy trình đơn giản",
+    cloud: "Cá nhân, ít quy trình",
   },
 ];
 
 export default function BangGiaPage() {
-  const [employees, setEmployees] = useState(2);
-  const [hours, setHours] = useState(4);
-  const monthlySalary = 11; // triệu VND
-  const monthlyWaste = Math.round(employees * monthlySalary * (hours / 8));
-  const yearlyWaste = monthlyWaste * 12;
-  const savedHoursMonth = hours * employees * 22;
-  const autoflowCost = 0.99 + 5; // hosting + 1 workflow trung bình
-  const roiMonths = Math.max(1, Math.round(autoflowCost / monthlyWaste * 12));
-
   return (
     <>
       <Navbar />
@@ -107,88 +87,28 @@ export default function BangGiaPage() {
         <section className="max-w-6xl mx-auto px-6 mb-16">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="font-display font-extrabold text-3xl md:text-5xl text-slate-900 leading-tight tracking-tight mb-5">
-              Đơn giản, minh bạch.{" "}
-              <span className="gradient-text">Không phí ẩn.</span>
+              Bạn biết trước mình trả bao nhiêu.
+              <br />
+              <span className="gradient-text">Rõ ràng từ đầu.</span>
             </h1>
             <p className="text-lg text-slate-500">
-              Server riêng cho doanh nghiệp bạn, chạy không giới hạn, dữ liệu
-              lưu tại Việt Nam. Chỉ 990K/tháng.
+              Mỗi quy trình tự động được xây riêng cho doanh nghiệp bạn.
+              Trả 1 lần, chạy mãi mãi. Server riêng, dữ liệu tại Việt Nam.
             </p>
           </div>
         </section>
 
-        {/* Section 1: Hosting 990K */}
-        <section id="hosting" className="max-w-4xl mx-auto px-6 mb-20">
-          <div className="relative rounded-2xl border-2 border-primary bg-white shadow-lg shadow-primary/5 p-8 md:p-10">
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-5 py-1.5 rounded-full">
-              1 gói duy nhất — không cần chọn
-            </span>
-
-            <div className="text-center mb-8">
-              <h2 className="font-display font-bold text-2xl md:text-3xl text-slate-900 mb-2">
-                Server riêng, tôi quản lý hết
-              </h2>
-              <div className="flex items-baseline justify-center gap-2">
-                <span className="font-display font-extrabold text-5xl md:text-6xl text-slate-900">
-                  990K
-                </span>
-                <span className="text-lg text-slate-500">/tháng</span>
-              </div>
-              <p className="text-sm text-slate-400 mt-2">
-                Thanh toán hàng tháng. Không cam kết dài hạn.
-              </p>
-            </div>
-
-            <ul className="grid sm:grid-cols-2 gap-3 mb-8">
-              {hostingFeatures.map((f) => (
-                <li key={f} className="flex items-start gap-2.5 text-sm">
-                  <svg
-                    className="shrink-0 mt-0.5 text-accent"
-                    width="16"
-                    height="16"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M2 8l4 4 8-8" />
-                  </svg>
-                  <span className="text-slate-600">{f}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="text-center">
-              <a
-                href="/audit"
-                className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-8 py-4 rounded-xl transition-all hover:shadow-xl hover:shadow-primary/25"
-              >
-                Bắt đầu dùng thử
-                <svg
-                  width="16"
-                  height="16"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <path d="M5 8h6M8 5l3 3-3 3" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 2: Workflow Build */}
+        {/* Section 1: Workflow Build — FIRST (cái khách hàng mua) */}
         <section id="workflow-build" className="max-w-6xl mx-auto px-6 mb-20">
           <div className="text-center mb-10">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4">
-              Xây dựng quy trình tự động
+              Bạn cần tự động hóa gì?
             </span>
             <h2 className="font-display font-bold text-2xl md:text-3xl text-slate-900 mb-3">
               Trả 1 lần. Chạy mãi mãi.
             </h2>
             <p className="text-slate-500">
-              Mỗi quy trình được xây riêng cho doanh nghiệp bạn. Không phí ẩn,
-              không phát sinh.
+              Mỗi quy trình được xây riêng. Sau khi bàn giao, nó tự chạy 24/7 trên server riêng của bạn.
             </p>
           </div>
 
@@ -245,9 +165,13 @@ export default function BangGiaPage() {
               </div>
             ))}
           </div>
+
+          <p className="text-center text-sm text-slate-400 mt-6">
+            Quy trình chạy trên server riêng của bạn — phí vận hành server chỉ 990K/tháng
+          </p>
         </section>
 
-        {/* Section 3: Free Pilot — 5 khách đầu tiên */}
+        {/* Section 2: Free Pilot — 5 khách đầu tiên */}
         <section id="pilot" className="max-w-4xl mx-auto px-6 mb-20">
           <div className="relative overflow-hidden rounded-2xl border-2 border-accent bg-gradient-to-br from-emerald-50 via-white to-blue-50 p-8 md:p-10">
             <div className="absolute -top-px -right-px">
@@ -266,8 +190,8 @@ export default function BangGiaPage() {
                 <span className="text-accent">cho 5 doanh nghiệp đầu tiên</span>
               </h2>
               <p className="text-slate-500 max-w-xl mx-auto">
-                Bạn chỉ trả phí hosting hàng tháng — AutoFlow xây miễn phí 1 quy
-                trình tự động đầu tiên để bạn trải nghiệm kết quả thật.
+                Bạn chỉ trả phí vận hành server hàng tháng — AutoFlow xây miễn
+                phí 1 quy trình để bạn trải nghiệm kết quả thật.
               </p>
             </div>
 
@@ -290,9 +214,9 @@ export default function BangGiaPage() {
                   border: "border-primary/10",
                 },
                 {
-                  value: "990K",
-                  label: "Chi phí duy nhất mỗi tháng",
-                  sub: "hosting, thanh toán theo tháng",
+                  value: "24/7",
+                  label: "Quy trình tự chạy liên tục",
+                  sub: "trên server riêng của bạn",
                   color: "text-slate-900",
                   bg: "bg-slate-50",
                   border: "border-slate-200",
@@ -322,7 +246,7 @@ export default function BangGiaPage() {
                   "Tư vấn chuyên sâu quy trình doanh nghiệp bạn (30 phút)",
                   "1 quy trình tự động hoạt động thật trên server riêng",
                   "Video hướng dẫn sử dụng chi tiết",
-                  "Hỗ trợ 7 ngày sau khi bàn giao qua Zalo",
+                  "Hỗ trợ 7 ngày sau bàn giao qua Zalo",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2.5 text-sm">
                     <svg
@@ -364,115 +288,106 @@ export default function BangGiaPage() {
           </div>
         </section>
 
-        {/* ROI Calculator */}
-        <section className="max-w-3xl mx-auto px-6 mb-20">
-          <div className="bg-gradient-to-br from-primary/5 via-white to-accent/5 rounded-2xl border border-primary/10 p-8 md:p-10">
+        {/* Section 3: Hosting — trình bày như "hạ tầng đi kèm", không phải sản phẩm riêng */}
+        <section id="hosting" className="max-w-4xl mx-auto px-6 mb-20">
+          <div className="rounded-2xl border border-slate-200 bg-white p-8 md:p-10">
             <div className="text-center mb-8">
-              <span className="inline-block bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-full mb-3">
-                TÍNH THỬ
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold mb-4">
+                🏠 Server vận hành
               </span>
-              <h2 className="font-display font-bold text-2xl text-slate-900 mb-1">
-                Bạn đang mất bao nhiêu tiền mỗi tháng cho việc nhập tay?
+              <h2 className="font-display font-bold text-2xl text-slate-900 mb-2">
+                Quy trình chạy ở đâu?
+              </h2>
+              <p className="text-slate-500 max-w-lg mx-auto">
+                Trên server riêng của bạn, đặt tại Việt Nam. AutoFlow quản lý toàn bộ —
+                bạn không cần biết kỹ thuật.
+              </p>
+            </div>
+
+            <div className="flex items-baseline justify-center gap-2 mb-6">
+              <span className="font-display font-extrabold text-4xl text-slate-900">
+                990K
+              </span>
+              <span className="text-slate-500">/tháng</span>
+            </div>
+
+            <ul className="grid sm:grid-cols-2 gap-3 mb-6 max-w-xl mx-auto">
+              {[
+                "Server riêng đặt tại Việt Nam",
+                "Sao lưu tự động mỗi ngày",
+                "Giám sát 24/7, cảnh báo qua Zalo",
+                "Bảo mật SSL tự động",
+                "Chạy không giới hạn số lần",
+                "Hỗ trợ tiếng Việt qua Zalo",
+              ].map((f) => (
+                <li key={f} className="flex items-start gap-2.5 text-sm">
+                  <svg
+                    className="shrink-0 mt-0.5 text-accent"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M2 8l4 4 8-8" />
+                  </svg>
+                  <span className="text-slate-600">{f}</span>
+                </li>
+              ))}
+            </ul>
+
+            <p className="text-center text-sm text-slate-400">
+              Thanh toán hàng tháng, hủy bất cứ lúc nào.
+            </p>
+          </div>
+        </section>
+
+        {/* ROI — Đơn giản, 1 ví dụ cố định, WOW */}
+        <section className="max-w-3xl mx-auto px-6 mb-20">
+          <div className="bg-gradient-to-br from-red-50/50 via-white to-accent/5 rounded-2xl border border-slate-200 p-8 md:p-10">
+            <div className="text-center mb-8">
+              <h2 className="font-display font-bold text-2xl text-slate-900 mb-2">
+                Con số thật: bạn đang mất bao nhiêu?
               </h2>
               <p className="text-sm text-slate-500">
-                Kéo thanh trượt — con số có thể khiến bạn bất ngờ
+                Ví dụ: 1 shop Shopee, 2 nhân viên nhập đơn thủ công, mỗi người 4 giờ/ngày
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-8 mb-8">
-              <div>
-                <label className="text-sm font-medium text-slate-700 mb-3 block">
-                  Số nhân viên đang làm thủ công
-                </label>
-                <input
-                  type="range"
-                  min="1"
-                  max="10"
-                  value={employees}
-                  onChange={(e) => setEmployees(Number(e.target.value))}
-                  className="w-full accent-primary"
-                />
-                <div className="flex justify-between text-xs text-slate-500 mt-2">
-                  <span>1</span>
-                  <span className="font-bold text-primary text-lg">
-                    {employees} người
-                  </span>
-                  <span>10</span>
-                </div>
+            <div className="grid sm:grid-cols-2 gap-6 mb-8">
+              <div className="bg-red-50 border border-red-100 rounded-2xl p-6 text-center">
+                <p className="text-sm text-red-400 mb-2">Đang lãng phí mỗi tháng</p>
+                <p className="font-display font-extrabold text-5xl text-red-500">176</p>
+                <p className="text-sm text-red-400 mt-1">giờ làm việc</p>
+                <p className="text-xs text-red-300 mt-1">= 22 ngày công = ~11 triệu tiền lương</p>
               </div>
-              <div>
-                <label className="text-sm font-medium text-slate-700 mb-3 block">
-                  Mỗi người mất bao nhiêu giờ/ngày cho việc nhập tay
-                </label>
-                <input
-                  type="range"
-                  min="1"
-                  max="8"
-                  value={hours}
-                  onChange={(e) => setHours(Number(e.target.value))}
-                  className="w-full accent-primary"
-                />
-                <div className="flex justify-between text-xs text-slate-500 mt-2">
-                  <span>1 giờ</span>
-                  <span className="font-bold text-primary text-lg">
-                    {hours} giờ
-                  </span>
-                  <span>8 giờ</span>
-                </div>
+              <div className="bg-accent/5 border border-accent/10 rounded-2xl p-6 text-center">
+                <p className="text-sm text-accent/70 mb-2">Sau khi dùng AutoFlow</p>
+                <p className="font-display font-extrabold text-5xl text-accent">80%</p>
+                <p className="text-sm text-accent/70 mt-1">công việc nhập tay được tự động</p>
+                <p className="text-xs text-accent/50 mt-1">Tiết kiệm ~9 triệu/tháng</p>
               </div>
             </div>
 
-            {/* Results — WOW numbers */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 mb-6">
-              <p className="text-center text-sm text-slate-500 mb-4">Mỗi tháng, doanh nghiệp bạn đang lãng phí:</p>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="text-center">
-                  <p className="font-display font-extrabold text-5xl text-red-500">
-                    {savedHoursMonth}
-                  </p>
-                  <p className="text-sm text-slate-500 mt-1">
-                    giờ làm việc
-                  </p>
-                  <p className="text-xs text-slate-400">
-                    = {Math.round(savedHoursMonth / 8)} ngày công
-                  </p>
-                </div>
-                <div className="text-center">
-                  <p className="font-display font-extrabold text-5xl text-red-500">
-                    {monthlyWaste}
-                  </p>
-                  <p className="text-sm text-slate-500 mt-1">
-                    triệu đồng tiền lương
-                  </p>
-                  <p className="text-xs text-slate-400">
-                    = {yearlyWaste} triệu/năm
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-accent/5 border border-accent/10 rounded-2xl p-6 text-center">
-              <p className="text-sm text-slate-600 mb-2">
-                Với AutoFlow, phần lớn công việc này được tự động hóa.
+            <div className="bg-white rounded-xl border border-slate-200 p-5 text-center">
+              <p className="text-sm text-slate-600">
+                Chi phí AutoFlow: <strong>1 quy trình từ 3 triệu</strong> (trả 1 lần) + <strong>hosting 990K/tháng</strong>.
               </p>
-              <p className="font-display font-bold text-xl text-accent">
-                Bạn tiết kiệm ~{monthlyWaste} triệu/tháng — chỉ với hosting 990K + 1 quy trình từ 3 triệu.
-              </p>
-              <p className="text-xs text-slate-400 mt-2">
-                Hoàn vốn ngay tháng đầu tiên.
+              <p className="font-display font-bold text-lg text-accent mt-2">
+                → Hoàn vốn ngay tháng đầu tiên.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Comparison Table — NO prices */}
+        {/* Comparison Table — không giá */}
         <section className="max-w-6xl mx-auto px-6 mb-20">
           <div className="text-center mb-10">
             <h2 className="font-display font-bold text-2xl md:text-3xl text-slate-900 mb-3">
-              Tự làm, thuê AutoFlow, hay dùng nước ngoài?
+              Tự làm, thuê AutoFlow, hay dùng dịch vụ nước ngoài?
             </h2>
             <p className="text-slate-500">
-              So sánh công sức và tính năng — không chỉ là chuyện tiền
+              Không chỉ là chuyện tiền — mà là thời gian và công sức
             </p>
           </div>
           <div className="overflow-x-auto">
@@ -520,17 +435,6 @@ export default function BangGiaPage() {
             </h3>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
-                <span className="text-3xl">🏠</span>
-                <div>
-                  <p className="text-sm font-semibold text-slate-900">
-                    Hosting: 990K/tháng
-                  </p>
-                  <p className="text-xs text-slate-500">
-                    Thanh toán hàng tháng. Hủy bất cứ lúc nào.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
                 <span className="text-3xl">⚙️</span>
                 <div>
                   <p className="text-sm font-semibold text-slate-900">
@@ -538,6 +442,17 @@ export default function BangGiaPage() {
                   </p>
                   <p className="text-xs text-slate-500">
                     Chuyển khoản ngân hàng, có hợp đồng rõ ràng
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
+                <span className="text-3xl">🏠</span>
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">
+                    Server: 990K/tháng
+                  </p>
+                  <p className="text-xs text-slate-500">
+                    Thanh toán hàng tháng, hủy bất cứ lúc nào
                   </p>
                 </div>
               </div>
@@ -576,7 +491,7 @@ export default function BangGiaPage() {
           </h2>
           <p className="text-slate-500 mb-6">
             Đăng ký tư vấn miễn phí — mình sẽ chỉ ra chính xác quy trình nào
-            trong doanh nghiệp bạn nên tự động hóa trước.
+            nên tự động hóa trước.
           </p>
           <a
             href="/audit"
