@@ -188,9 +188,27 @@ export default function BangGiaPage() {
             ))}
           </div>
 
-          <p className="text-center text-sm text-slate-400 mt-6">
-            Tất cả quy trình chạy trên server riêng của bạn — phí vận hành chỉ 500K/tháng
-          </p>
+          {/* Hosting as optional add-on — inline, not separate section */}
+          <div className="mt-10 max-w-2xl mx-auto">
+            <p className="text-center text-sm text-slate-500 mb-4">
+              Sau khi xây xong, quy trình cần chạy trên server. Bạn chọn:
+            </p>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="rounded-xl border-2 border-primary bg-primary/5 p-5 text-center">
+                <p className="font-display font-bold text-slate-900 mb-1">AutoFlow vận hành giúp</p>
+                <p className="font-display font-extrabold text-2xl text-primary">499K<span className="text-sm font-normal text-slate-500">/tháng</span></p>
+                <p className="text-xs text-slate-500 mt-2">Server riêng tại VN, backup hàng ngày, giám sát 24/7, hỗ trợ Zalo</p>
+                <p className="text-xs text-slate-400 mt-1">Thanh toán hàng tháng, hủy bất cứ lúc nào</p>
+                <span className="inline-block mt-3 text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">Khuyên dùng</span>
+              </div>
+              <div className="rounded-xl border border-slate-200 p-5 text-center">
+                <p className="font-display font-bold text-slate-900 mb-1">Bạn tự vận hành</p>
+                <p className="font-display font-extrabold text-2xl text-slate-900">0đ<span className="text-sm font-normal text-slate-500">/tháng</span></p>
+                <p className="text-xs text-slate-500 mt-2">AutoFlow bàn giao file quy trình, bạn tự cài lên server của mình</p>
+                <p className="text-xs text-slate-400 mt-1">Cần biết kỹ thuật Linux / Docker</p>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Section 2: Free Pilot */}
@@ -212,8 +230,8 @@ export default function BangGiaPage() {
                 <span className="text-accent">cho 5 doanh nghiệp đầu tiên</span>
               </h2>
               <p className="text-slate-500 max-w-xl mx-auto">
-                Bạn chỉ trả phí vận hành server hàng tháng — AutoFlow xây miễn
-                phí 1 quy trình để bạn trải nghiệm kết quả thật.
+                AutoFlow xây miễn phí 1 quy trình tự động để bạn trải nghiệm
+                kết quả thật. Không ràng buộc.
               </p>
             </div>
 
@@ -302,47 +320,7 @@ export default function BangGiaPage() {
           </div>
         </section>
 
-        {/* Section 3: Hosting */}
-        <section id="hosting" className="max-w-4xl mx-auto px-6 mb-20">
-          <div className="rounded-2xl border border-slate-200 bg-white p-8 md:p-10">
-            <div className="text-center mb-8">
-              <h2 className="font-display font-bold text-2xl text-slate-900 mb-2">
-                Quy trình chạy ở đâu?
-              </h2>
-              <p className="text-slate-500 max-w-lg mx-auto">
-                Trên server riêng của bạn, đặt tại Việt Nam. AutoFlow quản lý toàn bộ —
-                bạn không cần biết kỹ thuật.
-              </p>
-            </div>
-
-            <div className="flex items-baseline justify-center gap-2 mb-6">
-              <span className="font-display font-extrabold text-4xl text-slate-900">500K</span>
-              <span className="text-slate-500">/tháng</span>
-            </div>
-
-            <ul className="grid sm:grid-cols-2 gap-3 mb-6 max-w-xl mx-auto">
-              {[
-                "Server riêng đặt tại Việt Nam",
-                "Sao lưu tự động mỗi ngày",
-                "Giám sát 24/7, cảnh báo qua Zalo",
-                "Bảo mật SSL tự động",
-                "Chạy không giới hạn số lần",
-                "Hỗ trợ tiếng Việt qua Zalo",
-              ].map((f) => (
-                <li key={f} className="flex items-start gap-2.5 text-sm">
-                  <svg className="shrink-0 mt-0.5 text-accent" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M2 8l4 4 8-8" />
-                  </svg>
-                  <span className="text-slate-600">{f}</span>
-                </li>
-              ))}
-            </ul>
-
-            <p className="text-center text-sm text-slate-400">
-              Thanh toán hàng tháng, hủy bất cứ lúc nào.
-            </p>
-          </div>
-        </section>
+        {/* Hosting section removed — merged into inline choice above workflow cards */}
 
         {/* ROI */}
         <section className="max-w-3xl mx-auto px-6 mb-20">
@@ -373,7 +351,7 @@ export default function BangGiaPage() {
 
             <div className="bg-white rounded-xl border border-slate-200 p-5 text-center">
               <p className="text-sm text-slate-600">
-                Chi phí AutoFlow: <strong>1 quy trình từ 2 triệu</strong> (trả 1 lần) + <strong>server 500K/tháng</strong>.
+                Chi phí: <strong>1 quy trình từ 2 triệu</strong> (trả 1 lần). Vận hành server chỉ thêm <strong>499K/tháng</strong> nếu cần.
               </p>
               <p className="font-display font-bold text-lg text-accent mt-2">
                 → Hoàn vốn ngay tháng đầu tiên.
@@ -433,8 +411,8 @@ export default function BangGiaPage() {
               <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
                 <span className="text-3xl">🏠</span>
                 <div>
-                  <p className="text-sm font-semibold text-slate-900">Server: 500K/tháng</p>
-                  <p className="text-xs text-slate-500">Thanh toán hàng tháng, hủy bất cứ lúc nào</p>
+                  <p className="text-sm font-semibold text-slate-900">Server (tùy chọn): 499K/tháng</p>
+                  <p className="text-xs text-slate-500">Thanh toán hàng tháng, hủy bất cứ lúc nào. Hoặc tự vận hành miễn phí.</p>
                 </div>
               </div>
             </div>
@@ -468,7 +446,7 @@ export default function BangGiaPage() {
             href="/audit"
             className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-8 py-4 rounded-xl transition-all hover:shadow-xl hover:shadow-primary/25"
           >
-            Tư vấn miễn phí — chỉ 30 phút
+            Tư vấn miễn phí 
             <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M5 8h6M8 5l3 3-3 3" />
             </svg>
