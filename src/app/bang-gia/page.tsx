@@ -6,29 +6,38 @@ import Footer from "@/components/Footer";
 const workflowTiers = [
   {
     name: "Cơ bản",
-    desc: "Kết nối 2 hệ thống, tự động 1 bước",
-    price: "3",
+    price: "2",
+    included: [
+      "Kết nối 2 hệ thống",
+      "Tự động 1 bước xử lý",
+      "Bàn giao trong 5 ngày",
+    ],
     example:
       "Có đơn mới trên Shopee → tự ghi vào bảng tính + gửi tin xác nhận cho khách qua Zalo",
-    icon: "⚡",
     popular: false,
   },
   {
     name: "Nâng cao",
-    desc: "Nhiều bước xử lý, kết nối 3-4 hệ thống",
-    price: "5",
+    price: "4",
+    included: [
+      "Kết nối 3-4 hệ thống",
+      "Nhiều bước xử lý tự động",
+      "Bàn giao trong 7 ngày",
+    ],
     example:
       "Có đơn mới → tự tạo hóa đơn kế toán + cập nhật tồn kho + gửi xác nhận cho khách + ghi báo cáo doanh thu",
-    icon: "🔗",
     popular: true,
   },
   {
     name: "Toàn diện",
-    desc: "Quy trình phức tạp, nhiều điều kiện, tích hợp sâu",
-    price: "8",
+    price: "7",
+    included: [
+      "Kết nối 5+ hệ thống",
+      "Quy trình phức tạp, nhiều điều kiện",
+      "Bàn giao trong 10 ngày",
+    ],
     example:
       "Khách để lại thông tin Facebook → AI phân loại → ghi vào CRM → gửi email chào hàng → nhắc sales khi khách 'nóng'",
-    icon: "🚀",
     popular: false,
   },
 ];
@@ -93,22 +102,19 @@ export default function BangGiaPage() {
             </h1>
             <p className="text-lg text-slate-500">
               Mỗi quy trình tự động được xây riêng cho doanh nghiệp bạn.
-              Trả 1 lần, chạy mãi mãi. Server riêng, dữ liệu tại Việt Nam.
+              Trả 1 lần, chạy mãi mãi trên server riêng tại Việt Nam.
             </p>
           </div>
         </section>
 
-        {/* Section 1: Workflow Build — FIRST (cái khách hàng mua) */}
+        {/* Section 1: Workflow Build */}
         <section id="workflow-build" className="max-w-6xl mx-auto px-6 mb-20">
           <div className="text-center mb-10">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4">
-              Bạn cần tự động hóa gì?
-            </span>
             <h2 className="font-display font-bold text-2xl md:text-3xl text-slate-900 mb-3">
               Trả 1 lần. Chạy mãi mãi.
             </h2>
             <p className="text-slate-500">
-              Mỗi quy trình được xây riêng. Sau khi bàn giao, nó tự chạy 24/7 trên server riêng của bạn.
+              Mỗi quy trình được xây riêng cho bạn. Sau khi bàn giao, nó tự chạy 24/7.
             </p>
           </div>
 
@@ -128,13 +134,11 @@ export default function BangGiaPage() {
                   </span>
                 )}
 
-                <div className="text-3xl mb-3">{tier.icon}</div>
-                <h3 className="font-display font-bold text-xl text-slate-900">
+                <h3 className="font-display font-bold text-xl text-slate-900 mb-1">
                   {tier.name}
                 </h3>
-                <p className="text-sm text-slate-500 mt-1 mb-4">{tier.desc}</p>
 
-                <div className="mb-6">
+                <div className="mb-5">
                   <span className="font-display font-extrabold text-4xl text-slate-900">
                     {tier.price}
                   </span>
@@ -143,9 +147,27 @@ export default function BangGiaPage() {
                   </span>
                 </div>
 
+                <ul className="space-y-2 mb-5">
+                  {tier.included.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm">
+                      <svg
+                        className="shrink-0 mt-0.5 text-accent"
+                        width="16"
+                        height="16"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path d="M2 8l4 4 8-8" />
+                      </svg>
+                      <span className="text-slate-600">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
                 <div className="p-4 bg-slate-50 rounded-xl mb-6 flex-1">
                   <p className="text-xs font-semibold text-primary mb-1.5">
-                    💡 Ví dụ thực tế:
+                    Ví dụ thực tế:
                   </p>
                   <p className="text-sm text-slate-600 leading-relaxed">
                     {tier.example}
@@ -167,11 +189,11 @@ export default function BangGiaPage() {
           </div>
 
           <p className="text-center text-sm text-slate-400 mt-6">
-            Quy trình chạy trên server riêng của bạn — phí vận hành server chỉ 990K/tháng
+            Tất cả quy trình chạy trên server riêng của bạn — phí vận hành chỉ 500K/tháng
           </p>
         </section>
 
-        {/* Section 2: Free Pilot — 5 khách đầu tiên */}
+        {/* Section 2: Free Pilot */}
         <section id="pilot" className="max-w-4xl mx-auto px-6 mb-20">
           <div className="relative overflow-hidden rounded-2xl border-2 border-accent bg-gradient-to-br from-emerald-50 via-white to-blue-50 p-8 md:p-10">
             <div className="absolute -top-px -right-px">
@@ -200,13 +222,13 @@ export default function BangGiaPage() {
                 {
                   value: "0đ",
                   label: "Chi phí xây quy trình",
-                  sub: "trị giá 3 triệu",
+                  sub: "trị giá 2 triệu",
                   color: "text-accent",
                   bg: "bg-accent/5",
                   border: "border-accent/10",
                 },
                 {
-                  value: "7 ngày",
+                  value: "5 ngày",
                   label: "Từ đăng ký đến chạy thật",
                   sub: "nhanh gọn, rõ ràng",
                   color: "text-primary",
@@ -226,9 +248,7 @@ export default function BangGiaPage() {
                   key={i}
                   className={`${m.bg} border ${m.border} rounded-2xl p-5 text-center`}
                 >
-                  <p
-                    className={`font-display font-extrabold text-2xl ${m.color}`}
-                  >
+                  <p className={`font-display font-extrabold text-2xl ${m.color}`}>
                     {m.value}
                   </p>
                   <p className="text-xs text-slate-600 font-medium mt-1">{m.label}</p>
@@ -243,7 +263,7 @@ export default function BangGiaPage() {
               </h3>
               <ul className="space-y-2">
                 {[
-                  "Tư vấn chuyên sâu quy trình doanh nghiệp bạn (30 phút)",
+                  "Tư vấn chuyên sâu quy trình doanh nghiệp (30 phút)",
                   "1 quy trình tự động hoạt động thật trên server riêng",
                   "Video hướng dẫn sử dụng chi tiết",
                   "Hỗ trợ 7 ngày sau bàn giao qua Zalo",
@@ -271,13 +291,7 @@ export default function BangGiaPage() {
                 className="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white font-bold text-lg px-10 py-4 rounded-2xl transition-all hover:shadow-xl hover:shadow-accent/25"
               >
                 Nhận suất miễn phí
-                <svg
-                  width="16"
-                  height="16"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
+                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M5 8h6M8 5l3 3-3 3" />
                 </svg>
               </a>
@@ -288,13 +302,10 @@ export default function BangGiaPage() {
           </div>
         </section>
 
-        {/* Section 3: Hosting — trình bày như "hạ tầng đi kèm", không phải sản phẩm riêng */}
+        {/* Section 3: Hosting */}
         <section id="hosting" className="max-w-4xl mx-auto px-6 mb-20">
           <div className="rounded-2xl border border-slate-200 bg-white p-8 md:p-10">
             <div className="text-center mb-8">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold mb-4">
-                🏠 Server vận hành
-              </span>
               <h2 className="font-display font-bold text-2xl text-slate-900 mb-2">
                 Quy trình chạy ở đâu?
               </h2>
@@ -305,9 +316,7 @@ export default function BangGiaPage() {
             </div>
 
             <div className="flex items-baseline justify-center gap-2 mb-6">
-              <span className="font-display font-extrabold text-4xl text-slate-900">
-                990K
-              </span>
+              <span className="font-display font-extrabold text-4xl text-slate-900">500K</span>
               <span className="text-slate-500">/tháng</span>
             </div>
 
@@ -321,14 +330,7 @@ export default function BangGiaPage() {
                 "Hỗ trợ tiếng Việt qua Zalo",
               ].map((f) => (
                 <li key={f} className="flex items-start gap-2.5 text-sm">
-                  <svg
-                    className="shrink-0 mt-0.5 text-accent"
-                    width="16"
-                    height="16"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
+                  <svg className="shrink-0 mt-0.5 text-accent" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M2 8l4 4 8-8" />
                   </svg>
                   <span className="text-slate-600">{f}</span>
@@ -342,7 +344,7 @@ export default function BangGiaPage() {
           </div>
         </section>
 
-        {/* ROI — Đơn giản, 1 ví dụ cố định, WOW */}
+        {/* ROI */}
         <section className="max-w-3xl mx-auto px-6 mb-20">
           <div className="bg-gradient-to-br from-red-50/50 via-white to-accent/5 rounded-2xl border border-slate-200 p-8 md:p-10">
             <div className="text-center mb-8">
@@ -364,14 +366,14 @@ export default function BangGiaPage() {
               <div className="bg-accent/5 border border-accent/10 rounded-2xl p-6 text-center">
                 <p className="text-sm text-accent/70 mb-2">Sau khi dùng AutoFlow</p>
                 <p className="font-display font-extrabold text-5xl text-accent">80%</p>
-                <p className="text-sm text-accent/70 mt-1">công việc nhập tay được tự động</p>
+                <p className="text-sm text-accent/70 mt-1">công việc được tự động hóa</p>
                 <p className="text-xs text-accent/50 mt-1">Tiết kiệm ~9 triệu/tháng</p>
               </div>
             </div>
 
             <div className="bg-white rounded-xl border border-slate-200 p-5 text-center">
               <p className="text-sm text-slate-600">
-                Chi phí AutoFlow: <strong>1 quy trình từ 3 triệu</strong> (trả 1 lần) + <strong>hosting 990K/tháng</strong>.
+                Chi phí AutoFlow: <strong>1 quy trình từ 2 triệu</strong> (trả 1 lần) + <strong>server 500K/tháng</strong>.
               </p>
               <p className="font-display font-bold text-lg text-accent mt-2">
                 → Hoàn vốn ngay tháng đầu tiên.
@@ -380,7 +382,7 @@ export default function BangGiaPage() {
           </div>
         </section>
 
-        {/* Comparison Table — không giá */}
+        {/* Comparison */}
         <section className="max-w-6xl mx-auto px-6 mb-20">
           <div className="text-center mb-10">
             <h2 className="font-display font-bold text-2xl md:text-3xl text-slate-900 mb-3">
@@ -395,30 +397,17 @@ export default function BangGiaPage() {
               <thead>
                 <tr>
                   <th className="text-left py-4 px-4 font-display font-bold text-slate-700 border-b-2 border-slate-200" />
-                  <th className="text-left py-4 px-4 font-display font-bold text-slate-500 border-b-2 border-slate-200">
-                    Tự cài đặt
-                  </th>
-                  <th className="text-left py-4 px-4 font-display font-bold text-primary border-b-2 border-primary bg-primary/5 rounded-t-xl">
-                    AutoFlow VN ⭐
-                  </th>
-                  <th className="text-left py-4 px-4 font-display font-bold text-slate-500 border-b-2 border-slate-200">
-                    Dịch vụ nước ngoài
-                  </th>
+                  <th className="text-left py-4 px-4 font-display font-bold text-slate-500 border-b-2 border-slate-200">Tự cài đặt</th>
+                  <th className="text-left py-4 px-4 font-display font-bold text-primary border-b-2 border-primary bg-primary/5 rounded-t-xl">AutoFlow VN ⭐</th>
+                  <th className="text-left py-4 px-4 font-display font-bold text-slate-500 border-b-2 border-slate-200">Dịch vụ nước ngoài</th>
                 </tr>
               </thead>
               <tbody>
                 {comparisonRows.map((row, i) => (
-                  <tr
-                    key={row.label}
-                    className={i % 2 === 0 ? "bg-slate-50/50" : ""}
-                  >
-                    <td className="py-3.5 px-4 font-medium text-slate-700">
-                      {row.label}
-                    </td>
+                  <tr key={row.label} className={i % 2 === 0 ? "bg-slate-50/50" : ""}>
+                    <td className="py-3.5 px-4 font-medium text-slate-700">{row.label}</td>
                     <td className="py-3.5 px-4 text-slate-500">{row.self}</td>
-                    <td className="py-3.5 px-4 text-slate-900 font-medium bg-primary/5 border-x border-primary/10">
-                      {row.autoflow}
-                    </td>
+                    <td className="py-3.5 px-4 text-slate-900 font-medium bg-primary/5 border-x border-primary/10">{row.autoflow}</td>
                     <td className="py-3.5 px-4 text-slate-500">{row.cloud}</td>
                   </tr>
                 ))}
@@ -437,23 +426,15 @@ export default function BangGiaPage() {
               <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
                 <span className="text-3xl">⚙️</span>
                 <div>
-                  <p className="text-sm font-semibold text-slate-900">
-                    Quy trình: 50% trước, 50% khi bàn giao
-                  </p>
-                  <p className="text-xs text-slate-500">
-                    Chuyển khoản ngân hàng, có hợp đồng rõ ràng
-                  </p>
+                  <p className="text-sm font-semibold text-slate-900">Quy trình: 50% trước, 50% khi bàn giao</p>
+                  <p className="text-xs text-slate-500">Chuyển khoản ngân hàng, có hợp đồng rõ ràng</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
                 <span className="text-3xl">🏠</span>
                 <div>
-                  <p className="text-sm font-semibold text-slate-900">
-                    Server: 990K/tháng
-                  </p>
-                  <p className="text-xs text-slate-500">
-                    Thanh toán hàng tháng, hủy bất cứ lúc nào
-                  </p>
+                  <p className="text-sm font-semibold text-slate-900">Server: 500K/tháng</p>
+                  <p className="text-xs text-slate-500">Thanh toán hàng tháng, hủy bất cứ lúc nào</p>
                 </div>
               </div>
             </div>
@@ -464,22 +445,13 @@ export default function BangGiaPage() {
         <section className="max-w-3xl mx-auto px-6 mb-16">
           <div className="bg-accent/5 border border-accent/20 rounded-2xl p-8 text-center">
             <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-              <svg
-                width="28"
-                height="28"
-                fill="none"
-                stroke="#10B981"
-                strokeWidth="2"
-              >
+              <svg width="28" height="28" fill="none" stroke="#10B981" strokeWidth="2">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
             </div>
-            <h3 className="font-display font-bold text-xl text-slate-900 mb-2">
-              Cam kết hoàn tiền 100%
-            </h3>
+            <h3 className="font-display font-bold text-xl text-slate-900 mb-2">Cam kết hoàn tiền 100%</h3>
             <p className="text-sm text-slate-500 leading-relaxed max-w-lg mx-auto">
-              Nếu AutoFlow không giao đúng những gì đã cam kết trong hợp đồng
-              — bạn được hoàn toàn bộ chi phí. Không điều kiện ẩn.
+              Nếu AutoFlow không giao đúng những gì đã cam kết — bạn được hoàn toàn bộ chi phí. Không điều kiện ẩn.
             </p>
           </div>
         </section>
@@ -490,21 +462,14 @@ export default function BangGiaPage() {
             Sẵn sàng tiết kiệm hàng trăm giờ mỗi tháng?
           </h2>
           <p className="text-slate-500 mb-6">
-            Đăng ký tư vấn miễn phí — mình sẽ chỉ ra chính xác quy trình nào
-            nên tự động hóa trước.
+            Đăng ký tư vấn miễn phí — mình sẽ chỉ ra chính xác quy trình nào nên tự động hóa trước.
           </p>
           <a
             href="/audit"
             className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-8 py-4 rounded-xl transition-all hover:shadow-xl hover:shadow-primary/25"
           >
             Tư vấn miễn phí — chỉ 30 phút
-            <svg
-              width="16"
-              height="16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-            >
+            <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M5 8h6M8 5l3 3-3 3" />
             </svg>
           </a>
