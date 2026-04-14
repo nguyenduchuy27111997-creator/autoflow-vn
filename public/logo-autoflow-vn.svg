@@ -1,0 +1,21 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="192" height="192" rx="32" fill="#0066FF"/>
+  <!-- 3x3 grid dots -->
+  <circle cx="56" cy="56" r="10" fill="rgba(255,255,255,0.35)"/>
+  <circle cx="96" cy="56" r="10" fill="rgba(255,255,255,0.35)"/>
+  <circle cx="136" cy="56" r="10" fill="rgba(255,255,255,0.35)"/>
+  <circle cx="56" cy="96" r="10" fill="rgba(255,255,255,0.35)"/>
+  <circle cx="96" cy="96" r="10" fill="rgba(255,255,255,0.35)"/>
+  <circle cx="136" cy="96" r="10" fill="rgba(255,255,255,0.35)"/>
+  <circle cx="56" cy="136" r="10" fill="rgba(255,255,255,0.35)"/>
+  <circle cx="96" cy="136" r="10" fill="rgba(255,255,255,0.35)"/>
+  <circle cx="136" cy="136" r="10" fill="rgba(255,255,255,0.35)"/>
+  <!-- Staircase path -->
+  <polyline points="56,56 96,56 96,96 136,96 136,136" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <!-- Active nodes -->
+  <circle cx="56" cy="56" r="14" fill="white"/>
+  <circle cx="96" cy="56" r="12" fill="white"/>
+  <circle cx="96" cy="96" r="12" fill="white"/>
+  <circle cx="136" cy="96" r="12" fill="white"/>
+  <circle cx="136" cy="136" r="14" fill="white"/>
+</svg>

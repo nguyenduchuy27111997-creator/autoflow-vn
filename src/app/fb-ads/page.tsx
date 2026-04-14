@@ -460,7 +460,7 @@ export default function FbAdsLanding() {
       {/* ── Footer minimal ── */}
       <footer className="py-6 text-center border-t border-slate-100">
         <p className="text-xs text-slate-500">
-          © 2025 AutoFlow.vn — Tự động hóa quy trình cho SME Việt Nam
+          © 2026 AutoFlow VN — Tự động hóa quy trình cho SME Việt Nam
         </p>
       </footer>
     </div>

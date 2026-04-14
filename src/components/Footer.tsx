@@ -129,7 +129,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="mt-12 pt-6 border-t border-slate-800 flex flex-wrap justify-between items-center gap-4">
           <p className="text-xs text-slate-500">
-            © 2026 AutoFlow.vn — Tự động hóa thông minh cho SME Việt Nam
+            © 2026 AutoFlow VN — Tự động hóa thông minh cho SME Việt Nam
           </p>
           <div className="flex gap-6">
             <a

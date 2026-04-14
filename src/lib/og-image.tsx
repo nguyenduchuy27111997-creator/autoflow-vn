@@ -99,7 +99,7 @@ export function generateOgImage({ title, subtitle, badge }: OgImageProps) {
               letterSpacing: "-0.02em",
             }}
           >
-            AutoFlow.vn
+            AutoFlow VN
           </span>
           {badge && (
             <span
