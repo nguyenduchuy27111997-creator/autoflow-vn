@@ -6,7 +6,7 @@ import JsonLd from "@/components/JsonLd";
 export const metadata: Metadata = {
   title: "Server Riêng, Tôi Quản Lý Hết — Managed Hosting",
   description:
-    "Dịch vụ managed hosting cho SME: server riêng tại Việt Nam (Bizfly Cloud HCM), backup tự động, monitoring 24/7, SLA 99.9%. Chỉ 990K/tháng. Unlimited workflow executions.",
+    "Dịch vụ managed hosting cho SME: server riêng tại Việt Nam (Bizfly Cloud HCM), backup tự động, monitoring 24/7, SLA 99.9%. Chỉ 499K/tháng. Unlimited workflow executions.",
 };
 
 const valueProps = [
@@ -65,7 +65,7 @@ const comparisonRows = [
   {
     label: "Chi phí/tháng",
     self: "~500K VPS + thời gian bạn",
-    autoflow: "990K/tháng (trọn gói)",
+    autoflow: "499K/tháng (tùy chọn, hủy bất cứ lúc nào)",
     dev: "15–30 triệu/người",
   },
   {
@@ -134,7 +134,7 @@ export default function N8nHostingPage() {
           "@type": "Service",
           name: "Managed Hosting — AutoFlow VN",
           description:
-            "Dịch vụ managed hosting cho SME: server riêng tại Việt Nam (Bizfly Cloud HCM), backup tự động, monitoring 24/7, SLA 99.9%. Chỉ 990K/tháng.",
+            "Dịch vụ managed hosting cho SME: server riêng tại Việt Nam (Bizfly Cloud HCM), backup tự động, monitoring 24/7, SLA 99.9%. Chỉ 499K/tháng.",
           provider: {
             "@type": "Organization",
             name: "AutoFlow VN",
@@ -144,11 +144,11 @@ export default function N8nHostingPage() {
           serviceType: "Managed Hosting",
           offers: {
             "@type": "Offer",
-            price: "990000",
+            price: "499000",
             priceCurrency: "VND",
             priceSpecification: {
               "@type": "UnitPriceSpecification",
-              price: "990000",
+              price: "499000",
               priceCurrency: "VND",
               unitText: "tháng",
             },
@@ -170,7 +170,7 @@ export default function N8nHostingPage() {
             <p className="text-lg text-slate-500 leading-relaxed mb-8 max-w-2xl mx-auto">
               Bạn không cần biết Linux, Docker, hay cách backup database.
               AutoFlow setup server riêng tại Việt Nam (Bizfly Cloud HCM) cho bạn, monitor 24/7,
-              backup hàng ngày, SSL tự động — chỉ 990K/tháng. Unlimited workflow executions.
+              backup hàng ngày, SSL tự động — chỉ 499K/tháng. Unlimited workflow executions.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
@@ -226,7 +226,7 @@ export default function N8nHostingPage() {
             {/* Left: checklist */}
             <div>
               <h2 className="font-display font-bold text-2xl text-slate-900 mb-6">
-                Hosting 990K/tháng bao gồm:
+                Hosting 499K/tháng bao gồm:
               </h2>
               <ul className="space-y-4">
                 {includedFeatures.map((feature) => (
@@ -250,10 +250,10 @@ export default function N8nHostingPage() {
             {/* Right: pricing summary card */}
             <div className="bg-slate-900 text-white rounded-2xl p-8">
               <p className="font-display font-extrabold text-4xl mb-3">
-                Chỉ 990K/tháng
+                Chỉ 499K/tháng
               </p>
               <p className="text-slate-400 mb-6 leading-relaxed">
-                Chưa bằng 1 bữa ăn team building. Unlimited workflow executions. 1 workflow miễn phí khi ký 3 tháng.
+                Chưa bằng 1 bữa ăn team building. Unlimited workflow executions. Thanh toán hàng tháng, hủy bất cứ lúc nào.
               </p>
               <a
                 href="/bang-gia#managed-hosting"

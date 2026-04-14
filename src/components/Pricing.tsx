@@ -7,7 +7,7 @@ const workflowTiers = [
   {
     name: "Đơn giản",
     tagline: "≤5 nodes",
-    price: "3",
+    price: "2",
     unit: "triệu VND",
     desc: "Workflow cơ bản, kết nối 2-3 hệ thống",
     example: "Đơn Shopee mới → Google Sheet + thông báo Zalo OA",
@@ -16,7 +16,7 @@ const workflowTiers = [
   {
     name: "Trung bình",
     tagline: "6-15 nodes",
-    price: "5",
+    price: "4",
     unit: "triệu VND",
     desc: "Logic phức tạp hơn, nhiều nhánh xử lý",
     example:
@@ -26,7 +26,7 @@ const workflowTiers = [
   {
     name: "Phức tạp",
     tagline: "15+ nodes",
-    price: "8",
+    price: "7",
     unit: "triệu VND",
     desc: "Multi-step, nhiều điều kiện, tích hợp sâu",
     example:
@@ -42,50 +42,65 @@ export default function Pricing() {
         badge="Bảng giá đơn giản"
         title={
           <>
-            Server riêng{" "}
-            <span className="gradient-text">990K/tháng</span>. Workflow tính
-            riêng.
+            Hosting <span className="gradient-text">499K/tháng</span> (tùy
+            chọn). Workflow tính riêng.
           </>
         }
-        subtitle="Hosting 1 giá duy nhất. Workflow trả 1 lần theo độ phức tạp. Không phí ẩn."
+        subtitle="Hosting không bắt buộc — bạn có thể tự host miễn phí. Workflow trả 1 lần theo độ phức tạp. Không phí ẩn."
         className="mb-16"
       />
 
-      {/* Hosting card */}
-      <div className="max-w-2xl mx-auto mb-16 rounded-2xl border-2 border-primary bg-white shadow-md shadow-primary/5 p-8 text-center">
-        <h3 className="font-display font-bold text-slate-900 mb-1">
-          Managed Hosting
-        </h3>
-        <div className="flex items-baseline justify-center gap-2 mb-3">
-          <span className="font-display font-extrabold text-5xl text-slate-900">
-            990K
-          </span>
-          <span className="text-lg text-slate-500">/tháng</span>
+      {/* Hosting card — optional */}
+      <div className="max-w-3xl mx-auto mb-16 grid md:grid-cols-2 gap-4">
+        {/* AutoFlow hosts */}
+        <div className="rounded-2xl border-2 border-primary bg-white shadow-md shadow-primary/5 p-8 text-center">
+          <h3 className="font-display font-bold text-slate-900 mb-1">
+            AutoFlow vận hành giúp
+          </h3>
+          <div className="flex items-baseline justify-center gap-2 mb-3">
+            <span className="font-display font-extrabold text-5xl text-slate-900">
+              499K
+            </span>
+            <span className="text-lg text-slate-500">/tháng</span>
+          </div>
+          <p className="text-sm text-slate-500 mb-5 max-w-md mx-auto">
+            Server riêng Bizfly Cloud HCM, backup hàng ngày, monitoring 24/7,
+            SSL tự động, support Zalo, unlimited executions.
+          </p>
+          <p className="text-xs text-slate-400 mb-5">
+            Thanh toán hàng tháng, hủy bất cứ lúc nào
+          </p>
+          <a
+            href="/dich-vu/n8n-hosting"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/20 text-sm"
+          >
+            Xem chi tiết hosting
+          </a>
         </div>
-        <p className="text-sm text-slate-500 mb-5 max-w-md mx-auto">
-          Server riêng Bizfly Cloud HCM, backup hàng ngày, monitoring 24/7, SSL
-          tự động, support Zalo, unlimited executions.
-        </p>
-        <div className="flex flex-wrap justify-center gap-3 mb-5 text-xs text-slate-500">
-          <span className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-            Unlimited executions
-          </span>
-          <span className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-            Backup encrypted hàng ngày
-          </span>
-          <span className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-            1 workflow miễn phí khi ký 3 tháng
-          </span>
+        {/* Self-host */}
+        <div className="rounded-2xl border-2 border-slate-200 bg-white p-8 text-center">
+          <h3 className="font-display font-bold text-slate-900 mb-1">
+            Bạn tự vận hành
+          </h3>
+          <div className="flex items-baseline justify-center gap-2 mb-3">
+            <span className="font-display font-extrabold text-5xl text-accent">
+              0đ
+            </span>
+          </div>
+          <p className="text-sm text-slate-500 mb-5 max-w-md mx-auto">
+            Mua workflow, tự host trên server riêng của bạn. AutoFlow bàn giao
+            workflow + hướng dẫn cài đặt.
+          </p>
+          <p className="text-xs text-slate-400 mb-5">
+            Phù hợp nếu bạn có team IT
+          </p>
+          <a
+            href="/audit"
+            className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-6 py-3 rounded-xl transition-all text-sm"
+          >
+            Liên hệ tư vấn
+          </a>
         </div>
-        <a
-          href="/bang-gia#hosting"
-          className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/20 text-sm"
-        >
-          Xem chi tiết hosting
-        </a>
       </div>
 
       {/* Workflow pricing cards */}
@@ -159,11 +174,11 @@ export default function Pricing() {
       {/* Free pilot note */}
       <div className="text-center mt-10 p-6 bg-accent/5 rounded-xl border border-accent/10 max-w-2xl mx-auto">
         <p className="font-display font-bold text-slate-900">
-          Pilot miễn phí: 1 workflow khi ký hosting 3 tháng
+          Pilot miễn phí cho 5 khách đầu tiên
         </p>
         <p className="text-sm text-slate-500 mt-1">
-          Ký hosting 3 tháng (990K x 3) — nhận 1 workflow đơn giản miễn phí (trị
-          giá 3 triệu).
+          1 workflow miễn phí, không ràng buộc. Trải nghiệm tự động hóa trước
+          khi đầu tư thêm.
         </p>
       </div>
     </Container>

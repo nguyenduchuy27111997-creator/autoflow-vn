@@ -28,15 +28,16 @@ export default function PilotBanner() {
         {/* Header */}
         <div className="text-center mb-10">
           <span className="inline-block bg-accent/10 text-accent text-xs font-bold px-4 py-1.5 rounded-full mb-4">
-            PILOT MIỄN PHÍ — KÝ HOSTING 3 THÁNG
+            PILOT MIỄN PHÍ — 5 KHÁCH ĐẦU TIÊN
           </span>
           <h2 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 mb-3">
-            1 Workflow Miễn Phí Khi Ký{" "}
-            <span className="gradient-text">Hosting 3 Tháng</span>
+            1 Workflow Miễn Phí,{" "}
+            <span className="gradient-text">Không Ràng Buộc</span>
           </h2>
           <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-            Ký hosting 990K/tháng x 3 tháng — nhận miễn phí 1 workflow đơn giản
-            (trị giá 3 triệu). Trải nghiệm tự động hóa trước khi đầu tư thêm.
+            5 khách đầu tiên nhận miễn phí 1 workflow đơn giản (trị giá 2
+            triệu). Không cần mua hosting. Trải nghiệm tự động hóa trước khi
+            đầu tư thêm.
           </p>
         </div>
 
@@ -51,8 +52,8 @@ export default function PilotBanner() {
               border: "border-accent/10",
             },
             {
-              value: "990K/tháng",
-              label: "Hosting (1 giá duy nhất)",
+              value: "499K/tháng",
+              label: "Hosting (tùy chọn)",
               color: "text-primary",
               bg: "bg-primary/5",
               border: "border-primary/10",
@@ -104,8 +105,8 @@ export default function PilotBanner() {
             <ul className="space-y-3">
               {[
                 {
-                  title: "Hosting 990K/tháng (3 tháng minimum)",
-                  desc: "Server riêng Bizfly Cloud HCM, backup, monitoring, SSL, unlimited executions",
+                  title: "1 workflow miễn phí cho 5 khách đầu tiên",
+                  desc: "Không cần mua hosting, không ràng buộc hợp đồng",
                 },
                 {
                   title: "1 workflow đơn giản miễn phí (≤5 nodes)",
@@ -209,13 +210,13 @@ export default function PilotBanner() {
             </div>
             <div className="border-x border-slate-100">
               <p className="text-xs text-slate-500 mb-1">
-                AutoFlow Hosting + Pilot
+                AutoFlow Pilot
               </p>
               <p className="font-display font-bold text-accent">
-                2.970K (3 tháng)
+                0 đồng
               </p>
               <p className="text-xs text-slate-500">
-                + 1 workflow miễn phí
+                1 workflow miễn phí, không ràng buộc
               </p>
             </div>
             <div>
@@ -260,7 +261,8 @@ export default function PilotBanner() {
             </a>
           </div>
           <p className="text-xs text-slate-500 mt-3">
-            Điều kiện: ký hosting 3 tháng minimum (990K/tháng)
+            Chỉ 5 slot miễn phí. Hosting 499K/tháng tùy chọn (hủy bất cứ lúc
+            nào).
           </p>
         </div>
       </div>

@@ -5,13 +5,13 @@ import { caseStudies } from "@/lib/case-studies";
 import InlineContactForm from "@/components/InlineContactForm";
 
 export const metadata: Metadata = {
-  title: "Chương Trình Pilot — Giảm 40-50% | AutoFlow VN",
+  title: "Pilot Miễn Phí — 5 Khách Đầu Tiên | AutoFlow VN",
   description:
-    "Tự động hóa 1 workflow trong 7 ngày với giá pilot 5-8 triệu. Chỉ 3 slot. Audit chuyên sâu, workflow n8n production-ready, SOP & video hướng dẫn.",
+    "1 workflow miễn phí cho 5 khách đầu tiên. Không ràng buộc. Audit chuyên sâu, workflow n8n production-ready, SOP & video hướng dẫn.",
   openGraph: {
-    title: "Chương Trình Pilot — Giảm 40-50% | AutoFlow VN",
+    title: "Pilot Miễn Phí — 5 Khách Đầu Tiên | AutoFlow VN",
     description:
-      "Tự động hóa 1 workflow trong 7 ngày với giá pilot 5-8 triệu. Chỉ 3 slot.",
+      "1 workflow miễn phí cho 5 khách đầu tiên. Không ràng buộc, không cam kết hosting.",
     url: "https://autoflowvn.net/pilot",
   },
 };
@@ -160,25 +160,25 @@ export default function PilotPage() {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 text-orange-700 text-xs font-bold mb-5">
               <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
-              Chỉ 3 slot · Giảm 40-50% · 7 ngày triển khai
+              5 khách đầu tiên · Miễn phí · 7 ngày triển khai
             </div>
             <h1 className="font-display font-extrabold text-3xl md:text-5xl text-slate-900 leading-tight tracking-tight mb-5">
-              Chương Trình Pilot:{" "}
+              Pilot Miễn Phí:{" "}
               <span className="gradient-text">
                 Tự Động Hóa Trong 1 Tuần
               </span>
             </h1>
             <p className="text-lg text-slate-500 leading-relaxed max-w-2xl">
-              Thử tự động hóa 1 workflow thật với giá ưu đãi. Nếu hài lòng —
-              mở rộng. Nếu không — bạn vẫn có workflow chạy thật, SOP, và video
-              hướng dẫn.
+              5 khách đầu tiên nhận miễn phí 1 workflow, không ràng buộc. Nếu
+              hài lòng — mở rộng. Nếu không — bạn vẫn có workflow chạy thật,
+              SOP, và video hướng dẫn.
             </p>
           </div>
 
           {/* Key metrics */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 max-w-4xl">
             {[
-              { value: "5-8 triệu", label: "Chi phí pilot (1 lần)", color: "text-accent" },
+              { value: "0 đồng", label: "Chi phí pilot (miễn phí)", color: "text-accent" },
               { value: "1 tuần", label: "Thời gian triển khai", color: "text-primary" },
               { value: "4-5 giờ/ngày", label: "Tiết kiệm thời gian", color: "text-secondary" },
               { value: "12-15x", label: "ROI năm đầu", color: "text-orange-600" },
@@ -330,11 +330,11 @@ export default function PilotPage() {
                 </p>
               </div>
               <div className="p-8 text-center bg-accent/5">
-                <p className="text-xs text-slate-500 mb-2">Gói Pilot AutoFlow</p>
+                <p className="text-xs text-slate-500 mb-2">Pilot AutoFlow</p>
                 <p className="font-display font-extrabold text-2xl text-accent mb-1">
-                  5-8 triệu (1 lần)
+                  Miễn phí
                 </p>
-                <p className="text-sm text-slate-500">Hoàn vốn sau 1 tháng</p>
+                <p className="text-sm text-slate-500">1 workflow, không ràng buộc</p>
                 <p className="text-xs text-accent mt-2">
                   Chạy 24/7, không sai sót
                 </p>
@@ -387,7 +387,7 @@ export default function PilotPage() {
                 Điều kiện tham gia (Win-Win)
               </h2>
               <p className="text-sm text-slate-500 mb-5">
-                Để được hưởng mức giá pilot ưu đãi 40-50%, bạn đồng ý:
+                Để nhận pilot miễn phí, bạn đồng ý:
               </p>
               <div className="space-y-4">
                 {conditions.map((c, i) => (
@@ -558,7 +558,7 @@ export default function PilotPage() {
         <section className="max-w-3xl mx-auto px-6 mb-16">
           <InlineContactForm
             source="pilot"
-            title="Đăng Ký Pilot — Chỉ 3 Slot"
+            title="Đăng Ký Pilot Miễn Phí — 5 Slot"
             subtitle="Điền thông tin bên dưới. Mình liên hệ qua Zalo trong 2 giờ để trao đổi chi tiết."
           />
         </section>
