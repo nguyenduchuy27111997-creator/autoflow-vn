@@ -21,6 +21,13 @@ export async function notifyTelegram(message: string) {
   }
 }
 
+const VOLUME_LABELS: Record<string, string> = {
+  lt_100: "< 100",
+  "100_1k": "100 – 1.000",
+  "1k_10k": "1.000 – 10.000",
+  "10k_plus": "> 10.000",
+};
+
 /** Format audit submission for Telegram */
 export function formatAuditNotify(data: {
   name: string;
@@ -28,6 +35,10 @@ export function formatAuditNotify(data: {
   company?: string | null;
   industry?: string | null;
   source?: string;
+  // Tier 1 quantified pain fields (optional — new leads only)
+  painPrimary?: string | null;
+  painHoursPerWeek?: number | null;
+  monthlyVolume?: string | null;
 }) {
   return [
     "🔔 <b>Lead mới — Audit</b>",
@@ -37,6 +48,12 @@ export function formatAuditNotify(data: {
     data.company ? `🏢 ${data.company}` : null,
     data.industry ? `🏭 ${data.industry}` : null,
     data.source ? `📍 Nguồn: ${data.source}` : null,
+    data.painPrimary
+      ? `💔 Pain: ${data.painPrimary}${data.painHoursPerWeek != null ? ` (${data.painHoursPerWeek}h/tuần)` : ""}`
+      : null,
+    data.monthlyVolume
+      ? `📊 Volume: ${VOLUME_LABELS[data.monthlyVolume] ?? data.monthlyVolume}`
+      : null,
     "",
     `🔗 Xem chi tiết trong Client Ops dashboard (localhost:3000/dashboard/leads)`,
   ].filter(Boolean).join("\n");

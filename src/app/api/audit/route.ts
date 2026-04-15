@@ -23,8 +23,26 @@ export async function POST(req: NextRequest) {
     }
 
     // Validate required fields
-    const { name, phone, industry, teamSize, painPoints, details, company,
-      utm_source, utm_medium, utm_campaign, utm_term, utm_content } = body;
+    const {
+      name,
+      phone,
+      industry,
+      teamSize,
+      painPoints,
+      details,
+      company,
+      // New Tier 1 fields
+      monthlyVolume,
+      painPrimary,
+      painFrequency,
+      painHoursPerWeek,
+      // UTM
+      utm_source,
+      utm_medium,
+      utm_campaign,
+      utm_term,
+      utm_content,
+    } = body;
 
     if (!name || !phone) {
       return NextResponse.json(
@@ -38,8 +56,17 @@ export async function POST(req: NextRequest) {
       phone,
       company: company || null,
       industry: industry || null,
-      team_size: teamSize || null,
-      pain_points: painPoints || [],
+      // Legacy string format for backward compat
+      team_size: teamSize ? `${teamSize} người` : null,
+      // New numeric column
+      team_size_numeric: teamSize ? Number(teamSize) : null,
+      // New Tier 1 columns
+      monthly_volume: monthlyVolume || null,
+      pain_primary: painPrimary || null,
+      pain_frequency: painFrequency || null,
+      pain_hours_per_week: painHoursPerWeek != null ? Number(painHoursPerWeek) : null,
+      // Backward compat: populate pain_points from painPrimary if no array provided
+      pain_points: painPoints || (painPrimary ? [painPrimary] : []),
       details: details || null,
       source: req.headers.get("referer") || "direct",
       utm_source: utm_source || null,
@@ -49,11 +76,13 @@ export async function POST(req: NextRequest) {
       utm_content: utm_content || null,
     };
 
-    // Save to Supabase
+    // Save to Supabase — use .select() to retrieve inserted row ID
     const supabase = await createClient();
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from("audit_submissions")
-      .insert(submission);
+      .insert(submission)
+      .select("id")
+      .single();
 
     if (error) {
       console.error("Supabase insert error:", error);
@@ -75,14 +104,20 @@ export async function POST(req: NextRequest) {
     // Telegram notification — MUST await in serverless (Netlify kills fire-and-forget promises after response)
     try {
       await notifyTelegram(formatAuditNotify({
-        name, phone, company, industry,
+        name,
+        phone,
+        company,
+        industry,
         source: submission.source,
+        painPrimary: painPrimary || null,
+        painHoursPerWeek: painHoursPerWeek != null ? Number(painHoursPerWeek) : null,
+        monthlyVolume: monthlyVolume || null,
       }));
     } catch (err) {
       console.error("Telegram notify failed (non-fatal):", err);
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, id: data.id });
   } catch {
     return NextResponse.json(
       { error: "Có lỗi xảy ra. Vui lòng thử lại." },
