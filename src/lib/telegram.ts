@@ -95,6 +95,65 @@ export function formatPartnerNotify(data: {
   ].filter(Boolean).join("\n");
 }
 
+const BUDGET_LABELS: Record<string, string> = {
+  lt_5m: "< 5 triệu",
+  "5_15m": "5–15 triệu",
+  "15_30m": "15–30 triệu",
+  "30m_plus": "30 triệu+",
+  unclear: "Chưa rõ",
+};
+
+const TIMELINE_LABELS: Record<string, string> = {
+  asap: "ASAP (< 1 tháng)",
+  "1_3_months": "1–3 tháng",
+  "3_6_months": "3–6 tháng",
+  exploring: "Đang tìm hiểu",
+};
+
+const AUTHORITY_LABELS: Record<string, string> = {
+  self: "Tự quyết",
+  need_approval: "Cần approve sếp",
+  multi_level: "Multi-level",
+};
+
+/** Format Tier 2 HOT lead alert for Telegram */
+export function formatAuditTier2CompletedNotify(data: {
+  name: string;
+  industry?: string | null;
+  budget_range?: string | null;
+  timeline?: string | null;
+  decision_authority?: string | null;
+  pain_primary?: string | null;
+  pain_hours_per_week?: number | null;
+  monthly_volume?: string | null;
+}) {
+  return [
+    "🔥 <b>Lead HOT — Deep profile completed</b>",
+    "━━━━━━━━━━━━━━━",
+    `👤 ${data.name}`,
+    data.industry ? `🏭 ${data.industry}` : null,
+    data.budget_range
+      ? `💰 Budget: ${BUDGET_LABELS[data.budget_range] ?? data.budget_range}`
+      : null,
+    data.timeline
+      ? `⏰ Timeline: ${TIMELINE_LABELS[data.timeline] ?? data.timeline}`
+      : null,
+    data.decision_authority
+      ? `🎯 Authority: ${AUTHORITY_LABELS[data.decision_authority] ?? data.decision_authority}`
+      : null,
+    "━━━━━━━━━━━━━━━",
+    data.pain_primary
+      ? `📊 Pain chính: ${data.pain_primary}${data.pain_hours_per_week != null ? ` (${data.pain_hours_per_week}h/tuần)` : ""}`
+      : null,
+    data.monthly_volume
+      ? `📦 Volume: ${VOLUME_LABELS[data.monthly_volume] ?? data.monthly_volume}`
+      : null,
+    "━━━━━━━━━━━━━━━",
+    "<b>Response &lt; 2h required!</b>",
+    "Mở client-ops: localhost:3000/dashboard/leads",
+  ].filter(Boolean).join("\n");
+}
+
 /** Format PDF download for Telegram */
 export function formatPdfNotify(data: {
   email: string;
