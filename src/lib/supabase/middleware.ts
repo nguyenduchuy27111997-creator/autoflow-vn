@@ -25,18 +25,7 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (
-    !user &&
-    request.nextUrl.pathname.startsWith("/portal/dashboard")
-  ) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/portal";
-    return NextResponse.redirect(url);
-  }
+  await supabase.auth.getUser();
 
   return supabaseResponse;
 }

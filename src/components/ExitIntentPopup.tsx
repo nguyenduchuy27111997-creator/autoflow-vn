@@ -7,7 +7,7 @@ const DISMISSED_KEY = "autoflow_exit_popup_dismissed";
 const CONVERTED_KEY = "autoflow_lead_converted";
 
 // Pages where popup should NOT show (already have forms)
-const EXCLUDED_PATHS = ["/audit", "/quiz", "/portal"];
+const EXCLUDED_PATHS = ["/audit", "/quiz"];
 
 export default function ExitIntentPopup() {
   const [visible, setVisible] = useState(false);

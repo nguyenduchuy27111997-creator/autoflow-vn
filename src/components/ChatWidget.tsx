@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 
 import { formatChat } from "@/lib/format-chat";
 
-const EXCLUDED_PATHS = ["/portal"];
 const MAX_MESSAGES_PER_SESSION = 20;
 
 function gtag(event: string, params?: Record<string, unknown>) {
@@ -154,8 +153,6 @@ export default function ChatWidget() {
         .join("") || ""
     );
   }, []);
-
-  if (EXCLUDED_PATHS.some((p) => pathname.startsWith(p))) return null;
 
   return (
     <>

@@ -10,7 +10,7 @@ interface ProofItem {
   timeAgo: string;
 }
 
-const EXCLUDED_PATHS = ["/portal", "/quiz"];
+const EXCLUDED_PATHS = ["/quiz"];
 
 function getTimeAgo(date: string): string {
   const diff = Date.now() - new Date(date).getTime();

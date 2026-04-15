@@ -38,7 +38,7 @@ export function formatAuditNotify(data: {
     data.industry ? `🏭 ${data.industry}` : null,
     data.source ? `📍 Nguồn: ${data.source}` : null,
     "",
-    `🔗 <a href="https://autoflowvn.net/portal/dashboard/leads">Xem dashboard</a>`,
+    `🔗 Xem chi tiết trong Client Ops dashboard (localhost:3000/dashboard/leads)`,
   ].filter(Boolean).join("\n");
 }
 
@@ -55,7 +55,7 @@ export function formatChatLeadNotify(data: {
     data.phone ? `📱 ${data.phone}` : null,
     data.email ? `✉️ ${data.email}` : null,
     "",
-    `🔗 <a href="https://autoflowvn.net/portal/dashboard/leads">Xem dashboard</a>`,
+    `🔗 Xem chi tiết trong Client Ops dashboard (localhost:3000/dashboard/leads)`,
   ].filter(Boolean).join("\n");
 }
 
@@ -74,7 +74,7 @@ export function formatPartnerNotify(data: {
     `📱 ${data.phone}`,
     `📋 Loại: ${data.partner_type}`,
     "",
-    `🔗 <a href="https://autoflowvn.net/portal/dashboard/leads">Xem dashboard</a>`,
+    `🔗 Xem chi tiết trong Client Ops dashboard (localhost:3000/dashboard/leads)`,
   ].filter(Boolean).join("\n");
 }
 

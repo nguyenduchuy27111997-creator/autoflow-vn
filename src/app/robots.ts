@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/portal/", "/go/"],
+      disallow: ["/api/", "/go/"],
     },
     sitemap: "https://autoflowvn.net/sitemap.xml",
   };
