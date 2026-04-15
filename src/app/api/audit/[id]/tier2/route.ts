@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import {
   notifyTelegram,
   formatAuditTier2CompletedNotify,
@@ -104,7 +104,7 @@ export async function POST(
       update.success_criteria = data.success_criteria;
 
     // Fetch existing submission for Telegram notification context
-    const supabase = await createClient();
+    const supabase = createAdminClient();
 
     const { data: existing, error: fetchError } = await supabase
       .from("audit_submissions")
