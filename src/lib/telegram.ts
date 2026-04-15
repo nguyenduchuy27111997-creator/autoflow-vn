@@ -35,11 +35,19 @@ export function formatAuditNotify(data: {
   company?: string | null;
   industry?: string | null;
   source?: string;
-  // Tier 1 quantified pain fields (optional — new leads only)
+  // Phase 98: narrative-primary field
+  painNarrative?: string | null;
+  // Tier 1 quantified pain fields (optional — old form leads)
   painPrimary?: string | null;
   painHoursPerWeek?: number | null;
   monthlyVolume?: string | null;
 }) {
+  const narrativeSnippet = data.painNarrative
+    ? data.painNarrative.length > 150
+      ? `${data.painNarrative.slice(0, 150)}...`
+      : data.painNarrative
+    : null;
+
   return [
     "🔔 <b>Lead mới — Audit</b>",
     "",
@@ -47,6 +55,7 @@ export function formatAuditNotify(data: {
     `📱 ${data.phone}`,
     data.company ? `🏢 ${data.company}` : null,
     data.industry ? `🏭 ${data.industry}` : null,
+    narrativeSnippet ? `💭 ${narrativeSnippet}` : null,
     data.source ? `📍 Nguồn: ${data.source}` : null,
     data.painPrimary
       ? `💔 Pain: ${data.painPrimary}${data.painHoursPerWeek != null ? ` (${data.painHoursPerWeek}h/tuần)` : ""}`

@@ -31,7 +31,9 @@ export async function POST(req: NextRequest) {
       painPoints,
       details,
       company,
-      // New Tier 1 fields
+      // Phase 98: narrative-primary field
+      painNarrative,
+      // Tier 1 structured fields (optional for lean form, required by old form)
       monthlyVolume,
       painPrimary,
       painFrequency,
@@ -51,6 +53,14 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Phase 98: narrative-only submissions are valid; old structured form still needs painPrimary
+    if (!painNarrative && !painPrimary) {
+      return NextResponse.json(
+        { error: "Mô tả pain required." },
+        { status: 400 }
+      );
+    }
+
     const submission = {
       name,
       phone,
@@ -60,6 +70,8 @@ export async function POST(req: NextRequest) {
       team_size: teamSize ? `${teamSize} người` : null,
       // New numeric column
       team_size_numeric: teamSize ? Number(teamSize) : null,
+      // Phase 98: narrative column
+      pain_narrative: painNarrative || null,
       // New Tier 1 columns
       monthly_volume: monthlyVolume || null,
       pain_primary: painPrimary || null,
@@ -109,6 +121,7 @@ export async function POST(req: NextRequest) {
         company,
         industry,
         source: submission.source,
+        painNarrative: painNarrative || null,
         painPrimary: painPrimary || null,
         painHoursPerWeek: painHoursPerWeek != null ? Number(painHoursPerWeek) : null,
         monthlyVolume: monthlyVolume || null,

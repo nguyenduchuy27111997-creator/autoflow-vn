@@ -1,10 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { industries } from "@/data/constants";
 import { getStoredUTM } from "@/lib/utm";
 import { trackGenerateLead } from "@/lib/analytics";
 import { fbqTrackLead } from "@/lib/fbpixel";
@@ -36,41 +34,73 @@ export type PainPrimaryValue = (typeof PAIN_PRIMARY_OPTIONS)[number]["value"];
 export type FrequencyValue = (typeof FREQUENCY_OPTIONS)[number]["value"];
 export type VolumeValue = (typeof VOLUME_OPTIONS)[number]["value"];
 
+// ── Lean form industries (Phase 98 — separate from legacy constants) ──
+const LEAN_INDUSTRIES = [
+  { value: "fnb", label: "F&B" },
+  { value: "ecommerce", label: "E-commerce" },
+  { value: "hr", label: "HR" },
+  { value: "healthcare", label: "Healthcare" },
+  { value: "education", label: "Education" },
+  { value: "other", label: "Khác" },
+] as const;
+
+const NARRATIVE_PLACEHOLDERS: Record<string, string> = {
+  fnb: "VD: Mỗi ngày tôi mất 3 giờ tổng hợp đơn Grab Food + Shopee Food vào MISA, vẫn có sai sót. Cuối tháng mất 2 ngày làm báo cáo 5 chi nhánh...",
+  ecommerce:
+    "VD: Shop 200 đơn/ngày, 2 nhân viên nhập MISA suốt, hay sai. Không biết tồn kho real-time...",
+  hr: "VD: Mỗi tháng 50 CV, sàng lọc thủ công, hay miss ứng viên tốt. Schedule phỏng vấn qua Zalo rời rạc...",
+  healthcare:
+    "VD: Phòng khám 30 lịch/ngày, gọi điện nhắc từng bệnh nhân, no-show 20%. Hồ sơ bệnh án paper...",
+  education:
+    "VD: 200 học viên active, nhắc lịch học qua Zalo rời rạc. Học phí miss, không có alert...",
+  other:
+    "Mô tả 3 điều khiến business mất nhiều thời gian nhất hoặc làm bạn burnout...",
+};
+
+function getNarrativePlaceholder(industry: string): string {
+  return (
+    NARRATIVE_PLACEHOLDERS[industry] ??
+    NARRATIVE_PLACEHOLDERS["other"]
+  );
+}
+
 interface AuditFormState {
+  // Step 1
   name: string;
   phone: string;
   company: string;
   industry: string;
-  teamSizeNumeric: number | "";
-  monthlyVolume: VolumeValue | "";
-  painPrimary: PainPrimaryValue | "";
+  // Step 2
+  painNarrative: string;
+  // Step 3 (optional)
   painFrequency: FrequencyValue | "";
   painHoursPerWeek: number;
+  // Kept for backward compat (not shown in lean form)
+  painPrimary: PainPrimaryValue | "";
+  teamSizeNumeric: number | "";
+  monthlyVolume: VolumeValue | "";
   details: string;
 }
 
 export default function AuditPage() {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
-  const [auditId, setAuditId] = useState<string | null>(null);
-  const [showTier2, setShowTier2] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState<AuditFormState>({
     name: "",
     phone: "",
     company: "",
     industry: "",
+    painNarrative: "",
+    painFrequency: "",
+    painHoursPerWeek: 10,
+    painPrimary: "",
     teamSizeNumeric: "",
     monthlyVolume: "",
-    painPrimary: "",
-    painFrequency: "",
-    painHoursPerWeek: 5,
     details: "",
   });
 
-  const [submitting, setSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const submitForm = async (skipQuantify = false) => {
     setSubmitting(true);
     try {
       const utm = getStoredUTM();
@@ -80,25 +110,22 @@ export default function AuditPage() {
         body: JSON.stringify({
           name: form.name,
           phone: form.phone,
-          company: form.company,
-          industry: form.industry,
-          teamSize: form.teamSizeNumeric !== "" ? Number(form.teamSizeNumeric) : null,
-          monthlyVolume: form.monthlyVolume || null,
-          painPrimary: form.painPrimary || null,
-          painFrequency: form.painPrimary !== "other" ? (form.painFrequency || null) : null,
-          painHoursPerWeek: form.painPrimary !== "other" ? form.painHoursPerWeek : null,
-          details: form.details || null,
+          company: form.company || null,
+          industry: form.industry || null,
+          painNarrative: form.painNarrative,
+          painFrequency: skipQuantify ? null : (form.painFrequency || null),
+          painHoursPerWeek: skipQuantify ? null : (form.painHoursPerWeek || null),
+          // Backward compat fields — null for lean form
+          painPrimary: null,
+          teamSize: null,
+          monthlyVolume: null,
+          details: null,
           ...utm,
         }),
       });
       if (res.ok) {
         trackGenerateLead({ form_type: "audit" });
         fbqTrackLead({ content_name: "audit" });
-        const data = await res.json();
-        if (data.id) {
-          setAuditId(data.id);
-          setShowTier2(true);
-        }
       }
       setSubmitted(true);
     } catch {
@@ -108,14 +135,13 @@ export default function AuditPage() {
     }
   };
 
-  const canProceed1 = form.name && form.phone;
-  const canProceed2 = form.industry && form.teamSizeNumeric !== "";
+  // Validation
+  const canProceed1 =
+    form.name.trim().length > 0 &&
+    form.phone.trim().length > 0 &&
+    form.industry.length > 0;
 
-  // Step 3 validation: painPrimary required; frequency + hours required unless "other"
-  const isPainOther = form.painPrimary === "other";
-  const canSubmit3 =
-    form.painPrimary !== "" &&
-    (isPainOther || (form.painFrequency !== "" && form.painHoursPerWeek > 0));
+  const canProceed2 = form.painNarrative.trim().length >= 30;
 
   return (
     <>
@@ -145,6 +171,7 @@ export default function AuditPage() {
             {/* Form */}
             <div className="lg:col-span-3">
               {submitted ? (
+                /* ─── Step 4: Success ─── */
                 <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center">
                   <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6">
                     <svg
@@ -164,7 +191,7 @@ export default function AuditPage() {
                     Mình đã nhận thông tin và sẽ liên hệ qua Zalo/SĐT trong
                     vòng 24h để sắp xếp cuộc gọi audit. Hẹn gặp bạn sớm!
                   </p>
-                  <div className="p-5 bg-slate-50 rounded-xl max-w-sm mx-auto">
+                  <div className="p-5 bg-slate-50 rounded-xl max-w-sm mx-auto mb-6">
                     <p className="text-sm font-semibold text-slate-700 mb-2">
                       Bạn sẽ nhận được:
                     </p>
@@ -183,43 +210,14 @@ export default function AuditPage() {
                       </li>
                     </ul>
                   </div>
-
-                  {/* Tier 2 upgrade CTA */}
-                  {showTier2 && (
-                    <div className="mt-8 p-6 rounded-2xl border-2 border-primary bg-primary/5 text-left">
-                      <div className="text-sm font-bold text-primary mb-1">
-                        UPGRADE
-                      </div>
-                      <h3 className="font-display font-bold text-xl text-slate-900 mb-2">
-                        Nhận audit report cá nhân hóa trong 2 giờ
-                      </h3>
-                      <p className="text-slate-600 mb-4">
-                        Hoàn thành deep profile (10 phút) → team Huy có đủ
-                        context để tư vấn chính xác, không-hỏi-thừa trong call.
-                      </p>
-                      <div className="flex gap-3">
-                        <button
-                          onClick={() => setShowTier2(false)}
-                          className="px-4 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-all"
-                        >
-                          Bỏ qua, nhận 24h
-                        </button>
-                        <Link
-                          href={`/audit/deep-profile?id=${auditId}`}
-                          className="px-4 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-all"
-                        >
-                          Làm ngay →
-                        </Link>
-                      </div>
-                    </div>
-                  )}
+                  {/* Phase 99 placeholder */}
+                  <p className="text-xs text-slate-400">
+                    📅 Book 30-min call: sắp có (Phase 99)
+                  </p>
                 </div>
               ) : (
-                <form
-                  onSubmit={handleSubmit}
-                  className="bg-white rounded-2xl border border-slate-200 p-8 md:p-10"
-                >
-                  {/* Progress bar */}
+                <div className="bg-white rounded-2xl border border-slate-200 p-8 md:p-10">
+                  {/* Progress bar — 3 active steps (contact, pain, quantify) */}
                   <div className="flex items-center gap-2 mb-8">
                     {[1, 2, 3].map((s) => (
                       <div key={s} className="flex-1 flex items-center gap-2">
@@ -255,7 +253,7 @@ export default function AuditPage() {
                     ))}
                   </div>
 
-                  {/* Step 1: Contact */}
+                  {/* ─── Step 1: Contact + Industry ─── */}
                   {step === 1 && (
                     <div>
                       <h2 className="font-display font-bold text-xl text-slate-900 mb-1">
@@ -310,6 +308,29 @@ export default function AuditPage() {
                             className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                           />
                         </div>
+                        <div>
+                          <label className="text-sm font-medium text-slate-700 mb-1.5 block">
+                            Ngành nghề *
+                          </label>
+                          <div className="grid grid-cols-3 gap-2">
+                            {LEAN_INDUSTRIES.map((ind) => (
+                              <button
+                                key={ind.value}
+                                type="button"
+                                onClick={() =>
+                                  setForm({ ...form, industry: ind.value })
+                                }
+                                className={`px-3 py-2.5 rounded-xl border text-sm font-medium transition-all text-center ${
+                                  form.industry === ind.value
+                                    ? "border-primary bg-primary-light text-primary"
+                                    : "border-slate-200 text-slate-600 hover:border-slate-300"
+                                }`}
+                              >
+                                {ind.label}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
                       </div>
 
                       <button
@@ -323,92 +344,41 @@ export default function AuditPage() {
                     </div>
                   )}
 
-                  {/* Step 2: Business Info */}
+                  {/* ─── Step 2: Pain Story (narrative primary) ─── */}
                   {step === 2 && (
                     <div>
                       <h2 className="font-display font-bold text-xl text-slate-900 mb-1">
-                        Về doanh nghiệp của bạn
+                        Pain story của bạn
                       </h2>
                       <p className="text-sm text-slate-500 mb-6">
-                        Giúp mình chuẩn bị tốt hơn cho cuộc gọi audit
+                        Kể cho mình nghe — không cần hoàn hảo
                       </p>
 
-                      <div className="space-y-5">
-                        {/* Industry */}
-                        <div>
-                          <label className="text-sm font-medium text-slate-700 mb-1.5 block">
-                            Ngành nghề *
-                          </label>
-                          <div className="grid grid-cols-2 gap-2">
-                            {industries.map((ind) => (
-                              <button
-                                key={ind.value}
-                                type="button"
-                                onClick={() =>
-                                  setForm({ ...form, industry: ind.value })
-                                }
-                                className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all text-left ${
-                                  form.industry === ind.value
-                                    ? "border-primary bg-primary-light text-primary"
-                                    : "border-slate-200 text-slate-600 hover:border-slate-300"
-                                }`}
-                              >
-                                {ind.label}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Team size — numeric input */}
-                        <div>
-                          <label className="text-sm font-medium text-slate-700 mb-1.5 block">
-                            Quy mô team *
-                          </label>
-                          <input
-                            type="number"
-                            min={1}
-                            max={500}
-                            value={form.teamSizeNumeric}
-                            onChange={(e) =>
-                              setForm({
-                                ...form,
-                                teamSizeNumeric:
-                                  e.target.value === ""
-                                    ? ""
-                                    : Number(e.target.value),
-                              })
-                            }
-                            placeholder="Ví dụ: 8"
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
-                          />
-                          <p className="text-xs text-slate-400 mt-1">
-                            Số người trong team sẽ dùng automation
+                      <div>
+                        <label className="text-sm font-medium text-slate-700 mb-1.5 block">
+                          Mô tả điều khiến anh/chị đau đầu nhất (3-5 câu) *
+                        </label>
+                        <textarea
+                          rows={6}
+                          value={form.painNarrative}
+                          onChange={(e) =>
+                            setForm({ ...form, painNarrative: e.target.value })
+                          }
+                          placeholder={getNarrativePlaceholder(form.industry)}
+                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 resize-none"
+                          maxLength={2000}
+                        />
+                        <div className="flex justify-between items-center mt-1">
+                          {form.painNarrative.length < 30 && form.painNarrative.length > 0 ? (
+                            <p className="text-xs text-amber-500">
+                              Cần thêm {30 - form.painNarrative.length} ký tự nữa
+                            </p>
+                          ) : (
+                            <span />
+                          )}
+                          <p className="text-xs text-slate-400 ml-auto">
+                            {form.painNarrative.length}/2000
                           </p>
-                        </div>
-
-                        {/* Monthly volume — new field */}
-                        <div>
-                          <label className="text-sm font-medium text-slate-700 mb-1.5 block">
-                            Giao dịch/đơn/lead trung bình mỗi tháng?
-                          </label>
-                          <div className="grid grid-cols-2 gap-2">
-                            {VOLUME_OPTIONS.map((opt) => (
-                              <button
-                                key={opt.value}
-                                type="button"
-                                onClick={() =>
-                                  setForm({ ...form, monthlyVolume: opt.value })
-                                }
-                                className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all text-left ${
-                                  form.monthlyVolume === opt.value
-                                    ? "border-primary bg-primary-light text-primary"
-                                    : "border-slate-200 text-slate-600 hover:border-slate-300"
-                                }`}
-                              >
-                                {opt.label}
-                              </button>
-                            ))}
-                          </div>
                         </div>
                       </div>
 
@@ -432,121 +402,74 @@ export default function AuditPage() {
                     </div>
                   )}
 
-                  {/* Step 3: Pain Points — redesigned */}
+                  {/* ─── Step 3: Quick Quantify (optional) ─── */}
                   {step === 3 && (
                     <div>
                       <h2 className="font-display font-bold text-xl text-slate-900 mb-1">
-                        Vấn đề bạn đang gặp
+                        Tuỳ chọn: Giúp Huy hiểu rõ hơn
                       </h2>
                       <p className="text-sm text-slate-500 mb-6">
-                        Chọn vấn đề chính ảnh hưởng nhiều nhất
+                        30 giây — hoàn toàn không bắt buộc
                       </p>
 
-                      <div className="space-y-5">
-                        {/* Pain primary — single-select dropdown */}
+                      <div className="space-y-6">
+                        {/* Frequency radio */}
                         <div>
-                          <label className="text-sm font-medium text-slate-700 mb-1.5 block">
-                            Vấn đề chính *
+                          <label className="text-sm font-medium text-slate-700 mb-2 block">
+                            Pain này xảy ra:
                           </label>
-                          <select
-                            value={form.painPrimary}
-                            onChange={(e) =>
-                              setForm({
-                                ...form,
-                                painPrimary: e.target.value as PainPrimaryValue | "",
-                                // reset frequency/hours when switching
-                                painFrequency: "",
-                              })
-                            }
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 bg-white"
-                          >
-                            <option value="">-- Chọn vấn đề chính --</option>
-                            {PAIN_PRIMARY_OPTIONS.map((opt) => (
-                              <option key={opt.value} value={opt.value}>
-                                {opt.label}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-
-                        {/* Frequency + hours — shown unless "other" */}
-                        {form.painPrimary !== "" && !isPainOther && (
-                          <>
-                            {/* Frequency radio */}
-                            <div>
-                              <label className="text-sm font-medium text-slate-700 mb-2 block">
-                                Tần suất xảy ra *
-                              </label>
-                              <div className="flex gap-3">
-                                {FREQUENCY_OPTIONS.map((opt) => (
-                                  <label
-                                    key={opt.value}
-                                    className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border text-sm font-medium cursor-pointer transition-all ${
-                                      form.painFrequency === opt.value
-                                        ? "border-primary bg-primary-light text-primary"
-                                        : "border-slate-200 text-slate-600 hover:border-slate-300"
-                                    }`}
-                                  >
-                                    <input
-                                      type="radio"
-                                      name="painFrequency"
-                                      value={opt.value}
-                                      checked={form.painFrequency === opt.value}
-                                      onChange={() =>
-                                        setForm({
-                                          ...form,
-                                          painFrequency: opt.value,
-                                        })
-                                      }
-                                      className="sr-only"
-                                    />
-                                    {opt.label}
-                                  </label>
-                                ))}
-                              </div>
-                            </div>
-
-                            {/* Hours per week — slider */}
-                            <div>
-                              <label className="text-sm font-medium text-slate-700 mb-2 block">
-                                Ước tính số giờ bị mất mỗi tuần *
-                              </label>
-                              <div className="flex items-center gap-4">
+                          <div className="flex gap-3">
+                            {FREQUENCY_OPTIONS.map((opt) => (
+                              <label
+                                key={opt.value}
+                                className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border text-sm font-medium cursor-pointer transition-all ${
+                                  form.painFrequency === opt.value
+                                    ? "border-primary bg-primary-light text-primary"
+                                    : "border-slate-200 text-slate-600 hover:border-slate-300"
+                                }`}
+                              >
                                 <input
-                                  type="range"
-                                  min={1}
-                                  max={40}
-                                  value={form.painHoursPerWeek}
-                                  onChange={(e) =>
+                                  type="radio"
+                                  name="painFrequency"
+                                  value={opt.value}
+                                  checked={form.painFrequency === opt.value}
+                                  onChange={() =>
                                     setForm({
                                       ...form,
-                                      painHoursPerWeek: Number(e.target.value),
+                                      painFrequency: opt.value,
                                     })
                                   }
-                                  className="flex-1 accent-primary"
+                                  className="sr-only"
                                 />
-                                <span className="text-sm font-semibold text-primary w-28 text-right shrink-0">
-                                  {form.painHoursPerWeek} giờ/tuần bị mất
-                                </span>
-                              </div>
-                            </div>
-                          </>
-                        )}
+                                {opt.label}
+                              </label>
+                            ))}
+                          </div>
+                        </div>
 
-                        {/* Details textarea */}
+                        {/* Hours per week slider */}
                         <div>
-                          <label className="text-sm font-medium text-slate-700 mb-1.5 block">
-                            Chi tiết thêm (không bắt buộc)
+                          <label className="text-sm font-medium text-slate-700 mb-2 block">
+                            Ước tính giờ bị mất mỗi tuần
                           </label>
-                          <textarea
-                            rows={3}
-                            value={form.details}
-                            onChange={(e) =>
-                              setForm({ ...form, details: e.target.value })
-                            }
-                            placeholder="Ví dụ: Mỗi ngày 3 nhân viên mất 4 giờ nhập đơn từ Shopee sang MISA..."
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 resize-none"
-                          />
+                          <div className="flex items-center gap-4">
+                            <input
+                              type="range"
+                              min={1}
+                              max={40}
+                              value={form.painHoursPerWeek}
+                              onChange={(e) =>
+                                setForm({
+                                  ...form,
+                                  painHoursPerWeek: Number(e.target.value),
+                                })
+                              }
+                              className="flex-1 accent-primary"
+                            />
+                            <span className="text-sm font-semibold text-primary w-36 text-right shrink-0">
+                              {form.painHoursPerWeek} giờ/tuần bị mất
+                            </span>
+                          </div>
                         </div>
                       </div>
 
@@ -559,20 +482,14 @@ export default function AuditPage() {
                         autoComplete="off"
                       />
 
-                      <div className="flex gap-3 mt-6">
+                      <div className="flex flex-col gap-3 mt-8">
                         <button
                           type="button"
-                          onClick={() => setStep(2)}
-                          className="px-6 py-3.5 rounded-xl border border-slate-200 text-sm font-semibold text-slate-600 hover:bg-slate-50"
+                          onClick={() => submitForm(false)}
+                          disabled={submitting}
+                          className="w-full bg-primary hover:bg-primary-dark disabled:bg-primary/60 text-white font-semibold py-3.5 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/25 flex items-center justify-center gap-2"
                         >
-                          ← Quay lại
-                        </button>
-                        <button
-                          type="submit"
-                          disabled={submitting || !canSubmit3}
-                          className="flex-1 bg-primary hover:bg-primary-dark disabled:bg-primary/60 text-white font-semibold py-3.5 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/25 flex items-center justify-center gap-2"
-                        >
-                          {submitting ? "Đang gửi..." : "Gửi & Nhận audit miễn phí"}
+                          {submitting ? "Đang gửi..." : "Điền rồi gửi"}
                           <svg
                             width="16"
                             height="16"
@@ -583,6 +500,14 @@ export default function AuditPage() {
                             <path d="M5 8h6M8 5l3 3-3 3" />
                           </svg>
                         </button>
+                        <button
+                          type="button"
+                          onClick={() => submitForm(true)}
+                          disabled={submitting}
+                          className="w-full border border-slate-200 text-slate-600 hover:bg-slate-50 font-semibold py-3.5 rounded-xl transition-all text-sm"
+                        >
+                          Bỏ qua, gửi audit ngay
+                        </button>
                       </div>
 
                       <p className="text-xs text-center text-slate-500 mt-4">
@@ -590,7 +515,7 @@ export default function AuditPage() {
                       </p>
                     </div>
                   )}
-                </form>
+                </div>
               )}
             </div>
 
