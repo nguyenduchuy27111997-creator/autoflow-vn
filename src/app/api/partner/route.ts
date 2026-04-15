@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Telegram notification
-    notifyTelegram(formatPartnerNotify({ name, company, phone, partner_type })).catch(() => {});
+    try { await notifyTelegram(formatPartnerNotify({ name, company, phone, partner_type })); } catch (err) { console.error("Telegram notify failed:", err); }
 
     return NextResponse.json({ success: true, referral_code: code });
   } catch {

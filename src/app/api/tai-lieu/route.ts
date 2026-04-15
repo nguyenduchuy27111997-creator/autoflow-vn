@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Telegram notification
-    notifyTelegram(formatPdfNotify({ email: email.trim(), name, resource: pdfInfo.title })).catch(() => {});
+    try { await notifyTelegram(formatPdfNotify({ email: email.trim(), name, resource: pdfInfo.title })); } catch (err) { console.error("Telegram notify failed:", err); }
 
     // Enqueue PDF email sequence
     enqueueEmailSequence({

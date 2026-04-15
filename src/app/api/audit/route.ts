@@ -72,11 +72,15 @@ export async function POST(req: NextRequest) {
       }).catch((err) => console.error("Email queue error (audit):", err));
     }
 
-    // Telegram notification
-    notifyTelegram(formatAuditNotify({
-      name, phone, company, industry,
-      source: submission.source,
-    })).catch(() => {});
+    // Telegram notification — MUST await in serverless (Netlify kills fire-and-forget promises after response)
+    try {
+      await notifyTelegram(formatAuditNotify({
+        name, phone, company, industry,
+        source: submission.source,
+      }));
+    } catch (err) {
+      console.error("Telegram notify failed (non-fatal):", err);
+    }
 
     return NextResponse.json({ success: true });
   } catch {

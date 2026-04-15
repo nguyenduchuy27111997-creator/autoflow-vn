@@ -1,3 +1,4 @@
+
 import { anthropic } from "@ai-sdk/anthropic";
 import { streamText, tool, stepCountIs } from "ai";
 import { z } from "zod";
@@ -185,12 +186,16 @@ export async function POST(req: Request) {
             }
           } catch {} // fire-and-forget
 
-          // Telegram notification
-          notifyTelegram(formatChatLeadNotify({
-            phone: params.phone,
-            email: params.email,
-            name: params.name,
-          })).catch(() => {});
+          // Telegram notification — await (Netlify serverless kills fire-and-forget)
+          try {
+            await notifyTelegram(formatChatLeadNotify({
+              phone: params.phone,
+              email: params.email,
+              name: params.name,
+            }));
+          } catch (err) {
+            console.error("Telegram notify failed:", err);
+          }
 
           return {
             ok: true,
