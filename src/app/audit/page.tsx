@@ -1,43 +1,71 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { industries, teamSizes } from "@/data/constants";
+import { industries } from "@/data/constants";
 import { getStoredUTM } from "@/lib/utm";
 import { trackGenerateLead } from "@/lib/analytics";
 import { fbqTrackLead } from "@/lib/fbpixel";
 
-const painPoints = [
-  "Nhập liệu thủ công quá nhiều",
-  "Lead rơi vì không follow-up kịp",
-  "Báo cáo cuối tháng mất nhiều ngày",
-  "Đồng bộ dữ liệu giữa các hệ thống",
-  "Chăm sóc khách hàng chậm",
-  "Khác",
-];
+// ── Enum constants (reused in API handler + client-ops types) ──
+export const PAIN_PRIMARY_OPTIONS = [
+  { value: "manual_entry", label: "Nhập liệu thủ công quá nhiều" },
+  { value: "lead_drop", label: "Lead rơi vì không follow-up kịp" },
+  { value: "monthly_report", label: "Báo cáo cuối tháng mất nhiều ngày" },
+  { value: "data_sync", label: "Đồng bộ dữ liệu giữa các hệ thống" },
+  { value: "slow_cs", label: "Chăm sóc khách hàng chậm" },
+  { value: "other", label: "Khác (mô tả ở details)" },
+] as const;
+
+export const FREQUENCY_OPTIONS = [
+  { value: "daily", label: "Hàng ngày" },
+  { value: "weekly", label: "Hàng tuần" },
+  { value: "monthly", label: "Hàng tháng" },
+] as const;
+
+export const VOLUME_OPTIONS = [
+  { value: "lt_100", label: "< 100" },
+  { value: "100_1k", label: "100 – 1.000" },
+  { value: "1k_10k", label: "1.000 – 10.000" },
+  { value: "10k_plus", label: "> 10.000" },
+] as const;
+
+export type PainPrimaryValue = (typeof PAIN_PRIMARY_OPTIONS)[number]["value"];
+export type FrequencyValue = (typeof FREQUENCY_OPTIONS)[number]["value"];
+export type VolumeValue = (typeof VOLUME_OPTIONS)[number]["value"];
+
+interface AuditFormState {
+  name: string;
+  phone: string;
+  company: string;
+  industry: string;
+  teamSizeNumeric: number | "";
+  monthlyVolume: VolumeValue | "";
+  painPrimary: PainPrimaryValue | "";
+  painFrequency: FrequencyValue | "";
+  painHoursPerWeek: number;
+  details: string;
+}
 
 export default function AuditPage() {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({
+  const [auditId, setAuditId] = useState<string | null>(null);
+  const [showTier2, setShowTier2] = useState(false);
+  const [form, setForm] = useState<AuditFormState>({
     name: "",
     phone: "",
     company: "",
     industry: "",
-    teamSize: "",
-    painPoints: [] as string[],
+    teamSizeNumeric: "",
+    monthlyVolume: "",
+    painPrimary: "",
+    painFrequency: "",
+    painHoursPerWeek: 5,
     details: "",
   });
-
-  const togglePain = (pain: string) => {
-    setForm((prev) => ({
-      ...prev,
-      painPoints: prev.painPoints.includes(pain)
-        ? prev.painPoints.filter((p) => p !== pain)
-        : [...prev.painPoints, pain],
-    }));
-  };
 
   const [submitting, setSubmitting] = useState(false);
 
@@ -49,11 +77,28 @@ export default function AuditPage() {
       const res = await fetch("/api/audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, ...utm }),
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          company: form.company,
+          industry: form.industry,
+          teamSize: form.teamSizeNumeric !== "" ? Number(form.teamSizeNumeric) : null,
+          monthlyVolume: form.monthlyVolume || null,
+          painPrimary: form.painPrimary || null,
+          painFrequency: form.painPrimary !== "other" ? (form.painFrequency || null) : null,
+          painHoursPerWeek: form.painPrimary !== "other" ? form.painHoursPerWeek : null,
+          details: form.details || null,
+          ...utm,
+        }),
       });
       if (res.ok) {
         trackGenerateLead({ form_type: "audit" });
         fbqTrackLead({ content_name: "audit" });
+        const data = await res.json();
+        if (data.id) {
+          setAuditId(data.id);
+          setShowTier2(true);
+        }
       }
       setSubmitted(true);
     } catch {
@@ -64,7 +109,13 @@ export default function AuditPage() {
   };
 
   const canProceed1 = form.name && form.phone;
-  const canProceed2 = form.industry && form.teamSize;
+  const canProceed2 = form.industry && form.teamSizeNumeric !== "";
+
+  // Step 3 validation: painPrimary required; frequency + hours required unless "other"
+  const isPainOther = form.painPrimary === "other";
+  const canSubmit3 =
+    form.painPrimary !== "" &&
+    (isPainOther || (form.painFrequency !== "" && form.painHoursPerWeek > 0));
 
   return (
     <>
@@ -132,6 +183,36 @@ export default function AuditPage() {
                       </li>
                     </ul>
                   </div>
+
+                  {/* Tier 2 upgrade CTA */}
+                  {showTier2 && (
+                    <div className="mt-8 p-6 rounded-2xl border-2 border-primary bg-primary/5 text-left">
+                      <div className="text-sm font-bold text-primary mb-1">
+                        UPGRADE
+                      </div>
+                      <h3 className="font-display font-bold text-xl text-slate-900 mb-2">
+                        Nhận audit report cá nhân hóa trong 2 giờ
+                      </h3>
+                      <p className="text-slate-600 mb-4">
+                        Hoàn thành deep profile (10 phút) → team Huy có đủ
+                        context để tư vấn chính xác, không-hỏi-thừa trong call.
+                      </p>
+                      <div className="flex gap-3">
+                        <button
+                          onClick={() => setShowTier2(false)}
+                          className="px-4 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-all"
+                        >
+                          Bỏ qua, nhận 24h
+                        </button>
+                        <Link
+                          href={`/audit/deep-profile?id=${auditId}`}
+                          className="px-4 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-all"
+                        >
+                          Làm ngay →
+                        </Link>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <form
@@ -252,7 +333,8 @@ export default function AuditPage() {
                         Giúp mình chuẩn bị tốt hơn cho cuộc gọi audit
                       </p>
 
-                      <div className="space-y-4">
+                      <div className="space-y-5">
+                        {/* Industry */}
                         <div>
                           <label className="text-sm font-medium text-slate-700 mb-1.5 block">
                             Ngành nghề *
@@ -277,25 +359,53 @@ export default function AuditPage() {
                           </div>
                         </div>
 
+                        {/* Team size — numeric input */}
                         <div>
                           <label className="text-sm font-medium text-slate-700 mb-1.5 block">
                             Quy mô team *
                           </label>
-                          <div className="flex flex-wrap gap-2">
-                            {teamSizes.map((size) => (
+                          <input
+                            type="number"
+                            min={1}
+                            max={500}
+                            value={form.teamSizeNumeric}
+                            onChange={(e) =>
+                              setForm({
+                                ...form,
+                                teamSizeNumeric:
+                                  e.target.value === ""
+                                    ? ""
+                                    : Number(e.target.value),
+                              })
+                            }
+                            placeholder="Ví dụ: 8"
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
+                          />
+                          <p className="text-xs text-slate-400 mt-1">
+                            Số người trong team sẽ dùng automation
+                          </p>
+                        </div>
+
+                        {/* Monthly volume — new field */}
+                        <div>
+                          <label className="text-sm font-medium text-slate-700 mb-1.5 block">
+                            Giao dịch/đơn/lead trung bình mỗi tháng?
+                          </label>
+                          <div className="grid grid-cols-2 gap-2">
+                            {VOLUME_OPTIONS.map((opt) => (
                               <button
-                                key={size}
+                                key={opt.value}
                                 type="button"
                                 onClick={() =>
-                                  setForm({ ...form, teamSize: size })
+                                  setForm({ ...form, monthlyVolume: opt.value })
                                 }
-                                className={`px-4 py-2.5 rounded-xl border text-sm font-medium transition-all ${
-                                  form.teamSize === size
+                                className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all text-left ${
+                                  form.monthlyVolume === opt.value
                                     ? "border-primary bg-primary-light text-primary"
                                     : "border-slate-200 text-slate-600 hover:border-slate-300"
                                 }`}
                               >
-                                {size}
+                                {opt.label}
                               </button>
                             ))}
                           </div>
@@ -322,55 +432,122 @@ export default function AuditPage() {
                     </div>
                   )}
 
-                  {/* Step 3: Pain Points */}
+                  {/* Step 3: Pain Points — redesigned */}
                   {step === 3 && (
                     <div>
                       <h2 className="font-display font-bold text-xl text-slate-900 mb-1">
                         Vấn đề bạn đang gặp
                       </h2>
                       <p className="text-sm text-slate-500 mb-6">
-                        Chọn tất cả những gì phù hợp
+                        Chọn vấn đề chính ảnh hưởng nhiều nhất
                       </p>
 
-                      <div className="space-y-2 mb-4">
-                        {painPoints.map((pain) => (
-                          <button
-                            key={pain}
-                            type="button"
-                            onClick={() => togglePain(pain)}
-                            className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl border text-sm font-medium transition-all text-left ${
-                              form.painPoints.includes(pain)
-                                ? "border-primary bg-primary-light text-primary"
-                                : "border-slate-200 text-slate-600 hover:border-slate-300"
-                            }`}
+                      <div className="space-y-5">
+                        {/* Pain primary — single-select dropdown */}
+                        <div>
+                          <label className="text-sm font-medium text-slate-700 mb-1.5 block">
+                            Vấn đề chính *
+                          </label>
+                          <select
+                            value={form.painPrimary}
+                            onChange={(e) =>
+                              setForm({
+                                ...form,
+                                painPrimary: e.target.value as PainPrimaryValue | "",
+                                // reset frequency/hours when switching
+                                painFrequency: "",
+                              })
+                            }
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 bg-white"
                           >
-                            <span
-                              className={`w-5 h-5 rounded-md flex items-center justify-center text-xs ${
-                                form.painPoints.includes(pain)
-                                  ? "bg-primary text-white"
-                                  : "bg-slate-100"
-                              }`}
-                            >
-                              {form.painPoints.includes(pain) && "✓"}
-                            </span>
-                            {pain}
-                          </button>
-                        ))}
-                      </div>
+                            <option value="">-- Chọn vấn đề chính --</option>
+                            {PAIN_PRIMARY_OPTIONS.map((opt) => (
+                              <option key={opt.value} value={opt.value}>
+                                {opt.label}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
 
-                      <div>
-                        <label className="text-sm font-medium text-slate-700 mb-1.5 block">
-                          Chi tiết thêm (không bắt buộc)
-                        </label>
-                        <textarea
-                          rows={3}
-                          value={form.details}
-                          onChange={(e) =>
-                            setForm({ ...form, details: e.target.value })
-                          }
-                          placeholder="Ví dụ: Mỗi ngày 3 nhân viên mất 4 giờ nhập đơn từ Shopee sang MISA..."
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 resize-none"
-                        />
+                        {/* Frequency + hours — shown unless "other" */}
+                        {form.painPrimary !== "" && !isPainOther && (
+                          <>
+                            {/* Frequency radio */}
+                            <div>
+                              <label className="text-sm font-medium text-slate-700 mb-2 block">
+                                Tần suất xảy ra *
+                              </label>
+                              <div className="flex gap-3">
+                                {FREQUENCY_OPTIONS.map((opt) => (
+                                  <label
+                                    key={opt.value}
+                                    className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border text-sm font-medium cursor-pointer transition-all ${
+                                      form.painFrequency === opt.value
+                                        ? "border-primary bg-primary-light text-primary"
+                                        : "border-slate-200 text-slate-600 hover:border-slate-300"
+                                    }`}
+                                  >
+                                    <input
+                                      type="radio"
+                                      name="painFrequency"
+                                      value={opt.value}
+                                      checked={form.painFrequency === opt.value}
+                                      onChange={() =>
+                                        setForm({
+                                          ...form,
+                                          painFrequency: opt.value,
+                                        })
+                                      }
+                                      className="sr-only"
+                                    />
+                                    {opt.label}
+                                  </label>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Hours per week — slider */}
+                            <div>
+                              <label className="text-sm font-medium text-slate-700 mb-2 block">
+                                Ước tính số giờ bị mất mỗi tuần *
+                              </label>
+                              <div className="flex items-center gap-4">
+                                <input
+                                  type="range"
+                                  min={1}
+                                  max={40}
+                                  value={form.painHoursPerWeek}
+                                  onChange={(e) =>
+                                    setForm({
+                                      ...form,
+                                      painHoursPerWeek: Number(e.target.value),
+                                    })
+                                  }
+                                  className="flex-1 accent-primary"
+                                />
+                                <span className="text-sm font-semibold text-primary w-28 text-right shrink-0">
+                                  {form.painHoursPerWeek} giờ/tuần bị mất
+                                </span>
+                              </div>
+                            </div>
+                          </>
+                        )}
+
+                        {/* Details textarea */}
+                        <div>
+                          <label className="text-sm font-medium text-slate-700 mb-1.5 block">
+                            Chi tiết thêm (không bắt buộc)
+                          </label>
+                          <textarea
+                            rows={3}
+                            value={form.details}
+                            onChange={(e) =>
+                              setForm({ ...form, details: e.target.value })
+                            }
+                            placeholder="Ví dụ: Mỗi ngày 3 nhân viên mất 4 giờ nhập đơn từ Shopee sang MISA..."
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 resize-none"
+                          />
+                        </div>
                       </div>
 
                       {/* Honeypot */}
@@ -392,7 +569,7 @@ export default function AuditPage() {
                         </button>
                         <button
                           type="submit"
-                          disabled={submitting}
+                          disabled={submitting || !canSubmit3}
                           className="flex-1 bg-primary hover:bg-primary-dark disabled:bg-primary/60 text-white font-semibold py-3.5 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/25 flex items-center justify-center gap-2"
                         >
                           {submitting ? "Đang gửi..." : "Gửi & Nhận audit miễn phí"}
