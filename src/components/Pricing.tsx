@@ -119,8 +119,8 @@ export default function Pricing() {
         </p>
       </div>
 
-      <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-4">
-        {/* AutoFlow hosts */}
+      <div className="max-w-lg mx-auto">
+        {/* AutoFlow hosts — single card centered */}
         <div className="rounded-2xl border-2 border-primary bg-white shadow-md shadow-primary/5 p-8 text-center">
           <h3 className="font-display font-bold text-slate-900 mb-1">
             AutoFlow vận hành giúp
@@ -145,30 +145,9 @@ export default function Pricing() {
             Xem chi tiết hosting
           </a>
         </div>
-        {/* Self-host */}
-        <div className="rounded-2xl border-2 border-slate-200 bg-white p-8 text-center">
-          <h3 className="font-display font-bold text-slate-900 mb-1">
-            Bạn tự vận hành
-          </h3>
-          <div className="flex items-baseline justify-center gap-2 mb-3">
-            <span className="font-display font-extrabold text-5xl text-accent">
-              0đ
-            </span>
-          </div>
-          <p className="text-sm text-slate-500 mb-5 max-w-md mx-auto">
-            Mua workflow, tự host trên server riêng của bạn. AutoFlow bàn giao
-            workflow + hướng dẫn cài đặt.
-          </p>
-          <p className="text-xs text-slate-400 mb-5">
-            Phù hợp nếu bạn có team IT
-          </p>
-          <a
-            href="/audit"
-            className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-6 py-3 rounded-xl transition-all text-sm"
-          >
-            Liên hệ tư vấn
-          </a>
-        </div>
+        <p className="text-xs text-slate-400 text-center mt-4">
+          Có team IT? Bạn có thể tự host miễn phí — liên hệ để biết thêm.
+        </p>
       </div>
 
       {/* Free pilot note */}

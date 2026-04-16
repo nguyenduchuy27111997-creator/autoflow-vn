@@ -52,8 +52,8 @@ export default function PilotBanner() {
               border: "border-accent/10",
             },
             {
-              value: "499K/tháng",
-              label: "Hosting (tùy chọn)",
+              value: "5 slot",
+              label: "Còn lại cho 5 khách đầu tiên",
               color: "text-primary",
               bg: "bg-primary/5",
               border: "border-primary/10",
@@ -195,74 +195,29 @@ export default function PilotBanner() {
           </div>
         </div>
 
-        {/* ROI comparison */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-6 mb-8 max-w-3xl mx-auto">
-          <h3 className="font-display font-bold text-slate-900 mb-4 text-center">
-            So sánh chi phí
-          </h3>
-          <div className="grid grid-cols-3 gap-4 text-center">
-            <div>
-              <p className="text-xs text-slate-500 mb-1">Nhân viên nhập liệu</p>
-              <p className="font-display font-bold text-red-500">
-                8-12 tr/tháng
-              </p>
-              <p className="text-xs text-slate-500">= 96-144 tr/năm</p>
-            </div>
-            <div className="border-x border-slate-100">
-              <p className="text-xs text-slate-500 mb-1">
-                AutoFlow Pilot
-              </p>
-              <p className="font-display font-bold text-accent">
-                0 đồng
-              </p>
-              <p className="text-xs text-slate-500">
-                1 workflow miễn phí, không ràng buộc
-              </p>
-            </div>
-            <div>
-              <p className="text-xs text-slate-500 mb-1">n8n Cloud</p>
-              <p className="font-display font-bold text-slate-500">
-                ~730K/tháng
-              </p>
-              <p className="text-xs text-slate-500">
-                Giới hạn 2,500 lần chạy
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* CTA */}
         <div className="text-center">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="/bang-gia#pilot"
-              className="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white font-bold text-lg px-10 py-4 rounded-2xl transition-all hover:shadow-xl hover:shadow-accent/25 hover:-translate-y-0.5"
+          <a
+            href="/audit"
+            className="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white font-bold text-lg px-10 py-4 rounded-2xl transition-all hover:shadow-xl hover:shadow-accent/25 hover:-translate-y-0.5"
+          >
+            Đăng ký audit miễn phí
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              viewBox="0 0 24 24"
             >
-              Đăng ký pilot miễn phí
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
-              </svg>
-            </a>
-            <a
-              href="/audit"
-              className="inline-flex items-center gap-2 text-primary hover:text-primary-dark font-semibold text-sm transition-all"
-            >
-              Hoặc đặt lịch tư vấn miễn phí
-            </a>
-          </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </a>
           <p className="text-xs text-slate-500 mt-3">
-            Chỉ 5 slot miễn phí. Hosting 499K/tháng tùy chọn (hủy bất cứ lúc
-            nào).
+            Mô tả pain → discovery call 30 phút → audit report 48h. Miễn phí, không ràng buộc.
           </p>
         </div>
       </div>
