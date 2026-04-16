@@ -115,7 +115,7 @@ export default function AuditPage() {
           industry: form.industry || null,
           painNarrative: form.painNarrative,
           painFrequency: skipQuantify ? null : (form.painFrequency || null),
-          painHoursPerWeek: skipQuantify ? null : (form.painHoursPerWeek || null),
+          painHoursPerWeek: null, // slider removed — hỏi trong discovery call
           // Backward compat fields — null for lean form
           painPrimary: null,
           teamSize: null,
@@ -467,30 +467,6 @@ export default function AuditPage() {
                           </div>
                         </div>
 
-                        {/* Hours per week slider */}
-                        <div>
-                          <label className="text-sm font-medium text-slate-700 mb-2 block">
-                            Ước tính giờ bị mất mỗi tuần
-                          </label>
-                          <div className="flex items-center gap-4">
-                            <input
-                              type="range"
-                              min={1}
-                              max={40}
-                              value={form.painHoursPerWeek}
-                              onChange={(e) =>
-                                setForm({
-                                  ...form,
-                                  painHoursPerWeek: Number(e.target.value),
-                                })
-                              }
-                              className="flex-1 accent-primary"
-                            />
-                            <span className="text-sm font-semibold text-primary w-36 text-right shrink-0">
-                              {form.painHoursPerWeek} giờ/tuần bị mất
-                            </span>
-                          </div>
-                        </div>
                       </div>
 
                       {/* Honeypot */}
@@ -509,7 +485,7 @@ export default function AuditPage() {
                           disabled={submitting}
                           className="w-full bg-primary hover:bg-primary-dark disabled:bg-primary/60 text-white font-semibold py-3.5 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/25 flex items-center justify-center gap-2"
                         >
-                          {submitting ? "Đang gửi..." : "Điền rồi gửi"}
+                          {submitting ? "Đang gửi..." : "Gửi audit — nhận tư vấn trong 24h"}
                           <svg
                             width="16"
                             height="16"
@@ -526,7 +502,7 @@ export default function AuditPage() {
                           disabled={submitting}
                           className="w-full border border-slate-200 text-slate-600 hover:bg-slate-50 font-semibold py-3.5 rounded-xl transition-all text-sm"
                         >
-                          Bỏ qua, gửi audit ngay
+                          Bỏ qua phần này, gửi luôn
                         </button>
                       </div>
 

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Lottie from "lottie-react";
 import confetti from "canvas-confetti";
-import animationData from "../../../../public/lottie/success-check.json";
+import animationData from "./success-check.json";
 
 /**
  * Success animation — Lottie checkmark + confetti burst.
