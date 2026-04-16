@@ -15,42 +15,16 @@ export default function SuccessAnimation() {
     if (confettiFired.current) return;
     confettiFired.current = true;
 
-    // Dynamic import — canvas-confetti needs window, import only client-side
+    // Single burst — dynamic import để tránh SSR issue với canvas-confetti
     import("canvas-confetti").then(({ default: confetti }) => {
-      const duration = 2500;
-      const end = Date.now() + duration;
-      const colors = ["#10B981", "#0066FF", "#FBBF24", "#EC4899"];
-
-      // Center big burst immediately
       confetti({
-        particleCount: 80,
-        spread: 90,
-        origin: { y: 0.4 },
-        colors,
+        particleCount: 100,
+        spread: 80,
+        origin: { y: 0.5 },
+        colors: ["#10B981", "#0066FF", "#FBBF24", "#EC4899"],
       });
-
-      // Side cannons streaming
-      (function frame() {
-        confetti({
-          particleCount: 3,
-          angle: 60,
-          spread: 55,
-          startVelocity: 45,
-          origin: { x: 0, y: 0.7 },
-          colors,
-        });
-        confetti({
-          particleCount: 3,
-          angle: 120,
-          spread: 55,
-          startVelocity: 45,
-          origin: { x: 1, y: 0.7 },
-          colors,
-        });
-        if (Date.now() < end) requestAnimationFrame(frame);
-      })();
     }).catch((err) => {
-      console.error("[SuccessAnimation] confetti import failed:", err);
+      console.error("[SuccessAnimation] confetti failed:", err);
     });
   }, []);
 
