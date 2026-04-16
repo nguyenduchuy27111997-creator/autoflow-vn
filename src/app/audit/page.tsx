@@ -159,9 +159,9 @@ export default function AuditPage() {
               <span className="gradient-text">miễn phí</span>
             </h1>
             <p className="text-lg text-slate-500 leading-relaxed max-w-2xl">
-              Mình sẽ phân tích quy trình vận hành của bạn trong 30 phút và gửi
-              Audit Report chi tiết trong 24h — chỉ ra chính xác đâu có thể tự
-              động hóa và tiết kiệm bao nhiêu.
+              Discovery call 30 phút + Audit Report cá nhân hóa trong 48h —
+              chỉ ra chính xác đâu có thể tự động hóa và tiết kiệm bao nhiêu.
+              Không pitch bán hàng, bạn quyết định bước tiếp theo.
             </p>
           </div>
         </section>
@@ -171,45 +171,79 @@ export default function AuditPage() {
             {/* Form */}
             <div className="lg:col-span-3">
               {submitted ? (
-                /* ─── Step 4: Success ─── */
-                <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center">
-                  <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6">
-                    <svg
-                      width="40"
-                      height="40"
-                      fill="none"
-                      stroke="#10B981"
-                      strokeWidth="2.5"
-                    >
-                      <path d="M6 20l10 10 18-18" />
-                    </svg>
-                  </div>
-                  <h2 className="font-display font-bold text-2xl text-slate-900 mb-3">
-                    Cảm ơn bạn!
-                  </h2>
-                  <p className="text-slate-500 max-w-md mx-auto mb-8">
-                    Mình đã nhận thông tin và sẽ liên hệ qua Zalo/SĐT trong
-                    vòng 24h để sắp xếp cuộc gọi audit. Hẹn gặp bạn sớm!
-                  </p>
-                  <div className="p-5 bg-slate-50 rounded-xl max-w-sm mx-auto mb-6">
-                    <p className="text-sm font-semibold text-slate-700 mb-2">
-                      Bạn sẽ nhận được:
+                /* ─── Step 4: Success — quy trình 3 bước ─── */
+                <div className="bg-white rounded-2xl border border-slate-200 p-10 md:p-12">
+                  <div className="text-center mb-8">
+                    <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-5">
+                      <svg
+                        width="40"
+                        height="40"
+                        fill="none"
+                        stroke="#10B981"
+                        strokeWidth="2.5"
+                      >
+                        <path d="M6 20l10 10 18-18" />
+                      </svg>
+                    </div>
+                    <h2 className="font-display font-bold text-2xl text-slate-900 mb-3">
+                      Cảm ơn bạn!
+                    </h2>
+                    <p className="text-slate-500 max-w-md mx-auto">
+                      Mình đã nhận thông tin. Đây là quy trình 3 bước sắp tới — hoàn toàn miễn phí, không cam kết.
                     </p>
-                    <ul className="text-sm text-slate-500 space-y-1.5">
-                      <li className="flex items-center gap-2">
-                        <span className="text-accent">✓</span> Cuộc gọi audit
-                        30 phút
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="text-accent">✓</span> Audit Report
-                        chi tiết trong 24h
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="text-accent">✓</span> Proposal 3 gói
-                        trong 48h
-                      </li>
-                    </ul>
                   </div>
+
+                  {/* Timeline 3 bước */}
+                  <div className="max-w-lg mx-auto space-y-4">
+                    {/* Step 1 */}
+                    <div className="flex gap-4 items-start p-4 rounded-xl border border-slate-200 bg-slate-50">
+                      <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                        1
+                      </div>
+                      <div>
+                        <div className="font-semibold text-slate-900 mb-1">
+                          Discovery Call — 30 phút (trong 24h)
+                        </div>
+                        <p className="text-sm text-slate-500">
+                          Mình liên hệ qua Zalo/SĐT để sắp xếp cuộc gọi. Tập trung hỏi rõ pain points, không pitch bán hàng.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Step 2 */}
+                    <div className="flex gap-4 items-start p-4 rounded-xl border border-slate-200 bg-slate-50">
+                      <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                        2
+                      </div>
+                      <div>
+                        <div className="font-semibold text-slate-900 mb-1">
+                          Audit Report cá nhân hóa (trong 48h sau call)
+                        </div>
+                        <p className="text-sm text-slate-500">
+                          PDF chi tiết: phân tích pain, ROI ước tính, workflow đề xuất. Bạn giữ report — không phụ thuộc AutoFlow.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Step 3 */}
+                    <div className="flex gap-4 items-start p-4 rounded-xl border border-slate-200 bg-slate-50">
+                      <div className="w-10 h-10 rounded-full bg-accent text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                        3
+                      </div>
+                      <div>
+                        <div className="font-semibold text-slate-900 mb-1">
+                          Bạn quyết định — proposal chỉ gửi khi bạn confirm
+                        </div>
+                        <p className="text-sm text-slate-500">
+                          Sau khi đọc audit, nếu bạn muốn triển khai, mình sẽ gửi proposal với pricing cụ thể. Không confirm = không gửi proposal, không làm phiền.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className="text-xs text-slate-400 text-center mt-6 max-w-md mx-auto">
+                    💬 Không spam, không áp lực. Nếu thấy không fit, mình sẽ nói rõ và refer bạn tới người khác phù hợp hơn.
+                  </p>
                 </div>
               ) : (
                 <div className="bg-white rounded-2xl border border-slate-200 p-8 md:p-10">
@@ -526,18 +560,13 @@ export default function AuditPage() {
                   {[
                     {
                       icon: "📞",
-                      title: "Cuộc gọi audit 30 phút",
-                      desc: "Mình nghe bạn kể về quy trình hàng ngày, tìm ra chỗ đang mất thời gian nhất.",
+                      title: "Discovery Call 30 phút",
+                      desc: "Mình nghe bạn kể về quy trình hàng ngày, focus vào pain points. Không pitch bán hàng.",
                     },
                     {
                       icon: "📊",
-                      title: "Audit Report trong 24h",
-                      desc: "Báo cáo chi tiết: quy trình nào nên tự động, tiết kiệm bao nhiêu giờ/tháng, ROI dự kiến.",
-                    },
-                    {
-                      icon: "📋",
-                      title: "Proposal 3 gói trong 48h",
-                      desc: "Đề xuất cụ thể: workflow nào, timeline bao lâu, chi phí bao nhiêu. Không jargon.",
+                      title: "Audit Report cá nhân hóa",
+                      desc: "PDF chi tiết trong 48h sau call: phân tích pain, ROI ước tính, workflow đề xuất. Bạn giữ report — không phụ thuộc AutoFlow.",
                     },
                   ].map((item, i) => (
                     <div key={i} className="flex gap-3">
