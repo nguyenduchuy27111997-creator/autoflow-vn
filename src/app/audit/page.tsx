@@ -155,29 +155,13 @@ export default function AuditPage() {
               Miễn phí · Không ràng buộc · Bạn giữ report
             </div>
             <h1 className="font-display font-extrabold text-3xl md:text-5xl text-slate-900 leading-tight tracking-tight mb-5">
-              Tìm ra{" "}
-              <span className="gradient-text">5-15 giờ/tuần</span>
-              {" "}team bạn đang lãng phí
+              Audit quy trình{" "}
+              <span className="gradient-text">miễn phí</span>
             </h1>
             <p className="text-lg text-slate-500 leading-relaxed max-w-2xl">
-              Mô tả pain → discovery call 30 phút → audit report cá nhân hóa
-              trong 48h. PDF chi tiết: quy trình nào nên automate, ROI ước tính,
-              workflow đề xuất. <strong className="text-slate-700">Bạn giữ report, quyết định bước tiếp theo</strong>.
+              Mô tả pain của bạn — mình gọi tư vấn 30 phút và gửi audit report
+              cá nhân hóa trong 48h. Bạn giữ report, quyết định bước tiếp theo.
             </p>
-            <div className="flex flex-wrap gap-6 mt-6 text-sm text-slate-500">
-              <div className="flex items-center gap-2">
-                <span className="text-accent text-lg">✓</span>
-                <span>Không phí ẩn, không ràng buộc</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-accent text-lg">✓</span>
-                <span>Không pitch bán hàng trong call</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-accent text-lg">✓</span>
-                <span>Nếu không fit, mình refer người khác</span>
-              </div>
-            </div>
           </div>
         </section>
 
