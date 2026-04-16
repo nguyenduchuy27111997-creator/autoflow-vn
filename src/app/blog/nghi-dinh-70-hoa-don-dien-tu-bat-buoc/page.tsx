@@ -83,7 +83,7 @@ const faqItems = [
   },
   {
     q: "Chi phí triển khai tự động hóa hóa đơn là bao nhiêu?",
-    a: "AutoFlow VN triển khai trọn gói trong gói Starter (8–15 triệu đồng, 1–2 tuần). Bao gồm audit quy trình, xây dựng workflow, test với dữ liệu thật, bàn giao SOP và hỗ trợ 7 ngày. ROI thường đạt trong 1–2 tháng đầu.",
+    a: "AutoFlow VN triển khai trọn gói trong gói Cơ bản (từ 2 triệu đồng, 1–2 tuần). Bao gồm audit quy trình, xây dựng workflow, test với dữ liệu thật, bàn giao SOP và hỗ trợ 7 ngày. ROI thường đạt trong 1–2 tháng đầu.",
   },
 ];
 
@@ -437,7 +437,7 @@ export default function NghiDinh70Blog() {
                 />
                 <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-6">
                   <div className="bg-violet-50 border border-violet-200 rounded-xl p-3 sm:p-5 text-center">
-                    <div className="text-base sm:text-2xl font-black text-violet-600 mb-1">5–8 triệu</div>
+                    <div className="text-base sm:text-2xl font-black text-violet-600 mb-1">2–7 triệu</div>
                     <div className="text-[10px] sm:text-sm text-slate-600">Gói Pilot (1 workflow)</div>
                   </div>
                   <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 sm:p-5 text-center">

@@ -48,7 +48,7 @@ const faqItems = [
   },
   {
     q: "Chi phí triển khai onboarding tự động cho SME khoảng bao nhiêu?",
-    a: "Chi phí tùy thuộc vào quy mô và stack hiện tại. Phương án cơ bản nhất: n8n self-hosted (miễn phí) + Google Workspace (đã có) + một số Google Form cho thu thập hồ sơ — chi phí setup 1 lần khoảng 5–15 triệu VND. Với tốc độ tuyển 10 người/năm và chi phí onboarding thủ công $4,000–7,000/người, chỉ cần tiết kiệm được 10–15% chi phí mỗi hire là đã hoàn vốn trong năm đầu. Chưa kể đến 16% improvement về retention — giữ được 1 nhân viên tốt đã tiết kiệm hơn toàn bộ chi phí hệ thống.",
+    a: "Chi phí tùy thuộc vào quy mô và stack hiện tại. Phương án cơ bản nhất: n8n self-hosted (miễn phí) + Google Workspace (đã có) + một số Google Form cho thu thập hồ sơ — chi phí setup 1 lần khoảng 2–7 triệu VND. Với tốc độ tuyển 10 người/năm và chi phí onboarding thủ công $4,000–7,000/người, chỉ cần tiết kiệm được 10–15% chi phí mỗi hire là đã hoàn vốn trong năm đầu. Chưa kể đến 16% improvement về retention — giữ được 1 nhân viên tốt đã tiết kiệm hơn toàn bộ chi phí hệ thống.",
   },
   {
     q: "Check-in 30-60-90 ngày tự động khác gì so với HR tự nhớ làm?",
@@ -600,7 +600,7 @@ export default function OnboardingNhanVienTuDongBlog() {
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
                           <p className="text-slate-500 mb-1">Chi phí setup hệ thống (1 lần)</p>
-                          <p className="font-bold text-slate-800">8–15 triệu VND</p>
+                          <p className="font-bold text-slate-800">2–7 triệu VND</p>
                         </div>
                         <div>
                           <p className="text-slate-500 mb-1">Chi phí vận hành/tháng</p>

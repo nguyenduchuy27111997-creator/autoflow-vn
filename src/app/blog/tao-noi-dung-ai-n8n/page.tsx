@@ -56,7 +56,7 @@ const faqItems = [
   },
   {
     q: "Chi phí chạy pipeline AI content tốn bao nhiêu mỗi tháng?",
-    a: "Phụ thuộc vào khối lượng. Ví dụ: tạo 30 bài blog/tháng (~1,000 words/bài), dùng GPT-4o mini tốn khoảng 100-200k VND. Thêm social caption (150 posts) và email newsletter (4 issues) tốn thêm 50-100k. Tổng chi phí AI khoảng 200-400k VND/tháng — so với thuê content writer part-time 5-8 triệu/tháng. Server n8n self-hosted: thêm 100-200k VND/tháng.",
+    a: "Phụ thuộc vào khối lượng. Ví dụ: tạo 30 bài blog/tháng (~1,000 words/bài), dùng GPT-4o mini tốn khoảng 100-200k VND. Thêm social caption (150 posts) và email newsletter (4 issues) tốn thêm 50-100k. Tổng chi phí AI khoảng 200-400k VND/tháng — so với thuê content writer part-time 2–7 triệu/tháng. Server n8n self-hosted: thêm 100-200k VND/tháng.",
   },
   {
     q: "Pipeline có hỗ trợ đa ngôn ngữ (Anh/Việt) không?",

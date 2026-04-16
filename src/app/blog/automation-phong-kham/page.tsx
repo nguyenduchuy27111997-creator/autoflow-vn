@@ -395,7 +395,7 @@ export default function AutomationPhongKhamBlog() {
                     ["Phản hồi sau khám", "Phiếu giấy tại chỗ, tỷ lệ điền thấp", "ZNS 2h sau khám, 25-40% phản hồi, dữ liệu tự động"],
                     ["Nhắc tái khám", "Bác sĩ hoặc bệnh nhân tự nhớ", "Tự động theo ghi chú bác sĩ, đúng thời điểm"],
                     ["Giờ hoạt động", "Giờ hành chính, nghỉ cuối tuần", "24/7, kể cả lịch hẹn cuối tuần và ngày lễ"],
-                    ["Chi phí nhân sự nhắc lịch", "2-3 giờ lễ tân/ngày (~5-8 triệu/tháng)", "~600k-1.5 triệu/tháng vận hành hệ thống"],
+                    ["Chi phí nhân sự nhắc lịch", "2-3 giờ lễ tân/ngày (~2–7 triệu/tháng)", "~600k-1.5 triệu/tháng vận hành hệ thống"],
                     ["Khả năng scale", "Thêm bệnh nhân = thêm nhân sự", "50 hay 500 lịch hẹn, cùng chi phí vận hành"],
                   ]}
                 />

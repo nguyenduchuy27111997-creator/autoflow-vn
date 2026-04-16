@@ -476,7 +476,7 @@ export default function SapoN8nDaKenhBlog() {
 
                 <CalloutBox type="info" title="Cần bao nhiêu đơn/ngày để triển khai có lợi?">
                   <p className="mb-2">
-                    Chi phí setup 5–8 triệu và vận hành ~500k/tháng. Cửa hàng
+                    Chi phí setup 2–7 triệu và vận hành ~500k/tháng. Cửa hàng
                     có từ 30 đơn/ngày trở lên trên nhiều kênh thường hoàn vốn
                     trong tháng đầu — chưa tính giá trị tăng tỷ lệ mua lại và
                     bảo vệ rating trên sàn TMDT. Cửa hàng 100+ đơn/ngày thường
@@ -627,7 +627,7 @@ export default function SapoN8nDaKenhBlog() {
                   },
                   {
                     q: "Chi phí triển khai và vận hành Sapo n8n là bao nhiêu?",
-                    a: "Chi phí setup: 5–8 triệu nếu thuê đội tích hợp chuyên môn, hoặc thấp hơn nếu tự làm có kinh nghiệm kỹ thuật. Chi phí vận hành: VPS chạy n8n khoảng 200–500k/tháng, hoặc n8n Cloud từ $20/tháng. Cửa hàng 100+ đơn/ngày đa kênh thường hoàn vốn trong tháng đầu nhờ tiết kiệm nhân sự và tăng doanh thu từ chăm sóc khách hàng tự động.",
+                    a: "Chi phí setup: 2–7 triệu nếu thuê đội tích hợp chuyên môn, hoặc thấp hơn nếu tự làm có kinh nghiệm kỹ thuật. Chi phí vận hành: VPS chạy n8n khoảng 200–500k/tháng, hoặc n8n Cloud từ $20/tháng. Cửa hàng 100+ đơn/ngày đa kênh thường hoàn vốn trong tháng đầu nhờ tiết kiệm nhân sự và tăng doanh thu từ chăm sóc khách hàng tự động.",
                   },
                 ]} />
 
