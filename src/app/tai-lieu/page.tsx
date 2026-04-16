@@ -22,14 +22,36 @@ const useCases = [
       "AutoFlow xây 4 workflow n8n: (1) Đơn hàng mới từ 3 sàn tự động đồng bộ vào MISA, (2) Tồn kho cập nhật real-time giữa các kênh, (3) Trạng thái vận chuyển tự thông báo khách qua Zalo, (4) Báo cáo doanh thu tự động mỗi sáng gửi vào Telegram cho chủ shop.",
     results: [
       { metric: "0 giờ", label: "nhập liệu/ngày", sub: "từ 5 giờ xuống 0" },
-      { metric: "0 lỗi", label: "sai tồn kho/tuần", sub: "từ 8-10 lỗi xuống 0" },
-      { metric: "+23%", label: "doanh thu", sub: "nhờ 2 NV chuyển sang chăm khách" },
+      {
+        metric: "0 lỗi",
+        label: "sai tồn kho/tuần",
+        sub: "từ 8-10 lỗi xuống 0",
+      },
+      {
+        metric: "+23%",
+        label: "doanh thu",
+        sub: "nhờ 2 NV chuyển sang chăm khách",
+      },
     ],
     timeline: "3 tuần",
     package: "Dự án 4 workflows — 28 triệu đồng",
-    tools: ["Shopee API", "Tiki API", "TikTok Shop", "MISA", "Zalo OA", "Telegram"],
+    tools: [
+      "Shopee API",
+      "Tiki API",
+      "TikTok Shop",
+      "MISA",
+      "Zalo OA",
+      "Telegram",
+    ],
     icon: (
-      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        viewBox="0 0 24 24"
+      >
         <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
       </svg>
     ),
@@ -48,13 +70,24 @@ const useCases = [
     results: [
       { metric: "-80%", label: "miss lịch", sub: "từ 15% xuống còn 3%" },
       { metric: "1 FTE", label: "tiết kiệm", sub: "nhân sự tổng hợp báo cáo" },
-      { metric: "4x", label: "lead mới", sub: "nhờ follow-up tự động nhanh hơn" },
+      {
+        metric: "4x",
+        label: "lead mới",
+        sub: "nhờ follow-up tự động nhanh hơn",
+      },
     ],
     timeline: "4 tuần",
     package: "Dự án 5 workflows — 65 triệu đồng",
     tools: ["Zalo OA", "ZNS", "Google Sheets", "Facebook Lead Ads", "Telegram"],
     icon: (
-      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        viewBox="0 0 24 24"
+      >
         <path d="M12 14l9-5-9-5-9 5 9 5z" />
         <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
       </svg>
@@ -72,15 +105,32 @@ const useCases = [
     solution:
       "AutoFlow xây 6 workflow: (1) Lead từ Facebook Ads tự động vào Google Sheet CRM với timestamp + nguồn, (2) Phân lead tự động theo khu vực → đúng sales phụ trách, (3) Tin nhắn chào hàng đầu tiên gửi qua Zalo OA trong 30 giây, (4) Nhắc sales follow-up nếu chưa liên hệ sau 2h, (5) Báo cáo conversion rate từng sales mỗi tuần, (6) Lead nurture tự động: gửi brochure dự án, bảng giá, và video tour sau 3-7-14 ngày.",
     results: [
-      { metric: "30 giây", label: "phản hồi đầu tiên", sub: "từ 5-24 giờ xuống 30s" },
+      {
+        metric: "30 giây",
+        label: "phản hồi đầu tiên",
+        sub: "từ 5-24 giờ xuống 30s",
+      },
       { metric: "+45%", label: "lead được follow-up", sub: "từ 30% lên 75%" },
       { metric: "+15%", label: "tỷ lệ chốt deal", sub: "nhờ nurture tự động" },
     ],
     timeline: "4 tuần",
     package: "Dự án 6 workflows — 72 triệu đồng",
-    tools: ["Facebook Lead Ads", "Zalo OA", "Google Sheets", "Telegram", "n8n AI Agent"],
+    tools: [
+      "Facebook Lead Ads",
+      "Zalo OA",
+      "Google Sheets",
+      "Telegram",
+      "n8n AI Agent",
+    ],
     icon: (
-      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        viewBox="0 0 24 24"
+      >
         <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
       </svg>
     ),
@@ -154,12 +204,26 @@ function LeadModal({
               onClick={onClose}
               className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-600 hover:bg-slate-200 transition-colors"
             >
-              <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
                 <path d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
             <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
-              <svg width="24" height="24" fill="none" stroke="#10B981" strokeWidth="1.5" viewBox="0 0 24 24">
+              <svg
+                width="24"
+                height="24"
+                fill="none"
+                stroke="#10B981"
+                strokeWidth="1.5"
+                viewBox="0 0 24 24"
+              >
                 <path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </div>
@@ -171,21 +235,59 @@ function LeadModal({
             </p>
             <form onSubmit={handleSubmit} className="space-y-3">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Họ và tên</label>
-                <input type="text" required placeholder="Nguyễn Văn A" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder:text-slate-500 focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all" />
+                <label className="block text-sm font-medium text-slate-700 mb-1">
+                  Họ và tên
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Nguyễn Văn A"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder:text-slate-500 focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all"
+                />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Email *</label>
-                <input type="email" required placeholder="email@company.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder:text-slate-500 focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all" />
+                <label className="block text-sm font-medium text-slate-700 mb-1">
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  required
+                  placeholder="email@company.com"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder:text-slate-500 focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all"
+                />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Số điện thoại</label>
-                <input type="tel" placeholder="0912 345 678" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder:text-slate-500 focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all" />
+                <label className="block text-sm font-medium text-slate-700 mb-1">
+                  Số điện thoại
+                </label>
+                <input
+                  type="tel"
+                  placeholder="0935.115.248"
+                  value={form.phone}
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder:text-slate-500 focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all"
+                />
               </div>
-              <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" />
+              <input
+                type="text"
+                name="website"
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+              />
               {error && <p className="text-xs text-red-500 pt-1">{error}</p>}
-              <p className="text-xs text-slate-500 pt-1">Không spam. Hủy đăng ký bất cứ lúc nào.</p>
-              <button type="submit" disabled={!valid || loading} className="w-full py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/25 disabled:opacity-40 disabled:cursor-not-allowed transition-all">
+              <p className="text-xs text-slate-500 pt-1">
+                Không spam. Hủy đăng ký bất cứ lúc nào.
+              </p>
+              <button
+                type="submit"
+                disabled={!valid || loading}
+                className="w-full py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/25 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              >
                 {loading ? "Đang gửi..." : "Tải Miễn Phí"}
               </button>
             </form>
@@ -193,13 +295,35 @@ function LeadModal({
         ) : (
           <div className="text-center py-4">
             <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-              <svg width="32" height="32" fill="none" stroke="#10B981" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              <svg
+                width="32"
+                height="32"
+                fill="none"
+                stroke="#10B981"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
               </svg>
             </div>
-            <h3 className="font-display font-bold text-xl text-slate-900 mb-2">Đã gửi thành công!</h3>
-            <p className="text-sm text-slate-500 mb-6">Kiểm tra email — tài liệu sẽ đến trong vài giây.<br />Nếu không thấy, kiểm tra thư mục Spam nhé.</p>
-            <button onClick={onClose} className="px-6 py-2.5 rounded-xl bg-slate-100 text-slate-600 font-semibold text-sm hover:bg-slate-200 transition-colors">Đóng</button>
+            <h3 className="font-display font-bold text-xl text-slate-900 mb-2">
+              Đã gửi thành công!
+            </h3>
+            <p className="text-sm text-slate-500 mb-6">
+              Kiểm tra email — tài liệu sẽ đến trong vài giây.
+              <br />
+              Nếu không thấy, kiểm tra thư mục Spam nhé.
+            </p>
+            <button
+              onClick={onClose}
+              className="px-6 py-2.5 rounded-xl bg-slate-100 text-slate-600 font-semibold text-sm hover:bg-slate-200 transition-colors"
+            >
+              Đóng
+            </button>
           </div>
         )}
       </div>
@@ -219,18 +343,25 @@ export default function TaiLieuPage() {
           {/* ── Page header ──────────────────────────────── */}
           <div className="max-w-3xl mb-12">
             <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-light text-primary text-xs font-semibold mb-4">
-              <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg
+                width="14"
+                height="14"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
                 <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
               Tài liệu miễn phí
             </span>
             <h1 className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-slate-900 tracking-tight mb-4">
-              Tài liệu &{" "}
-              <span className="gradient-text">Công cụ</span>
+              Tài liệu & <span className="gradient-text">Công cụ</span>
             </h1>
             <p className="text-lg text-slate-500 leading-relaxed">
-              Quiz đánh giá, tài liệu chuyên sâu, và case study thực tế — tất cả miễn phí.
-              Giúp bạn hiểu rõ nhu cầu tự động hóa và bắt đầu đúng cách.
+              Quiz đánh giá, tài liệu chuyên sâu, và case study thực tế — tất cả
+              miễn phí. Giúp bạn hiểu rõ nhu cầu tự động hóa và bắt đầu đúng
+              cách.
             </p>
           </div>
 
@@ -250,32 +381,73 @@ export default function TaiLieuPage() {
                   Doanh nghiệp bạn sẵn sàng tự động hóa chưa?
                 </h2>
                 <p className="text-slate-500 leading-relaxed mb-6 max-w-lg">
-                  10 câu hỏi nhanh — nhận báo cáo cá nhân hóa về mức độ sẵn sàng, điểm nghẽn chính,
-                  và lộ trình tự động hóa phù hợp nhất cho doanh nghiệp bạn.
+                  10 câu hỏi nhanh — nhận báo cáo cá nhân hóa về mức độ sẵn
+                  sàng, điểm nghẽn chính, và lộ trình tự động hóa phù hợp nhất
+                  cho doanh nghiệp bạn.
                 </p>
                 <div className="flex flex-wrap gap-3 mb-6">
                   {["10 câu hỏi", "2 phút", "Kết quả ngay"].map((s) => (
-                    <span key={s} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/80 border border-slate-200 text-xs font-medium text-slate-600">
-                      <svg width="12" height="12" fill="none" stroke="#10B981" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                    <span
+                      key={s}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/80 border border-slate-200 text-xs font-medium text-slate-600"
+                    >
+                      <svg
+                        width="12"
+                        height="12"
+                        fill="none"
+                        stroke="#10B981"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
                       {s}
                     </span>
                   ))}
                 </div>
                 <span className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-semibold text-sm group-hover:bg-primary-dark group-hover:shadow-lg group-hover:shadow-primary/25 transition-all">
                   Làm Quiz Ngay
-                  <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                  <svg
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    />
+                  </svg>
                 </span>
               </div>
               {/* Illustration */}
               <div className="hidden lg:flex items-center justify-center w-72 h-56 rounded-2xl bg-white/50 border border-slate-200/60">
                 <div className="text-center">
                   <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <svg width="36" height="36" fill="none" stroke="#0066FF" strokeWidth="1.5" viewBox="0 0 24 24">
+                    <svg
+                      width="36"
+                      height="36"
+                      fill="none"
+                      stroke="#0066FF"
+                      strokeWidth="1.5"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
                   </div>
-                  <div className="font-display font-extrabold text-3xl text-primary">?/40</div>
-                  <div className="text-xs text-slate-500 mt-1">Readiness Score</div>
+                  <div className="font-display font-extrabold text-3xl text-primary">
+                    ?/40
+                  </div>
+                  <div className="text-xs text-slate-500 mt-1">
+                    Readiness Score
+                  </div>
                 </div>
               </div>
             </div>
@@ -299,19 +471,50 @@ export default function TaiLieuPage() {
                   10 Quy Trình SME Nên Tự Động Hóa Ngay
                 </h2>
                 <p className="text-slate-500 leading-relaxed mb-6 max-w-lg">
-                  Tổng hợp 10 quy trình lặp lại phổ biến nhất ở SME Việt Nam — kèm ước tính thời gian tiết kiệm,
-                  công cụ cần thiết, và bảng tự đánh giá mức độ sẵn sàng từ Starter đến Scale.
+                  Tổng hợp 10 quy trình lặp lại phổ biến nhất ở SME Việt Nam —
+                  kèm ước tính thời gian tiết kiệm, công cụ cần thiết, và bảng
+                  tự đánh giá mức độ sẵn sàng từ Cơ bản đến Toàn diện.
                 </p>
                 <div className="flex flex-wrap gap-3 mb-6">
-                  {["5 trang chi tiết", "10 quy trình", "Bảng tự đánh giá", "ROI ước tính"].map((s) => (
-                    <span key={s} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/80 border border-slate-200 text-xs font-medium text-slate-600">
-                      <svg width="12" height="12" fill="none" stroke="#10B981" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                  {[
+                    "5 trang chi tiết",
+                    "10 quy trình",
+                    "Bảng tự đánh giá",
+                    "ROI ước tính",
+                  ].map((s) => (
+                    <span
+                      key={s}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/80 border border-slate-200 text-xs font-medium text-slate-600"
+                    >
+                      <svg
+                        width="12"
+                        height="12"
+                        fill="none"
+                        stroke="#10B981"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
                       {s}
                     </span>
                   ))}
                 </div>
                 <span className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-white font-semibold text-sm group-hover:bg-accent-dark group-hover:shadow-lg group-hover:shadow-accent/25 transition-all">
-                  <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                  <svg
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
                   Tải PDF Miễn Phí
                 </span>
               </div>
@@ -319,12 +522,23 @@ export default function TaiLieuPage() {
               <div className="hidden lg:flex items-center justify-center w-72 h-56 rounded-2xl bg-white/50 border border-slate-200/60">
                 <div className="text-center">
                   <div className="w-20 h-20 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                    <svg width="36" height="36" fill="none" stroke="#10B981" strokeWidth="1.5" viewBox="0 0 24 24">
+                    <svg
+                      width="36"
+                      height="36"
+                      fill="none"
+                      stroke="#10B981"
+                      strokeWidth="1.5"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                   </div>
-                  <div className="font-display font-extrabold text-lg text-accent">10 Quy Trình</div>
-                  <div className="text-xs text-slate-500 mt-1">PDF — 5 trang</div>
+                  <div className="font-display font-extrabold text-lg text-accent">
+                    10 Quy Trình
+                  </div>
+                  <div className="text-xs text-slate-500 mt-1">
+                    PDF — 5 trang
+                  </div>
                 </div>
               </div>
             </div>
@@ -337,18 +551,25 @@ export default function TaiLieuPage() {
           {/* ══════════════════════════════════════════════ */}
           <div className="mb-12">
             <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-light text-primary text-xs font-semibold mb-4">
-              <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg
+                width="14"
+                height="14"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
                 <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               Kết quả thực tế
             </span>
             <h2 className="font-display font-extrabold text-2xl md:text-3xl text-slate-900 tracking-tight mb-3">
-              Case Study:{" "}
-              <span className="gradient-text">Trước & Sau</span>
+              Case Study: <span className="gradient-text">Trước & Sau</span>
             </h2>
             <p className="text-slate-500 max-w-2xl">
-              Mỗi case study là một doanh nghiệp thật, vấn đề thật, kết quả đo được.
-              Xem AutoFlow đã giúp họ tiết kiệm bao nhiêu thời gian và tiền bạc.
+              Mỗi case study là một doanh nghiệp thật, vấn đề thật, kết quả đo
+              được. Xem AutoFlow đã giúp họ tiết kiệm bao nhiêu thời gian và
+              tiền bạc.
             </p>
           </div>
 
@@ -362,18 +583,27 @@ export default function TaiLieuPage() {
                 {/* Card header */}
                 <div className="px-8 pt-8 pb-0 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                   <div>
-                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${uc.industryColor} mb-3`}>
+                    <span
+                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${uc.industryColor} mb-3`}
+                    >
                       {uc.industry}
                     </span>
                     <h3 className="font-display font-bold text-xl text-slate-900 mb-1">
                       {uc.title}
                     </h3>
                     <div className="flex flex-wrap items-center gap-2 mt-2">
-                      <span className="text-xs font-medium text-slate-500 bg-slate-50 px-2.5 py-1 rounded-md">{uc.timeline} triển khai</span>
-                      <span className="text-xs font-medium text-slate-500 bg-slate-50 px-2.5 py-1 rounded-md">{uc.package}</span>
+                      <span className="text-xs font-medium text-slate-500 bg-slate-50 px-2.5 py-1 rounded-md">
+                        {uc.timeline} triển khai
+                      </span>
+                      <span className="text-xs font-medium text-slate-500 bg-slate-50 px-2.5 py-1 rounded-md">
+                        {uc.package}
+                      </span>
                     </div>
                   </div>
-                  <div className="flex items-center justify-center w-12 h-12 rounded-xl text-white shrink-0" style={{ background: uc.accentColor }}>
+                  <div
+                    className="flex items-center justify-center w-12 h-12 rounded-xl text-white shrink-0"
+                    style={{ background: uc.accentColor }}
+                  >
                     {uc.icon}
                   </div>
                 </div>
@@ -383,20 +613,54 @@ export default function TaiLieuPage() {
                   <div>
                     <div className="flex items-center gap-2 mb-2">
                       <span className="w-6 h-6 rounded-md bg-red-50 flex items-center justify-center">
-                        <svg width="14" height="14" fill="none" stroke="#EF4444" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                        <svg
+                          width="14"
+                          height="14"
+                          fill="none"
+                          stroke="#EF4444"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
                       </span>
-                      <span className="text-sm font-semibold text-red-500">Trước</span>
+                      <span className="text-sm font-semibold text-red-500">
+                        Trước
+                      </span>
                     </div>
-                    <p className="text-sm text-slate-600 leading-relaxed">{uc.problem}</p>
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      {uc.problem}
+                    </p>
                   </div>
                   <div>
                     <div className="flex items-center gap-2 mb-2">
                       <span className="w-6 h-6 rounded-md bg-accent/10 flex items-center justify-center">
-                        <svg width="14" height="14" fill="none" stroke="#10B981" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <svg
+                          width="14"
+                          height="14"
+                          fill="none"
+                          stroke="#10B981"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
                       </span>
-                      <span className="text-sm font-semibold text-accent">Giải pháp AutoFlow</span>
+                      <span className="text-sm font-semibold text-accent">
+                        Giải pháp AutoFlow
+                      </span>
                     </div>
-                    <p className="text-sm text-slate-600 leading-relaxed">{uc.solution}</p>
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      {uc.solution}
+                    </p>
                   </div>
                 </div>
 
@@ -406,23 +670,44 @@ export default function TaiLieuPage() {
                     <div className="grid grid-cols-3 gap-4 mb-4">
                       {uc.results.map((r) => (
                         <div key={r.label} className="text-center">
-                          <div className="font-display font-extrabold text-2xl" style={{ color: uc.accentColor }}>
+                          <div
+                            className="font-display font-extrabold text-2xl"
+                            style={{ color: uc.accentColor }}
+                          >
                             {r.metric}
                           </div>
-                          <div className="text-xs font-semibold text-slate-700 mt-0.5">{r.label}</div>
+                          <div className="text-xs font-semibold text-slate-700 mt-0.5">
+                            {r.label}
+                          </div>
                           <div className="text-xs text-slate-500">{r.sub}</div>
                         </div>
                       ))}
                     </div>
                     <div className="flex flex-wrap items-center gap-1.5 pt-3 border-t border-slate-200">
                       {uc.tools.map((tool) => (
-                        <span key={tool} className="text-xs font-medium text-slate-500 bg-white border border-slate-200 px-2 py-0.5 rounded-md">
+                        <span
+                          key={tool}
+                          className="text-xs font-medium text-slate-500 bg-white border border-slate-200 px-2 py-0.5 rounded-md"
+                        >
                           {tool}
                         </span>
                       ))}
                       <span className="ml-auto inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:text-primary-dark transition-colors">
                         Xem chi tiết
-                        <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                        <svg
+                          width="14"
+                          height="14"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M13 7l5 5m0 0l-5 5m5-5H6"
+                          />
+                        </svg>
                       </span>
                     </div>
                   </div>
@@ -438,15 +723,34 @@ export default function TaiLieuPage() {
                 Doanh nghiệp bạn có đang gặp vấn đề tương tự?
               </h2>
               <p className="text-slate-500 mb-8 max-w-lg mx-auto">
-                Đặt lịch audit miễn phí 30 phút — mình sẽ phân tích quy trình của bạn
-                và đưa ra lộ trình tự động hóa cụ thể. Không ràng buộc.
+                Đặt lịch audit miễn phí 30 phút — mình sẽ phân tích quy trình
+                của bạn và đưa ra lộ trình tự động hóa cụ thể. Không ràng buộc.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="/#lien-he" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/25 transition-all">
+                <a
+                  href="/#lien-he"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/25 transition-all"
+                >
                   Nhận Audit Miễn Phí
-                  <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                  <svg
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    />
+                  </svg>
                 </a>
-                <a href="/quiz" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-all">
+                <a
+                  href="/quiz"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-all"
+                >
                   Hoặc Làm Quiz Trước
                 </a>
               </div>

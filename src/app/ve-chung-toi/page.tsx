@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Về Chúng Tôi — Đội ngũ AutoFlow VN",
   description:
-    "Đội ngũ AutoFlow VN — chuyên gia tự động hóa quy trình cho SME Việt Nam bằng n8n. Tích hợp Zalo, MISA, Shopee, KiotViet. Kết quả trong 2–4 tuần.",
+    "Đội ngũ AutoFlow VN — chuyên gia tự động hóa quy trình cho SME Việt Nam bằng n8n. Tích hợp Zalo, MISA, Shopee, KiotViet. Gói Cơ bản 5 ngày, Nâng cao 7 ngày, Toàn diện 10 ngày.",
   alternates: { canonical: "https://autoflowvn.net/ve-chung-toi" },
   openGraph: {
     title: "Về Chúng Tôi — Đội ngũ AutoFlow VN",
@@ -22,32 +22,66 @@ const team = [
     initial: "H",
     color: "#0066FF",
     desc: "Xin chào! Mình là Huy — người trực tiếp phân tích quy trình, viết workflow, và bàn giao cho khách hàng AutoFlow. Với kinh nghiệm phát triển phần mềm và tích hợp hệ thống, mình giúp SME Việt Nam tiết kiệm hàng chục giờ mỗi tuần bằng tự động hóa thông minh. Bạn sẽ nói chuyện trực tiếp với mình — không qua trung gian.",
-    skills: ["n8n", "Zalo OA API", "MISA", "KiotViet", "Shopee", "AI Workflows"],
+    skills: [
+      "n8n",
+      "Zalo OA API",
+      "MISA",
+      "KiotViet",
+      "Shopee",
+      "AI Workflows",
+    ],
   },
 ];
 
 const techStack = [
-  { name: "n8n", desc: "Nền tảng automation chính — mã nguồn mở, self-hosted", color: "#EA4B71" },
-  { name: "Zalo OA", desc: "Kênh giao tiếp #1 cho SME Việt Nam", color: "#0068FF" },
+  {
+    name: "n8n",
+    desc: "Nền tảng automation chính — mã nguồn mở, self-hosted",
+    color: "#EA4B71",
+  },
+  {
+    name: "Zalo OA",
+    desc: "Kênh giao tiếp #1 cho SME Việt Nam",
+    color: "#0068FF",
+  },
   { name: "MISA", desc: "Kế toán & ERP phổ biến nhất VN", color: "#E31937" },
   { name: "KiotViet", desc: "POS & quản lý bán hàng", color: "#00A651" },
-  { name: "Shopee API", desc: "Đồng bộ đơn hàng đa kênh real-time", color: "#EE4D2D" },
-  { name: "OpenAI / Claude", desc: "AI brain cho workflow thông minh", color: "#6366F1" },
-  { name: "Google Sheets", desc: "CRM nhẹ & báo cáo tự động", color: "#0F9D58" },
+  {
+    name: "Shopee API",
+    desc: "Đồng bộ đơn hàng đa kênh real-time",
+    color: "#EE4D2D",
+  },
+  {
+    name: "OpenAI / Claude",
+    desc: "AI brain cho workflow thông minh",
+    color: "#6366F1",
+  },
+  {
+    name: "Google Sheets",
+    desc: "CRM nhẹ & báo cáo tự động",
+    color: "#0F9D58",
+  },
   { name: "Haravan", desc: "E-commerce platform Việt Nam", color: "#2962FF" },
 ];
 
 const stats = [
   { value: "50+", label: "Workflows đã build" },
   { value: "4", label: "Ngành chuyên sâu" },
-  { value: "2–4", label: "Tuần triển khai" },
+  { value: "5–10", label: "Ngày triển khai" },
   { value: "100%", label: "Hoàn tiền nếu không deliver" },
 ];
 
 const values = [
   {
     icon: (
-      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        viewBox="0 0 24 24"
+      >
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
       </svg>
     ),
@@ -57,17 +91,31 @@ const values = [
   },
   {
     icon: (
-      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        viewBox="0 0 24 24"
+      >
         <path d="M12 6v6l4 2M12 2a10 10 0 100 20 10 10 0 000-20z" />
       </svg>
     ),
     title: "Kết quả trong tuần, không phải tháng",
-    desc: "Gói Starter chạy trong 1 tuần. Growth 3 tuần. Không kéo dài, không phát sinh chi phí.",
+    desc: "Workflow Cơ bản triển khai trong 5 ngày. Nâng cao 7 ngày. Toàn diện 10 ngày. Không kéo dài, không phát sinh chi phí.",
     color: "#0066FF",
   },
   {
     icon: (
-      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        viewBox="0 0 24 24"
+      >
         <circle cx="12" cy="12" r="10" />
         <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
       </svg>
@@ -78,7 +126,14 @@ const values = [
   },
   {
     icon: (
-      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        viewBox="0 0 24 24"
+      >
         <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
         <polyline points="14 2 14 8 20 8" />
         <line x1="16" y1="13" x2="8" y2="13" />
@@ -125,7 +180,9 @@ export default function VeChungToiPage() {
               <span className="gradient-text">50+ workflows tự động</span>
             </h1>
             <p className="text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto mb-8">
-              AutoFlow giúp SME Việt Nam tự động hóa quy trình lặp lại — để team bạn tập trung vào việc tạo ra giá trị thực, thay vì copy-paste cả ngày.
+              AutoFlow giúp SME Việt Nam tự động hóa quy trình lặp lại — để team
+              bạn tập trung vào việc tạo ra giá trị thực, thay vì copy-paste cả
+              ngày.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -133,7 +190,13 @@ export default function VeChungToiPage() {
                 className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-7 py-3.5 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/25"
               >
                 Nói chuyện với chúng tôi
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <svg
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                >
                   <path d="M5 8h6M8 5l3 3-3 3" />
                 </svg>
               </a>
@@ -151,8 +214,13 @@ export default function VeChungToiPage() {
         <section className="max-w-4xl mx-auto px-6 mb-20">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {stats.map((s, i) => (
-              <div key={i} className="bg-white rounded-xl border border-slate-200 p-5 text-center">
-                <p className="font-display font-extrabold text-2xl text-primary">{s.value}</p>
+              <div
+                key={i}
+                className="bg-white rounded-xl border border-slate-200 p-5 text-center"
+              >
+                <p className="font-display font-extrabold text-2xl text-primary">
+                  {s.value}
+                </p>
                 <p className="text-xs text-slate-500 mt-1">{s.label}</p>
               </div>
             ))}
@@ -169,13 +237,18 @@ export default function VeChungToiPage() {
             </div>
             <div className="space-y-5 text-slate-600 leading-relaxed">
               <p>
-                93% SME Việt Nam biết họ cần tự động hóa. Nhưng chưa tới 20% có người giúp triển khai — với giá phù hợp, trong thời gian hợp lý, và hiểu đúng ecosystem Việt Nam.
+                93% SME Việt Nam biết họ cần tự động hóa. Nhưng chưa tới 20% có
+                người giúp triển khai — với giá phù hợp, trong thời gian hợp lý,
+                và hiểu đúng ecosystem Việt Nam.
               </p>
               <p>
-                Các công ty IT lớn charge 200–500 triệu cho 1 project và mất 3–6 tháng. Các tool nước ngoài (Zapier, Make) không tích hợp native với Zalo OA, MISA, hay KiotViet.
+                Các công ty IT lớn charge 200–500 triệu cho 1 project và mất 3–6
+                tháng. Các tool nước ngoài (Zapier, Make) không tích hợp native
+                với Zalo OA, MISA, hay KiotViet.
               </p>
               <p className="font-semibold text-slate-900">
-                AutoFlow ra đời để lấp khoảng trống đó — automation chất lượng enterprise, giá SME, delivery trong tuần chứ không phải tháng.
+                AutoFlow ra đời để lấp khoảng trống đó — automation chất lượng
+                enterprise, giá SME, delivery trong tuần chứ không phải tháng.
               </p>
             </div>
           </div>
@@ -188,7 +261,8 @@ export default function VeChungToiPage() {
               Đội ngũ
             </h2>
             <p className="text-slate-500">
-              Lean team, deep expertise — bạn nói chuyện trực tiếp với người build workflow
+              Lean team, deep expertise — bạn nói chuyện trực tiếp với người
+              build workflow
             </p>
           </div>
           <div className="max-w-2xl mx-auto">
@@ -205,9 +279,15 @@ export default function VeChungToiPage() {
                     {member.initial}
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-display font-bold text-xl text-slate-900">{member.name}</h3>
-                    <p className="text-sm text-primary font-medium mt-0.5">{member.role}</p>
-                    <p className="text-sm text-slate-500 leading-relaxed mt-3">{member.desc}</p>
+                    <h3 className="font-display font-bold text-xl text-slate-900">
+                      {member.name}
+                    </h3>
+                    <p className="text-sm text-primary font-medium mt-0.5">
+                      {member.role}
+                    </p>
+                    <p className="text-sm text-slate-500 leading-relaxed mt-3">
+                      {member.desc}
+                    </p>
                     <div className="flex flex-wrap gap-2 mt-4">
                       {member.skills.map((skill) => (
                         <span
@@ -220,14 +300,25 @@ export default function VeChungToiPage() {
                     </div>
                     {/* Direct contact */}
                     <div className="flex flex-wrap gap-3 mt-4 pt-4 border-t border-slate-100">
-                      <a href="https://zalo.me/0935115248" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-medium text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full hover:bg-blue-100 transition-colors">
+                      <a
+                        href="https://zalo.me/0935115248"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-medium text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full hover:bg-blue-100 transition-colors"
+                      >
                         💬 Chat Zalo
                       </a>
-                      <a href="tel:0935115248" className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full hover:bg-slate-200 transition-colors">
+                      <a
+                        href="tel:0935115248"
+                        className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full hover:bg-slate-200 transition-colors"
+                      >
                         📱 0935.115.248
                       </a>
-                      <a href="mailto:hello@autoflowvn.net" className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full hover:bg-slate-200 transition-colors">
-                        ✉️ hello@autoflowvn.net
+                      <a
+                        href="mailto:support@autoflowvn.net"
+                        className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full hover:bg-slate-200 transition-colors"
+                      >
+                        ✉️ support@autoflowvn.net
                       </a>
                     </div>
                   </div>
@@ -261,8 +352,12 @@ export default function VeChungToiPage() {
                     {v.icon}
                   </div>
                   <div>
-                    <h3 className="font-display font-bold text-slate-900 mb-1.5">{v.title}</h3>
-                    <p className="text-sm text-slate-500 leading-relaxed">{v.desc}</p>
+                    <h3 className="font-display font-bold text-slate-900 mb-1.5">
+                      {v.title}
+                    </h3>
+                    <p className="text-sm text-slate-500 leading-relaxed">
+                      {v.desc}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -287,8 +382,12 @@ export default function VeChungToiPage() {
                   {a.number}
                 </span>
                 <div>
-                  <h3 className="font-display font-bold text-lg text-slate-900 mb-2">{a.title}</h3>
-                  <p className="text-sm text-slate-500 leading-relaxed">{a.desc}</p>
+                  <h3 className="font-display font-bold text-lg text-slate-900 mb-2">
+                    {a.title}
+                  </h3>
+                  <p className="text-sm text-slate-500 leading-relaxed">
+                    {a.desc}
+                  </p>
                 </div>
               </div>
             ))}
@@ -319,7 +418,9 @@ export default function VeChungToiPage() {
                     {tech.name.charAt(0)}
                   </div>
                   <div>
-                    <p className="font-semibold text-sm text-slate-900">{tech.name}</p>
+                    <p className="font-semibold text-sm text-slate-900">
+                      {tech.name}
+                    </p>
                     <p className="text-xs text-slate-500">{tech.desc}</p>
                   </div>
                 </div>
@@ -336,24 +437,36 @@ export default function VeChungToiPage() {
             </h2>
             <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
               <p>
-                Agency IT lớn có 5–10 người nhưng bạn chỉ nói chuyện với 1 account manager — người không build sản phẩm. Project chuyển qua team dev mà bạn không bao giờ gặp. Hiểu sai requirement → sửa → delay → phát sinh chi phí.
+                Agency IT lớn có 5–10 người nhưng bạn chỉ nói chuyện với 1
+                account manager — người không build sản phẩm. Project chuyển qua
+                team dev mà bạn không bao giờ gặp. Hiểu sai requirement → sửa →
+                delay → phát sinh chi phí.
               </p>
               <p>
-                Với AutoFlow, <strong>bạn nói chuyện trực tiếp với người build</strong>. Chúng tôi nghe bạn kể vấn đề, viết workflow, test, training cho team bạn. Không tam sao thất bản.
+                Với AutoFlow,{" "}
+                <strong>bạn nói chuyện trực tiếp với người build</strong>. Chúng
+                tôi nghe bạn kể vấn đề, viết workflow, test, training cho team
+                bạn. Không tam sao thất bản.
               </p>
             </div>
             <div className="mt-6 pt-6 border-t border-primary/10 grid sm:grid-cols-3 gap-4 text-center">
               <div>
-                <p className="font-display font-extrabold text-2xl text-primary">2–4 tuần</p>
+                <p className="font-display font-extrabold text-2xl text-primary">
+                  5–10 ngày
+                </p>
                 <p className="text-xs text-slate-500">thay vì 3–6 tháng</p>
               </div>
               <div>
-                <p className="font-display font-extrabold text-2xl text-primary">20–80 triệu</p>
+                <p className="font-display font-extrabold text-2xl text-primary">
+                  20–80 triệu
+                </p>
                 <p className="text-xs text-slate-500">thay vì 200–500 triệu</p>
               </div>
               <div>
-                <p className="font-display font-extrabold text-2xl text-primary">24h SLA</p>
-                <p className="text-xs text-slate-500">fix lỗi (retainer)</p>
+                <p className="font-display font-extrabold text-2xl text-primary">
+                  Support
+                </p>
+                <p className="text-xs text-slate-500">hosting 499K/tháng</p>
               </div>
             </div>
           </div>
@@ -366,14 +479,21 @@ export default function VeChungToiPage() {
               Muốn biết chúng tôi có thể giúp gì cho doanh nghiệp bạn?
             </h2>
             <p className="text-slate-400 mb-6">
-              30 phút audit miễn phí — chúng tôi sẽ chỉ ra chính xác đâu có thể tự động hóa.
+              30 phút audit miễn phí — chúng tôi sẽ chỉ ra chính xác đâu có thể
+              tự động hóa.
             </p>
             <a
               href="/audit"
               className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-8 py-4 rounded-xl transition-all hover:shadow-xl hover:shadow-primary/25"
             >
               Đặt lịch audit miễn phí
-              <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <svg
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
                 <path d="M5 8h6M8 5l3 3-3 3" />
               </svg>
             </a>

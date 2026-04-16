@@ -39,8 +39,8 @@ const deliverables = [
   },
   {
     icon: "💬",
-    title: "Hỗ trợ 7 ngày sau bàn giao",
-    desc: "Fix lỗi, trả lời thắc mắc qua Zalo. Đảm bảo workflow chạy ổn định trước khi kết thúc.",
+    title: "Hỗ trợ 7 ngày sau bàn giao (pilot)",
+    desc: "Fix lỗi, trả lời thắc mắc qua Zalo. Đảm bảo workflow chạy ổn định trước khi kết thúc. Nâng lên Hosting 499K/tháng: support ongoing qua Zalo giờ hành chính + monitoring 24/7.",
   },
 ];
 
