@@ -7,6 +7,7 @@ import WhyUs from "@/components/WhyUs";
 import Process from "@/components/Process";
 import PilotBanner from "@/components/PilotBanner";
 import Pricing from "@/components/Pricing";
+import ROICalculator from "@/components/ROICalculator";
 import Results from "@/components/Results";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
@@ -45,6 +46,7 @@ export default function Home() {
         <PilotBanner />
         <Process />
         <Pricing />
+        <ROICalculator />
         <Results />
 
         {/* Quiz CTA */}
