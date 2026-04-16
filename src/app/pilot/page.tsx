@@ -462,24 +462,24 @@ export default function PilotPage() {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                name: "Starter",
-                workflows: "1-3 workflows",
-                price: "8-15 triệu",
-                timeline: "1-2 tuần",
+                name: "Cơ bản",
+                desc: "Kết nối 2 hệ thống, 1 bước xử lý",
+                price: "2 triệu/workflow",
+                timeline: "5 ngày",
                 highlight: false,
               },
               {
-                name: "Growth",
-                workflows: "3-5 workflows",
-                price: "20-35 triệu",
-                timeline: "3-4 tuần",
+                name: "Nâng cao",
+                desc: "Kết nối 3-4 hệ thống, nhiều bước",
+                price: "4 triệu/workflow",
+                timeline: "7 ngày",
                 highlight: true,
               },
               {
-                name: "Scale",
-                workflows: "5-10 workflows",
-                price: "40-60 triệu",
-                timeline: "4-6 tuần",
+                name: "Toàn diện",
+                desc: "Kết nối 5+ hệ thống, quy trình phức tạp",
+                price: "7 triệu/workflow",
+                timeline: "10 ngày",
                 highlight: false,
               },
             ].map((pkg, i) => (
@@ -499,7 +499,7 @@ export default function PilotPage() {
                 <h3 className="font-display font-bold text-xl text-slate-900 mb-1">
                   {pkg.name}
                 </h3>
-                <p className="text-sm text-slate-500 mb-4">{pkg.workflows}</p>
+                <p className="text-sm text-slate-500 mb-4">{pkg.desc}</p>
                 <p className="font-display font-extrabold text-2xl text-primary mb-1">
                   {pkg.price}
                 </p>
@@ -512,6 +512,9 @@ export default function PilotPage() {
               </div>
             ))}
           </div>
+          <p className="text-center text-sm text-slate-500 mt-6">
+            Tùy chọn thêm: <strong>Hosting 499K/tháng</strong> — AutoFlow vận hành server, backup hàng ngày, hỗ trợ Zalo. Hủy bất cứ lúc nào.
+          </p>
         </section>
 
         {/* ── Refund Policy ── */}

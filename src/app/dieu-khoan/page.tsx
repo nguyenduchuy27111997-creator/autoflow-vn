@@ -37,7 +37,7 @@ export default function DieuKhoanPage() {
                 các nền tảng khác
               </li>
               <li>Training và bàn giao tài liệu vận hành</li>
-              <li>Hỗ trợ kỹ thuật và bảo trì (gói Retainer)</li>
+              <li>Hỗ trợ kỹ thuật và bảo trì (gói Hosting 499K/tháng)</li>
             </ul>
 
             <h2>3. Thanh toán</h2>
@@ -50,8 +50,7 @@ export default function DieuKhoanPage() {
                 <strong>Hình thức:</strong> Chuyển khoản ngân hàng
               </li>
               <li>
-                <strong>Retainer:</strong> Thanh toán đầu mỗi tháng, commitment
-                tối thiểu 3 tháng
+                <strong>Hosting:</strong> Thanh toán hàng tháng, hủy bất cứ lúc nào.
               </li>
               <li>Giá đã bao gồm VAT (nếu có). Không có phí ẩn phát sinh</li>
             </ul>
@@ -97,8 +96,8 @@ export default function DieuKhoanPage() {
                 AutoFlow cam kết bảo mật thông tin doanh nghiệp của khách hàng
               </li>
               <li>Không chia sẻ thông tin với bên thứ ba</li>
-              <li>Gói Scale bao gồm 30 ngày warranty sau bàn giao</li>
-              <li>Gói Retainer bao gồm SLA fix lỗi trong 24h làm việc</li>
+              <li>Tất cả workflow bao gồm 7 ngày warranty sau bàn giao</li>
+              <li>Gói Hosting bao gồm monitoring 24/7, backup daily, SLA support giờ hành chính.</li>
             </ul>
 
             <h2>7. Trách nhiệm và giới hạn</h2>
@@ -126,8 +125,7 @@ export default function DieuKhoanPage() {
                 100% thanh toán đợt 1. Sau khi bắt đầu — không hoàn phí đợt 1
               </li>
               <li>
-                <strong>Retainer:</strong> Hủy với 30 ngày notice. Không hoàn
-                phí tháng đã thanh toán
+                <strong>Hosting:</strong> Hủy bất cứ lúc nào, không hoàn tháng đã thanh toán.
               </li>
             </ul>
 

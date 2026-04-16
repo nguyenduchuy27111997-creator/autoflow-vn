@@ -14,17 +14,17 @@ const PARTNER_TYPES = [
 ];
 
 const COMMISSION_TABLE = [
-  { pkg: "Starter", range: "8-15 triệu", commission: "800K - 1.5 triệu", promo: "1.2 - 2.25 triệu" },
-  { pkg: "Growth", range: "20-35 triệu", commission: "2 - 3.5 triệu", promo: "3 - 5.25 triệu" },
-  { pkg: "Scale", range: "50-80 triệu", commission: "5 - 8 triệu", promo: "7.5 - 12 triệu" },
-  { pkg: "Retainer", range: "8-15 triệu/tháng", commission: "10% × 3 tháng", promo: "15% × 3 tháng" },
+  { pkg: "Workflow Cơ bản", range: "2 triệu", commission: "200K (10%)", promo: "300K (15%)" },
+  { pkg: "Workflow Nâng cao", range: "4 triệu", commission: "400K (10%)", promo: "600K (15%)" },
+  { pkg: "Workflow Toàn diện", range: "7 triệu", commission: "700K (10%)", promo: "1.05 triệu (15%)" },
+  { pkg: "Hosting (hàng tháng)", range: "499K/tháng", commission: "50K/tháng × 3 tháng đầu", promo: "75K/tháng × 3 tháng đầu" },
 ];
 
 const FAQ_ITEMS = [
   { q: "Khi nào tôi nhận commission?", a: "Sau khi khách hàng thanh toán đợt 1. AutoFlow chuyển khoản trong 7 ngày làm việc." },
   { q: "Có giới hạn số lượng referral không?", a: "Không giới hạn. Giới thiệu càng nhiều, kiếm càng nhiều." },
   { q: "Tôi cần làm gì sau khi được duyệt?", a: "Bạn nhận mã giới thiệu (VD: AF-TECHVN). Khi giới thiệu khách, họ nhắc mã này hoặc bạn kết nối trực tiếp qua Zalo." },
-  { q: "Retainer commission tính thế nào?", a: "10% giá trị 3 tháng retainer đầu tiên. Nếu khách gia hạn, commission kết thúc sau tháng 3." },
+  { q: "Hosting commission tính thế nào?", a: "10% giá trị hosting (499K/tháng = 50K commission/tháng) trong 3 tháng đầu. Sau tháng 3, commission kết thúc." },
   { q: "Tôi không phải agency/IT, có đăng ký được không?", a: "Hoàn toàn được! Bất kỳ ai có mạng lưới SME đều có thể tham gia — kế toán, business coach, freelancer." },
   { q: "Ưu đãi 15% kéo dài bao lâu?", a: "3 tháng đầu kể từ ngày ra mắt chương trình. Đăng ký sớm để nhận rate cao nhất." },
 ];

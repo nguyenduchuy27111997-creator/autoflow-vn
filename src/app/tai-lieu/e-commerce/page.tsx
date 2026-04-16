@@ -42,7 +42,7 @@ export default function EcommerceUseCasePage() {
                 3 tuần triển khai
               </span>
               <span className="w-1 h-1 bg-slate-300 rounded-full" />
-              <span>Gói Growth — 28 triệu đồng</span>
+              <span>Dự án 4 workflows — 28 triệu đồng</span>
               <span className="w-1 h-1 bg-slate-300 rounded-full" />
               <span>4 workflows n8n</span>
             </div>

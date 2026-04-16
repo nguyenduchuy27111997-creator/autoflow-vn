@@ -123,7 +123,7 @@ export default function ChinhSachBaoMatPage() {
               <li>Dữ liệu dự án thuộc sở hữu hoàn toàn của khách hàng</li>
               <li>
                 Sau khi bàn giao, AutoFlow không truy cập dữ liệu dự án trừ khi
-                được client cho phép (trong gói Retainer)
+                được client cho phép (khi sử dụng gói Hosting 499K/tháng)
               </li>
             </ul>
 

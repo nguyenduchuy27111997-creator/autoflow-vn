@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Bảng Giá Dịch Vụ Tự Động Hóa | AutoFlow VN",
   description:
-    "3 gói dịch vụ: Starter từ 8 triệu, Growth từ 20 triệu, Scale từ 50 triệu. Báo giá chi tiết, so sánh tính năng.",
+    "Workflow tự động hóa: Cơ bản 2 triệu, Nâng cao 4 triệu, Toàn diện 7 triệu. Trả 1 lần, chạy mãi mãi. Hosting tùy chọn 499K/tháng.",
   alternates: { canonical: "https://autoflowvn.net/bang-gia" },
   openGraph: {
     title: "Bảng Giá Dịch Vụ Tự Động Hóa | AutoFlow VN",
     description:
-      "3 gói dịch vụ: Starter từ 8 triệu, Growth từ 20 triệu, Scale từ 50 triệu. Báo giá chi tiết, so sánh tính năng.",
+      "Workflow tự động hóa: Cơ bản 2 triệu, Nâng cao 4 triệu, Toàn diện 7 triệu. Trả 1 lần, chạy mãi mãi. Hosting tùy chọn 499K/tháng.",
     url: "https://autoflowvn.net/bang-gia",
   },
 };

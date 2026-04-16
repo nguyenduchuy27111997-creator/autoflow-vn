@@ -43,7 +43,7 @@ export default function EducationUseCasePage() {
                 4 tuần triển khai
               </span>
               <span className="w-1 h-1 bg-slate-300 rounded-full" />
-              <span>Gói Scale — 65 triệu đồng</span>
+              <span>Dự án 5 workflows — 65 triệu đồng</span>
               <span className="w-1 h-1 bg-slate-300 rounded-full" />
               <span>5 workflows n8n</span>
             </div>

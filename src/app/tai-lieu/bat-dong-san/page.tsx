@@ -43,7 +43,7 @@ export default function RealEstateUseCasePage() {
                 4 tuần triển khai
               </span>
               <span className="w-1 h-1 bg-slate-300 rounded-full" />
-              <span>Gói Scale — 72 triệu đồng</span>
+              <span>Dự án 6 workflows — 72 triệu đồng</span>
               <span className="w-1 h-1 bg-slate-300 rounded-full" />
               <span>6 workflows n8n</span>
             </div>

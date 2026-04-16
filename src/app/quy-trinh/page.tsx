@@ -26,7 +26,7 @@ const steps = [
     description:
       "Dựa trên audit, mình gửi proposal cụ thể: workflow nào nên tự động, timeline bao lâu, chi phí bao nhiêu, ROI dự kiến.",
     deliverables: [
-      "Proposal 3 gói (Starter / Growth / Scale)",
+      "Proposal chi tiết (Cơ bản 2M / Nâng cao 4M / Toàn diện 7M)",
       "ROI Calculator cho doanh nghiệp bạn",
       "Timeline chi tiết từng workflow",
     ],
@@ -50,15 +50,15 @@ const steps = [
   {
     number: "04",
     title: "Bàn giao & Support",
-    duration: "7–30 ngày support",
+    duration: "7 ngày support",
     description:
       "Test kỹ, bàn giao full tài liệu. Support sau bàn giao để đảm bảo mọi thứ chạy trơn tru.",
     deliverables: [
       "Tài liệu vận hành chi tiết",
       "Monitoring dashboard",
-      "Support 7–30 ngày (tùy gói)",
+      "Support 7 ngày sau bàn giao",
     ],
-    note: "Tháng đầu retainer giảm 20% nếu bạn muốn mình tiếp tục hỗ trợ.",
+    note: "Hosting 499K/tháng (tùy chọn) nếu bạn muốn AutoFlow tiếp tục vận hành và hỗ trợ.",
     color: "#F59E0B",
   },
 ];
@@ -74,7 +74,7 @@ const faqs = [
   },
   {
     q: "Nếu workflow không chạy đúng sau bàn giao thì sao?",
-    a: "Mình support 7–30 ngày sau bàn giao (tùy gói). Nếu lỗi do mình build thì fix miễn phí. Ngoài ra có gói retainer 8–15 triệu/tháng nếu cần hỗ trợ dài hạn.",
+    a: "Mình support 7 ngày sau bàn giao. Nếu lỗi do mình build thì fix miễn phí. Hosting 499K/tháng bao gồm monitoring, backup, support Zalo giờ hành chính. Workflow mới báo giá riêng theo tier (2M/4M/7M).",
   },
   {
     q: "Mình có thể thay đổi yêu cầu giữa chừng không?",
@@ -171,7 +171,7 @@ export default function QuyTrinhPage() {
               { value: "30'", label: "Audit miễn phí" },
               { value: "48h", label: "Nhận proposal" },
               { value: "1–8", label: "Tuần build" },
-              { value: "30", label: "Ngày support" },
+              { value: "7", label: "Ngày support" },
             ].map((s, i) => (
               <div
                 key={i}

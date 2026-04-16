@@ -26,7 +26,7 @@ const useCases = [
       { metric: "+23%", label: "doanh thu", sub: "nhờ 2 NV chuyển sang chăm khách" },
     ],
     timeline: "3 tuần",
-    package: "Growth — 28 triệu đồng",
+    package: "Dự án 4 workflows — 28 triệu đồng",
     tools: ["Shopee API", "Tiki API", "TikTok Shop", "MISA", "Zalo OA", "Telegram"],
     icon: (
       <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -51,7 +51,7 @@ const useCases = [
       { metric: "4x", label: "lead mới", sub: "nhờ follow-up tự động nhanh hơn" },
     ],
     timeline: "4 tuần",
-    package: "Scale — 65 triệu đồng",
+    package: "Dự án 5 workflows — 65 triệu đồng",
     tools: ["Zalo OA", "ZNS", "Google Sheets", "Facebook Lead Ads", "Telegram"],
     icon: (
       <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -77,7 +77,7 @@ const useCases = [
       { metric: "+15%", label: "tỷ lệ chốt deal", sub: "nhờ nurture tự động" },
     ],
     timeline: "4 tuần",
-    package: "Scale — 72 triệu đồng",
+    package: "Dự án 6 workflows — 72 triệu đồng",
     tools: ["Facebook Lead Ads", "Zalo OA", "Google Sheets", "Telegram", "n8n AI Agent"],
     icon: (
       <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
