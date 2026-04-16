@@ -4,9 +4,9 @@ export default function Footer() {
   return (
     <footer className="bg-slate-900 border-t border-slate-800">
       <div className="max-w-6xl mx-auto px-6 py-12">
-        <div className="grid md:grid-cols-5 gap-8">
+        <div className="grid md:grid-cols-6 gap-8">
           {/* Brand */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 md:row-span-1">
             <Logo dark className="mb-4" />
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm mb-6">
               Giúp doanh nghiệp vừa và nhỏ Việt Nam tự động hóa quy trình lặp
@@ -82,6 +82,9 @@ export default function Footer() {
                 { label: "Mẫu Workflow", href: "/mau-workflow" },
                 { label: "Về chúng tôi", href: "/ve-chung-toi" },
                 { label: "Đối tác", href: "/doi-tac" },
+                { label: "Liên hệ", href: "/lien-he" },
+                { label: "So sánh công cụ", href: "/so-sanh" },
+                { label: "FAQ", href: "/faq" },
               ].map((item) => (
                 <li key={item.label}>
                   <a
@@ -108,21 +111,46 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors"
                 >
-                  📱 Zalo: 0935115248
+                  📱 Zalo: 0935.115.248
                 </a>
               </li>
               <li className="text-sm text-slate-400">
                 <a
-                  href="mailto:support@autoflowvn.net"
+                  href="mailto:hello@autoflowvn.net"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors"
                 >
-                  ✉️ support@autoflowvn.net
+                  ✉️ hello@autoflowvn.net
                 </a>
               </li>
               <li className="text-sm text-slate-400">📍 TP. Hồ Chí Minh</li>
             </ul>
+          </div>
+
+          {/* Newsletter */}
+          <div>
+            <h4 className="font-display font-bold text-sm text-white mb-4">
+              Nhận tips automation
+            </h4>
+            <p className="text-xs text-slate-400 mb-3 leading-relaxed">
+              Tips tự động hóa thực tế cho SME Việt Nam — mỗi tuần 1 email.
+            </p>
+            <form action="/api/newsletter" method="POST" className="space-y-2">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email của bạn"
+                required
+                className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-primary transition-colors"
+              />
+              <button
+                type="submit"
+                className="w-full px-3 py-2 rounded-lg bg-primary hover:bg-primary-dark text-white text-sm font-semibold transition-colors"
+              >
+                Đăng ký
+              </button>
+            </form>
           </div>
         </div>
 
