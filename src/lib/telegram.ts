@@ -164,33 +164,6 @@ export function formatAuditTier2CompletedNotify(data: {
 }
 
 /** Format Cal.com booking confirmed HOT alert for Telegram */
-export function formatBookingConfirmedNotify(data: {
-  name: string;
-  email: string;
-  startTime: string;
-  painFromBooking?: string;
-  isNewLead?: boolean;
-}) {
-  const when = new Date(data.startTime).toLocaleString("vi-VN", {
-    dateStyle: "medium",
-    timeStyle: "short",
-    timeZone: "Asia/Ho_Chi_Minh",
-  });
-  const lines = [
-    "🔥🔥 <b>Khách đã BOOK CALL!</b>",
-    "",
-    `👤 <b>${data.name}</b>`,
-    `✉️ ${data.email}`,
-    `📅 ${when}`,
-  ];
-  if (data.painFromBooking) {
-    lines.push("", `💭 ${data.painFromBooking.slice(0, 200)}`);
-  }
-  lines.push("", data.isNewLead ? "🆕 NEW lead (chưa submit audit form)" : "📋 Match existing audit submission");
-  lines.push("", "🔗 Mở client-ops: localhost:3000/dashboard/leads");
-  return lines.join("\n");
-}
-
 /** Format PDF download for Telegram */
 export function formatPdfNotify(data: {
   email: string;

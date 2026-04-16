@@ -39,80 +39,18 @@ export default function Pricing() {
   return (
     <Container id="bang-gia" className="py-20 md:py-28">
       <SectionHeader
-        badge="Bảng giá đơn giản"
+        badge="Bảng giá"
         title={
           <>
-            Hosting <span className="gradient-text">499K/tháng</span> (tùy
-            chọn). Workflow tính riêng.
+            Xây workflow một lần,{" "}
+            <span className="gradient-text">chạy mãi mãi</span>
           </>
         }
-        subtitle="Hosting không bắt buộc — bạn có thể tự host miễn phí. Workflow trả 1 lần theo độ phức tạp. Không phí ẩn."
+        subtitle="Trả 1 lần theo độ phức tạp. Không phí ẩn, không phí hàng tháng cho workflow."
         className="mb-16"
       />
 
-      {/* Hosting card — optional */}
-      <div className="max-w-3xl mx-auto mb-16 grid md:grid-cols-2 gap-4">
-        {/* AutoFlow hosts */}
-        <div className="rounded-2xl border-2 border-primary bg-white shadow-md shadow-primary/5 p-8 text-center">
-          <h3 className="font-display font-bold text-slate-900 mb-1">
-            AutoFlow vận hành giúp
-          </h3>
-          <div className="flex items-baseline justify-center gap-2 mb-3">
-            <span className="font-display font-extrabold text-5xl text-slate-900">
-              499K
-            </span>
-            <span className="text-lg text-slate-500">/tháng</span>
-          </div>
-          <p className="text-sm text-slate-500 mb-5 max-w-md mx-auto">
-            Server riêng Bizfly Cloud HCM, backup hàng ngày, monitoring 24/7,
-            SSL tự động, support Zalo, unlimited executions.
-          </p>
-          <p className="text-xs text-slate-400 mb-5">
-            Thanh toán hàng tháng, hủy bất cứ lúc nào
-          </p>
-          <a
-            href="/dich-vu/n8n-hosting"
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/20 text-sm"
-          >
-            Xem chi tiết hosting
-          </a>
-        </div>
-        {/* Self-host */}
-        <div className="rounded-2xl border-2 border-slate-200 bg-white p-8 text-center">
-          <h3 className="font-display font-bold text-slate-900 mb-1">
-            Bạn tự vận hành
-          </h3>
-          <div className="flex items-baseline justify-center gap-2 mb-3">
-            <span className="font-display font-extrabold text-5xl text-accent">
-              0đ
-            </span>
-          </div>
-          <p className="text-sm text-slate-500 mb-5 max-w-md mx-auto">
-            Mua workflow, tự host trên server riêng của bạn. AutoFlow bàn giao
-            workflow + hướng dẫn cài đặt.
-          </p>
-          <p className="text-xs text-slate-400 mb-5">
-            Phù hợp nếu bạn có team IT
-          </p>
-          <a
-            href="/audit"
-            className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-6 py-3 rounded-xl transition-all text-sm"
-          >
-            Liên hệ tư vấn
-          </a>
-        </div>
-      </div>
-
       {/* Workflow pricing cards */}
-      <div className="text-center mb-8">
-        <h3 className="font-display font-bold text-xl text-slate-900">
-          Xây dựng workflow — trả 1 lần
-        </h3>
-        <p className="text-sm text-slate-500 mt-1">
-          Giá theo độ phức tạp. Workflow chạy mãi, không phí hàng tháng.
-        </p>
-      </div>
-
       <div className="grid md:grid-cols-3 gap-6">
         {workflowTiers.map((pkg) => (
           <div
@@ -169,6 +107,68 @@ export default function Pricing() {
             </a>
           </div>
         ))}
+      </div>
+
+      {/* Hosting — optional */}
+      <div className="text-center mt-16 mb-8">
+        <h3 className="font-display font-bold text-xl text-slate-900">
+          Cần hosting? AutoFlow lo giúp bạn
+        </h3>
+        <p className="text-sm text-slate-500 mt-1">
+          Tùy chọn, không bắt buộc. Bạn có thể tự host miễn phí.
+        </p>
+      </div>
+
+      <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-4">
+        {/* AutoFlow hosts */}
+        <div className="rounded-2xl border-2 border-primary bg-white shadow-md shadow-primary/5 p-8 text-center">
+          <h3 className="font-display font-bold text-slate-900 mb-1">
+            AutoFlow vận hành giúp
+          </h3>
+          <div className="flex items-baseline justify-center gap-2 mb-3">
+            <span className="font-display font-extrabold text-5xl text-slate-900">
+              499K
+            </span>
+            <span className="text-lg text-slate-500">/tháng</span>
+          </div>
+          <p className="text-sm text-slate-500 mb-5 max-w-md mx-auto">
+            Server riêng Bizfly Cloud HCM, backup hàng ngày, monitoring 24/7,
+            SSL tự động, support Zalo, unlimited executions.
+          </p>
+          <p className="text-xs text-slate-400 mb-5">
+            Thanh toán hàng tháng, hủy bất cứ lúc nào
+          </p>
+          <a
+            href="/dich-vu/n8n-hosting"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/20 text-sm"
+          >
+            Xem chi tiết hosting
+          </a>
+        </div>
+        {/* Self-host */}
+        <div className="rounded-2xl border-2 border-slate-200 bg-white p-8 text-center">
+          <h3 className="font-display font-bold text-slate-900 mb-1">
+            Bạn tự vận hành
+          </h3>
+          <div className="flex items-baseline justify-center gap-2 mb-3">
+            <span className="font-display font-extrabold text-5xl text-accent">
+              0đ
+            </span>
+          </div>
+          <p className="text-sm text-slate-500 mb-5 max-w-md mx-auto">
+            Mua workflow, tự host trên server riêng của bạn. AutoFlow bàn giao
+            workflow + hướng dẫn cài đặt.
+          </p>
+          <p className="text-xs text-slate-400 mb-5">
+            Phù hợp nếu bạn có team IT
+          </p>
+          <a
+            href="/audit"
+            className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-6 py-3 rounded-xl transition-all text-sm"
+          >
+            Liên hệ tư vấn
+          </a>
+        </div>
       </div>
 
       {/* Free pilot note */}

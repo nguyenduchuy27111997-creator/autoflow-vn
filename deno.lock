@@ -11,20 +11,28 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
+        "npm:@ai-sdk/anthropic@^3.0.64",
+        "npm:@ai-sdk/react@^3.0.144",
         "npm:@supabase/ssr@0.9",
         "npm:@supabase/supabase-js@^2.100.1",
         "npm:@tailwindcss/postcss@4",
         "npm:@tailwindcss/typography@~0.5.19",
+        "npm:@tanstack/react-table@^8.21.3",
         "npm:@types/node@20",
         "npm:@types/react-dom@19",
         "npm:@types/react@19",
+        "npm:ai@^6.0.142",
         "npm:eslint-config-next@16.2.1",
         "npm:eslint@9",
         "npm:next@16.2.1",
+        "npm:nuqs@^2.8.9",
         "npm:react-dom@19.2.4",
         "npm:react@19.2.4",
+        "npm:recharts@^3.8.1",
+        "npm:resend@^6.9.4",
         "npm:tailwindcss@4",
-        "npm:typescript@5"
+        "npm:typescript@5",
+        "npm:uuid@13"
       ]
     }
   }

@@ -210,21 +210,6 @@ export default function AuditPage() {
                       </li>
                     </ul>
                   </div>
-                  <div className="mt-8 p-6 rounded-2xl border-2 border-primary bg-primary/5">
-                    <div className="text-sm font-bold text-primary mb-1">📅 NHẬN TƯ VẤN TRỰC TIẾP</div>
-                    <h3 className="font-display font-bold text-xl text-slate-900 mb-2">
-                      Muốn discuss pain này với Huy ngay?
-                    </h3>
-                    <p className="text-slate-600 mb-4">
-                      30 phút miễn phí — Huy sẽ tư vấn cách automation phù hợp cho anh/chị.
-                    </p>
-                    <a
-                      href="/book"
-                      className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-xl transition-all"
-                    >
-                      Book call now →
-                    </a>
-                  </div>
                 </div>
               ) : (
                 <div className="bg-white rounded-2xl border border-slate-200 p-8 md:p-10">

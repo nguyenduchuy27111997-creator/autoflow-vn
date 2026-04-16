@@ -9,6 +9,9 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  // Pháp lý / Compliance
+  { slug: "nghi-dinh-70-hoa-don-dien-tu-bat-buoc", title: "Nghị Định 70/2025: Hóa Đơn Điện Tử Bắt Buộc Từ 1/6/2025 — SME Cần Làm Gì?", description: "Hướng dẫn đầy đủ Nghị định 70/2025: ai bị ảnh hưởng, phạt bao nhiêu, và cách tự động hóa quy trình xuất hóa đơn với n8n + MISA meInvoice.", date: "2026-04-06", readTime: "14 phút", category: "Kế toán", featured: true },
+
   // Pillar
   { slug: "lo-trinh-tu-dong-hoa-sme", title: "Lộ Trình Tự Động Hóa Cho SME Việt Nam 2026: Từ Thủ Công Đến AI Agent", description: "Framework 5 giai đoạn, ROI calculator, đánh giá maturity miễn phí, và lộ trình triển khai thực tế bằng n8n.", date: "2026-04-02", readTime: "25 phút", category: "Pillar", featured: true },
   { slug: "so-sanh-cong-cu-automation-2026", title: "Toàn Cảnh Công Cụ Tự Động Hóa Tại Việt Nam 2026", description: "So sánh chi tiết n8n, Zapier, Make & 20+ nền tảng. Giá VND, tích hợp Việt Nam, decision framework.", date: "2026-04-02", readTime: "22 phút", category: "Pillar", featured: false },

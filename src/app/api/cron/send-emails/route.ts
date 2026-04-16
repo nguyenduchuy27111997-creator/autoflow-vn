@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { createClient } from "@/lib/supabase/server";
-import { EMAIL_FROM } from "@/data/constants";
+import { EMAIL_FROM, SITE_URL } from "@/data/constants";
 import {
   type QuizTier,
   type EmailResult,
@@ -22,6 +22,9 @@ import {
   auditEmail5,
 } from "@/lib/email-templates";
 
+const MAX_RETRIES = 3;
+const RETRY_DELAY_HOURS = 1;
+
 interface QueueRow {
   id: string;
   email: string;
@@ -29,6 +32,8 @@ interface QueueRow {
   sequence_type: string;
   email_number: number;
   metadata: Record<string, unknown> | null;
+  retry_count: number | null;
+  failed_at: string | null;
 }
 
 function getResend() {
@@ -52,10 +57,11 @@ function getEmailTemplate(row: QueueRow): EmailResult | null {
     if (row.email_number === 5) return quizEmail5({ email, name, tier });
   }
   if (row.sequence_type === "pdf") {
+    const resource = (meta.resource as string) ?? undefined;
     if (row.email_number === 1) return pdfEmail1({ email, name });
     if (row.email_number === 2) return pdfEmail2({ email, name });
-    if (row.email_number === 3) return pdfEmail3({ email, name });
-    if (row.email_number === 4) return pdfEmail4({ email, name });
+    if (row.email_number === 3) return pdfEmail3({ email, name, resource });
+    if (row.email_number === 4) return pdfEmail4({ email, name, resource });
     if (row.email_number === 5) return pdfEmail5({ email, name });
   }
   if (row.sequence_type === "audit") {
@@ -68,8 +74,11 @@ function getEmailTemplate(row: QueueRow): EmailResult | null {
   return null;
 }
 
+function unsubUrl(email: string): string {
+  return `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`;
+}
+
 export async function GET(req: NextRequest) {
-  // Auth check: Bearer token must match CRON_SECRET
   const secret = process.env.CRON_SECRET;
   const auth = req.headers.get("authorization");
   if (!secret || auth !== `Bearer ${secret}`) {
@@ -77,14 +86,15 @@ export async function GET(req: NextRequest) {
   }
 
   const supabase = await createClient();
-  const now = new Date().toISOString();
+  const now = new Date();
+  const nowISO = now.toISOString();
 
-  // Also skip rows where user has unsubscribed
+  // Fetch pending emails + failed emails eligible for retry
   const { data: rows, error } = await supabase
     .from("email_queue")
-    .select("id, email, name, sequence_type, email_number, metadata")
-    .eq("status", "pending")
-    .lte("scheduled_at", now)
+    .select("id, email, name, sequence_type, email_number, metadata, retry_count, failed_at")
+    .or(`status.eq.pending,status.eq.failed`)
+    .lte("scheduled_at", nowISO)
     .order("scheduled_at", { ascending: true })
     .limit(50);
 
@@ -96,6 +106,7 @@ export async function GET(req: NextRequest) {
   let sent = 0;
   let failed = 0;
   let skipped = 0;
+  let retryLater = 0;
 
   // Check unsubscribed emails in bulk
   const emails = [...new Set((rows ?? []).map((r) => r.email))];
@@ -115,6 +126,28 @@ export async function GET(req: NextRequest) {
   }
 
   for (const row of rows ?? []) {
+    const retryCount = row.retry_count ?? 0;
+
+    // Skip if exceeded max retries
+    if (retryCount >= MAX_RETRIES) {
+      await supabase
+        .from("email_queue")
+        .update({ status: "permanently_failed" })
+        .eq("id", row.id);
+      skipped++;
+      continue;
+    }
+
+    // For failed rows: only retry after RETRY_DELAY_HOURS
+    if (row.failed_at) {
+      const failedAt = new Date(row.failed_at);
+      const retryAfter = new Date(failedAt.getTime() + RETRY_DELAY_HOURS * 60 * 60 * 1000);
+      if (now < retryAfter) {
+        retryLater++;
+        continue;
+      }
+    }
+
     // Skip unsubscribed
     if (unsubscribedSet.has(row.email)) {
       await supabase
@@ -125,7 +158,6 @@ export async function GET(req: NextRequest) {
       continue;
     }
 
-    // No Resend API key — mark as skipped
     if (!resend) {
       await supabase
         .from("email_queue")
@@ -152,19 +184,25 @@ export async function GET(req: NextRequest) {
         subject: template.subject,
         html: template.html,
         headers: {
-          "List-Unsubscribe": `<${process.env.NEXT_PUBLIC_SITE_URL || "https://autoflowvn.net"}/api/unsubscribe?email=${encodeURIComponent(row.email)}>`,
+          "List-Unsubscribe": `<${unsubUrl(row.email)}>`,
+          "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+          "Precedence": "bulk",
         },
       });
       await supabase
         .from("email_queue")
-        .update({ status: "sent", sent_at: new Date().toISOString() })
+        .update({ status: "sent", sent_at: nowISO })
         .eq("id", row.id);
       sent++;
     } catch (err) {
-      console.error(`Failed to send email_queue row ${row.id}:`, err);
+      console.error(`Failed to send email_queue row ${row.id} (attempt ${retryCount + 1}/${MAX_RETRIES}):`, err);
       await supabase
         .from("email_queue")
-        .update({ status: "failed" })
+        .update({
+          status: retryCount + 1 >= MAX_RETRIES ? "permanently_failed" : "failed",
+          retry_count: retryCount + 1,
+          failed_at: nowISO,
+        })
         .eq("id", row.id);
       failed++;
     }
@@ -175,5 +213,6 @@ export async function GET(req: NextRequest) {
     sent,
     failed,
     skipped,
+    retryLater,
   });
 }

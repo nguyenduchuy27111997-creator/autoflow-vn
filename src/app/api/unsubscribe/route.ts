@@ -2,6 +2,31 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { SITE_NAME, SITE_URL } from "@/data/constants";
 
+// POST: One-click unsubscribe (RFC 8058 — required by Gmail/Yahoo since 2024)
+export async function POST(req: NextRequest) {
+  const email = req.nextUrl.searchParams.get("email");
+  if (!email) {
+    return NextResponse.json({ error: "Missing email" }, { status: 400 });
+  }
+
+  try {
+    const supabase = await createClient();
+    await supabase
+      .from("email_unsubscribes")
+      .upsert({ email: email.trim() }, { onConflict: "email" });
+    await supabase
+      .from("email_queue")
+      .update({ status: "skipped" })
+      .eq("email", email.trim())
+      .eq("status", "pending");
+
+    return NextResponse.json({ success: true });
+  } catch {
+    return NextResponse.json({ error: "Internal error" }, { status: 500 });
+  }
+}
+
+// GET: Browser-based unsubscribe with confirmation page
 export async function GET(req: NextRequest) {
   const email = req.nextUrl.searchParams.get("email");
 

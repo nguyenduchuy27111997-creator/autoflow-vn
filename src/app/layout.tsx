@@ -65,10 +65,6 @@ export const metadata: Metadata = {
     description:
       "Tiết kiệm 10–20 giờ/tuần. Loại bỏ lỗi nhập tay. ROI trong 5 tháng.",
   },
-  icons: {
-    icon: "/icon.svg",
-    apple: "/icon-192.png",
-  },
   manifest: "/manifest.json",
   robots: {
     index: true,
