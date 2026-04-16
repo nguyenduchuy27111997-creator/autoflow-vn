@@ -10,17 +10,24 @@ import animationData from "./success-check.json";
  */
 export default function SuccessAnimation() {
   const confettiFired = useRef(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (confettiFired.current) return;
     confettiFired.current = true;
 
-    // Single burst — dynamic import để tránh SSR issue với canvas-confetti
+    // Compute icon center as normalized viewport coordinates
+    const rect = wrapperRef.current?.getBoundingClientRect();
+    const x = rect ? (rect.left + rect.width / 2) / window.innerWidth : 0.5;
+    const y = rect ? (rect.top + rect.height / 2) / window.innerHeight : 0.3;
+
+    // Single burst từ vị trí icon — dynamic import tránh SSR issue
     import("canvas-confetti").then(({ default: confetti }) => {
       confetti({
         particleCount: 100,
-        spread: 80,
-        origin: { y: 0.5 },
+        spread: 90,
+        startVelocity: 35,
+        origin: { x, y },
         colors: ["#10B981", "#0066FF", "#FBBF24", "#EC4899"],
       });
     }).catch((err) => {
@@ -29,7 +36,7 @@ export default function SuccessAnimation() {
   }, []);
 
   return (
-    <div className="w-28 h-28 mx-auto mb-2 relative">
+    <div ref={wrapperRef} className="w-28 h-28 mx-auto mb-2 relative">
       {/* Fallback circle visible even if Lottie fails */}
       <div className="absolute inset-0 rounded-full bg-accent/10 flex items-center justify-center">
         <svg width="40" height="40" fill="none" stroke="#10B981" strokeWidth="3">
