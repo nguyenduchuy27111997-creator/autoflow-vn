@@ -152,17 +152,32 @@ export default function AuditPage() {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-light text-primary text-xs font-semibold mb-5">
               <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-              Miễn phí · Không ràng buộc · 30 phút
+              Miễn phí · Không ràng buộc · Bạn giữ report
             </div>
             <h1 className="font-display font-extrabold text-3xl md:text-5xl text-slate-900 leading-tight tracking-tight mb-5">
-              Nhận audit quy trình{" "}
-              <span className="gradient-text">miễn phí</span>
+              Tìm ra{" "}
+              <span className="gradient-text">5-15 giờ/tuần</span>
+              {" "}team bạn đang lãng phí
             </h1>
             <p className="text-lg text-slate-500 leading-relaxed max-w-2xl">
-              Discovery call 30 phút + Audit Report cá nhân hóa trong 48h —
-              chỉ ra chính xác đâu có thể tự động hóa và tiết kiệm bao nhiêu.
-              Không pitch bán hàng, bạn quyết định bước tiếp theo.
+              Mô tả pain → discovery call 30 phút → audit report cá nhân hóa
+              trong 48h. PDF chi tiết: quy trình nào nên automate, ROI ước tính,
+              workflow đề xuất. <strong className="text-slate-700">Bạn giữ report, quyết định bước tiếp theo</strong>.
             </p>
+            <div className="flex flex-wrap gap-6 mt-6 text-sm text-slate-500">
+              <div className="flex items-center gap-2">
+                <span className="text-accent text-lg">✓</span>
+                <span>Không phí ẩn, không ràng buộc</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-accent text-lg">✓</span>
+                <span>Không pitch bán hàng trong call</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-accent text-lg">✓</span>
+                <span>Nếu không fit, mình refer người khác</span>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -551,34 +566,53 @@ export default function AuditPage() {
 
             {/* Sidebar */}
             <div className="lg:col-span-2 space-y-6">
-              {/* What you get */}
+              {/* Quy trình 3 bước */}
               <div className="bg-slate-50 rounded-2xl border border-slate-200 p-7">
-                <h3 className="font-display font-bold text-slate-900 mb-5">
-                  Bạn sẽ nhận được gì?
+                <h3 className="font-display font-bold text-slate-900 mb-1">
+                  Quy trình 3 bước
                 </h3>
-                <div className="space-y-4">
+                <p className="text-xs text-slate-500 mb-6">
+                  Minh bạch từ đầu, không surprise
+                </p>
+                <div className="space-y-5">
                   {[
                     {
-                      icon: "📞",
-                      title: "Discovery Call 30 phút",
-                      desc: "Mình nghe bạn kể về quy trình hàng ngày, focus vào pain points. Không pitch bán hàng.",
+                      num: "1",
+                      title: "Discovery Call — 30 phút",
+                      timing: "Trong 24h sau submit",
+                      desc: "Mình liên hệ qua Zalo/SĐT sắp xếp call. Hỏi sâu vào pain, không pitch bán hàng.",
+                      accent: "bg-primary",
                     },
                     {
-                      icon: "📊",
+                      num: "2",
                       title: "Audit Report cá nhân hóa",
-                      desc: "PDF chi tiết trong 48h sau call: phân tích pain, ROI ước tính, workflow đề xuất. Bạn giữ report — không phụ thuộc AutoFlow.",
+                      timing: "48h sau call",
+                      desc: "PDF chi tiết: phân tích pain, ROI ước tính, workflow đề xuất. Bạn giữ report — không phụ thuộc AutoFlow.",
+                      accent: "bg-primary",
                     },
-                  ].map((item, i) => (
+                    {
+                      num: "3",
+                      title: "Bạn quyết định bước tiếp theo",
+                      timing: "Hoàn toàn tuỳ bạn",
+                      desc: "Muốn triển khai? Mình gửi proposal cụ thể. Không muốn? Không làm phiền — bạn giữ report làm tài liệu tham khảo.",
+                      accent: "bg-accent",
+                    },
+                  ].map((step, i) => (
                     <div key={i} className="flex gap-3">
-                      <span className="text-xl shrink-0 mt-0.5">
-                        {item.icon}
-                      </span>
-                      <div>
+                      <div
+                        className={`w-8 h-8 rounded-full ${step.accent} text-white flex items-center justify-center font-bold text-sm shrink-0`}
+                      >
+                        {step.num}
+                      </div>
+                      <div className="flex-1">
                         <p className="font-semibold text-sm text-slate-900">
-                          {item.title}
+                          {step.title}
                         </p>
-                        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
-                          {item.desc}
+                        <p className="text-xs text-primary font-medium mb-1">
+                          {step.timing}
+                        </p>
+                        <p className="text-xs text-slate-500 leading-relaxed">
+                          {step.desc}
                         </p>
                       </div>
                     </div>
@@ -586,21 +620,22 @@ export default function AuditPage() {
                 </div>
               </div>
 
-              {/* Trust signals */}
+              {/* Cam kết */}
               <div className="bg-white rounded-2xl border border-slate-200 p-7">
                 <h3 className="font-display font-bold text-sm text-slate-900 mb-4">
-                  Cam kết
+                  Cam kết của mình
                 </h3>
                 <div className="space-y-3">
                   {[
-                    "100% miễn phí — không phí ẩn",
+                    "100% miễn phí — không phí ẩn, không upsell bất ngờ",
                     "Không spam, không gọi điện liên tục",
-                    "Nếu không phù hợp, mình nói thẳng",
-                    "Data của bạn không chia sẻ bên thứ ba",
+                    "Nếu AutoFlow không fit, mình nói thẳng + refer người khác",
+                    "Data bạn share không chia sẻ bên thứ ba",
+                    "Proposal chỉ gửi khi bạn chủ động confirm",
                   ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-2.5">
+                    <div key={i} className="flex items-start gap-2.5">
                       <svg
-                        className="text-accent shrink-0"
+                        className="text-accent shrink-0 mt-0.5"
                         width="16"
                         height="16"
                         fill="none"
@@ -609,20 +644,41 @@ export default function AuditPage() {
                       >
                         <path d="M2 8l4 4 8-8" />
                       </svg>
-                      <span className="text-sm text-slate-600">{item}</span>
+                      <span className="text-sm text-slate-600 leading-relaxed">
+                        {item}
+                      </span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Quick stat */}
+              {/* Who should audit */}
+              <div className="bg-amber-50 rounded-2xl border border-amber-200 p-7">
+                <h3 className="font-display font-bold text-sm text-slate-900 mb-3">
+                  Phù hợp nếu bạn là…
+                </h3>
+                <ul className="space-y-2 text-sm text-slate-600 leading-relaxed">
+                  <li>🏪 Chủ shop Shopee/TikTok, 100-1000 đơn/ngày</li>
+                  <li>🍜 F&B chuỗi 3+ chi nhánh, xài MISA/KiotViet/iPOS</li>
+                  <li>🏥 Phòng khám/spa với {'>'}20 lịch/ngày</li>
+                  <li>🎓 Trung tâm đào tạo {'>'}100 học viên active</li>
+                  <li>👥 HR tuyển {'>'}20 ứng viên/tháng</li>
+                </ul>
+                <p className="text-xs text-slate-500 mt-4 italic">
+                  Ngoài các ngành này? Vẫn có thể fit — mình sẽ review pain và trả lời thẳng.
+                </p>
+              </div>
+
+              {/* Social proof stat */}
               <div className="bg-primary text-white rounded-2xl p-7">
                 <p className="font-display font-extrabold text-3xl mb-1">
-                  40%+
+                  12-18h
                 </p>
-                <p className="text-sm text-white/70">
-                  tỉ lệ chốt deal sau audit call. Vì audit cho thấy con số thật
-                  — không phải lời hứa.
+                <p className="text-sm text-white/80 mb-3">
+                  giờ/tuần trung bình clients tiết kiệm được sau khi deploy workflow đầu tiên.
+                </p>
+                <p className="text-xs text-white/60 italic">
+                  Con số từ audit thật, không phải lời hứa.
                 </p>
               </div>
             </div>
