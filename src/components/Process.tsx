@@ -8,7 +8,7 @@ const steps = [
     title: "Audit miễn phí",
     duration: "30 phút",
     description:
-      "Gọi video hoặc gặp trực tiếp. Mình nghe bạn kể về quy trình hàng ngày, tìm ra đâu là chỗ đang mất thời gian nhất. Bạn nhận được Audit Report trong 24h — miễn phí, không ràng buộc.",
+      "Gọi video hoặc gặp trực tiếp. Mình nghe bạn kể về quy trình hàng ngày, tìm ra đâu là chỗ đang mất thời gian nhất. Bạn nhận được Audit Report trong 48h sau call — miễn phí, không ràng buộc.",
     deliverable: "Audit Report chi tiết",
   },
   {
@@ -22,7 +22,7 @@ const steps = [
   {
     number: "03",
     title: "Build & Training",
-    duration: "1–8 tuần tùy gói",
+    duration: "1–4 tuần tùy độ phức tạp",
     description:
       "Bạn duyệt, mình build. Mỗi workflow hoàn thành đều có video Loom hướng dẫn. Training team trực tiếp. Bạn không cần biết code — chỉ cần biết bấm nút.",
     deliverable: "Workflows chạy thật + Video SOP",

@@ -11,7 +11,7 @@ const faqs = [
   },
   {
     q: "Tôi không biết code. Có dùng được không?",
-    a: "Hoàn toàn được. Mình build xong, bàn giao kèm video hướng dẫn từng bước. Team bạn chỉ cần biết bấm nút và đọc kết quả. Nếu có vấn đề, mình fix trong 24h qua retainer.",
+    a: "Hoàn toàn được. Mình build xong, bàn giao kèm video hướng dẫn từng bước. Team bạn chỉ cần biết bấm nút và đọc kết quả. Nếu có vấn đề, mình fix trong 24h qua gói hosting 499K/tháng.",
   },
   {
     q: "Data của tôi có an toàn không?",
@@ -19,15 +19,15 @@ const faqs = [
   },
   {
     q: "Nếu workflow bị lỗi thì sao?",
-    a: "Gói retainer cam kết fix lỗi trong 24h làm việc (SLA). Ngoài ra, mỗi workflow đều có error handling và thông báo tự động — nếu có lỗi, bạn biết ngay, không cần đợi khách phàn nàn.",
+    a: "Gói hosting 499K/tháng cam kết fix lỗi trong 24h làm việc (SLA). Ngoài ra, mỗi workflow đều có error handling và thông báo tự động — nếu có lỗi, bạn biết ngay, không cần đợi khách phàn nàn.",
   },
   {
     q: "Mất bao lâu để thấy kết quả?",
-    a: "Gói Starter: 1–2 tuần là workflow đầu tiên chạy thật. Gói Growth: 3–4 tuần toàn bộ xong. Bạn thấy kết quả ngay từ workflow đầu tiên — không phải đợi hết project.",
+    a: "Cơ bản (2M): 1–2 tuần là workflow đầu tiên chạy thật. Nâng cao (4M): 2–3 tuần toàn bộ xong. Toàn diện (7M): 3–4 tuần. Bạn thấy kết quả ngay từ workflow đầu tiên — không phải đợi hết project.",
   },
   {
     q: "Tại sao không dùng Zapier cho rẻ?",
-    a: "Zapier $20/tháng, giới hạn tasks, và không tích hợp được Zalo OA, MISA, KiotViet. AutoFlow dùng nền tảng mã nguồn mở, self-host chỉ $5/tháng (phí VPS), không giới hạn, và tích hợp native với ecosystem Việt Nam. Tiết kiệm hơn nhiều cho SME.",
+    a: "Zapier $20/tháng (~500K VND/tháng), giới hạn tasks, và không tích hợp được Zalo OA, MISA, KiotViet. AutoFlow dùng nền tảng mã nguồn mở, self-host chỉ $5/tháng (phí VPS), không giới hạn, và tích hợp native với ecosystem Việt Nam. Tiết kiệm hơn nhiều cho SME.",
   },
   {
     q: "Thanh toán như thế nào?",

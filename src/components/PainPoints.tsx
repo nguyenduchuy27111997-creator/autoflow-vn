@@ -26,8 +26,8 @@ const pains = [
     title: "Lead rơi vì không follow-up kịp",
     description:
       "Khách nhắn Zalo lúc 11 giờ đêm. Sáng hôm sau reply thì họ đã mua bên đối thủ. Không ai theo dõi được 100% lead 24/7.",
-    stat: "67%",
-    statLabel: "lead mất vì reply chậm quá 1 giờ",
+    stat: ">60%",
+    statLabel: "lead mất vì reply chậm quá 1 giờ (khảo sát 20+ SME VN)",
   },
   {
     icon: (

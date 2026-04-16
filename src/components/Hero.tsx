@@ -106,7 +106,7 @@ export default function Hero() {
           <div className="flex flex-wrap items-center justify-center gap-4 mt-6 opacity-0 animate-fade-up delay-400">
             <span className="inline-flex items-center gap-1.5 text-xs text-slate-500">
               <span className="w-2 h-2 rounded-full bg-accent" />
-              Phản hồi trong 2 giờ
+              Phản hồi nhanh trong giờ hành chính
             </span>
             <span className="inline-flex items-center gap-1.5 text-xs text-slate-500">
               <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
