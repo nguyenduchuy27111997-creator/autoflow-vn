@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { getStoredUTM } from "@/lib/utm";
 import { trackGenerateLead } from "@/lib/analytics";
 import { fbqTrackLead } from "@/lib/fbpixel";
+import SuccessAnimation from "./_components/SuccessAnimation";
 
 // ── Enum constants (reused in API handler + client-ops types) ──
 export const PAIN_PRIMARY_OPTIONS = [
@@ -173,18 +174,8 @@ export default function AuditPage() {
                 /* ─── Step 4: Success — quy trình 3 bước ─── */
                 <div className="bg-white rounded-2xl border border-slate-200 p-10 md:p-12">
                   <div className="text-center mb-8">
-                    <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-5">
-                      <svg
-                        width="40"
-                        height="40"
-                        fill="none"
-                        stroke="#10B981"
-                        strokeWidth="2.5"
-                      >
-                        <path d="M6 20l10 10 18-18" />
-                      </svg>
-                    </div>
-                    <h2 className="font-display font-bold text-2xl text-slate-900 mb-3">
+                    <SuccessAnimation />
+                    <h2 className="font-display font-bold text-2xl text-slate-900 mb-3 mt-2">
                       Cảm ơn bạn!
                     </h2>
                     <p className="text-slate-500 max-w-md mx-auto">
