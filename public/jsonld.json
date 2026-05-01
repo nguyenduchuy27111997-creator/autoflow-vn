@@ -1,0 +1,35 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "AutoFlow VN",
+    "url": "https://autoflowvn.net",
+    "logo": "https://autoflowvn.net/icon.svg",
+    "email": "support@autoflowvn.net",
+    "description": "Giúp doanh nghiệp vừa và nhỏ Việt Nam tự động hóa quy trình lặp lại — tích hợp Zalo, MISA, Shopee, KiotViet.",
+    "address": { "@type": "PostalAddress", "addressLocality": "TP. Hồ Chí Minh", "addressCountry": "VN" },
+    "contactPoint": { "@type": "ContactPoint", "contactType": "customer service", "email": "support@autoflowvn.net", "url": "https://autoflowvn.net/audit", "availableLanguage": ["vi", "en"] },
+    "sameAs": ["https://www.facebook.com/profile.php?id=61575409020684"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "AutoFlow VN",
+    "url": "https://autoflowvn.net",
+    "email": "support@autoflowvn.net",
+    "description": "Giúp doanh nghiệp vừa và nhỏ Việt Nam tự động hóa quy trình lặp lại",
+    "priceRange": "$$",
+    "address": { "@type": "PostalAddress", "addressLocality": "TP. Hồ Chí Minh", "addressCountry": "VN" },
+    "areaServed": { "@type": "Country", "name": "Vietnam" },
+    "serviceType": ["Automation Consulting", "Workflow Development", "Business Process Automation"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Gói dịch vụ tự động hóa",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Starter", "description": "1 quy trình, kết nối 2 hệ thống, vận hành + giám sát + hỗ trợ" }, "priceSpecification": { "@type": "PriceSpecification", "price": "1500000", "priceCurrency": "VND", "unitText": "MONTH" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Growth", "description": "2-3 quy trình, kết nối 3-4 hệ thống, tối ưu hàng tháng" }, "priceSpecification": { "@type": "PriceSpecification", "price": "2500000", "priceCurrency": "VND", "unitText": "MONTH" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Scale", "description": "4+ quy trình, kết nối 5+ hệ thống, audit hàng quý" }, "priceSpecification": { "@type": "PriceSpecification", "price": "4000000", "priceCurrency": "VND", "unitText": "MONTH" } }
+      ]
+    }
+  }
+]

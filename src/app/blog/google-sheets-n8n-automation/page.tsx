@@ -557,7 +557,7 @@ export default function GoogleSheetsN8nAutomationBlog() {
                     [
                       "Chi phí triển khai",
                       "0 — nhưng trả bằng thời gian nhân viên mỗi ngày",
-                      "2–7 triệu một lần, ~499K/tháng hosting (tuỳ chọn)",
+                      "từ 1.5 triệu/tháng bao gồm hosting + hỗ trợ",
                     ],
                   ]}
                 />

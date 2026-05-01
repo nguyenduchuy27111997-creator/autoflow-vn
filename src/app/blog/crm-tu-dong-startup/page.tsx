@@ -593,7 +593,7 @@ export default function CRMTuDongStartupBlog() {
                       </p>
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
-                          <p className="text-slate-500 mb-1">Chi phí triển khai (1 lần)</p>
+                          <p className="text-slate-500 mb-1">Chi phí gói hàng tháng</p>
                           <p className="font-bold text-slate-800">5–10 triệu VND</p>
                         </div>
                         <div>

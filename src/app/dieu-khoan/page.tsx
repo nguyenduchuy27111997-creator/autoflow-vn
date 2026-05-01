@@ -31,13 +31,13 @@ export default function DieuKhoanPage() {
             </p>
             <ul>
               <li>Audit và phân tích quy trình vận hành</li>
-              <li>Thiết kế và triển khai workflows trên nền tảng n8n</li>
+              <li>Thiết kế, triển khai, và vận hành workflows trên Hệ thống AutoFlow — dịch vụ tự động hóa quản lý trọn gói</li>
               <li>
                 Tích hợp với các hệ thống: Zalo OA, MISA, KiotViet, Shopee, và
                 các nền tảng khác
               </li>
               <li>Training và bàn giao tài liệu vận hành</li>
-              <li>Hỗ trợ kỹ thuật và bảo trì (gói Hosting 499K/tháng)</li>
+              <li>Hỗ trợ kỹ thuật và bảo trì (gói gói hàng tháng từ 1.5 triệu)</li>
             </ul>
 
             <h2>3. Thanh toán</h2>
@@ -50,7 +50,8 @@ export default function DieuKhoanPage() {
                 <strong>Hình thức:</strong> Chuyển khoản ngân hàng
               </li>
               <li>
-                <strong>Hosting:</strong> Thanh toán hàng tháng, hủy bất cứ lúc nào.
+                <strong>Hosting:</strong> Thanh toán hàng tháng, hủy bất cứ lúc
+                nào.
               </li>
               <li>Giá đã bao gồm VAT (nếu có). Không có phí ẩn phát sinh</li>
             </ul>
@@ -85,8 +86,8 @@ export default function DieuKhoanPage() {
                 giao
               </li>
               <li>
-                <strong>n8n server:</strong> Nếu sử dụng gói Scale
-                (self-hosted), server và data hoàn toàn thuộc về khách hàng
+                <strong>Hạ tầng vận hành:</strong> AutoFlow vận hành workflows trên hạ tầng dedicated tại VN.
+                Khách hàng nhận báo cáo hiệu suất + dashboard, không cần truy cập trực tiếp engine.
               </li>
             </ul>
 
@@ -96,8 +97,11 @@ export default function DieuKhoanPage() {
                 AutoFlow cam kết bảo mật thông tin doanh nghiệp của khách hàng
               </li>
               <li>Không chia sẻ thông tin với bên thứ ba</li>
-              <li>Tất cả workflow bao gồm 7 ngày warranty sau bàn giao</li>
-              <li>Gói Hosting bao gồm monitoring 24/7, backup daily, SLA support giờ hành chính.</li>
+              <li>Tất cả workflow bao gồm 30 ngày warranty sau bàn giao</li>
+              <li>
+                Gói Hosting bao gồm monitoring 24/7, backup daily, SLA support
+                giờ hành chính.
+              </li>
             </ul>
 
             <h2>7. Trách nhiệm và giới hạn</h2>
@@ -125,7 +129,8 @@ export default function DieuKhoanPage() {
                 100% thanh toán đợt 1. Sau khi bắt đầu — không hoàn phí đợt 1
               </li>
               <li>
-                <strong>Hosting:</strong> Hủy bất cứ lúc nào, không hoàn tháng đã thanh toán.
+                <strong>Hosting:</strong> Hủy bất cứ lúc nào, không hoàn tháng
+                đã thanh toán.
               </li>
             </ul>
 
@@ -151,10 +156,10 @@ export default function DieuKhoanPage() {
             <p>Nếu có câu hỏi về điều khoản dịch vụ, vui lòng liên hệ:</p>
             <ul>
               <li>
-                <strong>Email:</strong> hello@autoflowvn.net
+                <strong>Email:</strong> support@autoflowvn.net
               </li>
               <li>
-                <strong>Zalo:</strong> 0912 345 678
+                <strong>Zalo:</strong> 0935.115.248
               </li>
               <li>
                 <strong>Địa chỉ:</strong> TP. Hồ Chí Minh, Việt Nam

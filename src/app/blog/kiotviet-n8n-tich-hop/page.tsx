@@ -620,7 +620,7 @@ export default function KiotVietN8nTichHopBlog() {
                   },
                   {
                     q: "Chi phí triển khai và vận hành tích hợp KiotViet n8n là bao nhiêu?",
-                    a: "Chi phí setup: 4–7 triệu nếu tự làm hoặc thuê đội tích hợp. Chi phí vận hành: VPS chạy n8n khoảng 200–500k/tháng. Hoặc dùng n8n Cloud: free tier đủ cho cửa hàng nhỏ (<5.000 lần chạy/tháng), gói trả phí từ $20/tháng. Cửa hàng 50+ hóa đơn/ngày thường hoàn vốn trong tháng đầu.",
+                    a: "Gói hàng tháng: 2.5–4 triệu nếu tự làm hoặc thuê đội tích hợp. Chi phí vận hành: VPS chạy n8n khoảng 200–500k/tháng. Hoặc dùng n8n Cloud: free tier đủ cho cửa hàng nhỏ (<5.000 lần chạy/tháng), gói trả phí từ $20/tháng. Cửa hàng 50+ hóa đơn/ngày thường hoàn vốn trong tháng đầu.",
                   },
                 ]} />
     </BlogLayout>

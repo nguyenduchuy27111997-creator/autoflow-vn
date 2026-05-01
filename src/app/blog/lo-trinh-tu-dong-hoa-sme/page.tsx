@@ -55,7 +55,7 @@ const tocItems = [
 const faqItems = [
   {
     q: "SME nhỏ (dưới 10 người) có cần automation không?",
-    a: "Hoàn toàn có. SME nhỏ thường lãng phí 15-25 giờ/tuần cho việc lặp lại. Với chi phí từ 2-7 triệu, bạn có thể tự động hóa các quy trình cốt lõi và tiết kiệm tương đương 1 nhân viên full-time. Bắt đầu từ Giai đoạn 2 với 2-3 workflow đơn giản nhất.",
+    a: "Hoàn toàn có. SME nhỏ thường lãng phí 15-25 giờ/tuần cho việc lặp lại. Với gói từ 1.5 triệu/tháng, bạn có thể tự động hóa các quy trình cốt lõi và tiết kiệm tương đương 1 nhân viên full-time. Bắt đầu từ Giai đoạn 2 với 2-3 workflow đơn giản nhất.",
   },
   {
     q: "Mất bao lâu để đi từ Giai đoạn 1 đến Giai đoạn 3?",
@@ -63,11 +63,11 @@ const faqItems = [
   },
   {
     q: "Chi phí triển khai automation cho SME là bao nhiêu?",
-    a: "Giai đoạn 2 (cơ bản): 2–7 triệu, 1-2 tuần. Giai đoạn 3 (kết nối): 20-35 triệu thêm, 3-4 tuần. Giai đoạn 4 (thông minh): 50-80 triệu, 6-8 tuần. Payback trung bình: 3-6 tháng. ROI năm đầu thường 200-500%. Dùng ROI Calculator ở trên để tính cho trường hợp cụ thể.",
+    a: "Giai đoạn 2 (Starter): từ 1.5 triệu/tháng, 1-2 tuần. Giai đoạn 3 (kết nối): 20-35 triệu thêm, 3-4 tuần. Giai đoạn 4 (thông minh): 50-80 triệu, 6-8 tuần. Payback trung bình: 3-6 tháng. ROI năm đầu thường 200-500%. Dùng ROI Calculator ở trên để tính cho trường hợp cụ thể.",
   },
   {
     q: "n8n có phù hợp cho SME không biết code?",
-    a: "Có. n8n có giao diện kéo-thả trực quan. Với gói Cơ bản, AutoFlow triển khai toàn bộ — bạn chỉ cần mô tả quy trình hiện tại. Đội ngũ của bạn chỉ cần biết dùng (không cần biết code). Tuy nhiên nếu muốn tự triển khai, bạn cần khoảng 1-2 tuần để học cơ bản.",
+    a: "Có. n8n có giao diện kéo-thả trực quan. Với gói Starter, AutoFlow triển khai toàn bộ — bạn chỉ cần mô tả quy trình hiện tại. Đội ngũ của bạn chỉ cần biết dùng (không cần biết code). Tuy nhiên nếu muốn tự triển khai, bạn cần khoảng 1-2 tuần để học cơ bản.",
   },
   {
     q: "Làm sao biết nên ưu tiên tự động hóa quy trình nào trước?",
@@ -90,8 +90,8 @@ const faqItems = [
     a: "Hiện tại AutoFlow phục vụ chuyên sâu: E-commerce (Shopee, TikTok Shop, KiotViet, Haravan, Sapo), F&B, Giáo dục, Bất động sản, Y tế (phòng khám), Salon & Spa, Du lịch & Khách sạn, và Logistics. Mỗi ngành có bộ workflow template riêng, đã được kiểm chứng với khách hàng thực tế.",
   },
   {
-    q: "Hosting 499K/tháng sau triển khai có bắt buộc không?",
-    a: "Không bắt buộc. Sau khi triển khai xong, hệ thống tự chạy. Hosting (499K/tháng) dành cho doanh nghiệp muốn hỗ trợ liên tục: monitor, fix lỗi trong 24h, thêm workflow mới mỗi tháng. Tỉ lệ khách chọn hosting: 70%+ vì muốn yên tâm và phát triển liên tục.",
+    q: "gói hàng tháng từ 1.5 triệu sau triển khai có bắt buộc không?",
+    a: "Không bắt buộc. Sau khi triển khai xong, hệ thống tự chạy. Hosting (từ 1.5 triệu/tháng) dành cho doanh nghiệp muốn hỗ trợ liên tục: monitor, fix lỗi trong 24h, thêm workflow mới mỗi tháng. Tỉ lệ khách chọn hosting: 70%+ vì muốn yên tâm và phát triển liên tục.",
   },
 ];
 
@@ -310,7 +310,7 @@ export default function LoTrinhTuDongHoaSME() {
 
                 <p>
                   <strong>Kết quả điển hình của giai đoạn này:</strong> Tiết kiệm 10-15 giờ/tuần, giảm 90% lỗi nhập liệu,
-                  nhân viên tập trung vào việc có giá trị hơn. Chi phí: 2–7 triệu, hoàn vốn trong 4-6 tuần.
+                  nhân viên tập trung vào việc có giá trị hơn. Chi phí: từ 1.5 triệu/tháng, hoàn vốn ngay tháng đầu.
                 </p>
 
                 <p>

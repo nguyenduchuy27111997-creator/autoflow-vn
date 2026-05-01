@@ -628,7 +628,7 @@ export default function EmailMarketingAutomationBlog() {
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
                           <p className="text-slate-500 mb-1">Chi phí setup (1 lần)</p>
-                          <p className="font-bold text-slate-800">2–7 triệu VND</p>
+                          <p className="font-bold text-slate-800">từ 1.5 triệu/tháng</p>
                         </div>
                         <div>
                           <p className="text-slate-500 mb-1">Chi phí vận hành/tháng</p>

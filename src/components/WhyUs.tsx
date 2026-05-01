@@ -38,7 +38,7 @@ const advantages = [
   {
     title: "2–4 tuần là xong, không phải 6 tháng",
     description:
-      "Quy trình delivery chuẩn hóa: Audit → Build → Training → Bàn giao. Workflow đơn giản triển khai trong 1 tuần. Nâng cao trong 2–3 tuần. Không kéo dài, không phát sinh.",
+      "Quy trình delivery chuẩn hóa: Audit → Build → Training → Bàn giao. Gói Starter triển khai trong 1 tuần. Growth/Scale trong 2–3 tuần. Bao gồm hosting + giám sát + hỗ trợ hàng tháng.",
     icon: (
       <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />

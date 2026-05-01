@@ -127,7 +127,7 @@ export default function NhacLichZaloOAGiaoDucBlog() {
                   Về mặt tài chính: một trung tâm với 300 học viên, lớp học 500.000 VND/buổi,
                   tỷ lệ miss 12% — mỗi tháng mất khoảng <strong>36 buổi học bị bỏ lỡ</strong> không
                   thu hồi được. Giảm tỷ lệ này xuống 7% đồng nghĩa với việc thu hồi thêm ~15 buổi/tháng,
-                  tương đương <strong>7.2–7 triệu VND</strong> doanh thu thực thu mỗi tháng.
+                  tương đương <strong>7.từ 1.5 triệu/tháng</strong> doanh thu thực thu mỗi tháng.
                 </p>
 
                 <CalloutBox type="info" title="Tại sao Zalo OA thay vì SMS hay email?">

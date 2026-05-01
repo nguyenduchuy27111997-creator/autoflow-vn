@@ -1,23 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { isValidEmail } from "@/lib/rate-limit";
 import { SITE_NAME, SITE_URL } from "@/data/constants";
 
 // POST: One-click unsubscribe (RFC 8058 — required by Gmail/Yahoo since 2024)
 export async function POST(req: NextRequest) {
-  const email = req.nextUrl.searchParams.get("email");
-  if (!email) {
-    return NextResponse.json({ error: "Missing email" }, { status: 400 });
+  const emailRaw = req.nextUrl.searchParams.get("email");
+  if (!isValidEmail(emailRaw)) {
+    return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
+  const email = emailRaw.trim().toLowerCase();
 
   try {
     const supabase = await createClient();
     await supabase
       .from("email_unsubscribes")
-      .upsert({ email: email.trim() }, { onConflict: "email" });
+      .upsert({ email }, { onConflict: "email" });
     await supabase
       .from("email_queue")
       .update({ status: "skipped" })
-      .eq("email", email.trim())
+      .eq("email", email)
       .eq("status", "pending");
 
     return NextResponse.json({ success: true });
@@ -28,14 +30,15 @@ export async function POST(req: NextRequest) {
 
 // GET: Browser-based unsubscribe with confirmation page
 export async function GET(req: NextRequest) {
-  const email = req.nextUrl.searchParams.get("email");
+  const emailRaw = req.nextUrl.searchParams.get("email");
 
-  if (!email) {
+  if (!isValidEmail(emailRaw)) {
     return new NextResponse(htmlPage("Email không hợp lệ", false), {
       status: 400,
       headers: { "Content-Type": "text/html; charset=utf-8" },
     });
   }
+  const email = emailRaw.trim().toLowerCase();
 
   try {
     const supabase = await createClient();
@@ -43,13 +46,13 @@ export async function GET(req: NextRequest) {
     // Insert into unsubscribes table (upsert to avoid duplicates)
     await supabase
       .from("email_unsubscribes")
-      .upsert({ email: email.trim() }, { onConflict: "email" });
+      .upsert({ email }, { onConflict: "email" });
 
     // Cancel all pending emails for this address
     await supabase
       .from("email_queue")
       .update({ status: "skipped" })
-      .eq("email", email.trim())
+      .eq("email", email)
       .eq("status", "pending");
 
     return new NextResponse(

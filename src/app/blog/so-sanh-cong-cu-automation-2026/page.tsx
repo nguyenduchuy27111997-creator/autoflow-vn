@@ -88,7 +88,7 @@ const faqItems = [
   },
   {
     q: "Chi phí triển khai automation thực tế là bao nhiêu?",
-    a: "Tự triển khai n8n: VPS 300.000-500.000đ/tháng + thời gian học. Thuê AutoFlow: gói Cơ bản 2 triệu (một lần) cho 3-5 workflow + hosting tuỳ chọn 499K/tháng. So sánh: Zapier Professional $299/tháng (~7,5 triệu) cho features tương đương nhưng không có hỗ trợ tiếng Việt và tích hợp Việt Nam.",
+    a: "Tự triển khai n8n: VPS 300.000-500.000đ/tháng + thời gian học. Thuê AutoFlow: gói Starter từ 1.5 triệu/tháng bao gồm hosting + giám sát + hỗ trợ. So sánh: Zapier Professional $299/tháng (~7,5 triệu) cho features tương đương nhưng không có hỗ trợ tiếng Việt và tích hợp Việt Nam.",
   },
 ];
 
@@ -443,14 +443,14 @@ export default function SoSanhCongCuAutomation2026() {
             color: "bg-blue-50 border-blue-200",
             titleColor: "text-blue-700",
             tools: "n8n self-host + VPS chất lượng, Make Core ($9), IFTTT Pro ($3.49), Pipedream Pro ($29)",
-            note: "Ngân sách đủ để thuê VPS tốt + domain. AutoFlow gói Cơ bản: từ 2 triệu (một lần).",
+            note: "Ngân sách đủ để thuê VPS tốt + domain. AutoFlow gói Starter: từ 1.5 triệu/tháng (bao gồm hosting).",
             best: "SME 5-15 người, cần 5-10 workflow cơ bản",
           },
           {
             tier: "5-20 triệu/tháng",
             color: "bg-violet-50 border-violet-200",
             titleColor: "text-violet-700",
-            tools: "n8n self-host + AutoFlow Hosting 499K/tháng, Make Pro ($99), Zapier Starter ($19.99 - rất hạn chế)",
+            tools: "n8n self-host + AutoFlow gói hàng tháng từ 1.5 triệu, Make Pro ($99), Zapier Starter ($19.99 - rất hạn chế)",
             note: "Đủ budget để thuê chuyên gia quản lý + phát triển workflow mới hàng tháng.",
             best: "SME 15-50 người, cần automation phức tạp, multi-channel",
           },

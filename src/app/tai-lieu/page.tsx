@@ -19,7 +19,7 @@ const useCases = [
     problem:
       "Mỗi ngày nhân viên dành 5 giờ copy-paste đơn hàng từ Shopee, Tiki, TikTok Shop vào MISA. 8-10 lỗi sai tồn kho mỗi tuần khiến khách hàng phàn nàn. 2 nhân viên full-time chỉ để nhập liệu — tốn 240 triệu/năm.",
     solution:
-      "AutoFlow xây 4 workflow n8n: (1) Đơn hàng mới từ 3 sàn tự động đồng bộ vào MISA, (2) Tồn kho cập nhật real-time giữa các kênh, (3) Trạng thái vận chuyển tự thông báo khách qua Zalo, (4) Báo cáo doanh thu tự động mỗi sáng gửi vào Telegram cho chủ shop.",
+      "AutoFlow xây 4 workflow: (1) Đơn hàng mới từ 3 sàn tự động đồng bộ vào MISA, (2) Tồn kho cập nhật real-time giữa các kênh, (3) Trạng thái vận chuyển tự thông báo khách qua Zalo, (4) Báo cáo doanh thu tự động mỗi sáng gửi vào Telegram cho chủ shop.",
     results: [
       { metric: "0 giờ", label: "nhập liệu/ngày", sub: "từ 5 giờ xuống 0" },
       {
@@ -120,7 +120,7 @@ const useCases = [
       "Zalo OA",
       "Google Sheets",
       "Telegram",
-      "n8n AI Agent",
+      "AI Agent (Claude)",
     ],
     icon: (
       <svg

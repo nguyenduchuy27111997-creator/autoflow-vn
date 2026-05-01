@@ -45,7 +45,7 @@ export default function RealEstateUseCasePage() {
               <span className="w-1 h-1 bg-slate-300 rounded-full" />
               <span>Dự án 6 workflows — 72 triệu đồng</span>
               <span className="w-1 h-1 bg-slate-300 rounded-full" />
-              <span>6 workflows n8n</span>
+              <span>6 workflows tự động hóa</span>
             </div>
           </div>
         </section>
@@ -154,7 +154,7 @@ export default function RealEstateUseCasePage() {
                 accentColor="#8B5CF6"
                 steps={[
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" /></svg>, label: "Lead submit form", sub: "Facebook Lead Ads" },
-                  { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>, label: "n8n webhook", sub: "Instant — < 5 giây" },
+                  { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>, label: "Workflow webhook", sub: "Instant — < 5 giây" },
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>, label: "Lưu CRM", sub: "Google Sheet + nguồn + UTM" },
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>, label: "Dedupe check", sub: "Loại lead trùng SĐT" },
                 ]}
@@ -309,7 +309,7 @@ export default function RealEstateUseCasePage() {
                 { week: "Tuần 1", title: "Audit & Planning", items: ["Discovery call 2 giờ — hiểu flow lead từ Facebook đến chốt deal", "Mapping quy trình phân lead, follow-up hiện tại", "Setup Facebook Lead Ads webhook + Google Sheet CRM", "Proposal chi tiết với 6 workflows + ROI ước tính"] },
                 { week: "Tuần 2", title: "Build Workflow #1, #2 & #3", items: ["Xây workflow lead capture tự động", "Xây workflow phân lead theo khu vực", "Xây workflow chào hàng 30 giây qua Zalo OA", "Test với 50 lead đầu tiên"] },
                 { week: "Tuần 3", title: "Build Workflow #4, #5 & #6", items: ["Xây workflow nhắc follow-up + escalation", "Xây workflow báo cáo conversion rate", "Xây workflow nurture sequence 14 ngày", "Test toàn bộ với data thực"] },
-                { week: "Tuần 4", title: "Go-live & Training", items: ["Go-live toàn bộ 6 workflows", "Training 2 buổi: quản lý + team sales", "Bàn giao SOP + video Loom hướng dẫn", "Bàn giao dashboard Google Sheet CRM", "Support 14 ngày sau bàn giao"] },
+                { week: "Tuần 4", title: "Go-live & Training", items: ["Go-live toàn bộ 6 workflows", "Training 2 buổi: quản lý + team sales", "Bàn giao SOP + tài liệu hướng dẫn", "Bàn giao dashboard Google Sheet CRM", "Support 14 ngày sau bàn giao"] },
               ].map((phase, i) => (
                 <div key={i} className="flex gap-4 md:gap-6">
                   <div className="flex flex-col items-center">
@@ -347,7 +347,7 @@ export default function RealEstateUseCasePage() {
               { name: "Zalo OA", desc: "Chào hàng, nurture" },
               { name: "Google Sheets", desc: "CRM + tracking" },
               { name: "Telegram", desc: "Alert + báo cáo" },
-              { name: "n8n AI Agent", desc: "Phân tích lead thông minh" },
+              { name: "AI Agent (Claude)", desc: "Phân tích lead thông minh" },
             ].map((tool) => (
               <div key={tool.name} className="bg-white rounded-xl border border-slate-200 p-4 text-center hover:border-purple-200 hover:shadow-md transition-all">
                 <div className="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center mx-auto mb-2">
@@ -391,7 +391,7 @@ export default function RealEstateUseCasePage() {
                 <div className="space-y-3">
                   {[
                     { item: "AutoFlow setup (1 lần)", cost: "72 triệu" },
-                    { item: "n8n self-hosted + VPS", cost: "~3.6 triệu/năm" },
+                    { item: "Hệ thống AutoFlow chuyên dụng", cost: "~3.6 triệu/năm" },
                     { item: "Zalo ZNS messages (500 lead/tháng)", cost: "~18 triệu/năm" },
                   ].map((row) => (
                     <div key={row.item} className="flex items-center justify-between text-sm">

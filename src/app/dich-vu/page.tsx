@@ -60,8 +60,8 @@ const advantages = [
     desc: "Zalo OA, MISA, KiotViet, Shopee, Haravan — tất cả tích hợp trực tiếp qua API, không qua bên thứ ba.",
   },
   {
-    title: "Data 100% trong nước",
-    desc: "n8n self-hosted trên VPS Việt Nam. Dữ liệu khách hàng, đơn hàng, tài chính — không gửi ra server nước ngoài.",
+    title: "Dữ liệu 100% trong nước",
+    desc: "Hệ thống AutoFlow chuyên dụng tại VPS Việt Nam (Bizfly HCM). Dữ liệu khách hàng, đơn hàng, tài chính — không gửi ra server nước ngoài.",
   },
   {
     title: "Kết quả đo được, cam kết bằng hợp đồng",

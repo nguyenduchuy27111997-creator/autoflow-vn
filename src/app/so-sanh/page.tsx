@@ -28,14 +28,14 @@ interface ComparisonRow {
 const rows: ComparisonRow[] = [
   {
     feature: "Giá",
-    autoflow: "2–7M/workflow (1 lần)",
+    autoflow: "gói Starter/Growth/Scale (hàng tháng)",
     zapier: "$20–70/tháng (~500K–1.7M)",
     make: "$9–16/tháng (~220K–400K)",
     agency: "50–200M/project",
   },
   {
     feature: "Thời gian setup",
-    autoflow: "5–10 ngày",
+    autoflow: "1–2 tuần",
     zapier: "Tự setup",
     make: "Tự setup",
     agency: "2–6 tháng",
@@ -63,7 +63,7 @@ const rows: ComparisonRow[] = [
   },
   {
     feature: "Phí hàng tháng",
-    autoflow: "499K hosting (tùy chọn)",
+    autoflow: "Từ 1.5 triệu/tháng (all-in)",
     zapier: "Bắt buộc subscription",
     make: "Bắt buộc subscription",
     agency: { note: "Không (nhưng maintain riêng)" },
@@ -120,11 +120,11 @@ const highlights = [
   {
     icon: "⚡",
     title: "Bàn giao trong tuần",
-    desc: "5–10 ngày thay vì 2–6 tháng của IT agency.",
+    desc: "1–2 tuần thay vì 2–6 tháng của IT agency.",
   },
   {
     icon: "💰",
-    title: "Trả một lần, dùng mãi",
+    title: "Trả hàng tháng, tất cả bao gồm",
     desc: "Không subscription hàng tháng bắt buộc như Zapier và Make.",
   },
   {

@@ -35,3 +35,14 @@ export function isRateLimited(
   entry.count++;
   return false;
 }
+
+/**
+ * Validate email format. Stricter than `.includes("@")`.
+ * Catches `test@`, `@test.com`, `user@.com`, etc.
+ */
+export function isValidEmail(value: unknown): value is string {
+  if (typeof value !== "string") return false;
+  const trimmed = value.trim();
+  if (trimmed.length < 5 || trimmed.length > 254) return false;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmed);
+}

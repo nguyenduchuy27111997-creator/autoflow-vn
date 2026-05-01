@@ -113,7 +113,7 @@ export default function PilotBanner() {
                   desc: "VD: Đơn Shopee → tự động vào Google Sheet + thông báo Zalo OA",
                 },
                 {
-                  title: "Video Loom hướng dẫn",
+                  title: "Tài liệu hướng dẫn",
                   desc: "Team xem lại bất cứ lúc nào",
                 },
                 {

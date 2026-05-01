@@ -34,7 +34,7 @@ const jsonLd = {
   },
   about: {
     "@type": "Service",
-    name: "n8n Automation Consulting",
+    name: "Workflow Automation Consulting",
     provider: { "@type": "Organization", name: "AutoFlow VN" },
   },
 };

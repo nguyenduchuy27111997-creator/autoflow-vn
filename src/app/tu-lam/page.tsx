@@ -55,7 +55,7 @@ const comparison = [
   {
     criteria: "Bảo trì",
     diy: "Tự fix mọi thứ, mọi lúc",
-    autoflow: "Hosting 499K/tháng: monitor 24/7, fix trong giờ hành chính",
+    autoflow: "gói hàng tháng từ 1.5 triệu: monitor 24/7, fix trong giờ hành chính",
   },
   {
     criteria: "Kết quả",

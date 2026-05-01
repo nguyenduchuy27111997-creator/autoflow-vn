@@ -122,7 +122,7 @@ export async function POST(req: NextRequest) {
           <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 32px 24px;">
             <div style="text-align: center; margin-bottom: 32px;">
               <div style="font-size: 24px; font-weight: 800; color: #0F172A;">${SITE_NAME}</div>
-              <div style="font-size: 13px; color: #94A3B8; margin-top: 4px;">Chuyên gia #1 về n8n automation tại Việt Nam</div>
+              <div style="font-size: 13px; color: #94A3B8; margin-top: 4px;">Chuyên gia tự động hóa quản lý cho SME Việt Nam</div>
             </div>
 
             <p style="font-size: 15px; color: #334155; line-height: 1.7;">

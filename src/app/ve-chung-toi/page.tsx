@@ -5,12 +5,12 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Về Chúng Tôi — Đội ngũ AutoFlow VN",
   description:
-    "Đội ngũ AutoFlow VN — chuyên gia tự động hóa quy trình cho SME Việt Nam bằng n8n. Tích hợp Zalo, MISA, Shopee, KiotViet. Gói Cơ bản 5 ngày, Nâng cao 7 ngày, Toàn diện 10 ngày.",
+    "Đội ngũ AutoFlow VN — chuyên gia tự động hóa quy trình cho SME Việt Nam. Tích hợp Zalo, MISA, Shopee, KiotViet. Gói Starter, Growth, Scale — triển khai trong 1-2 tuần.",
   alternates: { canonical: "https://autoflowvn.net/ve-chung-toi" },
   openGraph: {
     title: "Về Chúng Tôi — Đội ngũ AutoFlow VN",
     description:
-      "Đội ngũ AutoFlow VN — chuyên gia tự động hóa quy trình cho SME Việt Nam bằng n8n.",
+      "Đội ngũ AutoFlow VN — chuyên gia tự động hóa quy trình cho SME Việt Nam.",
     url: "https://autoflowvn.net/ve-chung-toi",
   },
 };
@@ -23,7 +23,7 @@ const team = [
     color: "#0066FF",
     desc: "Xin chào! Mình là Huy — người trực tiếp phân tích quy trình, viết workflow, và bàn giao cho khách hàng AutoFlow. Với kinh nghiệm phát triển phần mềm và tích hợp hệ thống, mình giúp SME Việt Nam tiết kiệm hàng chục giờ mỗi tuần bằng tự động hóa thông minh. Bạn sẽ nói chuyện trực tiếp với mình — không qua trung gian.",
     skills: [
-      "n8n",
+      "Workflow Automation",
       "Zalo OA API",
       "MISA",
       "KiotViet",
@@ -35,9 +35,9 @@ const team = [
 
 const techStack = [
   {
-    name: "n8n",
-    desc: "Nền tảng automation chính — mã nguồn mở, self-hosted",
-    color: "#EA4B71",
+    name: "Hệ thống AutoFlow",
+    desc: "Hạ tầng tự động hóa chuyên dụng — vận hành tại VPS Việt Nam",
+    color: "#0066FF",
   },
   {
     name: "Zalo OA",
@@ -103,7 +103,7 @@ const values = [
       </svg>
     ),
     title: "Kết quả trong tuần, không phải tháng",
-    desc: "Workflow Cơ bản triển khai trong 5 ngày. Nâng cao 7 ngày. Toàn diện 10 ngày. Không kéo dài, không phát sinh chi phí.",
+    desc: "Gói Starter triển khai trong 1 tuần. Growth 1-2 tuần. Scale 2-3 tuần. Bao gồm hosting + giám sát + hỗ trợ.",
     color: "#0066FF",
   },
   {
@@ -141,7 +141,7 @@ const values = [
       </svg>
     ),
     title: "Bàn giao toàn bộ, không giữ lại",
-    desc: "Workflows, video hướng dẫn, SOP, source code — tất cả thuộc về bạn. Không lock-in, không phụ thuộc.",
+    desc: "Workflows, tài liệu hướng dẫn, SOP, source code — tất cả thuộc về bạn. Không lock-in, không phụ thuộc.",
     color: "#6366F1",
   },
 ];
@@ -160,7 +160,7 @@ const approach = [
   {
     number: "03",
     title: "Training team, không chỉ bàn giao code",
-    desc: "Mỗi workflow có video Loom hướng dẫn và SOP. Team bạn tự vận hành được mà không cần hiểu code.",
+    desc: "Mỗi workflow có tài liệu hướng dẫn và SOP. Team bạn tự vận hành được mà không cần hiểu code.",
   },
 ];
 
@@ -452,7 +452,7 @@ export default function VeChungToiPage() {
             <div className="mt-6 pt-6 border-t border-primary/10 grid sm:grid-cols-3 gap-4 text-center">
               <div>
                 <p className="font-display font-extrabold text-2xl text-primary">
-                  5–10 ngày
+                  1–2 tuần
                 </p>
                 <p className="text-xs text-slate-500">thay vì 3–6 tháng</p>
               </div>
@@ -466,7 +466,7 @@ export default function VeChungToiPage() {
                 <p className="font-display font-extrabold text-2xl text-primary">
                   Support
                 </p>
-                <p className="text-xs text-slate-500">hosting 499K/tháng</p>
+                <p className="text-xs text-slate-500">gói hàng tháng từ 1.5 triệu</p>
               </div>
             </div>
           </div>

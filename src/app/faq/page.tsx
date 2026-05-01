@@ -11,12 +11,12 @@ import Footer from "@/components/Footer";
 const faqs = [
   // Original 7 from FAQ.tsx
   {
-    q: "n8n là gì? Tôi chưa nghe bao giờ.",
-    a: "n8n là nền tảng tự động hóa mã nguồn mở, giống như Zapier nhưng mạnh hơn và miễn phí khi self-host. AutoFlow dùng n8n vì nó tích hợp được với Zalo OA, MISA, KiotViet — những thứ Zapier và Make.com không làm được. Bạn không cần biết n8n là gì — mình lo phần kỹ thuật, bạn chỉ cần thấy kết quả.",
+    q: "Hệ thống AutoFlow là gì? Có gì khác Zapier?",
+    a: "Hệ thống AutoFlow là hạ tầng tự động hóa quy trình chuyên dụng tại Việt Nam, do AutoFlow VN xây dựng và vận hành. Khác Zapier: tích hợp được Zalo OA, MISA, KiotViet, GrabFood, ShopeeFood — những thứ Zapier không làm được. Khác Make.com: dữ liệu ở Việt Nam (tuân thủ NĐ 13/2023), không giới hạn lượt chạy, chi phí cố định mỗi tháng. Bạn không cần biết kỹ thuật — AutoFlow lo toàn bộ phần vận hành, bạn chỉ cần xem báo cáo.",
   },
   {
     q: "Tôi không biết code. Có dùng được không?",
-    a: "Hoàn toàn được. Mình build xong, bàn giao kèm video hướng dẫn từng bước. Team bạn chỉ cần biết bấm nút và đọc kết quả. Nếu có vấn đề, mình fix trong 24h qua gói hosting 499K/tháng.",
+    a: "Hoàn toàn được. Mình build xong, bàn giao kèm tài liệu hướng dẫn từng bước. Team bạn chỉ cần biết bấm nút và đọc kết quả. Nếu có vấn đề, mình fix trong 24h qua gói gói hàng tháng từ 1.5 triệu.",
   },
   {
     q: "Data của tôi có an toàn không?",
@@ -24,15 +24,15 @@ const faqs = [
   },
   {
     q: "Nếu workflow bị lỗi thì sao?",
-    a: "Gói hosting 499K/tháng cam kết fix lỗi trong 24h làm việc (SLA). Mỗi workflow đều có error handling và thông báo tự động — nếu có lỗi, bạn biết ngay qua Zalo, không cần đợi khách phàn nàn. Trong 7 ngày đầu sau bàn giao, support hoàn toàn miễn phí.",
+    a: "Gói gói hàng tháng từ 1.5 triệu cam kết fix lỗi trong 24h làm việc (SLA). Mỗi workflow đều có error handling và thông báo tự động — nếu có lỗi, bạn biết ngay qua Zalo, không cần đợi khách phàn nàn. Trong 30 ngày đầu sau bàn giao, support hoàn toàn miễn phí.",
   },
   {
     q: "Mất bao lâu để thấy kết quả?",
-    a: "Cơ bản (2M): 1–2 tuần là workflow đầu tiên chạy thật. Nâng cao (4M): 2–3 tuần toàn bộ xong. Toàn diện (7M): 3–4 tuần. Bạn thấy kết quả ngay từ workflow đầu tiên — không phải đợi hết project.",
+    a: "Starter (1.5M/tháng): 1–2 tuần là workflow đầu tiên chạy thật. Growth (2.5M/tháng): 2–3 tuần toàn bộ xong. Scale (4M/tháng): 3–4 tuần. Bạn thấy kết quả ngay từ workflow đầu tiên — không phải đợi hết project.",
   },
   {
     q: "Tại sao không dùng Zapier cho rẻ?",
-    a: "Zapier $20/tháng (~500K VND/tháng), giới hạn tasks, và không tích hợp được Zalo OA, MISA, KiotViet. AutoFlow dùng nền tảng mã nguồn mở, self-host chỉ $5/tháng (phí VPS), không giới hạn, và tích hợp native với ecosystem Việt Nam. Tiết kiệm hơn nhiều cho SME. Xem so sánh chi tiết tại /so-sanh.",
+    a: "Zapier $20/tháng (~500K VND/tháng) chỉ là khởi điểm — vượt 750 lượt chạy/tháng giá tăng nhanh, lại không tích hợp được Zalo OA, MISA, KiotViet. Hệ thống AutoFlow dedicated tại Việt Nam: chỉ 1 phí cố định 1.5M/tháng, không giới hạn lượt chạy, tích hợp sâu với hệ sinh thái Việt Nam. Xem so sánh chi tiết tại /so-sanh.",
   },
   {
     q: "Thanh toán như thế nào?",
@@ -45,31 +45,31 @@ const faqs = [
   },
   {
     q: "Sau pilot miễn phí thì sao?",
-    a: "Sau khi pilot chạy thành công, bạn có 3 lựa chọn: (1) Mua thêm workflow mới (2–7M/workflow tùy độ phức tạp), (2) Đăng ký gói hosting 499K/tháng để AutoFlow vận hành và bảo trì, hoặc (3) Dừng lại — workflow đã build vẫn thuộc về bạn hoàn toàn.",
+    a: "Sau khi pilot chạy thành công, bạn có 3 lựa chọn: (1) Mua thêm workflow mới (gói Starter/Growth/Scale tùy độ phức tạp), (2) Đăng ký gói gói hàng tháng từ 1.5 triệu để AutoFlow vận hành và bảo trì, hoặc (3) Dừng lại — workflow đã build vẫn thuộc về bạn hoàn toàn.",
   },
   {
     q: "Tôi không biết kỹ thuật, có dùng được không?",
-    a: "Hoàn toàn có. AutoFlow build và bàn giao toàn bộ — bạn không cần hiểu code hay biết n8n là gì. Huy sẽ training trực tiếp cho team bạn qua video Loom và buổi hướng dẫn 1-on-1. Sau đó team chỉ cần biết bấm nút và kiểm tra kết quả.",
+    a: "Hoàn toàn có. AutoFlow là dịch vụ tự động hóa quản lý trọn gói — bạn không cần hiểu code hay đăng nhập vào hệ thống. AutoFlow xây và vận hành workflows giúp bạn, định kỳ gửi báo cáo hiệu suất qua email và Zalo. Mọi thay đổi gửi qua yêu cầu thay đổi, AutoFlow lo toàn bộ phần kỹ thuật.",
   },
   {
     q: "Workflow bị lỗi thì AutoFlow có fix không?",
-    a: "Có. 7 ngày đầu sau bàn giao: support và fix miễn phí hoàn toàn. Từ tháng thứ 2 trở đi: nếu dùng gói hosting 499K/tháng, AutoFlow cam kết SLA fix trong 24h giờ hành chính. Ngoài hosting: fix theo giờ với rate thỏa thuận.",
+    a: "Có. 30 ngày đầu sau bàn giao: support và fix miễn phí hoàn toàn. Từ tháng thứ 2 trở đi: nếu dùng gói gói hàng tháng từ 1.5 triệu, AutoFlow cam kết SLA fix trong 24h giờ hành chính. Ngoài hosting: fix theo giờ với rate thỏa thuận.",
   },
   {
     q: "AutoFlow khác gì so với thuê freelancer?",
-    a: "Freelancer không có SLA, không monitoring, không backup, và có thể biến mất sau khi bàn giao. AutoFlow cung cấp: hợp đồng dịch vụ rõ ràng, monitoring 24/7 (gói hosting), backup hàng ngày, support Zalo giờ hành chính, và cam kết hoàn tiền 100% nếu không đạt scope. Bạn làm việc với cùng một người từ đầu đến cuối.",
+    a: "Freelancer không có SLA, không monitoring, không backup, và có thể biến mất sau khi bàn giao. AutoFlow cung cấp: hợp đồng dịch vụ rõ ràng, monitoring & cảnh báo tự động 24/7, backup hàng ngày, support Zalo giờ hành chính (T2–T6, 8:00–18:00), và cam kết hoàn tiền 100% nếu không đạt scope. Bạn làm việc với cùng một người từ đầu đến cuối.",
   },
   {
     q: "Có hoàn tiền không?",
     a: "Có. AutoFlow cam kết hoàn tiền 100% nếu không deliver đúng scope đã ký trong hợp đồng. Điều kiện: workflow không chạy đúng theo yêu cầu đã thống nhất sau quá trình build và test. Không có điều kiện ẩn hay phí xử lý.",
   },
   {
-    q: "Gói hosting 499K/tháng bao gồm những gì?",
-    a: "Gói hosting 499K/tháng bao gồm: VPS Bizfly tại TP.HCM (không phụ thuộc server nước ngoài), backup data hàng ngày, monitoring uptime 24/7, SSL certificate, support qua Zalo trong giờ hành chính (T2–T6, 8:00–18:00), fix lỗi trong 24h (SLA), và không giới hạn số lần chạy workflow. Không bao gồm: build workflow mới (tính riêng).",
+    q: "Gói gói hàng tháng từ 1.5 triệu bao gồm những gì?",
+    a: "Gói hàng tháng từ 1.5 triệu bao gồm: VPS Bizfly tại TP.HCM (không phụ thuộc server nước ngoài), backup data hàng ngày, monitoring uptime tự động 24/7 + cảnh báo Zalo khi có sự cố, SSL certificate, support qua Zalo trong giờ hành chính (T2–T6, 8:00–18:00), fix lỗi trong 24h (SLA giờ hành chính), và quota execution theo gói. Không bao gồm: build workflow mới (tính riêng).",
   },
   {
-    q: "Tôi có thể tự vận hành workflow mà không cần gói hosting không?",
-    a: "Được. Sau khi bàn giao, workflow hoàn toàn thuộc về bạn — bạn có thể tự host trên server của mình hoặc dùng bất kỳ nhà cung cấp VPS nào. AutoFlow sẽ bàn giao toàn bộ source code, tài liệu, và hướng dẫn cài đặt. Gói hosting chỉ là tùy chọn nếu bạn muốn AutoFlow lo phần vận hành.",
+    q: "AutoFlow vận hành workflow như thế nào? Tôi có truy cập engine không?",
+    a: "AutoFlow là dịch vụ tự động hóa quản lý trọn gói — AutoFlow xây, triển khai, và vận hành workflows trên Hệ thống AutoFlow. Bạn nhận: (1) báo cáo hiệu suất hàng tháng, (2) cảnh báo Zalo khi có vấn đề, (3) yêu cầu thay đổi khi cần điều chỉnh. Bạn không cần đăng nhập trực tiếp vào hệ thống — đó là điểm khác biệt giữa dịch vụ trọn gói và tự vận hành. Toàn bộ phần kỹ thuật do AutoFlow lo.",
   },
 ];
 

@@ -32,7 +32,7 @@ const steps = [
   },
 ];
 
-const platforms = ["n8n", "Zalo OA", "MISA", "Shopee", "KiotViet"];
+const platforms = ["Hệ thống AutoFlow", "Zalo OA", "MISA", "Shopee", "KiotViet"];
 
 /* ───────── Component ───────── */
 export default function FbAdsLanding() {
@@ -75,7 +75,9 @@ export default function FbAdsLanding() {
   };
 
   const scrollToForm = () => {
-    document.getElementById("audit-form")?.scrollIntoView({ behavior: "smooth" });
+    document
+      .getElementById("audit-form")
+      ?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -106,8 +108,8 @@ export default function FbAdsLanding() {
 
               <h1 className="font-display font-extrabold text-3xl md:text-[2.6rem] text-slate-900 leading-[1.15] tracking-tight mb-5">
                 Nhân viên bạn đang tốn{" "}
-                <span className="gradient-text">4+ giờ/ngày</span> nhập liệu
-                thủ công?
+                <span className="gradient-text">4+ giờ/ngày</span> nhập liệu thủ
+                công?
               </h1>
 
               <p className="text-lg text-slate-500 leading-relaxed mb-8 max-w-lg">
@@ -187,7 +189,10 @@ export default function FbAdsLanding() {
                       "Audit Report chi tiết trong 24h",
                       "Proposal 3 gói trong 48h",
                     ].map((item) => (
-                      <div key={item} className="flex items-center gap-2 mt-1.5">
+                      <div
+                        key={item}
+                        className="flex items-center gap-2 mt-1.5"
+                      >
                         <span className="text-accent text-sm">✓</span>
                         <span className="text-sm text-slate-600">{item}</span>
                       </div>
@@ -234,7 +239,7 @@ export default function FbAdsLanding() {
                         onChange={(e) =>
                           setForm({ ...form, phone: e.target.value })
                         }
-                        placeholder="0912 345 678"
+                        placeholder="0935.115.248"
                         className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                       />
                     </div>
@@ -272,9 +277,7 @@ export default function FbAdsLanding() {
                           <button
                             key={size}
                             type="button"
-                            onClick={() =>
-                              setForm({ ...form, teamSize: size })
-                            }
+                            onClick={() => setForm({ ...form, teamSize: size })}
                             className={`px-3 py-2 rounded-xl border text-sm font-medium transition-all ${
                               form.teamSize === size
                                 ? "border-primary bg-primary-light text-primary"
@@ -428,7 +431,13 @@ export default function FbAdsLanding() {
                 {/* Connector arrow */}
                 {i < 2 && (
                   <div className="hidden md:block absolute top-5 -right-3 text-slate-300">
-                    <svg width="20" height="12" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <svg
+                      width="20"
+                      height="12"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    >
                       <path d="M0 6h16M12 2l4 4-4 4" />
                     </svg>
                   </div>

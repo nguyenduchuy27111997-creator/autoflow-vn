@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import { Be_Vietnam_Pro, Plus_Jakarta_Sans } from "next/font/google";
-import Script from "next/script";
+import ScriptLoader from "@/components/analytics/ScriptLoader";
 import JsonLd from "@/components/JsonLd";
 import { Suspense } from "react";
-import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
-import FacebookPixel from '@/components/analytics/FacebookPixel';
-import ConsentBannerWrapper from '@/components/analytics/ConsentBannerWrapper';
-import UTMCapture from '@/components/analytics/UTMCapture';
-import ZaloTracker from '@/components/analytics/ZaloTracker';
-import ExitIntentPopup from '@/components/ExitIntentPopup';
-import SocialProof from '@/components/SocialProof';
-import ChatWidget from '@/components/ChatWidget';
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import FacebookPixel from "@/components/analytics/FacebookPixel";
+import ConsentBannerWrapper from "@/components/analytics/ConsentBannerWrapper";
+import UTMCapture from "@/components/analytics/UTMCapture";
+import ZaloTracker from "@/components/analytics/ZaloTracker";
+import ExitIntentPopup from "@/components/ExitIntentPopup";
+import SocialProof from "@/components/SocialProof";
+import ChatWidget from "@/components/ChatWidget";
 import "./globals.css";
 
 const beVietnam = Be_Vietnam_Pro({
@@ -70,12 +70,16 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true },
+    // Tell Wayback Machine + similar archivers not to snapshot — historical
+    // versions of educational blog posts referencing n8n could surface in
+    // archives even after we remove them from live site.
+    noarchive: true,
   },
   other: {
     "geo.region": "VN-SG",
     "geo.placename": "Ho Chi Minh City",
     "geo.position": "10.762622;106.660172",
-    "ICBM": "10.762622, 106.660172",
+    ICBM: "10.762622, 106.660172",
   },
 };
 
@@ -90,145 +94,11 @@ export default function RootLayout({
       className={`${beVietnam.variable} ${plusJakarta.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans" suppressHydrationWarning>
-        {/* WebSite schema (sitelinks search box) */}
-        <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            name: "AutoFlow VN",
-            url: "https://autoflowvn.net",
-            description: "Tự động hóa quy trình kinh doanh cho SME Việt Nam",
-            inLanguage: "vi",
-            publisher: { "@type": "Organization", name: "AutoFlow VN" },
-          }}
-        />
-        {/* Organization schema */}
-        <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "AutoFlow VN",
-            url: "https://autoflowvn.net",
-            logo: "https://autoflowvn.net/icon.svg",
-            email: "hello@autoflowvn.net",
-            description:
-              "Giúp doanh nghiệp vừa và nhỏ Việt Nam tự động hóa quy trình lặp lại — tích hợp Zalo, MISA, Shopee, KiotViet.",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "TP. Hồ Chí Minh",
-              addressCountry: "VN",
-            },
-            contactPoint: {
-              "@type": "ContactPoint",
-              contactType: "customer service",
-              email: "hello@autoflowvn.net",
-              url: "https://autoflowvn.net/audit",
-              availableLanguage: ["vi", "en"],
-            },
-            sameAs: [
-              "https://www.facebook.com/profile.php?id=61575409020684",
-            ],
-            knowsAbout: [
-              "business process automation",
-              "workflow automation",
-              "business process automation",
-              "Zalo OA integration",
-              "Vietnamese SME digital transformation",
-            ],
-          }}
-        />
-        {/* LocalBusiness schema */}
-        <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            name: "AutoFlow VN",
-            description:
-              "Giúp doanh nghiệp vừa và nhỏ Việt Nam tự động hóa quy trình lặp lại — tích hợp Zalo, MISA, Shopee, KiotViet.",
-            url: "https://autoflowvn.net",
-            email: "hello@autoflowvn.net",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "TP. Hồ Chí Minh",
-              addressCountry: "VN",
-            },
-            priceRange: "$$",
-            areaServed: {
-              "@type": "Country",
-              name: "Vietnam",
-            },
-            openingHoursSpecification: {
-              "@type": "OpeningHoursSpecification",
-              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-              opens: "09:00",
-              closes: "18:00",
-            },
-            serviceType: [
-              "Automation Consulting",
-              "Workflow Development",
-              "Business Process Automation",
-            ],
-            hasOfferCatalog: {
-              "@type": "OfferCatalog",
-              name: "Gói dịch vụ tự động hóa",
-              itemListElement: [
-                {
-                  "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Service",
-                    name: "Workflow Cơ bản",
-                    description: "Kết nối 2 hệ thống, 1 bước xử lý, bàn giao trong 5 ngày",
-                  },
-                  priceSpecification: {
-                    "@type": "PriceSpecification",
-                    price: "2000000",
-                    priceCurrency: "VND",
-                    minPrice: "2000000",
-                    maxPrice: "2000000",
-                  },
-                },
-                {
-                  "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Service",
-                    name: "Workflow Nâng cao",
-                    description: "Kết nối 3-4 hệ thống, nhiều bước xử lý, bàn giao trong 7 ngày",
-                  },
-                  priceSpecification: {
-                    "@type": "PriceSpecification",
-                    price: "4000000",
-                    priceCurrency: "VND",
-                    minPrice: "4000000",
-                    maxPrice: "4000000",
-                  },
-                },
-                {
-                  "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Service",
-                    name: "Workflow Toàn diện",
-                    description: "Kết nối 5+ hệ thống, quy trình phức tạp, bàn giao trong 10 ngày",
-                  },
-                  priceSpecification: {
-                    "@type": "PriceSpecification",
-                    price: "7000000",
-                    priceCurrency: "VND",
-                    minPrice: "7000000",
-                    maxPrice: "7000000",
-                  },
-                },
-              ],
-            },
-          }}
-        />
+      <body
+        className="min-h-full flex flex-col font-sans"
+        suppressHydrationWarning
+      >
         {children}
-        {ZALO_OA_ID && (
-          <Script
-            src="https://sp.zalo.me/plugins/sdk.js"
-            strategy="lazyOnload"
-          />
-        )}
         {ZALO_OA_ID && (
           <div
             className="zalo-chat-widget"
@@ -240,9 +110,12 @@ export default function RootLayout({
           />
         )}
         <GoogleAnalytics />
+        <ScriptLoader />
         <FacebookPixel />
         <ConsentBannerWrapper />
-        <Suspense fallback={null}><UTMCapture /></Suspense>
+        <Suspense fallback={null}>
+          <UTMCapture />
+        </Suspense>
         <ZaloTracker />
         <ExitIntentPopup />
         <SocialProof />

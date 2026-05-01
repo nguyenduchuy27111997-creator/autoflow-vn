@@ -83,7 +83,7 @@ const faqItems = [
   },
   {
     q: "Chi phí triển khai tự động hóa hóa đơn là bao nhiêu?",
-    a: "AutoFlow VN triển khai trọn gói trong gói Cơ bản (từ 2 triệu đồng, 1–2 tuần). Bao gồm audit quy trình, xây dựng workflow, test với dữ liệu thật, bàn giao SOP và hỗ trợ 7 ngày. ROI thường đạt trong 1–2 tháng đầu.",
+    a: "AutoFlow VN triển khai trọn gói trong gói Starter (từ 1.5 triệu/tháng, 1–2 tuần triển khai). Bao gồm audit quy trình, xây dựng workflow, test với dữ liệu thật, bàn giao SOP và hỗ trợ 30 ngày. ROI thường đạt trong 1–2 tháng đầu.",
   },
 ];
 
@@ -427,17 +427,17 @@ export default function NghiDinh70Blog() {
                     },
                     {
                       title: "Ngày 6: Bàn Giao & Hướng Dẫn",
-                      desc: "Bàn giao workflow production, video Loom hướng dẫn vận hành, SOP document trên Notion. Đào tạo kế toán cách kiểm tra và xử lý ngoại lệ.",
+                      desc: "Bàn giao workflow production, tài liệu hướng dẫn vận hành, SOP document trên Notion. Đào tạo kế toán cách kiểm tra và xử lý ngoại lệ.",
                     },
                     {
                       title: "Ngày 7: Go Live & Monitor",
-                      desc: "Chuyển sang môi trường production, monitor 24h đầu. Setup cảnh báo lỗi qua Zalo. Hỗ trợ trong 7 ngày sau bàn giao.",
+                      desc: "Chuyển sang môi trường production, monitor 24h đầu. Setup cảnh báo lỗi qua Zalo. Hỗ trợ trong 30 ngày sau bàn giao.",
                     },
                   ]}
                 />
                 <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-6">
                   <div className="bg-violet-50 border border-violet-200 rounded-xl p-3 sm:p-5 text-center">
-                    <div className="text-base sm:text-2xl font-black text-violet-600 mb-1">2–7 triệu</div>
+                    <div className="text-base sm:text-2xl font-black text-violet-600 mb-1">từ 1.5 triệu/th</div>
                     <div className="text-[10px] sm:text-sm text-slate-600">Gói Pilot (1 workflow)</div>
                   </div>
                   <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 sm:p-5 text-center">

@@ -118,7 +118,7 @@ export default function PricingCalculator() {
 
         {retainer && (
           <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-6 text-sm text-amber-800">
-            <strong>+ Retainer:</strong> 8-15 triệu/tháng — monitor, fix lỗi 24h, thêm workflow mới hàng tháng.
+            <strong>Gói hàng tháng đề xuất:</strong> từ 1.5-4 triệu/tháng — bao gồm hosting, monitoring tự động 24/7, hỗ trợ Zalo giờ hành chính, tối ưu hàng tháng.
           </div>
         )}
 

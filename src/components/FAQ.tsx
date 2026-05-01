@@ -6,12 +6,12 @@ import JsonLd from "./JsonLd";
 
 const faqs = [
   {
-    q: "n8n là gì? Tôi chưa nghe bao giờ.",
-    a: "n8n là nền tảng tự động hóa mã nguồn mở, giống như Zapier nhưng mạnh hơn và miễn phí khi self-host. AutoFlow dùng n8n vì nó tích hợp được với Zalo OA, MISA, KiotViet — những thứ Zapier và Make.com không làm được. Bạn không cần biết n8n là gì — mình lo phần kỹ thuật, bạn chỉ cần thấy kết quả.",
+    q: "Hệ thống AutoFlow là gì? Có gì khác Zapier?",
+    a: "Hệ thống AutoFlow là hạ tầng tự động hóa quy trình chuyên dụng tại Việt Nam, do AutoFlow VN xây dựng và vận hành. Khác Zapier: tích hợp được Zalo OA, MISA, KiotViet — những thứ Zapier không làm được. Bạn không cần biết kỹ thuật — AutoFlow lo toàn bộ phần vận hành, bạn chỉ cần xem báo cáo định kỳ.",
   },
   {
     q: "Tôi không biết code. Có dùng được không?",
-    a: "Hoàn toàn được. Mình build xong, bàn giao kèm video hướng dẫn từng bước. Team bạn chỉ cần biết bấm nút và đọc kết quả. Nếu có vấn đề, mình fix trong 24h qua gói hosting 499K/tháng.",
+    a: "Hoàn toàn được. Mình build xong, bàn giao kèm tài liệu hướng dẫn từng bước. Team bạn chỉ cần biết bấm nút và đọc kết quả. Nếu có vấn đề, mình fix trong 24h qua gói gói hàng tháng từ 1.5 triệu.",
   },
   {
     q: "Data của tôi có an toàn không?",
@@ -19,11 +19,11 @@ const faqs = [
   },
   {
     q: "Nếu workflow bị lỗi thì sao?",
-    a: "Gói hosting 499K/tháng cam kết fix lỗi trong 24h làm việc (SLA). Ngoài ra, mỗi workflow đều có error handling và thông báo tự động — nếu có lỗi, bạn biết ngay, không cần đợi khách phàn nàn.",
+    a: "Gói gói hàng tháng từ 1.5 triệu cam kết fix lỗi trong 24h làm việc (SLA). Ngoài ra, mỗi workflow đều có error handling và thông báo tự động — nếu có lỗi, bạn biết ngay, không cần đợi khách phàn nàn.",
   },
   {
     q: "Mất bao lâu để thấy kết quả?",
-    a: "Cơ bản (2M): 1–2 tuần là workflow đầu tiên chạy thật. Nâng cao (4M): 2–3 tuần toàn bộ xong. Toàn diện (7M): 3–4 tuần. Bạn thấy kết quả ngay từ workflow đầu tiên — không phải đợi hết project.",
+    a: "Starter (1.5M/tháng): 1–2 tuần là workflow đầu tiên chạy thật. Growth (2.5M/tháng): 2–3 tuần toàn bộ xong. Scale (4M/tháng): 3–4 tuần. Bạn thấy kết quả ngay từ workflow đầu tiên — không phải đợi hết project.",
   },
   {
     q: "Tại sao không dùng Zapier cho rẻ?",

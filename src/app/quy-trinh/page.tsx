@@ -10,55 +10,55 @@ const steps = [
     title: "Audit miễn phí",
     duration: "30 phút",
     description:
-      "Gọi video hoặc gặp trực tiếp. Mình nghe bạn kể về quy trình hàng ngày, tìm ra đâu là chỗ đang mất thời gian nhất.",
+      "Gọi video hoặc gặp trực tiếp. Mình nghe bạn kể về quy trình hàng ngày, tìm ra đâu đang mất thời gian nhất, và đề xuất giải pháp cụ thể.",
     deliverables: [
       "Audit Report chi tiết (gửi trong 24h)",
       "Sơ đồ quy trình hiện tại vs. đề xuất",
-      "Danh sách pain points ưu tiên",
+      "Ước tính ROI: tiết kiệm bao nhiêu giờ/tháng, hoàn vốn bao lâu",
     ],
     note: "Miễn phí, không ràng buộc. Bạn nhận report dù có tiếp tục hay không.",
     color: "#6366F1",
   },
   {
     number: "02",
-    title: "Đề xuất giải pháp",
+    title: "Chọn gói & Ký hợp đồng",
     duration: "48 giờ",
     description:
-      "Dựa trên audit, mình gửi proposal cụ thể: workflow nào nên tự động, timeline bao lâu, chi phí bao nhiêu, ROI dự kiến.",
+      "Dựa trên audit, mình đề xuất gói phù hợp. Tất cả gói hàng tháng đã bao gồm: xây dựng + hosting + monitoring tự động 24/7 + hỗ trợ Zalo giờ hành chính + tối ưu.",
     deliverables: [
-      "Proposal chi tiết (Cơ bản 2M / Nâng cao 4M / Toàn diện 7M)",
-      "ROI Calculator cho doanh nghiệp bạn",
-      "Timeline chi tiết từng workflow",
+      "Gói Starter 1.5M, Growth 2.5M, hoặc Scale 4M/tháng",
+      "Hợp đồng rõ ràng + cam kết hoàn tiền 100% nếu không đạt KPI",
+      "Phí xây dựng ban đầu (50% trước, 50% khi bàn giao)",
     ],
-    note: "Không jargon, toàn số liệu. Bạn duyệt xong mới bắt đầu.",
+    note: "Trả hàng tháng, hủy bất cứ lúc nào. Không ràng buộc dài hạn.",
     color: "#0EA5E9",
   },
   {
     number: "03",
-    title: "Build & Training",
-    duration: "1–8 tuần tùy gói",
+    title: "Build & Deploy",
+    duration: "1–3 tuần",
     description:
-      "Bạn duyệt, mình build. Mỗi workflow hoàn thành đều có video Loom hướng dẫn. Training team trực tiếp.",
+      "Mình xây workflows, test với data thật, deploy lên server riêng của bạn tại Việt Nam. Mỗi workflow có tài liệu hướng dẫn.",
     deliverables: [
-      "Workflows chạy thật trên n8n",
-      "Video SOP cho từng workflow",
-      "Training session cho team (1–2 buổi)",
+      "Workflows chạy thật trên server riêng tại VN",
+      "Tài liệu hướng dẫn cho từng workflow",
+      "Giám sát tự động + cảnh báo qua Zalo/Telegram",
     ],
-    note: "Bạn không cần biết code — chỉ cần biết bấm nút.",
+    note: "Bạn không cần biết code — chỉ cần kiểm tra kết quả.",
     color: "#10B981",
   },
   {
     number: "04",
-    title: "Bàn giao & Support",
-    duration: "7 ngày support",
+    title: "Vận hành & Tối ưu",
+    duration: "Ongoing hàng tháng",
     description:
-      "Test kỹ, bàn giao full tài liệu. Support sau bàn giao để đảm bảo mọi thứ chạy trơn tru.",
+      "AutoFlow vận hành, giám sát, tối ưu liên tục. Mỗi tháng gửi báo cáo hiệu suất: bao nhiêu lần chạy, giờ tiết kiệm, ROI.",
     deliverables: [
-      "Tài liệu vận hành chi tiết",
-      "Monitoring dashboard",
-      "Support 7 ngày sau bàn giao",
+      "Monitoring tự động 24/7 — hệ thống tự khôi phục lỗi tạm thời + cảnh báo Zalo, AutoFlow xử lý sự cố trong giờ hành chính",
+      "Báo cáo hiệu suất hàng tháng (executions, ROI, uptime)",
+      "Tối ưu workflow liên tục — quy trình ngày càng tốt hơn",
     ],
-    note: "Hosting 499K/tháng (tùy chọn) nếu bạn muốn AutoFlow tiếp tục vận hành và hỗ trợ.",
+    note: "Bạn tập trung kinh doanh — AutoFlow lo phần còn lại.",
     color: "#F59E0B",
   },
 ];
@@ -66,23 +66,23 @@ const steps = [
 const faqs = [
   {
     q: "Mình có phải chuẩn bị gì trước buổi audit không?",
-    a: "Không cần chuẩn bị kỹ. Cứ kể lại quy trình hàng ngày — mình sẽ hỏi để hiểu rõ hơn. Nếu có sẵn SOP hoặc danh sách công cụ đang dùng thì càng tốt, nhưng không bắt buộc.",
+    a: "Không cần chuẩn bị kỹ. Cứ kể lại quy trình hàng ngày — mình sẽ hỏi để hiểu rõ hơn. Nếu có sẵn SOP hoặc danh sách công cụ đang dùng thì càng tốt.",
   },
   {
     q: "Từ audit đến lúc workflow chạy mất bao lâu?",
-    a: "Nhanh nhất 1 tuần (gói Starter, 1 workflow). Phức tạp nhất 8 tuần (gói Scale, 8–12 workflows). Mình luôn cam kết timeline cụ thể trước khi bắt đầu build.",
+    a: "Gói Starter: 1 tuần. Growth: 1-2 tuần. Scale: 2-3 tuần. Workflow đầu tiên thường chạy trong 3-5 ngày.",
   },
   {
-    q: "Nếu workflow không chạy đúng sau bàn giao thì sao?",
-    a: "Mình support 7 ngày sau bàn giao. Nếu lỗi do mình build thì fix miễn phí. Hosting 499K/tháng bao gồm monitoring, backup, support Zalo giờ hành chính. Workflow mới báo giá riêng theo tier (2M/4M/7M).",
+    q: "Gói hàng tháng bao gồm gì?",
+    a: "Tất cả: server riêng tại VN + monitoring tự động 24/7 + cảnh báo Zalo khi sự cố + backup hàng ngày + hỗ trợ Zalo giờ hành chính (T2–T6, 8:00–18:00) + tối ưu hàng tháng + báo cáo hiệu suất. Không phí ẩn. Hủy bất cứ lúc nào.",
   },
   {
-    q: "Mình có thể thay đổi yêu cầu giữa chừng không?",
-    a: "Được — với điều kiện change request nhỏ và trong scope. Thay đổi lớn sẽ có addendum rõ ràng với chi phí và timeline cụ thể trước khi làm.",
+    q: "Nếu workflow lỗi thì sao?",
+    a: "Monitoring tự động 24/7 phát hiện sự cố — hệ thống tự restart và alert qua Telegram + Zalo. AutoFlow xử lý sự cố trong giờ hành chính (T2–T6, 8:00–18:00); ngoài giờ thì hệ thống đã có cơ chế tự khôi phục cho phần lớn lỗi tạm thời. Cam kết hoàn tiền 100% phí setup nếu không đạt KPI sau 30 ngày (theo điều kiện hợp đồng).",
   },
   {
     q: "Team mình không biết kỹ thuật, có dùng được không?",
-    a: "100% được. Mỗi workflow đều có video hướng dẫn và SOP. Team chỉ cần biết bấm nút và kiểm tra kết quả — không cần biết code.",
+    a: "100% được. AutoFlow vận hành tất cả — bạn chỉ cần kiểm tra kết quả. Mỗi workflow có tài liệu hướng dẫn. Team không cần biết code.",
   },
 ];
 
@@ -112,8 +112,8 @@ const commitments = [
     color: "#10B981",
   },
   {
-    title: "Thanh toán 50/50",
-    desc: "50% trước khi bắt đầu, 50% khi bàn giao hoàn tất. Giảm rủi ro cho cả hai bên.",
+    title: "Trả hàng tháng, hủy bất cứ lúc nào",
+    desc: "Không ràng buộc dài hạn. Phí xây dựng 50/50, gói hàng tháng thanh toán đầu tháng.",
     icon: (
       <svg width="22" height="22" fill="none" stroke="#0EA5E9" strokeWidth="2" viewBox="0 0 24 24">
         <line x1="12" y1="1" x2="12" y2="23" />
@@ -142,14 +142,14 @@ export default function QuyTrinhPage() {
               <span className="gradient-text">Bạn biết trước tất cả.</span>
             </h1>
             <p className="text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto mb-8">
-              Từ cuộc gọi đầu tiên đến lúc bàn giao — scope, timeline, chi phí đều rõ ràng trước khi bắt đầu.
+              Audit miễn phí → chọn gói → build & deploy → AutoFlow vận hành liên tục. Tất cả trong 1 gói hàng tháng.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/audit"
                 className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-7 py-3.5 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/25"
               >
-                Bắt đầu bước 1 — Audit miễn phí
+                Đặt lịch audit miễn phí
                 <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M5 8h6M8 5l3 3-3 3" />
                 </svg>
@@ -170,8 +170,8 @@ export default function QuyTrinhPage() {
             {[
               { value: "30'", label: "Audit miễn phí" },
               { value: "48h", label: "Nhận proposal" },
-              { value: "1–8", label: "Tuần build" },
-              { value: "7", label: "Ngày support" },
+              { value: "1–3", label: "Tuần triển khai" },
+              { value: "24/7", label: "Giám sát ongoing" },
             ].map((s, i) => (
               <div
                 key={i}
@@ -326,10 +326,10 @@ export default function QuyTrinhPage() {
         <section className="max-w-3xl mx-auto px-6 text-center">
           <div className="bg-slate-900 rounded-2xl p-10">
             <h2 className="font-display font-extrabold text-2xl text-white mb-3">
-              Sẵn sàng bắt đầu bước 1?
+              Sẵn sàng bắt đầu?
             </h2>
             <p className="text-slate-400 mb-6">
-              30 phút audit miễn phí — mình chỉ ra cụ thể workflow nào nên tự động hóa trước.
+              30 phút audit miễn phí — mình chỉ ra cụ thể quy trình nào nên tự động hóa trước.
             </p>
             <a
               href="/audit"

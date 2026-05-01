@@ -1,7 +1,7 @@
 {
   "name": "AutoFlow VN — Tự Động Hóa Quy Trình Cho SME Việt Nam",
   "short_name": "AutoFlow VN",
-  "description": "Tự động hóa quy trình bằng n8n — tích hợp Zalo, MISA, Shopee, KiotViet.",
+  "description": "Dịch vụ tự động hóa quản lý cho SME Việt Nam — tích hợp Zalo, MISA, Shopee, KiotViet.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

@@ -33,28 +33,16 @@ export async function enqueueEmailSequence(
   try {
     const supabase = await createClient();
 
-    // Duplicate check — any existing row for this email+sequence_type
-    const { count, error: countError } = await supabase
-      .from("email_queue")
-      .select("id", { count: "exact", head: true })
-      .eq("email", email.trim())
-      .eq("sequence_type", sequenceType);
-
-    if (countError) {
-      return { success: false, error: countError.message };
-    }
-
-    if ((count ?? 0) > 0) {
-      return { success: true, skipped: true };
-    }
-
-    // Schedule 5 emails
+    // Schedule 5 emails — atomic upsert (ON CONFLICT do nothing).
+    // Unique constraint (email, sequence_type, email_number) prevents
+    // duplicates even when concurrent submissions happen for the same email.
     const now = new Date();
+    const cleanEmail = email.trim().toLowerCase();
     const rows = EMAIL_SCHEDULE.map(({ email_number, days_offset }) => {
       const scheduled = new Date(now);
       scheduled.setDate(scheduled.getDate() + days_offset);
       return {
-        email: email.trim(),
+        email: cleanEmail,
         name: name?.trim() || null,
         sequence_type: sequenceType,
         email_number,
@@ -64,15 +52,24 @@ export async function enqueueEmailSequence(
       };
     });
 
-    const { error: insertError } = await supabase
+    const { error: insertError, data } = await supabase
       .from("email_queue")
-      .insert(rows);
+      .upsert(rows, {
+        onConflict: "email,sequence_type,email_number",
+        ignoreDuplicates: true,
+      })
+      .select("id");
 
     if (insertError) {
       return { success: false, error: insertError.message };
     }
 
-    return { success: true, inserted: EMAIL_SCHEDULE.length };
+    const inserted = data?.length ?? 0;
+    if (inserted === 0) {
+      return { success: true, skipped: true };
+    }
+
+    return { success: true, inserted };
   } catch (err) {
     return {
       success: false,

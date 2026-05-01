@@ -56,7 +56,7 @@ const faqItems = [
   },
   {
     q: "Chi phí để triển khai hệ thống này khoảng bao nhiêu?",
-    a: "n8n self-hosted miễn phí hoàn toàn. Google Sheet miễn phí. Zalo OA miễn phí. Chi phí chính là setup và cấu hình (thường 1–2 tuần làm việc). Nếu thuê chuyên gia, chi phí setup một lần dao động 2–7 triệu tuỳ độ phức tạp, sau đó không có chi phí vận hành thêm.",
+    a: "n8n self-hosted miễn phí hoàn toàn. Google Sheet miễn phí. Zalo OA miễn phí. Chi phí chính là setup và cấu hình (thường 1–2 tuần làm việc). Nếu thuê chuyên gia, gói hàng tháng từ 1.5–4 triệu bao gồm setup, hosting, giám sát và hỗ trợ.",
   },
   {
     q: "Thị trường BDS Việt Nam 2026 có phù hợp để đầu tư vào automation không?",

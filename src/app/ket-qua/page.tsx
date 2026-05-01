@@ -7,7 +7,7 @@ import { caseStudies } from "@/lib/case-studies";
 export const metadata: Metadata = {
   title: "Kết quả thực tế — Case Studies | AutoFlow VN",
   description:
-    "Xem case studies thực tế: doanh nghiệp Việt tiết kiệm 18+ giờ/tuần, tăng 23% doanh thu nhờ tự động hóa n8n. Before/after rõ ràng, ROI đo được.",
+    "Xem case studies thực tế: doanh nghiệp Việt tiết kiệm 18+ giờ/tuần, tăng 23% doanh thu nhờ tự động hóa quy trình. Trước/sau rõ ràng, ROI đo được.",
   openGraph: {
     title: "Kết quả thực tế — Case Studies | AutoFlow VN",
     description:

@@ -45,7 +45,7 @@ export default function EducationUseCasePage() {
               <span className="w-1 h-1 bg-slate-300 rounded-full" />
               <span>Dự án 5 workflows — 65 triệu đồng</span>
               <span className="w-1 h-1 bg-slate-300 rounded-full" />
-              <span>5 workflows n8n</span>
+              <span>5 workflows tự động hóa</span>
             </div>
           </div>
         </section>
@@ -204,7 +204,7 @@ export default function EducationUseCasePage() {
                 accentColor="#3B82F6"
                 steps={[
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" /></svg>, label: "Khách điền form FB", sub: "Facebook Lead Ads" },
-                  { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>, label: "n8n webhook nhận", sub: "Instant — < 5 giây" },
+                  { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>, label: "Workflow webhook nhận", sub: "Instant — < 5 giây" },
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>, label: "Ghi vào CRM", sub: "Google Sheet + timestamp" },
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>, label: "Alert tư vấn viên", sub: "Telegram + Zalo OA" },
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>, label: "Auto welcome", sub: "Zalo OA gửi thông tin khóa học" },
@@ -282,7 +282,7 @@ export default function EducationUseCasePage() {
                 { week: "Tuần 1", title: "Audit & Planning", items: ["Discovery call 2 giờ — hiểu flow học viên từ đăng ký đến kết thúc khóa", "Mapping quy trình nhắc lịch hiện tại 8 chi nhánh", "Kiểm tra Zalo OA, Facebook Lead Ads, Google Sheet setup", "Proposal chi tiết với 5 workflows + ROI ước tính"] },
                 { week: "Tuần 2", title: "Build Workflow #1 & #2", items: ["Xây workflow nhắc lịch Zalo OA 24h trước", "Xây workflow nhắc lại 3h + thông báo giáo viên", "Test với 2 chi nhánh pilot", "Setup ZNS template trên Zalo OA"] },
                 { week: "Tuần 3", title: "Build Workflow #3, #4 & #5", items: ["Xây workflow lead capture từ Facebook", "Xây workflow báo cáo 8 chi nhánh tự động", "Xây workflow khảo sát hài lòng sau khóa học", "Test toàn bộ với data thực"] },
-                { week: "Tuần 4", title: "Rollout & Training", items: ["Go-live toàn bộ 8 chi nhánh", "Training 2 buổi: quản lý + nhân viên tư vấn", "Bàn giao SOP + video Loom hướng dẫn", "Support 14 ngày sau bàn giao"] },
+                { week: "Tuần 4", title: "Rollout & Training", items: ["Go-live toàn bộ 8 chi nhánh", "Training 2 buổi: quản lý + nhân viên tư vấn", "Bàn giao SOP + tài liệu hướng dẫn", "Support 14 ngày sau bàn giao"] },
               ].map((phase, i) => (
                 <div key={i} className="flex gap-4 md:gap-6">
                   <div className="flex flex-col items-center">
@@ -365,7 +365,7 @@ export default function EducationUseCasePage() {
                 <div className="space-y-3">
                   {[
                     { item: "AutoFlow setup (1 lần)", cost: "65 triệu" },
-                    { item: "n8n self-hosted + VPS", cost: "~3.6 triệu/năm" },
+                    { item: "Hệ thống AutoFlow chuyên dụng", cost: "~3.6 triệu/năm" },
                     { item: "Zalo ZNS messages", cost: "~12 triệu/năm" },
                   ].map((row) => (
                     <div key={row.item} className="flex items-center justify-between text-sm">

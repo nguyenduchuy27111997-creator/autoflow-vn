@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const t = templates.find((t) => t.slug === slug);
   if (!t) return {};
   return {
-    title: `${t.name} | Mẫu Workflow n8n — AutoFlow VN`,
+    title: `${t.name} | Mẫu Workflow Tự Động Hóa — AutoFlow VN`,
     description: t.shortDesc,
     alternates: { canonical: `https://autoflowvn.net/mau-workflow/${t.slug}` },
     openGraph: {
@@ -181,7 +181,7 @@ export default async function TemplateDetailPage({ params }: { params: Promise<{
                 <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Tự làm (DIY)</div>
                 <ul className="space-y-1.5 text-xs text-slate-600">
                   <li>⏱ Ước tính 2-4 tuần tự build</li>
-                  <li>📚 Cần học n8n cơ bản</li>
+                  <li>📚 Cần học công cụ tự động hóa cơ bản</li>
                   <li>🔧 Tự debug khi có lỗi</li>
                   <li>💰 Miễn phí (chỉ tốn thời gian)</li>
                 </ul>

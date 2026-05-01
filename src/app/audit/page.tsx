@@ -59,16 +59,14 @@ const NARRATIVE_PLACEHOLDERS: Record<string, string> = {
 };
 
 function getNarrativePlaceholder(industry: string): string {
-  return (
-    NARRATIVE_PLACEHOLDERS[industry] ??
-    NARRATIVE_PLACEHOLDERS["other"]
-  );
+  return NARRATIVE_PLACEHOLDERS[industry] ?? NARRATIVE_PLACEHOLDERS["other"];
 }
 
 interface AuditFormState {
   // Step 1
   name: string;
   phone: string;
+  email: string;
   company: string;
   industry: string;
   // Step 2
@@ -90,6 +88,7 @@ export default function AuditPage() {
   const [form, setForm] = useState<AuditFormState>({
     name: "",
     phone: "",
+    email: "",
     company: "",
     industry: "",
     painNarrative: "",
@@ -111,10 +110,11 @@ export default function AuditPage() {
         body: JSON.stringify({
           name: form.name,
           phone: form.phone,
+          email: form.email || null,
           company: form.company || null,
           industry: form.industry || null,
           painNarrative: form.painNarrative,
-          painFrequency: skipQuantify ? null : (form.painFrequency || null),
+          painFrequency: skipQuantify ? null : form.painFrequency || null,
           painHoursPerWeek: null, // slider removed — hỏi trong discovery call
           // Backward compat fields — null for lean form
           painPrimary: null,
@@ -156,8 +156,7 @@ export default function AuditPage() {
               Miễn phí · Không ràng buộc · Bạn giữ report
             </div>
             <h1 className="font-display font-extrabold text-3xl md:text-5xl text-slate-900 leading-tight tracking-tight mb-5">
-              Audit quy trình{" "}
-              <span className="gradient-text">miễn phí</span>
+              Audit quy trình <span className="gradient-text">miễn phí</span>
             </h1>
             <p className="text-lg text-slate-500 leading-relaxed max-w-2xl">
               Mô tả pain của bạn — mình gọi tư vấn 30 phút và gửi audit report
@@ -179,7 +178,8 @@ export default function AuditPage() {
                       Cảm ơn bạn!
                     </h2>
                     <p className="text-slate-500 max-w-md mx-auto">
-                      Mình đã nhận thông tin. Đây là quy trình 3 bước sắp tới — hoàn toàn miễn phí, không cam kết.
+                      Mình đã nhận thông tin. Đây là quy trình 3 bước sắp tới —
+                      hoàn toàn miễn phí, không cam kết.
                     </p>
                   </div>
 
@@ -195,7 +195,8 @@ export default function AuditPage() {
                           Discovery Call — 30 phút (trong 24h)
                         </div>
                         <p className="text-sm text-slate-500">
-                          Mình liên hệ qua Zalo/SĐT để sắp xếp cuộc gọi. Tập trung hỏi rõ pain points, không pitch bán hàng.
+                          Mình liên hệ qua Zalo/SĐT để sắp xếp cuộc gọi. Tập
+                          trung hỏi rõ pain points, không pitch bán hàng.
                         </p>
                       </div>
                     </div>
@@ -210,7 +211,8 @@ export default function AuditPage() {
                           Audit Report cá nhân hóa (trong 48h sau call)
                         </div>
                         <p className="text-sm text-slate-500">
-                          PDF chi tiết: phân tích pain, ROI ước tính, workflow đề xuất. Bạn giữ report — không phụ thuộc AutoFlow.
+                          PDF chi tiết: phân tích pain, ROI ước tính, workflow
+                          đề xuất. Bạn giữ report — không phụ thuộc AutoFlow.
                         </p>
                       </div>
                     </div>
@@ -225,14 +227,17 @@ export default function AuditPage() {
                           Bạn quyết định — proposal chỉ gửi khi bạn confirm
                         </div>
                         <p className="text-sm text-slate-500">
-                          Sau khi đọc audit, nếu bạn muốn triển khai, mình sẽ gửi proposal với pricing cụ thể. Không confirm = không gửi proposal, không làm phiền.
+                          Sau khi đọc audit, nếu bạn muốn triển khai, mình sẽ
+                          gửi proposal với pricing cụ thể. Không confirm = không
+                          gửi proposal, không làm phiền.
                         </p>
                       </div>
                     </div>
                   </div>
 
                   <p className="text-xs text-slate-400 text-center mt-6 max-w-md mx-auto">
-                    💬 Không spam, không áp lực. Nếu thấy không fit, mình sẽ nói rõ và refer bạn tới người khác phù hợp hơn.
+                    💬 Không spam, không áp lực. Nếu thấy không fit, mình sẽ nói
+                    rõ và refer bạn tới người khác phù hợp hơn.
                   </p>
                 </div>
               ) : (
@@ -310,7 +315,21 @@ export default function AuditPage() {
                             onChange={(e) =>
                               setForm({ ...form, phone: e.target.value })
                             }
-                            placeholder="0912 345 678"
+                            placeholder="0935.115.248"
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-sm font-medium text-slate-700 mb-1.5 block">
+                            Email (không bắt buộc — để nhận audit report)
+                          </label>
+                          <input
+                            type="email"
+                            value={form.email}
+                            onChange={(e) =>
+                              setForm({ ...form, email: e.target.value })
+                            }
+                            placeholder="email@company.com"
                             className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                           />
                         </div>
@@ -389,9 +408,11 @@ export default function AuditPage() {
                           maxLength={2000}
                         />
                         <div className="flex justify-between items-center mt-1">
-                          {form.painNarrative.length < 30 && form.painNarrative.length > 0 ? (
+                          {form.painNarrative.length < 30 &&
+                          form.painNarrative.length > 0 ? (
                             <p className="text-xs text-amber-500">
-                              Cần thêm {30 - form.painNarrative.length} ký tự nữa
+                              Cần thêm {30 - form.painNarrative.length} ký tự
+                              nữa
                             </p>
                           ) : (
                             <span />
@@ -466,7 +487,6 @@ export default function AuditPage() {
                             ))}
                           </div>
                         </div>
-
                       </div>
 
                       {/* Honeypot */}
@@ -485,7 +505,9 @@ export default function AuditPage() {
                           disabled={submitting}
                           className="w-full bg-primary hover:bg-primary-dark disabled:bg-primary/60 text-white font-semibold py-3.5 rounded-xl transition-all hover:shadow-lg hover:shadow-primary/25 flex items-center justify-center gap-2"
                         >
-                          {submitting ? "Đang gửi..." : "Gửi audit — nhận tư vấn trong 24h"}
+                          {submitting
+                            ? "Đang gửi..."
+                            : "Gửi audit — nhận tư vấn trong 24h"}
                           <svg
                             width="16"
                             height="16"
@@ -611,12 +633,13 @@ export default function AuditPage() {
                 <ul className="space-y-2 text-sm text-slate-600 leading-relaxed">
                   <li>🏪 Chủ shop Shopee/TikTok, 100-1000 đơn/ngày</li>
                   <li>🍜 F&B chuỗi 3+ chi nhánh, xài MISA/KiotViet/iPOS</li>
-                  <li>🏥 Phòng khám/spa với {'>'}20 lịch/ngày</li>
-                  <li>🎓 Trung tâm đào tạo {'>'}100 học viên active</li>
-                  <li>👥 HR tuyển {'>'}20 ứng viên/tháng</li>
+                  <li>🏥 Phòng khám/spa với {">"}20 lịch/ngày</li>
+                  <li>🎓 Trung tâm đào tạo {">"}100 học viên active</li>
+                  <li>👥 HR tuyển {">"}20 ứng viên/tháng</li>
                 </ul>
                 <p className="text-xs text-slate-500 mt-4 italic">
-                  Ngoài các ngành này? Vẫn có thể fit — mình sẽ review pain và trả lời thẳng.
+                  Ngoài các ngành này? Vẫn có thể fit — mình sẽ review pain và
+                  trả lời thẳng.
                 </p>
               </div>
 
@@ -626,7 +649,8 @@ export default function AuditPage() {
                   12-18h
                 </p>
                 <p className="text-sm text-white/80 mb-3">
-                  giờ/tuần trung bình clients tiết kiệm được sau khi deploy workflow đầu tiên.
+                  giờ/tuần trung bình clients tiết kiệm được sau khi deploy
+                  workflow đầu tiên.
                 </p>
                 <p className="text-xs text-white/60 italic">
                   Con số từ audit thật, không phải lời hứa.

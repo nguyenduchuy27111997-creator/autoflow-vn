@@ -4,7 +4,12 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getStoredUTM } from "@/lib/utm";
-import { trackGenerateLead, trackQuizStart, trackQuizQuestion, trackQuizCompleted } from "@/lib/analytics";
+import {
+  trackGenerateLead,
+  trackQuizStart,
+  trackQuizQuestion,
+  trackQuizCompleted,
+} from "@/lib/analytics";
 import { fbqTrackLead } from "@/lib/fbpixel";
 import {
   quizQuestions,
@@ -140,7 +145,9 @@ export default function QuizPage() {
   async function handleSubmit() {
     if (!emailValid || submitting) return;
 
-    const honeypot = document.querySelector<HTMLInputElement>('input[name="website"]');
+    const honeypot = document.querySelector<HTMLInputElement>(
+      'input[name="website"]',
+    );
     if (honeypot?.value) return;
 
     setSubmitting(true);
@@ -165,7 +172,11 @@ export default function QuizPage() {
 
       if (res.ok) {
         trackQuizCompleted(totalScore);
-        trackGenerateLead({ form_type: "quiz", score: totalScore, result_tier: tier });
+        trackGenerateLead({
+          form_type: "quiz",
+          score: totalScore,
+          result_tier: tier,
+        });
         fbqTrackLead({ content_name: "quiz" });
       }
     } catch (err) {
@@ -380,7 +391,7 @@ export default function QuizPage() {
                     </label>
                     <input
                       type="tel"
-                      placeholder="0912 345 678"
+                      placeholder="0935.115.248"
                       value={leadData.phone}
                       onChange={(e) =>
                         setLeadData((p) => ({ ...p, phone: e.target.value }))

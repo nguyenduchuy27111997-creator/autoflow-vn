@@ -38,7 +38,7 @@ const howToJsonLd = {
       "@type": "HowToStep",
       position: 3,
       name: "Build & Test",
-      text: "Xây dựng workflow trên n8n, test kỹ lưỡng với dữ liệu thực",
+      text: "Xây dựng workflow trên Hệ thống AutoFlow, test kỹ lưỡng với dữ liệu thực",
     },
     {
       "@type": "HowToStep",

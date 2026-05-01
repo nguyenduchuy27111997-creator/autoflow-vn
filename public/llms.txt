@@ -1,12 +1,12 @@
 # AutoFlow VN
 
-> AutoFlow VN giúp doanh nghiệp vừa và nhỏ Việt Nam tự động hóa quy trình lặp lại bằng n8n.
+> AutoFlow VN là dịch vụ tự động hóa quản lý trọn gói cho SME Việt Nam — xây workflow, vận hành hạ tầng, báo cáo định kỳ. Khách hàng không cần đăng nhập hệ thống kỹ thuật.
 
 ## Dịch vụ chính
-- Tự động hóa quy trình (n8n workflows)
-- Tích hợp Zalo OA, MISA, Shopee, KiotViet
+- Tự động hóa quy trình lặp lại (managed automation as a service)
+- Tích hợp Zalo OA, MISA, Shopee, KiotViet, GHN, GHTK
 - Audit quy trình miễn phí
-- Training và hỗ trợ sau go-live
+- Vận hành + giám sát + báo cáo hàng tháng
 
 ## Ngành phục vụ
 - E-commerce (Shopee, TikTok Shop, Haravan, Sapo)
@@ -18,7 +18,7 @@
 
 ## Liên hệ
 - Website: https://autoflowvn.net
-- Email: hello@autoflowvn.net
+- Email: support@autoflowvn.net
 - Zalo: 0935115248
 - Địa chỉ: TP. Hồ Chí Minh, Việt Nam
 

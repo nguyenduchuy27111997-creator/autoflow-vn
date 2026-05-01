@@ -24,8 +24,8 @@ const steps = [
     title: "Build & Training",
     duration: "1–4 tuần tùy độ phức tạp",
     description:
-      "Bạn duyệt, mình build. Mỗi workflow hoàn thành đều có video Loom hướng dẫn. Training team trực tiếp. Bạn không cần biết code — chỉ cần biết bấm nút.",
-    deliverable: "Workflows chạy thật + Video SOP",
+      "Bạn duyệt, mình build. Mỗi workflow hoàn thành đều có tài liệu hướng dẫn. Training team trực tiếp. Bạn không cần biết code — chỉ cần biết bấm nút.",
+    deliverable: "Workflows chạy thật + tài liệu hướng dẫn",
   },
   {
     number: "04",

@@ -10,9 +10,9 @@ const HOURLY_COSTS = [
 ];
 
 const WORKFLOW_TIERS = [
-  { label: "Đơn giản — 2 triệu/workflow", value: 2000000 },
-  { label: "Trung bình — 4 triệu/workflow", value: 4000000 },
-  { label: "Phức tạp — 7 triệu/workflow", value: 7000000 },
+  { label: "Starter — 1.5 triệu/tháng", value: 1500000 },
+  { label: "Growth — 2.5 triệu/tháng", value: 2500000 },
+  { label: "Scale — 4 triệu/tháng", value: 4000000 },
 ];
 
 function formatTrieu(amount: number): string {

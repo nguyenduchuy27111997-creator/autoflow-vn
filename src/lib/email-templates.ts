@@ -119,7 +119,7 @@ function emailWrapper(
               </td>
             </tr>
           </table>
-          <div style="font-size:12px;color:${COLORS.textLight};margin-top:6px;letter-spacing:0.3px;">Chuyên gia n8n automation cho SME Việt Nam</div>
+          <div style="font-size:12px;color:${COLORS.textLight};margin-top:6px;letter-spacing:0.3px;">Chuyên gia tự động hóa quản lý cho SME Việt Nam</div>
         </td></tr>
 
         <!-- Body -->
@@ -678,7 +678,7 @@ export function pdfEmail3(params: { email: string; name?: string; resource?: str
     subject,
     html: emailWrapper(
       bodyHtml,
-      `Case study thực tế: xem doanh nghiệp tương tự đã đạt kết quả gì nhờ n8n automation.`,
+      `Case study thực tế: xem doanh nghiệp tương tự đã đạt kết quả gì nhờ tự động hóa quy trình.`,
       email
     ),
   };

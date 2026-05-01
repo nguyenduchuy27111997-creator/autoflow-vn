@@ -113,6 +113,20 @@ export async function POST(req: NextRequest) {
       }).catch((err) => console.error("Email queue error (audit):", err));
     }
 
+    // Forward to external webhook (Google Sheets sync)
+    const webhookUrl = process.env.AUDIT_WEBHOOK_URL;
+    if (webhookUrl) {
+      try {
+        await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...submission, id: data.id, email: body.email || null }),
+        });
+      } catch (err) {
+        console.error("Audit webhook failed (non-fatal):", err);
+      }
+    }
+
     // Telegram notification — MUST await in serverless (Netlify kills fire-and-forget promises after response)
     try {
       await notifyTelegram(formatAuditNotify({

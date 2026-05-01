@@ -7,7 +7,7 @@ import InlineContactForm from "@/components/InlineContactForm";
 export const metadata: Metadata = {
   title: "Pilot Miễn Phí — 5 Khách Đầu Tiên | AutoFlow VN",
   description:
-    "1 workflow miễn phí cho 5 khách đầu tiên. Không ràng buộc. Audit chuyên sâu, workflow n8n production-ready, SOP & video hướng dẫn.",
+    "1 workflow miễn phí cho 5 khách đầu tiên. Không ràng buộc. Audit chuyên sâu, workflow production-ready trên Hệ thống AutoFlow, tài liệu hướng dẫn đầy đủ.",
   openGraph: {
     title: "Pilot Miễn Phí — 5 Khách Đầu Tiên | AutoFlow VN",
     description:
@@ -24,12 +24,12 @@ const deliverables = [
   },
   {
     icon: "⚙️",
-    title: "1 workflow n8n production-ready",
-    desc: "Workflow tự động hóa hoàn chỉnh, đã test với dữ liệu thật, chạy trên n8n cloud hoặc self-hosted.",
+    title: "1 workflow chạy ổn định, sẵn sàng production",
+    desc: "Workflow tự động hóa hoàn chỉnh, đã test với dữ liệu thật, chạy trên Hệ thống AutoFlow vận hành liên tục.",
   },
   {
     icon: "🎥",
-    title: "Video Loom hướng dẫn",
+    title: "Tài liệu hướng dẫn",
     desc: "Video step-by-step để team xem lại bất cứ lúc nào, không cần nhớ hết từ buổi bàn giao.",
   },
   {
@@ -39,8 +39,8 @@ const deliverables = [
   },
   {
     icon: "💬",
-    title: "Hỗ trợ 7 ngày sau bàn giao (pilot)",
-    desc: "Fix lỗi, trả lời thắc mắc qua Zalo. Đảm bảo workflow chạy ổn định trước khi kết thúc. Nâng lên Hosting 499K/tháng: support ongoing qua Zalo giờ hành chính + monitoring 24/7.",
+    title: "Hỗ trợ 30 ngày sau bàn giao",
+    desc: "Fix lỗi, trả lời thắc mắc qua Zalo. Đảm bảo workflow chạy ổn định. Sau đó chọn gói phù hợp từ 1.5 triệu/tháng — bao gồm hosting, monitoring tự động 24/7 và hỗ trợ Zalo giờ hành chính.",
   },
 ];
 
@@ -58,7 +58,7 @@ const timeline = [
     day: "Ngày 3–5",
     phase: "Build & Test",
     tasks: [
-      "Xây dựng workflow trên n8n",
+      "Xây dựng workflow trên Hệ thống AutoFlow",
       "Kết nối API (Shopee/Tiki/MISA/KiotViet/Zalo OA)",
       "Test với dữ liệu thật, handle edge cases",
     ],
@@ -67,7 +67,7 @@ const timeline = [
     day: "Ngày 6–7",
     phase: "Bàn Giao & Training",
     tasks: [
-      "Training cho team (video Loom + live)",
+      "Tài liệu hướng dẫn vận hành",
       "Giao SOP trên Notion",
       "Bật workflow production, monitor ngày đầu",
     ],
@@ -118,7 +118,7 @@ const industryExamples = [
 ];
 
 const successCriteria = [
-  "Workflow chạy ổn định trên n8n production trong 7 ngày liên tục",
+  "Workflow chạy ổn định trên Hệ thống AutoFlow production trong 7 ngày liên tục",
   "Giảm thời gian xử lý thủ công tối thiểu 50%",
   "Không phát sinh lỗi nghiêm trọng ảnh hưởng kinh doanh",
   "Khách hàng xác nhận hài lòng với kết quả",
@@ -171,7 +171,7 @@ export default function PilotPage() {
             <p className="text-lg text-slate-500 leading-relaxed max-w-2xl">
               5 khách đầu tiên nhận miễn phí 1 workflow, không ràng buộc. Nếu
               hài lòng — mở rộng. Nếu không — bạn vẫn có workflow chạy thật,
-              SOP, và video hướng dẫn.
+              SOP, và tài liệu hướng dẫn.
             </p>
           </div>
 
@@ -462,24 +462,24 @@ export default function PilotPage() {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                name: "Cơ bản",
-                desc: "Kết nối 2 hệ thống, 1 bước xử lý",
-                price: "2 triệu/workflow",
-                timeline: "5 ngày",
+                name: "Starter",
+                desc: "1 quy trình, kết nối 2 hệ thống",
+                price: "1.5 triệu/tháng",
+                setup: "+ 2 triệu setup",
                 highlight: false,
               },
               {
-                name: "Nâng cao",
-                desc: "Kết nối 3-4 hệ thống, nhiều bước",
-                price: "4 triệu/workflow",
-                timeline: "7 ngày",
+                name: "Growth",
+                desc: "2-3 quy trình, kết nối 3-4 hệ thống",
+                price: "2.5 triệu/tháng",
+                setup: "+ 3 triệu setup",
                 highlight: true,
               },
               {
-                name: "Toàn diện",
-                desc: "Kết nối 5+ hệ thống, quy trình phức tạp",
-                price: "7 triệu/workflow",
-                timeline: "10 ngày",
+                name: "Scale",
+                desc: "4+ quy trình, kết nối 5+ hệ thống",
+                price: "4 triệu/tháng",
+                setup: "+ 5 triệu setup",
                 highlight: false,
               },
             ].map((pkg, i) => (
@@ -503,17 +503,17 @@ export default function PilotPage() {
                 <p className="font-display font-extrabold text-2xl text-primary mb-1">
                   {pkg.price}
                 </p>
-                <p className="text-xs text-slate-500 mb-4">
-                  Timeline: {pkg.timeline}
+                <p className="text-xs text-slate-400 mb-4">
+                  {pkg.setup}
                 </p>
                 <p className="text-xs text-accent font-semibold">
-                  Khách pilot giảm thêm 10%
+                  Khách pilot giảm 10% tháng đầu
                 </p>
               </div>
             ))}
           </div>
           <p className="text-center text-sm text-slate-500 mt-6">
-            Tùy chọn thêm: <strong>Hosting 499K/tháng</strong> — AutoFlow vận hành server, backup hàng ngày, hỗ trợ Zalo. Hủy bất cứ lúc nào.
+            Mỗi gói đã bao gồm: hosting server VN, monitoring tự động 24/7, hỗ trợ Zalo giờ hành chính (T2–T6, 8:00–18:00), tối ưu hàng tháng. Hủy bất cứ lúc nào.
           </p>
         </section>
 

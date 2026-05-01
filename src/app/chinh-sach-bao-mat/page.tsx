@@ -78,9 +78,10 @@ export default function ChinhSachBaoMatPage() {
                 danh, không chứa thông tin cá nhân trực tiếp)
               </li>
               <li>
-                <strong>Facebook Pixel (Meta):</strong> Khi bạn chấp nhận cookies quảng cáo,
-                chúng tôi sử dụng Facebook Pixel để đo lường hiệu quả quảng cáo và tạo tệp
-                khách hàng tương tự. Dữ liệu được gửi đến Meta Platforms, Inc. theo{" "}
+                <strong>Facebook Pixel (Meta):</strong> Khi bạn chấp nhận
+                cookies quảng cáo, chúng tôi sử dụng Facebook Pixel để đo lường
+                hiệu quả quảng cáo và tạo tệp khách hàng tương tự. Dữ liệu được
+                gửi đến Meta Platforms, Inc. theo{" "}
                 <a
                   href="https://www.facebook.com/privacy/policy/"
                   target="_blank"
@@ -103,7 +104,8 @@ export default function ChinhSachBaoMatPage() {
               <li>Kết nối HTTPS mã hóa cho toàn bộ website</li>
               <li>
                 Chỉ lưu trữ cookie phân tích của Google Analytics (
-                <code>_ga</code>, <code>_ga_*</code>) khi bạn đồng ý — không lưu dữ liệu cá nhân trực tiếp
+                <code>_ga</code>, <code>_ga_*</code>) khi bạn đồng ý — không lưu
+                dữ liệu cá nhân trực tiếp
               </li>
               <li>Form có cơ chế chống spam tự động</li>
               <li>
@@ -117,13 +119,13 @@ export default function ChinhSachBaoMatPage() {
             </p>
             <ul>
               <li>
-                Hệ thống n8n được self-hosted trên VPS tại Việt Nam — dữ liệu
+                Hệ thống AutoFlow vận hành chuyên dụng trên VPS tại Việt Nam — dữ liệu
                 100% trong nước
               </li>
               <li>Dữ liệu dự án thuộc sở hữu hoàn toàn của khách hàng</li>
               <li>
                 Sau khi bàn giao, AutoFlow không truy cập dữ liệu dự án trừ khi
-                được client cho phép (khi sử dụng gói Hosting 499K/tháng)
+                được client cho phép (khi sử dụng gói gói hàng tháng từ 1.5 triệu)
               </li>
             </ul>
 
@@ -137,8 +139,8 @@ export default function ChinhSachBaoMatPage() {
             </ul>
             <p>
               Để thực hiện các quyền trên, liên hệ{" "}
-              <strong>hello@autoflowvn.net</strong> hoặc Zalo{" "}
-              <strong>0912 345 678</strong>.
+              <strong>support@autoflowvn.net</strong> hoặc Zalo{" "}
+              <strong>0935.115.248</strong>.
             </p>
 
             <h2>8. Cookies</h2>
@@ -148,21 +150,21 @@ export default function ChinhSachBaoMatPage() {
             </p>
             <ul>
               <li>
-                <strong>Chấp nhận:</strong> Google Analytics và Facebook Pixel được
-                kích hoạt. Google Analytics lưu cookie <code>_ga</code> và{" "}
-                <code>_ga_*</code> để đo lường traffic ẩn danh. Facebook Pixel lưu
-                cookie <code>_fbp</code> (browser ID) và <code>_fbc</code> (click ID
-                từ quảng cáo Facebook) để đo lường hiệu quả quảng cáo.
+                <strong>Chấp nhận:</strong> Google Analytics và Facebook Pixel
+                được kích hoạt. Google Analytics lưu cookie <code>_ga</code> và{" "}
+                <code>_ga_*</code> để đo lường traffic ẩn danh. Facebook Pixel
+                lưu cookie <code>_fbp</code> (browser ID) và <code>_fbc</code>{" "}
+                (click ID từ quảng cáo Facebook) để đo lường hiệu quả quảng cáo.
               </li>
               <li>
-                <strong>Từ chối:</strong> Google Analytics và Facebook Pixel không
-                được kích hoạt. Không có cookie phân tích hoặc quảng cáo nào được
-                lưu trên trình duyệt của bạn.
+                <strong>Từ chối:</strong> Google Analytics và Facebook Pixel
+                không được kích hoạt. Không có cookie phân tích hoặc quảng cáo
+                nào được lưu trên trình duyệt của bạn.
               </li>
             </ul>
             <p>
-              Lựa chọn của bạn được ghi nhớ qua các lần truy cập. Bạn có thể thay
-              đổi bất cứ lúc nào bằng cách xóa cookie của trình duyệt.
+              Lựa chọn của bạn được ghi nhớ qua các lần truy cập. Bạn có thể
+              thay đổi bất cứ lúc nào bằng cách xóa cookie của trình duyệt.
             </p>
 
             <h2>9. Thay đổi chính sách</h2>
@@ -179,10 +181,10 @@ export default function ChinhSachBaoMatPage() {
             </p>
             <ul>
               <li>
-                <strong>Email:</strong> hello@autoflowvn.net
+                <strong>Email:</strong> support@autoflowvn.net
               </li>
               <li>
-                <strong>Zalo:</strong> 0912 345 678
+                <strong>Zalo:</strong> 0935.115.248
               </li>
               <li>
                 <strong>Địa chỉ:</strong> TP. Hồ Chí Minh, Việt Nam

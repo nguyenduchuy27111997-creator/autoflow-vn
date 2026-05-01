@@ -149,7 +149,7 @@ export default async function Image() {
             fontWeight: 600,
           }}
         >
-          <span>n8n · Zalo OA · MISA · Shopee</span>
+          <span>Tự động hóa · Zalo OA · MISA · Shopee</span>
         </div>
       </div>
     ),

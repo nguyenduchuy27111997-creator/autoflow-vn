@@ -28,7 +28,7 @@ export default function TemplateGalleryPage() {
             </span>
             <h1 className="font-display font-extrabold text-3xl md:text-4xl text-slate-900 mb-4">
               Thư Viện Mẫu Workflow{" "}
-              <span className="gradient-text">n8n Cho SME Việt Nam</span>
+              <span className="gradient-text">Cho SME Việt Nam</span>
             </h1>
             <p className="text-lg text-slate-500 max-w-2xl mx-auto">
               {templates.length} workflow template đã được kiểm chứng với doanh nghiệp Việt Nam.

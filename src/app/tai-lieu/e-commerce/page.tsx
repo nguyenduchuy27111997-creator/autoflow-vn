@@ -44,7 +44,7 @@ export default function EcommerceUseCasePage() {
               <span className="w-1 h-1 bg-slate-300 rounded-full" />
               <span>Dự án 4 workflows — 28 triệu đồng</span>
               <span className="w-1 h-1 bg-slate-300 rounded-full" />
-              <span>4 workflows n8n</span>
+              <span>4 workflows tự động hóa</span>
             </div>
           </div>
         </section>
@@ -147,7 +147,7 @@ export default function EcommerceUseCasePage() {
                 accentColor="#F59E0B"
                 steps={[
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>, label: "Đơn mới trên sàn", sub: "Shopee, Tiki, TikTok" },
-                  { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>, label: "n8n webhook nhận", sub: "Trigger tự động mỗi 5 phút" },
+                  { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>, label: "Workflow webhook nhận", sub: "Trigger tự động mỗi 5 phút" },
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>, label: "Chuẩn hóa data", sub: "Map fields, validate" },
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" /></svg>, label: "Ghi vào MISA", sub: "Tự động tạo hóa đơn" },
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>, label: "Xác nhận thành công", sub: "Log + alert nếu lỗi" },
@@ -175,7 +175,7 @@ export default function EcommerceUseCasePage() {
                 accentColor="#F59E0B"
                 steps={[
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" /></svg>, label: "Tồn kho thay đổi", sub: "MISA update" },
-                  { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>, label: "n8n trigger", sub: "Poll mỗi 5 phút" },
+                  { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>, label: "Trigger workflow", sub: "Poll mỗi 5 phút" },
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>, label: "So sánh & map SKU", sub: "Check chênh lệch" },
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>, label: "Update 3 sàn", sub: "API Shopee, Tiki, TikTok" },
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>, label: "Alert nếu hết hàng", sub: "Telegram cho chủ shop" },
@@ -202,7 +202,7 @@ export default function EcommerceUseCasePage() {
                 accentColor="#F59E0B"
                 steps={[
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>, label: "Trạng thái đơn đổi", sub: "Đang giao, đã giao, hoàn" },
-                  { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>, label: "n8n xử lý", sub: "Map template ZNS" },
+                  { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>, label: "Workflow xử lý", sub: "Map template ZNS" },
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>, label: "Gửi Zalo OA", sub: "ZNS template cá nhân hóa" },
                   { icon: <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>, label: "Khách nhận tin", sub: "Mã vận đơn + link tracking" },
                 ]}
@@ -252,7 +252,7 @@ export default function EcommerceUseCasePage() {
               {[
                 { week: "Tuần 1", title: "Audit & Planning", items: ["Discovery call 2 giờ — hiểu quy trình hiện tại", "Mapping toàn bộ flow đơn hàng trên 3 sàn", "Kiểm tra API access Shopee, Tiki, TikTok Shop, MISA", "Proposal chi tiết với 4 workflows + ROI ước tính"] },
                 { week: "Tuần 2", title: "Build Workflow #1 & #2", items: ["Xây workflow đồng bộ đơn hàng (test với data thật)", "Xây workflow đồng bộ tồn kho real-time", "Test với 50 đơn đầu tiên — fix edge cases", "Training lần 1 cho team vận hành"] },
-                { week: "Tuần 3", title: "Build Workflow #3 & #4 + Go-live", items: ["Xây workflow thông báo vận chuyển qua Zalo OA", "Xây workflow báo cáo doanh thu tự động", "Go-live toàn bộ 4 workflows", "Bàn giao SOP + video hướng dẫn Loom", "Support 14 ngày sau bàn giao"] },
+                { week: "Tuần 3", title: "Build Workflow #3 & #4 + Go-live", items: ["Xây workflow thông báo vận chuyển qua Zalo OA", "Xây workflow báo cáo doanh thu tự động", "Go-live toàn bộ 4 workflows", "Bàn giao SOP + tài liệu hướng dẫn Loom", "Support 14 ngày sau bàn giao"] },
               ].map((phase, i) => (
                 <div key={i} className="flex gap-4 md:gap-6">
                   <div className="flex flex-col items-center">
@@ -335,7 +335,7 @@ export default function EcommerceUseCasePage() {
                 <div className="space-y-3">
                   {[
                     { item: "AutoFlow setup (1 lần)", cost: "28 triệu" },
-                    { item: "n8n self-hosted + VPS", cost: "~3.6 triệu/năm" },
+                    { item: "Hệ thống AutoFlow chuyên dụng", cost: "~3.6 triệu/năm" },
                     { item: "Zalo ZNS messages", cost: "~6 triệu/năm" },
                   ].map((row) => (
                     <div key={row.item} className="flex items-center justify-between text-sm">
