@@ -188,3 +188,64 @@ describe("Migration 043 sanity check", () => {
     );
   });
 });
+
+describe("Wrapper → task integration (Plan 120-01)", () => {
+  it("USE_TRIGGER_DEV=true branch calls tasks.trigger with exactly {email_queue_row_id, sequence_type}", () => {
+    const source = readSource("src/lib/email-queue.ts");
+    const triggerCall = source.match(
+      /tasks\.trigger[<\w\s\.,>]*\(\s*["']email-sequence["']\s*,\s*\{([\s\S]*?)\}\s*\)/
+    );
+    assert.ok(triggerCall, "tasks.trigger('email-sequence', {...}) call required");
+    const stripped = triggerCall[1].replace(/\/\/[^\n]*/g, "");
+    const keys = [...stripped.matchAll(/(\w+)\s*:/g)].map((m) => m[1]);
+    assert.deepEqual(
+      keys.sort(),
+      ["email_queue_row_id", "sequence_type"].sort(),
+      `trigger payload keys must be exactly {email_queue_row_id, sequence_type}; found: ${keys.join(", ")}`
+    );
+  });
+
+  it("legacy 5-row schedule preserved for USE_TRIGGER_DEV=false branch", () => {
+    const source = readSource("src/lib/email-queue.ts");
+    assert.match(source, /EMAIL_SCHEDULE/);
+    // Verify 5 schedule entries (days_offset 0, 3, 7, 14, 21)
+    for (const offset of [0, 3, 7, 14, 21]) {
+      assert.match(
+        source,
+        new RegExp(`days_offset:\\s*${offset}\\b`),
+        `legacy schedule must keep days_offset ${offset}`
+      );
+    }
+  });
+
+  it("task body fetches PII via SUPABASE_SERVICE_ROLE_KEY (D-02)", () => {
+    const source = readSource("src/trigger/email-sequence.ts");
+    assert.match(source, /process\.env\.SUPABASE_SERVICE_ROLE_KEY/);
+    assert.match(source, /from\(["']email_queue["']\)/);
+    assert.match(source, /eq\(["']id["'],\s*payload\.email_queue_row_id\)/);
+  });
+
+  it("task body throws on errors (no silent swallow — Trigger.dev retry surfaces failures)", () => {
+    const source = readSource("src/trigger/email-sequence.ts");
+    // Run() body must contain throw statements + must NOT contain .catch(() => {})
+    const runBody = source.match(/run:\s*async[\s\S]*?^\s*\}\s*,?\s*$/m);
+    assert.ok(runBody, "run() body must exist");
+    assert.match(runBody[0], /throw new Error/);
+    assert.ok(
+      !/\.catch\(\s*\(\s*\)\s*=>\s*\{\s*\}\s*\)/.test(runBody[0]),
+      "task body must NOT contain fire-and-forget .catch(() => {}) — Phase 120 explicitly forbids this anti-pattern"
+    );
+  });
+
+  it("task body expands schedule to 5 rows total (anchor + 4 remainder)", () => {
+    const source = readSource("src/trigger/email-sequence.ts");
+    // Remainder must cover email_number 2, 3, 4, 5
+    for (const n of [2, 3, 4, 5]) {
+      assert.match(
+        source,
+        new RegExp(`email_number:\\s*${n}\\b`),
+        `task body must schedule email_number ${n}`
+      );
+    }
+  });
+});
