@@ -37,7 +37,7 @@ export default function DieuKhoanPage() {
                 các nền tảng khác
               </li>
               <li>Training và bàn giao tài liệu vận hành</li>
-              <li>Hỗ trợ kỹ thuật và bảo trì (gói gói hàng tháng từ 1.5 triệu)</li>
+              <li>Hỗ trợ kỹ thuật và bảo trì (gói hàng tháng từ 1.5 triệu)</li>
             </ul>
 
             <h2>3. Thanh toán</h2>

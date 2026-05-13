@@ -11,7 +11,7 @@ const faqs = [
   },
   {
     q: "Tôi không biết code. Có dùng được không?",
-    a: "Hoàn toàn được. Mình build xong, bàn giao kèm tài liệu hướng dẫn từng bước. Team bạn chỉ cần biết bấm nút và đọc kết quả. Nếu có vấn đề, mình fix trong 24h qua gói gói hàng tháng từ 1.5 triệu.",
+    a: "Hoàn toàn được. Mình build xong, bàn giao kèm tài liệu hướng dẫn từng bước. Team bạn chỉ cần biết bấm nút và đọc kết quả. Nếu có vấn đề, mình fix trong 24h qua gói hàng tháng từ 1.5 triệu.",
   },
   {
     q: "Data của tôi có an toàn không?",

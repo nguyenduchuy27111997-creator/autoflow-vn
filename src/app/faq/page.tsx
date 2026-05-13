@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: "Tôi không biết code. Có dùng được không?",
-    a: "Hoàn toàn được. Mình build xong, bàn giao kèm tài liệu hướng dẫn từng bước. Team bạn chỉ cần biết bấm nút và đọc kết quả. Nếu có vấn đề, mình fix trong 24h qua gói gói hàng tháng từ 1.5 triệu.",
+    a: "Hoàn toàn được. Mình build xong, bàn giao kèm tài liệu hướng dẫn từng bước. Team bạn chỉ cần biết bấm nút và đọc kết quả. Nếu có vấn đề, mình fix trong 24h qua gói hàng tháng từ 1.5 triệu.",
   },
   {
     q: "Data của tôi có an toàn không?",
@@ -45,7 +45,7 @@ const faqs = [
   },
   {
     q: "Sau pilot miễn phí thì sao?",
-    a: "Sau khi pilot chạy thành công, bạn có 3 lựa chọn: (1) Mua thêm workflow mới (gói Starter/Growth/Scale tùy độ phức tạp), (2) Đăng ký gói gói hàng tháng từ 1.5 triệu để AutoFlow vận hành và bảo trì, hoặc (3) Dừng lại — workflow đã build vẫn thuộc về bạn hoàn toàn.",
+    a: "Sau khi pilot chạy thành công, bạn có 3 lựa chọn: (1) Mua thêm workflow mới (gói Starter/Growth/Scale tùy độ phức tạp), (2) Đăng ký gói hàng tháng từ 1.5 triệu để AutoFlow vận hành và bảo trì, hoặc (3) Dừng lại — workflow đã build vẫn thuộc về bạn hoàn toàn.",
   },
   {
     q: "Tôi không biết kỹ thuật, có dùng được không?",
@@ -53,7 +53,7 @@ const faqs = [
   },
   {
     q: "Workflow bị lỗi thì AutoFlow có fix không?",
-    a: "Có. 30 ngày đầu sau bàn giao: support và fix miễn phí hoàn toàn. Từ tháng thứ 2 trở đi: nếu dùng gói gói hàng tháng từ 1.5 triệu, AutoFlow cam kết SLA fix trong 24h giờ hành chính. Ngoài hosting: fix theo giờ với rate thỏa thuận.",
+    a: "Có. 30 ngày đầu sau bàn giao: support và fix miễn phí hoàn toàn. Từ tháng thứ 2 trở đi: nếu dùng gói hàng tháng từ 1.5 triệu, AutoFlow cam kết SLA fix trong 24h giờ hành chính. Ngoài hosting: fix theo giờ với rate thỏa thuận.",
   },
   {
     q: "AutoFlow khác gì so với thuê freelancer?",
@@ -61,11 +61,11 @@ const faqs = [
   },
   {
     q: "Có hoàn tiền không?",
-    a: "Có. AutoFlow cam kết hoàn tiền 100% nếu không deliver đúng scope đã ký trong hợp đồng. Điều kiện: workflow không chạy đúng theo yêu cầu đã thống nhất sau quá trình build và test. Không có điều kiện ẩn hay phí xử lý.",
+    a: "Có. AutoFlow cam kết hoàn 100% phí xây dựng nếu workflow không đạt KPI đã ký trong hợp đồng sau 30 ngày vận hành thật. Hợp đồng liệt kê rõ các trường hợp loại trừ (vd: khách thay đổi scope, lỗi do bên thứ ba như Shopee API down) — gửi mẫu trước khi ký.",
   },
   {
     q: "Gói gói hàng tháng từ 1.5 triệu bao gồm những gì?",
-    a: "Gói hàng tháng từ 1.5 triệu bao gồm: VPS Bizfly tại TP.HCM (không phụ thuộc server nước ngoài), backup data hàng ngày, monitoring uptime tự động 24/7 + cảnh báo Zalo khi có sự cố, SSL certificate, support qua Zalo trong giờ hành chính (T2–T6, 8:00–18:00), fix lỗi trong 24h (SLA giờ hành chính), và quota execution theo gói. Không bao gồm: build workflow mới (tính riêng).",
+    a: "Gói hàng tháng từ 1.5 triệu bao gồm: VPS Bizfly tại TP.HCM (không phụ thuộc server nước ngoài), backup data hàng ngày, monitoring uptime tự động 24/7 + cảnh báo Zalo khi có sự cố, SSL certificate, support qua Zalo trong giờ hành chính (T2–T6, 8:00–18:00), fix lỗi trong 24h (SLA giờ hành chính), và quota execution theo gói (Starter 10K / Growth 30K / Scale 100K exec/tháng). Build workflow mới ngoài scope ký ban đầu tính phí setup riêng theo tier. Riêng gói Scale: bao gồm 1 workflow mới mỗi quý.",
   },
   {
     q: "AutoFlow vận hành workflow như thế nào? Tôi có truy cập engine không?",

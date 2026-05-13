@@ -103,7 +103,7 @@ const commitments = [
   },
   {
     title: "Cam kết 100% hoàn tiền",
-    desc: "Không deliver đúng scope = hoàn 100%. Không điều kiện ẩn.",
+    desc: "Không đạt KPI sau 30 ngày = hoàn 100% phí xây dựng (theo điều khoản hợp đồng).",
     icon: (
       <svg width="22" height="22" fill="none" stroke="#10B981" strokeWidth="2" viewBox="0 0 24 24">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />

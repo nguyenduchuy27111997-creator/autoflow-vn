@@ -26,9 +26,9 @@ const TIMELINES = [
 ];
 
 const TIERS = [
-  { name: "Starter", min: 8, max: 15, workflows: "1", timeline: "1-2 tuần" },
-  { name: "Growth", min: 20, max: 35, workflows: "3-5", timeline: "3-4 tuần" },
-  { name: "Scale", min: 50, max: 80, workflows: "8-12", timeline: "6-8 tuần" },
+  { name: "Starter", setup: 2, monthly: 1.5, workflows: "1", timeline: "1-2 tuần" },
+  { name: "Growth", setup: 3, monthly: 2.5, workflows: "2-3", timeline: "3-4 tuần" },
+  { name: "Scale", setup: 5, monthly: 4, workflows: "4+", timeline: "6-8 tuần" },
 ];
 
 function formatVND(m: number) {
@@ -58,15 +58,16 @@ export default function PricingCalculator() {
   const tl = TIMELINES.find((t) => t.id === timeline);
   const complexityFactor = team?.factor || 1;
   const urgencyFactor = tl?.factor || 1;
-  const basePerWorkflow = 7;
-  const rawEstimate = workflowCount * basePerWorkflow * complexityFactor * urgencyFactor;
+  // Bump tier theo complexity (team lớn) + urgency (gấp) — KHÔNG ra số tiền raw,
+  // chỉ recommend tier matching bang-gia (Starter/Growth/Scale).
+  const effectiveWorkflows = workflowCount * complexityFactor * urgencyFactor;
+  const tier = effectiveWorkflows <= 1.5 ? TIERS[0] : effectiveWorkflows <= 3.5 ? TIERS[1] : TIERS[2];
 
-  const tier = rawEstimate <= 15 ? TIERS[0] : rawEstimate <= 40 ? TIERS[1] : TIERS[2];
-  const rangeLow = formatVND(Math.max(tier.min, rawEstimate * 0.85));
-  const rangeHigh = formatVND(Math.min(tier.max, rawEstimate * 1.15));
-  const monthlySavings = Math.round(workflowCount * 15); // ~15 giờ/workflow/tháng
-  const monthlyEquivalent = formatVND((rangeLow + rangeHigh) / 2 / 10);
-  const paybackMonths = Math.max(1, Math.ceil(((rangeLow + rangeHigh) / 2) / (monthlySavings * 0.08))); // rough
+  const yearOneCost = formatVND(tier.setup + tier.monthly * 12);
+  const monthlySavings = Math.round(workflowCount * 15); // ~15 giờ/workflow/tháng (conservative)
+  // ROI: vs thuê NV part-time ~10tr/tháng. Net saving = 10 − (setup amortized + monthly).
+  const amortizedMonthly = tier.monthly + tier.setup / 12;
+  const netMonthlySaving = formatVND(Math.max(0, 10 - amortizedMonthly));
 
   const canProceed = step === 1 ? selected.length > 0 : step === 2 ? !!teamSize : step === 3 ? !!timeline : true;
 
@@ -75,7 +76,7 @@ export default function PricingCalculator() {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       window.gtag("event", s === 4 ? "pricing_calculator_complete" : "pricing_calculator_step", {
         step: s,
-        ...(s === 4 && { tier: tier.name, range_low: rangeLow, range_high: rangeHigh }),
+        ...(s === 4 && { tier: tier.name, setup: tier.setup, monthly: tier.monthly, year_one: yearOneCost }),
       });
     }
   };
@@ -99,33 +100,36 @@ export default function PricingCalculator() {
       <div className="bg-white rounded-2xl border border-slate-200 p-6 md:p-8">
         {/* Result */}
         <div className="text-center mb-6">
-          <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-2">Ước tính chi phí</p>
+          <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-2">Gói phù hợp</p>
           <div className="font-display font-extrabold text-4xl md:text-5xl text-slate-900">
-            {rangeLow} — {rangeHigh} <span className="text-lg font-bold text-slate-500">triệu VND</span>
+            {tier.name}
           </div>
-          <p className="text-sm text-slate-500 mt-2">
-            Gói <strong className="text-slate-700">{tier.name}</strong> · {Math.round(workflowCount)} workflows · {tier.timeline}
+          <p className="text-base text-slate-700 mt-3">
+            <strong>{tier.setup} triệu</strong> setup (1 lần) <span className="text-slate-400">+</span> <strong>{tier.monthly} triệu/tháng</strong> vận hành
+          </p>
+          <p className="text-xs text-slate-500 mt-1.5">
+            {Math.round(workflowCount)} workflow{workflowCount !== 1 ? "s" : ""} · timeline {tier.timeline} · năm đầu ~{yearOneCost} triệu
           </p>
         </div>
 
         {/* Value comparison */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-          <ValueCard icon="👤" label="Thuê NV" value="10-15 tr/tháng" sub="+ BHXH + quản lý" muted />
-          <ValueCard icon="⚡" label="AutoFlow" value={`~${monthlyEquivalent} tr/tháng`} sub="tính trên 10 tháng" accent />
+          <ValueCard icon="👤" label="Thuê NV part-time" value="~10 tr/tháng" sub="+ BHXH + quản lý" muted />
+          <ValueCard icon="⚡" label="AutoFlow" value={`${tier.setup}tr + ${tier.monthly}tr/m`} sub="setup + monthly" accent />
           <ValueCard icon="⏱" label="Tiết kiệm" value={`~${monthlySavings} giờ/tháng`} sub={`= ${Math.round(monthlySavings / 8)} ngày`} />
-          <ValueCard icon="📈" label="Hoàn vốn" value={`~${paybackMonths} tháng`} sub="ROI từ tháng tiếp" />
+          <ValueCard icon="📈" label="vs thuê NV" value={`~${netMonthlySaving} tr/tháng`} sub="net saving sau năm 1" />
         </div>
 
         {retainer && (
           <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-6 text-sm text-amber-800">
-            <strong>Gói hàng tháng đề xuất:</strong> từ 1.5-4 triệu/tháng — bao gồm hosting, monitoring tự động 24/7, hỗ trợ Zalo giờ hành chính, tối ưu hàng tháng.
+            <strong>Gói {tier.name}:</strong> {tier.monthly} triệu/tháng — bao gồm hosting, monitoring tự động 24/7, hỗ trợ Zalo giờ hành chính (T2–T6, 8h–18h), tối ưu hàng tháng.
           </div>
         )}
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <a
-            href={`/audit?estimated=${rangeLow}-${rangeHigh}&tier=${tier.name}&workflows=${Math.round(workflowCount)}`}
+            href={`/audit?tier=${tier.name}&setup=${tier.setup}&monthly=${tier.monthly}&workflows=${Math.round(workflowCount)}`}
             onClick={() => {
               if (typeof window !== "undefined" && typeof window.gtag === "function")
                 window.gtag("event", "pricing_calculator_cta_click", { action: "audit", tier: tier.name });
@@ -293,9 +297,9 @@ export default function PricingCalculator() {
           >
             <div>
               <span className={`text-sm font-semibold ${retainer ? "text-amber-700" : "text-slate-700"}`}>
-                Cần bảo trì hàng tháng?
+                Cần AutoFlow vận hành luôn?
               </span>
-              <span className="text-xs text-slate-500 ml-2">8-15 triệu/tháng</span>
+              <span className="text-xs text-slate-500 ml-2">Đã gồm trong gói (1.5–4 triệu/tháng)</span>
             </div>
             <div className={`w-10 h-6 rounded-full transition-colors flex items-center ${retainer ? "bg-amber-400 justify-end" : "bg-slate-200 justify-start"}`}>
               <div className="w-4 h-4 rounded-full bg-white shadow mx-1" />

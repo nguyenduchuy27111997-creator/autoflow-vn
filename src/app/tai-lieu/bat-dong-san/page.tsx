@@ -390,8 +390,8 @@ export default function RealEstateUseCasePage() {
                 <h3 className="text-sm font-semibold text-accent uppercase tracking-wide mb-4">Chi phí sau automation</h3>
                 <div className="space-y-3">
                   {[
-                    { item: "AutoFlow setup (1 lần)", cost: "72 triệu" },
-                    { item: "Hệ thống AutoFlow chuyên dụng", cost: "~3.6 triệu/năm" },
+                    { item: "AutoFlow setup gói Scale (1 lần)", cost: "5 triệu" },
+                    { item: "Vận hành hàng tháng (hosting + monitoring + support)", cost: "~48 triệu/năm" },
                     { item: "Zalo ZNS messages (500 lead/tháng)", cost: "~18 triệu/năm" },
                   ].map((row) => (
                     <div key={row.item} className="flex items-center justify-between text-sm">
@@ -401,14 +401,14 @@ export default function RealEstateUseCasePage() {
                   ))}
                   <div className="pt-3 border-t border-slate-200 flex items-center justify-between text-sm font-bold">
                     <span className="text-slate-800">Tổng chi phí năm đầu</span>
-                    <span className="text-accent">~93.6 triệu</span>
+                    <span className="text-accent">~71 triệu</span>
                   </div>
                 </div>
               </div>
             </div>
             <div className="bg-purple-50/50 border-t border-purple-100 p-6 text-center">
               <p className="text-sm text-slate-600">
-                <strong className="text-purple-600 font-display text-lg">ROI: tiết kiệm ~962 triệu/năm</strong>
+                <strong className="text-purple-600 font-display text-lg">ROI: tiết kiệm ~985 triệu/năm</strong>
                 <br />
                 <span className="text-slate-500">Hoàn vốn chỉ sau ~5 tuần sử dụng</span>
               </p>

@@ -309,7 +309,7 @@ export default function BangGiaPage() {
                 {
                   value: "0đ",
                   label: "Chi phí trải nghiệm",
-                  sub: "trị giá 2 triệu",
+                  sub: "trị giá ~3.5 triệu (build + 30 ngày hỗ trợ)",
                   color: "text-accent",
                   bg: "bg-accent/5",
                   border: "border-accent/10",
@@ -468,7 +468,7 @@ export default function BangGiaPage() {
             </div>
             <h3 className="font-display font-bold text-xl text-slate-900 mb-2">Cam kết hoàn tiền 100%</h3>
             <p className="text-sm text-slate-500 leading-relaxed max-w-lg mx-auto">
-              Nếu quy trình không chạy như cam kết sau 30 ngày — bạn được hoàn toàn bộ phí xây dựng. Không điều kiện ẩn.
+              Nếu workflow không đạt KPI đã ký sau 30 ngày — hoàn 100% phí xây dựng theo điều khoản hợp đồng (có liệt kê rõ các trường hợp loại trừ, gửi mẫu trước khi ký).
             </p>
           </div>
         </section>

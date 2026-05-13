@@ -55,7 +55,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Hosting commission tính thế nào?",
-    a: "10% giá trị hosting (từ 1.5 triệu/tháng = 50K commission/tháng) trong 3 tháng đầu. Sau tháng 3, commission kết thúc.",
+    a: "10% giá trị hosting hàng tháng (gói Starter 1.5tr = 150K, Growth 2.5tr = 250K, Scale 4tr = 400K commission/tháng) trong 3 tháng đầu kể từ khi khách bắt đầu trả phí. Sau tháng 3, commission kết thúc.",
   },
   {
     q: "Tôi không phải agency/IT, có đăng ký được không?",
