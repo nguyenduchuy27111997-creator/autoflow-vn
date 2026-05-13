@@ -249,3 +249,69 @@ describe("Wrapper → task integration (Plan 120-01)", () => {
     }
   });
 });
+
+describe("Route inventory invariants (Plan 120-02)", () => {
+  const ROUTES = [
+    "src/app/api/audit/route.ts",
+    "src/app/api/chat/route.ts",
+    "src/app/api/quiz/route.ts",
+    "src/app/api/tai-lieu/route.ts",
+    "src/app/api/newsletter/route.ts",
+    "src/app/api/partner/route.ts",
+  ];
+
+  it("exactly 6 routes call enqueueEmailSequence (no callers added or lost)", () => {
+    let total = 0;
+    for (const route of ROUTES) {
+      const source = readSource(route);
+      const matches = source.match(/enqueueEmailSequence\(/g);
+      assert.ok(
+        matches && matches.length >= 1,
+        `${route} must contain at least one enqueueEmailSequence() call`
+      );
+      total += matches.length;
+    }
+    // Each route must contain exactly one call; total === 6
+    assert.equal(total, 6, `expected 6 total enqueueEmailSequence calls across the 6 routes; found ${total}`);
+  });
+
+  it("each route's sequenceType is one of {audit, quiz, pdf} (resolved Q3 — preserve current behavior)", () => {
+    const allowed = new Set(["audit", "quiz", "pdf"]);
+    for (const route of ROUTES) {
+      const source = readSource(route);
+      // Find each enqueueEmailSequence call and inspect its sequenceType
+      const calls = source.match(
+        /enqueueEmailSequence\(\s*\{[\s\S]*?\}\s*\)/g
+      );
+      assert.ok(calls && calls.length > 0, `${route} has no enqueueEmailSequence call`);
+      for (const call of calls) {
+        const seqMatch = call.match(/sequenceType:\s*["']([^"']+)["']/);
+        assert.ok(seqMatch, `${route} call missing sequenceType: ${call.slice(0, 80)}`);
+        assert.ok(
+          allowed.has(seqMatch[1]),
+          `${route} uses sequenceType "${seqMatch[1]}" — only ${[...allowed].join("/")} allowed in Phase 120`
+        );
+      }
+    }
+  });
+
+  it("no route imports @trigger.dev/sdk directly (wrapper-only — Pitfall 3 + Pitfall 7)", () => {
+    for (const route of ROUTES) {
+      const source = readSource(route);
+      assert.ok(
+        !/from\s+["']@trigger\.dev\/sdk["']/.test(source),
+        `${route} must NOT import @trigger.dev/sdk directly; the wrapper handles it`
+      );
+    }
+  });
+
+  it("no route calls tasks.trigger() directly (wrapper-only)", () => {
+    for (const route of ROUTES) {
+      const source = readSource(route);
+      assert.ok(
+        !/tasks\.trigger\(/.test(source),
+        `${route} must NOT call tasks.trigger() directly; only email-queue.ts wrapper does`
+      );
+    }
+  });
+});
