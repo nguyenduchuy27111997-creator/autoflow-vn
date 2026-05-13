@@ -30,6 +30,7 @@
  * ════════════════════════════════════════════════════════════════════════
  */
 import { task } from "@trigger.dev/sdk";
+import { createClient } from "@supabase/supabase-js";
 
 /**
  * The 5 sequence types the email_queue.sequence_type CHECK constraint
@@ -56,6 +57,15 @@ export interface EmailTaskPayload {
   sequence_type: EmailSequenceType;
 }
 
+// Days offsets for emails 2-5 (anchor row at email_number=1 is inserted
+// by email-queue.ts wrapper before triggering this task).
+const EMAIL_SCHEDULE_REMAINDER = [
+  { email_number: 2, days_offset: 3 },
+  { email_number: 3, days_offset: 7 },
+  { email_number: 4, days_offset: 14 },
+  { email_number: 5, days_offset: 21 },
+];
+
 export const emailSequenceTask = task({
   id: "email-sequence",
   retry: {
@@ -66,12 +76,73 @@ export const emailSequenceTask = task({
     randomize: false,
   },
   run: async (payload: EmailTaskPayload) => {
-    // Real implementation lands in Plan 120-01 Task 2 — Wave 0 scaffold
-    // intentionally throws so any accidental production trigger is loud
-    // (vs. a silent "ok" stub that would mask deployment-order errors).
-    // The PII-strip type gate (above) is already in force at compile time.
-    throw new Error(
-      `email-sequence task scaffold not yet implemented — Plan 120-01 wires real Supabase fetch + send (payload row=${payload.email_queue_row_id}, type=${payload.sequence_type})`,
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!supabaseUrl || !serviceRoleKey) {
+      // Surface as a task FAILED state with a clear message in the dashboard.
+      throw new Error(
+        "[email-sequence] SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY missing — task workers cannot fetch PII from email_queue"
+      );
+    }
+
+    const supabase = createClient(supabaseUrl, serviceRoleKey);
+
+    // 1. Fetch the anchor row (email_number=1) that email-queue.ts inserted.
+    //    PII (email, name) is loaded into worker MEMORY here — never persisted
+    //    by Trigger.dev (TRG-05 / VN Law 91/2025 gate).
+    const { data: anchor, error: fetchError } = await supabase
+      .from("email_queue")
+      .select("id, email, name, sequence_type, metadata")
+      .eq("id", payload.email_queue_row_id)
+      .single();
+
+    if (fetchError || !anchor) {
+      // Throwing here triggers a Trigger.dev retry (handles read-after-write
+      // races where the wrapper just inserted but read replica lags).
+      throw new Error(
+        `[email-sequence] anchor row ${payload.email_queue_row_id} not found: ${fetchError?.message ?? "no row"}`
+      );
+    }
+
+    // 2. Idempotent expansion to the full 5-row schedule. Anchor row already
+    //    exists at email_number=1; we add 2-5. ON CONFLICT ignoreDuplicates
+    //    keeps retries safe.
+    const now = new Date();
+    const remainderRows = EMAIL_SCHEDULE_REMAINDER.map(
+      ({ email_number, days_offset }) => {
+        const scheduled = new Date(now);
+        scheduled.setDate(scheduled.getDate() + days_offset);
+        return {
+          email: anchor.email,
+          name: anchor.name,
+          sequence_type: anchor.sequence_type,
+          email_number,
+          scheduled_at: scheduled.toISOString(),
+          status: "pending" as const,
+          metadata: anchor.metadata,
+        };
+      }
     );
+
+    const { data: inserted, error: insertError } = await supabase
+      .from("email_queue")
+      .upsert(remainderRows, {
+        onConflict: "email,sequence_type,email_number",
+        ignoreDuplicates: true,
+      })
+      .select("id");
+
+    if (insertError) {
+      throw new Error(
+        `[email-sequence] failed to expand schedule for ${payload.email_queue_row_id}: ${insertError.message}`
+      );
+    }
+
+    return {
+      ok: true,
+      email_queue_row_id: payload.email_queue_row_id,
+      sequence_type: payload.sequence_type,
+      scheduled: inserted?.length ?? 0,
+    };
   },
 });
