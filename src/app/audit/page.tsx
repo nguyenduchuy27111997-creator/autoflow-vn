@@ -1,12 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getStoredUTM } from "@/lib/utm";
-import { trackGenerateLead } from "@/lib/analytics";
+import {
+  trackGenerateLead,
+  trackAuditFormStarted,
+  trackAuditFormCompleted,
+  trackLeadContactCaptured,
+  trackAuditStepCompleted,
+} from "@/lib/analytics";
 import { fbqTrackLead } from "@/lib/fbpixel";
 import SuccessAnimation from "./_components/SuccessAnimation";
+import { AuditStepTracker } from "./_components/AuditStepTracker";
 
 // ── Enum constants (reused in API handler + client-ops types) ──
 export const PAIN_PRIMARY_OPTIONS = [
@@ -100,7 +107,21 @@ export default function AuditPage() {
     details: "",
   });
 
+  // ANL-01: track form start on mount (pre-resolved Q#2 — fires on component mount)
+  const formStartedAtRef = useRef<number>(0);
+  const stepStartedAtRef = useRef<number>(Date.now());
+
+  useEffect(() => {
+    formStartedAtRef.current = Date.now();
+    stepStartedAtRef.current = Date.now();
+    trackAuditFormStarted();
+  }, []);
+
   const submitForm = async (skipQuantify = false) => {
+    // ANL-02: step 3 completed fires before fetch (drop-off semantics — fires even on network failure)
+    const stepCompletedAt = Date.now();
+    trackAuditStepCompleted(3, stepCompletedAt - stepStartedAtRef.current);
+
     setSubmitting(true);
     try {
       const utm = getStoredUTM();
@@ -125,8 +146,21 @@ export default function AuditPage() {
         }),
       });
       if (res.ok) {
-        trackGenerateLead({ form_type: "audit" });
-        fbqTrackLead({ content_name: "audit" });
+        trackGenerateLead({ form_type: "audit" }); // existing GA4 — preserved
+        fbqTrackLead({ content_name: "audit" });   // existing FB — preserved
+
+        // ANL-01: extract audit_submission.id from response, identify, fire completion
+        // /api/audit/route.ts returns { success: true, id: data.id } — UUID, not PII
+        let submissionId: string | null = null;
+        try {
+          const body = await res.clone().json();
+          submissionId = body?.id || null;
+        } catch {}
+
+        if (submissionId) {
+          trackLeadContactCaptured(submissionId); // also calls posthog.identify(submissionId)
+        }
+        trackAuditFormCompleted();
       }
       setSubmitted(true);
     } catch {
@@ -242,6 +276,9 @@ export default function AuditPage() {
                 </div>
               ) : (
                 <div className="bg-white rounded-2xl border border-slate-200 p-8 md:p-10">
+                  {/* ANL-02: step view tracker — fires audit_step_view with 500ms debounce */}
+                  <AuditStepTracker step={step} formStartedAt={formStartedAtRef.current} />
+
                   {/* Progress bar — 3 active steps (contact, pain, quantify) */}
                   <div className="flex items-center gap-2 mb-8">
                     {[1, 2, 3].map((s) => (
@@ -301,7 +338,8 @@ export default function AuditPage() {
                               setForm({ ...form, name: e.target.value })
                             }
                             placeholder="Nguyễn Văn A"
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
+                            data-ph-no-capture
+                            className="ph-no-capture w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                           />
                         </div>
                         <div>
@@ -316,7 +354,8 @@ export default function AuditPage() {
                               setForm({ ...form, phone: e.target.value })
                             }
                             placeholder="0935.115.248"
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
+                            data-ph-no-capture
+                            className="ph-no-capture w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                           />
                         </div>
                         <div>
@@ -330,7 +369,8 @@ export default function AuditPage() {
                               setForm({ ...form, email: e.target.value })
                             }
                             placeholder="email@company.com"
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
+                            data-ph-no-capture
+                            className="ph-no-capture w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                           />
                         </div>
                         <div>
@@ -344,7 +384,8 @@ export default function AuditPage() {
                               setForm({ ...form, company: e.target.value })
                             }
                             placeholder="Công ty ABC"
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
+                            data-ph-no-capture
+                            className="ph-no-capture w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10"
                           />
                         </div>
                         <div>
@@ -374,7 +415,12 @@ export default function AuditPage() {
 
                       <button
                         type="button"
-                        onClick={() => setStep(2)}
+                        onClick={() => {
+                          const now = Date.now();
+                          trackAuditStepCompleted(1, now - stepStartedAtRef.current);
+                          stepStartedAtRef.current = now;
+                          setStep(2);
+                        }}
                         disabled={!canProceed1}
                         className="mt-6 w-full bg-primary hover:bg-primary-dark disabled:bg-slate-200 disabled:text-slate-500 text-white font-semibold py-3.5 rounded-xl transition-all"
                       >
@@ -404,7 +450,8 @@ export default function AuditPage() {
                             setForm({ ...form, painNarrative: e.target.value })
                           }
                           placeholder={getNarrativePlaceholder(form.industry)}
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 resize-none"
+                          data-ph-no-capture
+                          className="ph-no-capture w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 resize-none"
                           maxLength={2000}
                         />
                         <div className="flex justify-between items-center mt-1">
@@ -433,7 +480,12 @@ export default function AuditPage() {
                         </button>
                         <button
                           type="button"
-                          onClick={() => setStep(3)}
+                          onClick={() => {
+                            const now = Date.now();
+                            trackAuditStepCompleted(2, now - stepStartedAtRef.current);
+                            stepStartedAtRef.current = now;
+                            setStep(3);
+                          }}
                           disabled={!canProceed2}
                           className="flex-1 bg-primary hover:bg-primary-dark disabled:bg-slate-200 disabled:text-slate-500 text-white font-semibold py-3.5 rounded-xl transition-all"
                         >
