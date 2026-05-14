@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Be_Vietnam_Pro, Plus_Jakarta_Sans } from "next/font/google";
 import ScriptLoader from "@/components/analytics/ScriptLoader";
+import { PostHogSessionGate } from "@/components/analytics/PostHogSessionGate";
 import JsonLd from "@/components/JsonLd";
 import { Suspense } from "react";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
@@ -111,6 +112,7 @@ export default function RootLayout({
         )}
         <GoogleAnalytics />
         <ScriptLoader />
+        <PostHogSessionGate />
         <FacebookPixel />
         <ConsentBannerWrapper />
         <Suspense fallback={null}>

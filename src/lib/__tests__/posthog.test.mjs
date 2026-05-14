@@ -125,6 +125,24 @@ test('All 5 ANL-01 funnel event helpers exported', async () => {
   }
 });
 
+// ── Phase 121-02 allowlist assertions ───────────────────────────────────────
+//
+// isReplayAllowed() is a pure function exported from posthog-replay-allowlist.ts
+// The file lives at website/src/lib/posthog-replay-allowlist.ts and is imported
+// here via tsx loader (same as analytics.ts import above).
+
+test('isReplayAllowed: D-05b verbatim allowlist — exact match and prefix rules', async () => {
+  const { isReplayAllowed } = await import('../posthog-replay-allowlist.ts');
+  assert.equal(isReplayAllowed('/'), true, "/ (homepage) must be allowed");
+  assert.equal(isReplayAllowed('/bang-gia'), true, "/bang-gia must be allowed");
+  assert.equal(isReplayAllowed('/blog/post-1'), true, "/blog/* must be allowed");
+  assert.equal(isReplayAllowed('/tai-lieu/x'), true, "/tai-lieu/* must be allowed");
+  assert.equal(isReplayAllowed('/audit'), false, "/audit must be blocked");
+  assert.equal(isReplayAllowed('/audit/step-1'), false, "/audit/* must be blocked");
+  assert.equal(isReplayAllowed('/quy-trinh'), false, "/quy-trinh must be blocked");
+  assert.equal(isReplayAllowed('/dashboard'), false, "/dashboard must be blocked");
+});
+
 test('Static PII guard: no posthog.capture() call passes email/name/phone/address', async () => {
   // This test verifies the structural guarantee by running the grep command
   // and asserting it returns 0 results.
