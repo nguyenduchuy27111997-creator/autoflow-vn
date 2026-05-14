@@ -4,16 +4,17 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { usePathname } from "next/navigation";
+import posthog from "posthog-js";
 
 import { formatChat } from "@/lib/format-chat";
+import {
+  trackChatbotOpened,
+  trackChatbotMessageSent,
+  trackLeadContactCaptured,
+  trackZaloOpen,
+} from "@/lib/analytics";
 
 const MAX_MESSAGES_PER_SESSION = 20;
-
-function gtag(event: string, params?: Record<string, unknown>) {
-  if (typeof window !== "undefined" && typeof window.gtag === "function") {
-    window.gtag("event", event, params);
-  }
-}
 
 const QUICK_REPLIES = [
   { label: "📋 Xem bảng giá", value: "Bảng giá các gói dịch vụ của AutoFlow là bao nhiêu?" },
@@ -44,6 +45,12 @@ export default function ChatWidget() {
   const pathname = usePathname();
   const prevMsgCount = useRef(0);
 
+  // Track chat-open timestamp for time_since_open_ms
+  const chatOpenedAtRef = useRef<number>(0);
+
+  // Track whether lead capture event has already fired this session (once-per-session)
+  const leadCapturedRef = useRef(false);
+
   const { messages, status, sendMessage, error } = useChat({
     transport: new DefaultChatTransport({
       api: "/api/chat",
@@ -58,7 +65,8 @@ export default function ChatWidget() {
       },
     ] as unknown as import("ai").UIMessage[],
     onError: () => {
-      gtag("chat_error");
+      try { (window as unknown as { gtag?: (e: string) => void }).gtag?.("chat_error"); } catch {}
+      try { posthog.capture("chat_error"); } catch {}
     },
   });
 
@@ -126,11 +134,39 @@ export default function ChatWidget() {
     prevMsgCount.current = messages.length;
   }, [messages, open]);
 
-  // GA4: track chat opened
+  // Lead capture detection — fires trackLeadContactCaptured once per session
+  // when the save_contact tool confirmation text appears in the assistant stream.
+  // D-03: distinct_id = sessionId (UUID), never email/name/phone.
+  useEffect(() => {
+    if (leadCapturedRef.current) return;
+    const lastAssistant = [...messages].reverse().find(m => (m.role as string) === "assistant");
+    if (!lastAssistant) return;
+    const text = lastAssistant.parts
+      ?.filter((p): p is { type: "text"; text: string } => p.type === "text")
+      .map(p => p.text)
+      .join("") || "";
+    if (text.includes("Đã lưu thông tin")) {
+      trackLeadContactCaptured(sessionIdRef.current || "pending");
+      leadCapturedRef.current = true;
+    }
+  }, [messages]);
+
+  // GA4 + PostHog: track chat opened
   const handleOpen = useCallback(() => {
     setOpen(true);
     setUnread(0);
-    gtag("chat_opened");
+    chatOpenedAtRef.current = Date.now();
+    trackChatbotOpened();
+    // distinct_id deviation note (CONTEXT.md D-03):
+    // D-03 says "identify via lead_id UUID after email capture". The chat API
+    // (/api/chat) does NOT return lead_id — it streams via AI SDK with only
+    // { ok: true } from save_contact tool. So this surface uses sessionId
+    // (crypto.randomUUID() at first open, persisted in sessionIdRef) as the
+    // chat-surface distinct_id. Cross-session stitching (chat session →
+    // audit lead_id → portal user_id) is deferred to v10.1+.
+    // identify() does NOT fire on open — PostHog auto-generates an anonymous
+    // distinct_id. The identify() call lives in trackLeadContactCaptured (the
+    // useEffect above) and ties only that event + subsequent events to sessionId.
   }, []);
 
   const handleSend = useCallback(
@@ -139,9 +175,13 @@ export default function ChatWidget() {
       sendMessage({ text });
       setInput("");
       setMsgCount((prev) => prev + 1);
-      gtag("chat_message_sent", { message_length: text.length });
+      trackChatbotMessageSent({
+        conversation_id: sessionIdRef.current || "pending",
+        message_number: msgCount + 1,
+        time_since_open_ms: chatOpenedAtRef.current ? Date.now() - chatOpenedAtRef.current : 0,
+      });
     },
-    [sendMessage, isBusy, rateLimited]
+    [sendMessage, isBusy, rateLimited, msgCount]
   );
 
   // Get text from message parts
@@ -166,7 +206,7 @@ export default function ChatWidget() {
             rel="noopener noreferrer"
             className="relative rounded-full bg-[#0068FF] shadow-md shadow-blue-500/20 flex items-center justify-center text-white hover:shadow-lg hover:-translate-y-0.5 transition-all group w-[40px] h-[40px] sm:w-[46px] sm:h-[46px]"
             aria-label="Chat Zalo"
-            onClick={() => gtag("zalo_widget_open")}
+            onClick={() => trackZaloOpen()}
           >
             {/* Official Zalo logo from SimpleIcons */}
             <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="white">
