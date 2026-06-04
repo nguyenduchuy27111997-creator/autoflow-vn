@@ -64,6 +64,7 @@ export async function POST(req: NextRequest) {
     const submission = {
       name,
       phone,
+      email: typeof body.email === "string" && body.email.trim() ? body.email.trim() : null,
       company: company || null,
       industry: industry || null,
       // Legacy string format for backward compat
