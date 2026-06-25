@@ -2,10 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { enqueueEmailSequence } from "@/lib/email-queue";
 import { notifyTelegram, formatPartnerNotify } from "@/lib/telegram";
-import { isValidEmail } from "@/lib/rate-limit";
+import { isValidEmail, getRateLimitKey, isRateLimited } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate-limit: chặn flood partner_applications + spam Telegram operator.
+    if (isRateLimited(getRateLimitKey(req), "partner", { maxRequests: 5 })) {
+      return NextResponse.json({ error: "Quá nhiều yêu cầu, vui lòng thử lại sau." }, { status: 429 });
+    }
     const body = await req.json();
 
     // Honeypot

@@ -4,6 +4,7 @@ import { streamText, tool, stepCountIs } from "ai";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { notifyTelegram, formatChatLeadNotify } from "@/lib/telegram";
+import { getRateLimitKey, isRateLimited } from "@/lib/rate-limit";
 
 export const maxDuration = 30;
 
@@ -76,7 +77,15 @@ KHI KHÔNG BIẾT:
 - Gợi ý: dùng thử miễn phí tại /audit, làm quiz tại /quiz, xem bảng giá tại /bang-gia`;
 
 export async function POST(req: Request) {
+  // Rate-limit: endpoint anon gọi Claude (COGS thật) — chặn DoS đốt tiền LLM không-giới-hạn.
+  if (isRateLimited(getRateLimitKey(req as unknown as Parameters<typeof getRateLimitKey>[0]), "chat", { maxRequests: 20, windowMs: 60 * 60 * 1000 })) {
+    return new Response(JSON.stringify({ error: "Quá nhiều yêu cầu, vui lòng thử lại sau." }), { status: 429, headers: { "content-type": "application/json" } });
+  }
   const { messages, sessionId } = await req.json();
+  // Bound input: chặn body khổng-lồ / số tin nhiều bất-thường đốt token.
+  if (!Array.isArray(messages) || messages.length === 0 || messages.length > 40) {
+    return new Response(JSON.stringify({ error: "Yêu cầu không hợp lệ." }), { status: 400, headers: { "content-type": "application/json" } });
+  }
 
   // Convert UI messages (parts format) to simple model messages
   const modelMessages = messages.map((m: { role: string; parts?: { type: string; text?: string }[]; content?: string }) => ({
