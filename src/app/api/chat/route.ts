@@ -2,7 +2,7 @@
 import { anthropic } from "@ai-sdk/anthropic";
 import { streamText, tool, stepCountIs } from "ai";
 import { z } from "zod";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { notifyTelegram, formatChatLeadNotify } from "@/lib/telegram";
 import { getRateLimitKey, isRateLimited } from "@/lib/rate-limit";
 
@@ -104,7 +104,7 @@ export async function POST(req: Request) {
     .join("") || "";
 
   if (lastMessage?.role === "user" && sessionId && lastUserText) {
-    const supabase = await createClient();
+    const supabase = createAdminClient();
     try {
       await supabase.from("chat_sessions").insert({
         session_id: sessionId,
@@ -133,7 +133,7 @@ export async function POST(req: Request) {
         }),
         execute: async (params) => {
           if (!sessionId) return { ok: true };
-          const supabase = await createClient();
+          const supabase = createAdminClient();
           const intentScore =
             params.intent_level === "high" ? 70 :
             params.intent_level === "medium" ? 40 : 15;
@@ -183,7 +183,7 @@ export async function POST(req: Request) {
         }),
         execute: async (params) => {
           if (!sessionId || (!params.phone && !params.email)) return { ok: false };
-          const supabase = await createClient();
+          const supabase = createAdminClient();
 
           try {
             // Update existing chat_lead with contact info
@@ -244,7 +244,7 @@ export async function POST(req: Request) {
       // Save assistant response to Supabase
       if (sessionId && text) {
         try {
-          const supabase = await createClient();
+          const supabase = createAdminClient();
           await supabase.from("chat_sessions").insert({
             session_id: sessionId,
             role: "assistant",

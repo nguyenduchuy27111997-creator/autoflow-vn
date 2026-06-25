@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { enqueueEmailSequence } from "@/lib/email-queue";
 import { getRateLimitKey, isRateLimited } from "@/lib/rate-limit";
 import { notifyTelegram, formatPdfNotify } from "@/lib/telegram";
@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Save lead to Supabase
-    const supabase = await createClient();
+    const supabase = createAdminClient();
     const { error: dbError } = await supabase.from("pdf_leads").insert({
       name: name?.trim() || null,
       email: email.trim(),

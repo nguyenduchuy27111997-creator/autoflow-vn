@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { enqueueEmailSequence } from "@/lib/email-queue";
 import { notifyTelegram, formatPartnerNotify } from "@/lib/telegram";
 import { isValidEmail, getRateLimitKey, isRateLimited } from "@/lib/rate-limit";
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     // Generate referral code
     const code = `AF-${(company || name).replace(/\s+/g, "").toUpperCase().slice(0, 8)}`;
 
-    const supabase = await createClient();
+    const supabase = createAdminClient();
     const { error } = await supabase.from("partner_applications").insert({
       name: name.trim(),
       company: company?.trim() || null,

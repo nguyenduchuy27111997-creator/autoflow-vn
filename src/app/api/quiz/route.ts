@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { enqueueEmailSequence } from "@/lib/email-queue";
 import { getRateLimitKey, isRateLimited } from "@/lib/rate-limit";
 
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Save to Supabase
-    const supabase = await createClient();
+    const supabase = createAdminClient();
     const { error: dbError } = await supabase.from("quiz_leads").insert({
       name: name?.trim() || null,
       email: email.trim(),
